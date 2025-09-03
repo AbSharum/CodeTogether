@@ -12,9 +12,11 @@ Scope:
   -Sending private messages, creating posts, learn to code, message friends, connect with new friends, and to meet new people.
 
 Key Activities:
-  -
+  - design and implement web pages to allow social interaction.
+  - coding challenges
+  - peer to peer messaging
 
-Role and Responibilities:
+Role and Responsibilities:
   -Project Manager - AB
   -Front end - Parker
   -Server - AB helper Seth
@@ -22,10 +24,14 @@ Role and Responibilities:
 
 Tools Resources:
   -Discord; word pages/documentation for methods / co
-  -Github
+  -GitHub for code storage and easy group workings 
 
 Risk + Mitigation:
-  -
+  -poor code merger/duplicate code will result in bad grade heavy monitoring and cooperation to achieve successful code merger and no duplicate code.
+  -peer review of code to allow for any rethinking/ improving to design and code base.
 
 Approval:
-  -
+  -signed: Parker Fletcher
+  -signed:
+  -signed:
+  -signed: 
