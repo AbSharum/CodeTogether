@@ -1,0 +1,28 @@
+@startuml
+node "User PC" {
+    node "Web Browser" {
+        artifact "Social Media Website" {
+            [HTML] 
+            [CSS] 
+            [JavaScript] 
+            [Bootstrap]
+        }
+    }
+}
+
+node "Server (OpenSuSE Tumbleweed)" {
+    node "Apache Web Server" {
+        artifact "PHP Application"
+    }
+    
+    node "MariaDB Database Server" {
+        artifact "Social Media DB"
+    }
+}
+
+"Web Browser" --> "Apache Web Server" : HTTP/HTTPS Requests
+"Apache Web Server" --> "PHP Application"
+"PHP Application" --> "MariaDB Database Server" : SQL Queries
+
+@enduml
+
