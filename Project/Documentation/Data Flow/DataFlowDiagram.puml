@@ -1,0 +1,29 @@
+@startuml
+skinparam rectangle {
+  BorderColor black
+  Shadowing true
+}
+
+skinparam componentStyle rectangle
+
+actor "User / Client" as User1
+actor "User / Client" as User2
+actor "User / Client" as User3
+
+rectangle "Web Interface" as WebInterface
+
+rectangle "Server\n(Apache2)" as Server
+rectangle "MariaDB" as DB 
+rectangle "DBA / Back End\nEngineer" as DBA 
+
+' Connections
+User1 --> WebInterface : send / receive\nrequest (TCP)
+User2 --> WebInterface : send / receive\nrequest (TCP)
+User3 --> WebInterface : send / receive\nrequest (TCP)
+
+WebInterface --> Server : Pass request to server\nand return data for user
+Server --> DB : Send query
+DB --> Server : Send requested data
+DBA --> DB : Data validation /\nmaintenance
+
+@enduml
