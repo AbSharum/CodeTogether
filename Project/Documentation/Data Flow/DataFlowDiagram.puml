@@ -1,6 +1,6 @@
 @startuml
 
-scale 1.5
+scale 3
 
 skinparam rectangle {
   BorderColor SteelBlue
