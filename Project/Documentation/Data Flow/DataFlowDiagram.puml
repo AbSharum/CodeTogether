@@ -1,29 +1,52 @@
 @startuml
+
+scale 1.5
+
 skinparam rectangle {
-  BorderColor black
-  Shadowing true
+  BorderColor SteelBlue
+  BackgroundColor SkyBlue
 }
 
-skinparam componentStyle rectangle
+skinparam storage {
+  BorderColor SteelBlue
+  BackgroundColor SkyBlue
+}
 
-actor "User / Client" as User1
-actor "User / Client" as User2
-actor "User / Client" as User3
 
-rectangle "Web Interface" as WebInterface
+rectangle "User / Client" as User
+storage "User Authentication" as UserAuth
+rectangle "User DB" as UserDB
+rectangle "Role DB" as RoleDB
+storage "Serve User Feed" as Feed
+rectangle "Post DB" as PostDB
+rectangle "Message DB" as MessageDB
+storage "Message Processing" as Message
+storage "Coding Game" as Code
 
-rectangle "Server\n(Apache2)" as Server
-rectangle "MariaDB" as DB 
-rectangle "DBA / Back End\nEngineer" as DBA 
+User -up-> UserAuth : Login\nrequest
+UserAuth -down-> User : Confirm\nlogin
 
-' Connections
-User1 --> WebInterface : send / receive\nrequest (TCP)
-User2 --> WebInterface : send / receive\nrequest (TCP)
-User3 --> WebInterface : send / receive\nrequest (TCP)
+UserAuth -right-> UserDB : check for user
 
-WebInterface --> Server : Pass request to server\nand return data for user
-Server --> DB : Send query
-DB --> Server : Send requested data
-DBA --> DB : Data validation /\nmaintenance
+UserDB -right-> RoleDB : check for roles
+
+RoleDB -left-> UserAuth : \nconfirm role and user
+
+User -left-> Feed : request feed
+Feed -right-> User : return user feed
+
+Feed -up-> PostDB : request posts\n related to user
+PostDB -down-> Feed : confirm user\n related posts
+
+User -right-> Message : send messages to users
+Message -left-> User : return conversation history
+
+Message -right-> MessageDB : add to conversation history
+MessageDB -left-> Message : return conversation history
+
+User <-down-> Code : send \ recieve game state
+
+
+
 
 @enduml
