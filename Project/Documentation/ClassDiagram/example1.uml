@@ -1,0 +1,41 @@
+@startuml
+
+
+class User {
+  -userID: int
+  +name: String
+  #age: int
+  +makePost(String)
+  +commentOnPost()
+  +playGame
+}
+
+
+
+class Animal {
+  +name: String
+  #age: int
+  +eat()
+  +sleep()
+}
+
+abstract class Mammal extends Animal {
+  +giveBirth()
+}
+
+interface Flyable {
+  +fly()
+}
+
+class Bird extends Animal implements Flyable {
+  -wingSpan: double
+  +fly()
+  +layEggs()
+}
+
+Mammal <|-- Dog
+Bird <|-- Sparrow
+
+Animal "1" -- "*" Food : eats
+Bird "1" o-- "2" Wing : has
+@enduml
