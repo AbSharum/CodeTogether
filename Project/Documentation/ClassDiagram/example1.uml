@@ -2,6 +2,7 @@
 
 class User {
   -userID: int
+  -userRole: String
   +name: String
   +age: int = 0
   +postsMade: int
@@ -35,6 +36,7 @@ class Moderator extends User {
   --
   +banUser(user: User)
   +removePost(post: Post)
+  +changeUserRole(user: User)
 }
 
 class FriendsList {
@@ -161,4 +163,5 @@ class CodeSubmission {
 Game "1" o-- "*" Comment
 
 @enduml
+
 
