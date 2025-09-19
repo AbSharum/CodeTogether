@@ -1,41 +1,164 @@
 @startuml
 
-
 class User {
   -userID: int
   +name: String
-  #age: int
-  +makePost(String)
-  +commentOnPost()
-  +playGame
+  +age: int = 0
+  +postsMade: int
+  +languagesLearning: List<String>
+  --
+  +makePost(content: String)
+  +commentOnPost(post: Post, content: String)
+  +addLanguage(language: String)
+  +viewProfile()
 }
 
-
-
-class Animal {
-  +name: String
-  #age: int
-  +eat()
-  +sleep()
+class CsStudent extends User {
+  +gamesCompleted: int
+  +gamesRank: int
+  +gamePoints: int
+  --
+  +playGame(game: Game)
+  +viewRankings()
 }
 
-abstract class Mammal extends Animal {
-  +giveBirth()
+class CsProfessor extends User {
+  +gamesCreated: int
+  +classesTaught: List<String>
+  --
+  +createGame(game: Game)
+  +teachClass(className: String)
 }
 
-interface Flyable {
-  +fly()
+class Moderator extends User {
+  +moderatorActions: List<String>
+  --
+  +banUser(user: User)
+  +removePost(post: Post)
 }
 
-class Bird extends Animal implements Flyable {
-  -wingSpan: double
-  +fly()
-  +layEggs()
+class FriendsList {
+  +friends: List<User>
+  --
+  +addFriend(user: User)
+  +removeFriend(user: User)
+  +getFriends(): List<User>
 }
 
-Mammal <|-- Dog
-Bird <|-- Sparrow
+User "1" *-- "1" FriendsList
 
-Animal "1" -- "*" Food : eats
-Bird "1" o-- "2" Wing : has
+class Post {
+  -postID: int
+  -postAuthorID: int
+  +content: String
+  +datePosted: String
+  +hashTag: String
+  +tags: List<String>
+  +comments: List<Comment>
+  --
+  +editContent(newContent: String)
+  +deletePost()
+}
+
+class Repost extends Post {
+  +originalPostID: int
+  +repostText: String
+  --
+  +share()
+}
+
+class Thread {
+  +threadID: int
+  +posts: List<Post>
+  --
+  +addPost(post: Post)
+  +removePost(post: Post)
+  +getPosts(): List<Post>
+}
+
+Thread "1" o-- "*" Post
+
+class Attachment {
+  +url: String
+  +fileData: Blob
+}
+
+Post "0..1" --> Attachment
+
+class Comment {
+  +commentID: int
+  +authorID: int
+  +content: String
+  +datePosted: String
+  --
+  +editComment(newContent: String)
+  +deleteComment()
+}
+
+Post "1" o-- "*" Comment
+
+class UserProfilePage {
+  +pfpUrl: String
+  +bannerUrl: String
+  +themeColor: RGB
+  --
+  +customizeTheme(color: RGB)
+  +uploadPfp(url: String)
+}
+
+class ModeratorProfilePage extends UserProfilePage {
+  +adminBadgeUrl: String
+  --
+  +displayAdminBadge()
+}
+
+class RGB {
+  +red: int
+  +green: int
+  +blue: int
+}
+
+class Music {
+  +url: String
+  +fileData: Blob
+}
+
+UserProfilePage "0..1" --> Music
+
+User "1" *-- "1" UserProfilePage
+
+class Game {
+  +gameID: int
+  +creatorID: int
+  +task: String
+  +programmingLanguage: String
+  +difficulty: int
+  +timeLimit: int
+  +pointsRewarded: int
+  --
+  +startGame()
+  +awardPoints(user: User)
+}
+
+class DailyGame extends Game {
+  +codeSubmission: String
+  +userComments: List<Comment>
+  --
+  +submitCode(code: String)
+}
+
+class CompetitiveGame extends Game {
+  +teams: List<String>
+  +coopCodeSubmission: CodeSubmission
+  --
+  +submitTeamCode(code: String)
+}
+
+class CodeSubmission {
+  +submittedCode: String
+}
+
+Game "1" o-- "*" Comment
+
 @enduml
+
