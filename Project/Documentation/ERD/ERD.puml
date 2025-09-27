@@ -1,99 +1,114 @@
 @startuml
-
-class User {
-  +userID: int <<PK>>
-  +roleID: int <<FK>>
-  +username: varchar
-  +password: varchar
-  +points: int
+' Use IE notation
+skinparam class {
+  BackgroundColor<<IE>> LightYellow
+  BorderColor<<IE>> Black
 }
 
-class Role {
-  +roleID: int <<PK>>
-  +roleName: varchar
-  +privileges: varchar
+entity User <<IE>> {
+  * userID : int
+  * roleID : int
+  --
+    username : varchar
+    password : varchar
+    points : int
 }
 
-class FriendList {
-  +userID1: int <<PK, FK>>
-  +userID2: int <<PK, FK>>
-  +status: varchar
+entity Role <<IE>> {
+  * roleID : int
+  --
+    roleName : varchar
+    privileges : varchar
 }
 
-class Post {
-  +postID: int <<PK>>
-  +userID: int <<FK>>
-  +threadID: int <<FK>>
-  +contents: file
-  +likes: int
-  +caption: varchar
-  +isDeleted: boolean
+entity FriendList <<IE>> {
+  * userID1 : int
+  * userID2 : int
+  --
+    status : varchar
 }
 
-class Comment {
-  +commentID: int <<PK>>
-  +userID: int <<FK>>
-  +postID: int <<FK>>
-  +contents: varchar
-  +isDeleted: boolean
+entity Post <<IE>> {
+  * postID : int
+  --
+    userID : int
+    threadID : int
+    contents : file
+    likes : int
+    caption : varchar
+    isDeleted : boolean
 }
 
-class Thread {
-  +threadID: int <<PK>>
-  +title: varchar
+entity Comment <<IE>> {
+  * commentID : int
+  --
+    userID : int
+    postID : int
+    contents : varchar
+    isDeleted : boolean
 }
 
-class ThreadBridge {
-  +userID: int <<PK, FK>>
-  +threadID: int <<PK, FK>>
+entity Thread <<IE>> {
+  * threadID : int
+  --
+    title : varchar
 }
 
-class Chat {
-  +chatID: int <<PK>>
-  +chatType: varchar
+entity ThreadBridge <<IE>> {
+  * userID : int
+  * threadID : int
 }
 
-class ChatBridge {
-  +chatID: int <<PK, FK>>
-  +userID: int <<PK, FK>>
+entity Chat <<IE>> {
+  * chatID : int
+  --
+    chatType : varchar
 }
 
-class Message {
-  +messageID: int <<PK>>
-  +threadID: int <<FK>>
-  +userID: int <<FK>>
-  +chatID: int <<FK>>
-  +content: varchar
-  +isDeleted: boolean
+entity ChatBridge <<IE>> {
+  * chatID : int
+  * userID : int
 }
 
-class Game {
-  +gameID: int <<PK>>
-  +description: varchar
-  +points: int
-  +timeLimit: int
+entity Message <<IE>> {
+  * messageID : int
+  --
+    threadID : int
+    userID : int
+    chatID : int
+    content : varchar
+    isDeleted : boolean
 }
 
-class GameBridge {
-  +gameID: int <<PK, FK>>
-  +userID: int <<PK, FK>>
+entity Game <<IE>> {
+  * gameID : int
+  --
+    description : varchar
+    points : int
+    timeLimit : int
 }
 
-' Relationships
-User "1" -right- "1" Role 
-User "*" -left- "*" FriendList
-User "1" -- "*" Post
-User "1" -left- "*" Comment
-User "1" -- "*" Message
-User "*" -down- "1" ThreadBridge
-User "*" -- "1" ChatBridge
-User "*" -up- "1" GameBridge
-ChatBridge "1" -down- "*" Chat 
-ThreadBridge "1" -- "*" Thread
-Thread "1" -up- "*" Message
-Thread "1" -up- "*" Post
-Post "1" -right- "*" Comment
-Chat "1" -left- "*" Message
-Game "*" -down- "1" GameBridge
+entity GameBridge <<IE>> {
+  * gameID : int
+  * userID : int
+}
+
+' Relationships with cardinality
+User ||-right-o{ Role : "has"
+User }o-left-o{ FriendList : "friend"
+User ||--o{ Post : "creates"
+User ||-left-o{ Comment : "writes"
+User ||--o{ Message : "sends"
+User ||-down-o{ ThreadBridge : "joins"
+User ||--o{ ChatBridge : "joins"
+User ||-up-o{ GameBridge : "plays"
+
+ChatBridge }o-down-|| Chat : "participates in"
+ThreadBridge }o--|| Thread : "participates in"
+Thread ||-up-o{ Message : "contains"
+Thread ||-up-o{ Post : "contains"
+Post ||-right-o{ Comment : "has"
+Chat ||-left-o{ Message : "contains"
+Game ||-down-o{ GameBridge : "played by"
 
 @enduml
