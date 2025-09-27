@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.12) (preloaded format=pdflatex 2024.9.24)  14 SEP 2025 22:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.12) (preloaded format=pdflatex 2024.9.24)  21 SEP 2025 16:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"./High Level Desgin.tex"
-(High Level Desgin.tex
+**"./Database Design.tex"
+(Database Design.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (/home/abraham/.miktex/texmfs/install/tex/latex/base/article.cls
@@ -731,8 +731,8 @@ Package: ulem 2019/11/18
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count325
 \l__pdf_internal_box=\box73
-) (High Level Desgin.aux)
-\openout1 = `"High Level Desgin.aux"'.
+) (Database Design.aux)
+\openout1 = `"Database Design.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
 LaTeX Font Info:    ... okay on input line 37.
@@ -872,51 +872,35 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/home/abraham/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map}]
-<DataFlowDiagram.png, id=10, 3380.63pt x 1081.03876pt>
-File: DataFlowDiagram.png Graphic file (type png)
-<use DataFlowDiagram.png>
-Package pdftex.def Info: DataFlowDiagram.png  used on input line 50.
-(pdftex.def)             Requested size: 433.62001pt x 138.6595pt.
-<DeploymentDiagram.png, id=11, 777.90625pt x 805.0075pt>
-File: DeploymentDiagram.png Graphic file (type png)
-<use DeploymentDiagram.png>
-Package pdftex.def Info: DeploymentDiagram.png  used on input line 59.
-(pdftex.def)             Requested size: 433.62001pt x 448.73752pt.
- [1 <./DataFlowDiagram.png (PNG copy)>]
-<SystemArchi.png, id=18, 369.38pt x 401.5pt>
-File: SystemArchi.png Graphic file (type png)
-<use SystemArchi.png>
-Package pdftex.def Info: SystemArchi.png  used on input line 68.
-(pdftex.def)             Requested size: 433.62001pt x 471.32758pt.
- [2 <./DeploymentDiagram.png>]
-<Tech Stack.png, id=23, 829.0975pt x 485.815pt>
-File: Tech Stack.png Graphic file (type png)
-<use Tech Stack.png>
-Package pdftex.def Info: Tech Stack.png  used on input line 77.
-(pdftex.def)             Requested size: 433.62001pt x 254.07819pt.
- [3 <./SystemArchi.png>] [4 <./Tech Stack.png>] (High Level Desgin.aux)
+<ERD.png, id=10, 897.05138pt x 551.05875pt>
+File: ERD.png Graphic file (type png)
+<use ERD.png>
+Package pdftex.def Info: ERD.png  used on input line 50.
+(pdftex.def)             Requested size: 433.62001pt x 266.37187pt.
+ [1 <./ERD.png>]
+(Database Design.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 27434 strings out of 476392
- 678271 string characters out of 5794334
+ 27410 strings out of 476392
+ 677613 string characters out of 5794334
  1928187 words of memory out of 5000000
- 49047 multiletter control sequences out of 15000+600000
+ 49023 multiletter control sequences out of 15000+600000
  564032 words of font info for 59 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 99i,11n,101p,766b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,11n,101p,764b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/abraham/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx10.p
 fb></home/abraham/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx12.
 pfb></home/abraham/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.
 pfb></home/abraham/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.
 pfb></home/abraham/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr17.
 pfb>
-Output written on "High Level Desgin.pdf" (5 pages, 291074 bytes).
+Output written on "Database Design.pdf" (2 pages, 119354 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
+ 39 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

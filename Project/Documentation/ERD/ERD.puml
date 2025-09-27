@@ -1,0 +1,99 @@
+@startuml
+
+class User {
+  +userID: int <<PK>>
+  +roleID: int <<FK>>
+  +username: varchar
+  +password: varchar
+  +points: int
+}
+
+class Role {
+  +roleID: int <<PK>>
+  +roleName: varchar
+  +privileges: varchar
+}
+
+class FriendList {
+  +userID1: int <<PK, FK>>
+  +userID2: int <<PK, FK>>
+  +status: varchar
+}
+
+class Post {
+  +postID: int <<PK>>
+  +userID: int <<FK>>
+  +threadID: int <<FK>>
+  +contents: file
+  +likes: int
+  +caption: varchar
+  +isDeleted: boolean
+}
+
+class Comment {
+  +commentID: int <<PK>>
+  +userID: int <<FK>>
+  +postID: int <<FK>>
+  +contents: varchar
+  +isDeleted: boolean
+}
+
+class Thread {
+  +threadID: int <<PK>>
+  +title: varchar
+}
+
+class ThreadBridge {
+  +userID: int <<PK, FK>>
+  +threadID: int <<PK, FK>>
+}
+
+class Chat {
+  +chatID: int <<PK>>
+  +chatType: varchar
+}
+
+class ChatBridge {
+  +chatID: int <<PK, FK>>
+  +userID: int <<PK, FK>>
+}
+
+class Message {
+  +messageID: int <<PK>>
+  +threadID: int <<FK>>
+  +userID: int <<FK>>
+  +chatID: int <<FK>>
+  +content: varchar
+  +isDeleted: boolean
+}
+
+class Game {
+  +gameID: int <<PK>>
+  +description: varchar
+  +points: int
+  +timeLimit: int
+}
+
+class GameBridge {
+  +gameID: int <<PK, FK>>
+  +userID: int <<PK, FK>>
+}
+
+' Relationships
+User "1" -right- "1" Role 
+User "*" -left- "*" FriendList
+User "1" -- "*" Post
+User "1" -left- "*" Comment
+User "1" -- "*" Message
+User "*" -down- "1" ThreadBridge
+User "*" -- "1" ChatBridge
+User "*" -up- "1" GameBridge
+ChatBridge "1" -down- "*" Chat 
+ThreadBridge "1" -- "*" Thread
+Thread "1" -up- "*" Message
+Thread "1" -up- "*" Post
+Post "1" -right- "*" Comment
+Chat "1" -left- "*" Message
+Game "*" -down- "1" GameBridge
+
+@enduml
