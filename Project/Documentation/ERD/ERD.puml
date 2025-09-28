@@ -10,6 +10,7 @@ entity User <<IE>> {
   * roleID : int
   --
     username : varchar
+    email : varchar
     password : varchar
     points : int
 }
