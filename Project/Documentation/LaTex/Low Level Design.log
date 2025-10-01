@@ -2,8 +2,8 @@ This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"./Database Design.tex"
-(Database Design.tex
+**"./Low Level Design.tex"
+(Low Level Design.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (C:\Users\Abxbo\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -757,8 +757,8 @@ tex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count324
 \l__pdf_internal_box=\box73
-) (Database Design.aux)
-\openout1 = `"Database Design.aux"'.
+) (Low Level Design.aux)
+\openout1 = `"Low Level Design.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
 LaTeX Font Info:    ... okay on input line 37.
@@ -904,34 +904,58 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {C:/Users/Abxbo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-<ERD.png, id=10, 998.73125pt x 947.54pt>
-File: ERD.png Graphic file (type png)
-<use ERD.png>
-Package pdftex.def Info: ERD.png  used on input line 50.
-(pdftex.def)             Requested size: 433.62001pt x 411.39581pt.
- [1 <./ERD.png>] (Database Design.aux)
+<ClassDiagram.png, id=10, 978.65625pt x 1029.8475pt>
+File: ClassDiagram.png Graphic file (type png)
+<use ClassDiagram.png>
+Package pdftex.def Info: ClassDiagram.png  used on input line 50.
+(pdftex.def)             Requested size: 350.25522pt x 368.57626pt.
+<SequenceDiagram 1.png, id=11, 1095.09125pt x 1012.78375pt>
+File: SequenceDiagram 1.png Graphic file (type png)
+<use SequenceDiagram 1.png>
+Package pdftex.def Info: SequenceDiagram 1.png  used on input line 61.
+(pdftex.def)             Requested size: 398.52695pt x 368.5735pt.
+ [1 <./ClassDiagram.png>]
+<SequenceDiagram 2.png, id=19, 1563.8425pt x 1246.6575pt>
+File: SequenceDiagram 2.png Graphic file (type png)
+<use SequenceDiagram 2.png>
+Package pdftex.def Info: SequenceDiagram 2.png  used on input line 70.
+(pdftex.def)             Requested size: 433.62543pt x 345.67572pt.
+ [2 <./SequenceDiagram 1.png>]
+<StateDiagram.png, id=24, 471.26062pt x 323.70938pt>
+File: StateDiagram.png Graphic file (type png)
+<use StateDiagram.png>
+Package pdftex.def Info: StateDiagram.png  used on input line 79.
+(pdftex.def)             Requested size: 433.62256pt x 297.85576pt.
+ [3 <./SequenceDiagram 2.png>]
+<UseCaseDiagram.png, id=30, 484.9317pt x 607.7907pt>
+File: UseCaseDiagram.png Graphic file (type png)
+<use UseCaseDiagram.png>
+Package pdftex.def Info: UseCaseDiagram.png  used on input line 88.
+(pdftex.def)             Requested size: 294.07643pt x 368.58163pt.
+
+[4 <./StateDiagram.png>] [5 <./UseCaseDiagram.png>] (Low Level Design.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 27402 strings out of 474485
- 680431 string characters out of 5743734
+ 27435 strings out of 474485
+ 681301 string characters out of 5743734
  1927542 words of memory out of 5000000
- 49232 multiletter control sequences out of 15000+600000
- 564032 words of font info for 59 fonts, out of 8000000 for 9000
+ 49265 multiletter control sequences out of 15000+600000
+ 564339 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,11n,101p,764b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,11n,101p,765b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Abxbo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/Abxbo/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmbx12.pfb><C:/Users/Abxbo/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmr10.pfb><C:/Users/Abxbo/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Abxbo/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on "Database Design.pdf" (2 pages, 101797 bytes).
+Output written on "Low Level Design.pdf" (6 pages, 299348 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
+ 60 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
