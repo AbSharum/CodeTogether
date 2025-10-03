@@ -1,0 +1,94 @@
+\documentclass[10pt,titlepage]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{spverbatim}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage[letterpaper, margin=1.25in]{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usetikzlibrary{trees}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+\lstdefinestyle{mystyle}{
+	keywordstyle=\color{blue},
+	commentstyle=\color{red},
+	stringstyle=\color{violet},
+	basicstyle=\fontsize{12}{12},
+	columns=fullflexible,
+	breaklines=true
+}
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+\lstset{style=mystyle}
+
+\title{Sprint 1 Planning}
+
+\author{Seth Williams, Abraham Sharum, Parker Fletcher, Bryson Dye \\\\ \\ Due Date: October 3, 2025 \\ Class: CS 40003 - Software Engineering}	
+
+\lstset{style=mystyle}
+\begin{document}
+	\pagestyle{fancy}
+	\fancyhead{}
+	\fancyhead[LE,LO]{\textbf{CS 40003 - Software Engineering}}
+	\fancyhead[RO,RE]{\textbf{Sprint 1 Planning}}
+	\fancyfoot{}
+	\fancyfoot[CE,CO]{\textbf{\thepage}}
+	
+	
+	\maketitle
+	
+	\section*{Configurations}
+	\begin{enumerate}
+		\item Setup repository
+		\item Setup server
+		\item Setup database
+	\end{enumerate}
+	
+	\section*{Planning}
+	\begin{enumerate}
+		\item Prioritize features for next sprint 
+		\item Assign roles and responsibilities within the team
+		\item Create a sprint backlog
+	\end{enumerate}
+	
+	\section*{Backend Development}
+	\begin{enumerate}
+		\item Create simple model/framework draft to test core functionality 
+		\item Implement user registration
+		\item Implement user login
+		\item Connect user setup to database
+	\end{enumerate}
+	
+	\section*{Frontend Development}
+	\begin{enumerate}
+		\item Create simple front end draft to test core functionality
+		\item Create signup form
+		\item Create login form
+		\item Display logged-in user information
+	\end{enumerate}
+	
+	\section*{Testing}
+	\begin{enumerate}
+		\item Set up unit tests for backend
+		\item Manually test signup and login functionality
+	\end{enumerate}
+	
+	\section*{Documentation}
+	\begin{enumerate}
+		\item Write setup instructions in README
+		\item Document API usage
+		\item Record sprints and their progress
+	\end{enumerate}
+	
+	
+	
+	
+\end{document}
