@@ -1,0 +1,83 @@
+@startuml
+title Git Branching Structure: main, dev, test, and feature
+
+skinparam state {
+  BorderColor #4178BE
+  BackgroundColor #EAF4FF
+  RoundCorner 10
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+  BorderColor #E0C14E
+}
+
+' ===== BRANCHES =====
+state "main branch" as MAIN {
+  state "M1\nInitial commit" as M1
+  state "M2\nStable release" as M2
+  state "M3\nProduction hotfix" as M3
+}
+
+state "dev branch" as DEV {
+  state "D1\nSync from main" as D1
+  state "D2\nIntegration changes" as D2
+  state "D3\nPre-release" as D3
+}
+
+state "test branch" as TEST {
+  state "T1\nPulled from dev" as T1
+  state "T2\nTesting & QA" as T2
+  state "T3\nApproved for release" as T3
+}
+
+state "feature branch" as FEAT {
+  state "F1\nStart feature" as F1
+  state "F2\nFeature implementation" as F2
+  state "F3\nFeature complete" as F3
+}
+
+' ===== FLOW =====
+
+' main flow
+M1 --> M2
+M2 --> M3
+
+' dev branch from main
+M1 --> D1
+D1 --> D2
+D2 --> D3
+
+' feature branch from dev
+D1 -down-> F1
+F1 --> F2
+F2 --> F3
+F3 -up-> D2
+
+' dev to test
+D3 --> T1 
+T1 --> T2
+T2 --> T3
+T3 --> M3 
+
+' ===== NOTES =====
+note top of FEAT
+Feature branches are short-lived  
+and merged into dev after completion
+end note
+
+note top of DEV
+dev integrates multiple features  
+and is merged into test for QA
+end note
+
+note bottom of TEST
+test branch ensures stability  
+before merging into main
+end note
+
+note top of MAIN
+main contains production-ready code  
+and receives merges only from test
+end note
+
+@enduml
