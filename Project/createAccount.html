@@ -13,7 +13,8 @@
                 <div class="card p-4 text-bg-dark bg-opacity 75" style="max-width: 400px;">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">Code Together Account Creation</h2>
-                        <form action = "createAccount.php" method="POST">  
+                        <form action = "createAccount.php" method="POST"> 
+                            <form id="registration"> 
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">First Name</label>
                                 <input type="text" class="form-control" id="firstName" name="firstName" required>
@@ -30,11 +31,12 @@
                                 <label for="password" class="form-label">Password</label>
                                 <input type="text" class="form-control" id="password" name="password" required>
                                 <label for="confirm_password" class="form-label">Confirm Password</label>
-                                <input type="text" class="form-control" class="confirm_password" name="confirm_password" required>
+                                <input type="text" class="form-control" id="confirm_password" name="confirm_password" required>
                             </div>
                             <div class="d-grid gap-2 mb-3">
                                 <button type="submit" class="btn btn-success">Create Account</button>
                             </div>
+                            </form>
                             <div class="d-grid gap-2">
                                 <button type="return" class="btn btn-success" onclick="window.location.href='fancyLogin.html'">Return to Login</button>
                             </div>
