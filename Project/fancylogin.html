@@ -14,7 +14,7 @@
         <div class="card p-4 text-bg-dark bg-opacity 75" style="max-width: 400px;">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Code Together Login</h2>
-                <form action = "fancylogin.php" method="POST">
+                <form action = "fancyLogin.php" method="POST">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
                         <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
@@ -27,11 +27,13 @@
                         <input type="checkbox" id="rememberMe" name="rememberMe" value = "1">
                         <label class="form-check-label" for="rememberMe">Remember Me</label>
                     </div>
-                    <div class="d-grid gap-2">
+                    <div class="d-grid gap-2 mb-3">
                         <button type="submit" class="btn btn-success">Login</button>
-                        <button type="submit" class="btn btn-success">Create Account</button>
                     </div>
                 </form>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-success" onclick="window.location.href='createAccount.html'">Create Account</button>
+                </div>
             </div>
         </div>
     </div>
