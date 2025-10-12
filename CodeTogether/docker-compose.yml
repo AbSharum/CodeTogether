@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  php-apache:
+    build: .
+    container_name: CodeTogetherServer
+    ports:
+      - "8080:80"
+    volumes:
+      - ./CodeTogether:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - mariadb
+    environment:
+      DB_HOST: mariadb
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_USER: ${MYSQL_USER}
+      DB_PASS: ${MYSQL_PASSWORD}
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MYSQL_DATABASE}
+      MARIADB_USER: ${MYSQL_USER}
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb-data:/var/lib/mysql
+      - ./mariadb-init:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+

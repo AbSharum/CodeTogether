@@ -1,0 +1,148 @@
+\documentclass[10pt,titlepage]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{spverbatim}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage[letterpaper, margin=1.25in]{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usetikzlibrary{trees}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+\lstdefinestyle{mystyle}{
+	keywordstyle=\color{blue},
+	commentstyle=\color{red},
+	stringstyle=\color{violet},
+	basicstyle=\fontsize{12}{12},
+	columns=fullflexible,
+	breaklines=true
+}
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+\lstset{style=mystyle}
+
+\title{Project Management Plan}
+
+\author{Seth Williams, Abraham Sharum, Parker Fletcher, Bryson Dye \\\\ \\ Due Date: September 5, 2025 \\ Class: CS 40003 - Software Engineering}	
+
+\lstset{style=mystyle}
+\begin{document}
+	\pagestyle{fancy}
+	\fancyhead{}
+	\fancyhead[LE,LO]{\textbf{CS 40003 - Software Engineering}}
+	\fancyhead[RO,RE]{\textbf{Project Management Plan}}
+	\fancyfoot{}
+	\fancyfoot[CE,CO]{\textbf{\thepage}}
+	\maketitle
+	
+	\section*{Project Overview}
+	\begin{itemize}
+		\item \textbf{Project Name:} Code Together
+		\item \textbf{Phase:} Phase 1 - Project Planning and Design
+		\item \textbf{Team:} Seth Williams, Abraham Sharum, Bryson Dye, Parker Fletcher
+		\item \textbf{Timeline:} Sprint 1
+	\end{itemize}
+	
+	\section*{Objectives}
+	\begin{itemize}
+		\item Social media platform geared towards CS students with the intent of learning. Measured by user satisfaction with the experience and how it affected their learning.
+		\item The platform is relatively easy to use and is intuitive for new users / CS students. Measured by users on how difficult the platform was to use. 
+	\end{itemize}
+	
+	\section*{Scope}
+	
+	\subsection*{Requirements:}
+	
+	\begin{itemize} 
+		\item Connect with friends
+		\item Learn from peers, or systems within the application
+		\item Harmless experience free of online toxicity 
+		\item Form study groups with other users
+		\item Schedule activities with other users
+        \item Create posts/activities that other users can interact with
+	\end{itemize}
+	
+	\subsection*{Use cases:} 
+	\begin{itemize}
+		\item Learn and communicate all in one place
+		\item Maintain contact with friends compared to other team oriented platforms 
+		\item Find people with similar interests  
+        \item Collaborate with others while coding and learning
+        \item Challenging yourself in an environment with constructive criticism and collaboration
+	\end{itemize}
+	
+	
+	\pagebreak
+	\section*{Key Activities}
+
+
+	\begin{table}[!ht]
+		\centering
+		\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+			\hline
+			\textbf{Activities} & \textbf{Due Dates} \\ \hline
+			Coding Challenge  & Sprint 3  \\ \hline
+			Setup audio for site  & Sprint 3  \\ \hline
+			Design and implement web pages to allow social interaction  & sprint 2  \\ \hline
+			Peer-to-peer messaging & sprint 3 \\ \hline
+			Web server setup & sprint 2  \\ \hline
+			Design and Implement Account pages & sprint 2 \\ \hline
+			Design and Implement Friend finder System & sprint 3 \\ \hline
+			Design and Implement Tutorial Page & sprint 2 \\ \hline
+			Design and Implement Help/Contact/Privacy pages & sprint 2 \\ \hline
+			Implement a Notifications System & sprint 2 \\ \hline
+			Design and Implement a Weather/date/time Display & sprint 2 \\ \hline
+		  	Design a post editor and submitter & Sprint 1 \\ \hline
+			Design and implement search bar for filtering posts & Sprint 3 \\ \hline
+			Create a profanity filter to keep posts clean & Sprint 2 \\ \hline
+			Create a simple terms of service and user agreement page & Sprint 2 \\ \hline
+            Set up forgot email service & Sprint 2 \\ \hline
+            Implement hashtag system to categorize posts & Sprint 3 \\ \hline
+            Design nodes to distribute work across systems & Sprint 2 \\ \hline
+            Implement different roles such as user, moderator, administrator, ect. & Sprint 3 \\ \hline
+            Setup CRUD functions for the database from the website & Sprint 1 \\ \hline
+		\end{tabular}
+	\end{table}
+	
+
+    
+    
+	\section*{Roles and Responsibilities}
+	\begin{itemize}
+		\item Project Manager --- AB
+		\item Front End --- Parker
+		\item Server --- AB (helper: Seth)
+		\item Networking --- Bryson
+		\item Back End --- Full Team Collaboration
+	\end{itemize}
+	
+	\section*{Tools and Resources}
+	\begin{itemize}
+		\item Discord; Word pages/documentation for methods
+		\item GitHub for code storage and group collaboration
+	\end{itemize}
+	
+	\section*{Risk \& Mitigation}
+	\begin{itemize}
+		\item Poor code merging / duplicate code production may result in poor grade --- heavy monitoring and cooperation will ensure successful merging with no duplication.
+		\item Peer review of code to allow rethinking/improvement of design and code base.
+        \item Thorough testing of all systems and their functions that are implemented to allow for bug finding and fixing in order to minimize any critical flaws before deployment.
+	\end{itemize}
+	
+	\section*{Approval}
+	\begin{itemize}
+		\item Signed: Parker Fletcher, Front End, Back End 9/3/2025
+		\item Signed: Seth Williams, Front End to Server Connections, 9/3/2025
+		\item Signed: Abraham Sharum, Project Manager, 9/3/2025
+		\item Signed: Bryson Dye, Networking, 9/3/2025
+	\end{itemize}
+	
+\end{document}

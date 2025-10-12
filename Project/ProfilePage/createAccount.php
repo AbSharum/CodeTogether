@@ -12,8 +12,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $firstName = trim($_POST['firstName']);
     $lastName = trim($_POST['lastName']);
     $email = trim($_POST['email']);
-    $password = trim($_POST[password']);
-    $confirmPassword = trim($_POST[confirmPassword']);
+    $password = trim($_POST['password']);
+    $confirmPassword = trim($_POST['confirmPassword']);
 
     if($password !== $confirmPassword){
         $error_message = "Passwords do not match. Please try again.";
