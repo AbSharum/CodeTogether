@@ -29,9 +29,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="text" class="form-control" id="password" name="password" required>
-                                <label for="confirm_password" class="form-label">Confirm Password</label>
-                                <input type="text" class="form-control" id="confirm_password" name="confirm_password" required>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                <input type="checkbox" onclick="showPass()">Show Password<br> <!-- function is in fancylogin.js -->
+                                
                             </div>
                             <div class="d-grid gap-2 mb-3">
                                 <button type="submit" class="btn btn-success">Create Account</button>

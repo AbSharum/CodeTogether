@@ -62,9 +62,12 @@ window.onload = function() {
 };
 function showPass(){
     var x = document.getElementById("password");
-    if(x.type === "text"){
-        x.type = "password";
-    }else{
+    var y = document.getElementById("confirmPassword");
+    if(x.type === "password"){
         x.type = "text";
+        y.type = "text";
+    }else{
+        x.type = "password";
+        y.type = "password";
     }
 }
