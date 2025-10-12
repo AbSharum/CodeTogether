@@ -18,19 +18,14 @@ body {
     transition: transform 0.2s; /* Creates a smooth transition effect on the transform property */
     width: 500px; /* Sets a fixed width for the container */
     text-align: center; /* Centers text within the container */
+    justify-content: center; /* This property does not apply here as it's not a flexbox container */
 }
 
 h2 {
     text-align: center; /* Centers the h2 heading */
 }
 
-.button:hover {
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); /* Changes the shadow on hover */
-} 
-.button:active {
-    transform: translateY(4px); /* Moves the button down 4 pixels when it's clicked */
-}
-.button { /* button colors */
+.button { /* This class is defined but not used in the HTML */
     padding: 15px;
     border-radius: 10px;
     margin-top: 15px;
@@ -98,7 +93,6 @@ input {
 .checkbox label[for="rememberme"] {
     display: inline; /* Displays the label as an inline element */
     width: auto; /* Allows the label to take its natural width */
-    color: green;
 }
 
 

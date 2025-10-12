@@ -60,3 +60,11 @@ function animate() {
 window.onload = function() {
     animate();
 };
+function showPass(){
+    var x = document.getElementById("password");
+    if(x.type === "text"){
+        x.type = "password";
+    }else{
+        x.type = "text";
+    }
+}
