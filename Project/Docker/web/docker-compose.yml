@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+
+  php-apache:
+    image: php:8.2-apache
+    container_name: CodeTogetherServer
+    ports:
+      - "8080:80"
+    volumes:
+      - ./CodeTogether:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: student
+      MARIADB_DATABASE: CodeTogetherDB
+      MARIADB_USER: student
+      MARIADB_PASSWORD: student
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb-data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
