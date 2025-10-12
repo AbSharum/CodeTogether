@@ -6,10 +6,11 @@ class Database {
 
     public static function getConnection(): mysqli {
         if (self::$connection === null) {
-            $host = getenv('DB_HOST');
-            $user = getenv('DB_USER');
-            $pass = getenv('DB_PASSWORD');
-            $db   = getenv('DB_NAME');
+            $host = getenv('MYSQL_HOST') ?: 'mariadb';
+            $db   = getenv('MYSQL_DATABASE');
+            $user = getenv('MYSQL_USER');
+            $pass = getenv('MYSQL_PASSWORD');
+
 
             self::$connection = new mysqli($host, $user, $pass, $db);
 

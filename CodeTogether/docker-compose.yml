@@ -7,16 +7,13 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./CodeTogether:/var/www/html
-    networks:
-      - app-network
+      - ./app/public:/var/www/html
+    env_file:
+      - .env
     depends_on:
       - mariadb
-    environment:
-      DB_HOST: mariadb
-      DB_NAME: ${MYSQL_DATABASE}
-      DB_USER: ${MYSQL_USER}
-      DB_PASS: ${MYSQL_PASSWORD}
+    networks:
+      - app-network
 
   mariadb:
     image: mariadb:latest
@@ -29,12 +26,11 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mariadb-data:/var/lib/mysql
-      - ./mariadb-init:/docker-entrypoint-initdb.d
+      - ./mariadb/mariadb-data:/var/lib/mysql
+      - ./mariadb/mariadb-init:/docker-entrypoint-initdb.d
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
-
