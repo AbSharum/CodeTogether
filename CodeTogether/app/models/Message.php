@@ -33,16 +33,16 @@ class Message implements JsonSerializable{
     }
 
     public function jsonSerialize(){
-            return array(
-                'messageID' => $this->messageID,
-                'threadID' => $this->threadID,
-                'userID' => $this->userID,
-                'chatID' => $this->chatID,
-                'content' => $this->content,
-                'isDeleted' => $this->isDeleted,
-                'isEdited' => $this->isEdited,
-                'sentAt' => $this->sentAt
-            );
+        return array(
+            'messageID' => $this->messageID,
+            'threadID' => $this->threadID,
+            'userID' => $this->userID,
+            'chatID' => $this->chatID,
+            'content' => $this->content,
+            'isDeleted' => $this->isDeleted,
+            'isEdited' => $this->isEdited,
+            'sentAt' => $this->sentAt
+        );
     }
 
     public function setMessageID($messageID){

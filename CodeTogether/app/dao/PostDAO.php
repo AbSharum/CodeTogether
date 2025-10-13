@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/Post.php';
-require_once __DIR__ . '/../../config/dbConn.php';
+require_once __DIR__ . '/../config/dbConn.php';
 
 class PostDAO {
 

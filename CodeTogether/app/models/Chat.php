@@ -21,12 +21,12 @@ class Chat implements JsonSerializable{
     }
 
     public function jsonSerialize(): array{
-            return array(
-                'chatID' => $this->chatID,
-                'chatType' => $this->chatType,
-                'lastMessageAt' => $this->lastMessageAt,
-                'createdOn' => $this->createdOn
-            );
+        return array(
+            'chatID' => $this->chatID,
+            'chatType' => $this->chatType,
+            'lastMessageAt' => $this->lastMessageAt,
+            'createdOn' => $this->createdOn
+        );
     }
 
     public function setChatID($chatID){
