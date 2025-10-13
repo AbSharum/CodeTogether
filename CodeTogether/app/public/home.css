@@ -1,0 +1,26 @@
+
+ul {
+
+    text-align: center;
+    overflow: hidden;
+    background-color: #0a0a0a;
+}
+
+ul li {
+  float: left;
+}
+
+ul li a {
+  display: block;
+  color: rgb(8, 194, 33);
+  text-align: center;
+  padding: 22px 18px;
+
+}
+
+
+
+.container-fluid{
+    background-color: #0a0a0a;
+    color: #008000;
+}
