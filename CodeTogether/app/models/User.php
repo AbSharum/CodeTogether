@@ -1,6 +1,6 @@
 <?php
 class User implements JsonSerializable {
-    private $userID;
+    private int $userID;
     private $roleID;
     private $username;
     private $email;
@@ -17,7 +17,6 @@ class User implements JsonSerializable {
         $this->points = $points;
         $this->status = $status;
         $this->email = $email;
-        $this->isDeleted = $isDeleted;
         $this->password= $password;
     }
 
@@ -37,13 +36,13 @@ class User implements JsonSerializable {
             return array(
                 'userID' => $this->userID,
                 'roleID' => $this->roleID,
-                'username' => $this->username;
-                'email' => $this->email;
-                'points' => $this->points;
-                'status' => $this->status;
-                'createdOn' => $this->createdOn;
-                'latestUpdate' => $this->latestUpdate;
-                'password' => $this->password;
+                'username' => $this->username,
+                'email' => $this->email,
+                'points' => $this->points,
+                'status' => $this->status,
+                'createdOn' => $this->createdOn,
+                'latestUpdate' => $this->latestUpdate,
+                'password' => $this->password
             );
     }
 
@@ -51,7 +50,7 @@ class User implements JsonSerializable {
         $this->userID=$userID;
     }
 
-    public function getUserID(){
+    public function getUserID(): int{
         return $this->userID;
     }
 

@@ -27,14 +27,14 @@ class Comment implements JsonSerializable{
     }
 
     public function jsonSerialize(){
-            return array(
-                'commentID' => $this->commentID,
-                'userID' => $this->userID,
-                'postID' => $this->postID,
-                'contents' => $this->contents,
-                'isDeleted' => $this->isDeleted,
-                'createdOn' => $this->createdOn
-            );
+        return array(
+            'commentID' => $this->commentID,
+            'userID' => $this->userID,
+            'postID' => $this->postID,
+            'contents' => $this->contents,
+            'isDeleted' => $this->isDeleted,
+            'createdOn' => $this->createdOn
+        );
     }
 
     public function setCommentID($commentID): void{
@@ -42,7 +42,7 @@ class Comment implements JsonSerializable{
     }
 
     public function getCommentID(): String{
-        return $this->$commentID;
+        return $this->commentID;
     }
 
     public function setUserID($userID){

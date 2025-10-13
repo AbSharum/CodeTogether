@@ -44,13 +44,13 @@ class Post implements JsonSerializable{
                 'postID' => $this->postID,
                 'userID' => $this->userID,
                 'threadID' => $this->threadID,
-                'contents' => $this->contents;
-                'likes' => $this->likes;
-                'caption' => $this->caption;
-                'visibility' => $this->visibility;
-                'isDeleted' => $this->isDeleted;
-                'createdOn' => $this->createdOn;
-                'latestUpdate' => $this->latestUpdate;
+                'contents' => $this->contents,
+                'likes' => $this->likes,
+                'caption' => $this->caption,
+                'visibility' => $this->visibility,
+                'isDeleted' => $this->isDeleted,
+                'createdOn' => $this->createdOn,
+                'latestUpdate' => $this->latestUpdate
             );
     }
 

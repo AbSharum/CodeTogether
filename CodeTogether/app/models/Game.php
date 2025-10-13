@@ -30,15 +30,15 @@ class Game implements JsonSerializable{
     }
 
     public function jsonSerialize(){
-            return array(
-                'gameID' => $this->gameID,
-                'description' => $this->description,
-                'points' => $this->points,
-                'timeLimit' => $this->timeLimit,
-                'difficulty' => $this->difficulty,
-                'createdOn' => $this->createdOn,
-                'latestUpdate' => $this->latestUpdate,
-            );
+        return array(
+            'gameID' => $this->gameID,
+            'description' => $this->description,
+            'points' => $this->points,
+            'timeLimit' => $this->timeLimit,
+            'difficulty' => $this->difficulty,
+            'createdOn' => $this->createdOn,
+            'latestUpdate' => $this->latestUpdate,
+        );
     }
 
     public function setGameID($gameID){

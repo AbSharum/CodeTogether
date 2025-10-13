@@ -20,12 +20,12 @@ class FriendsList implements JsonSerializable{
     }
 
     public function jsonSerialize(){
-            return array(
-                'userID1' => $this->userID1,
-                'userID2' => $this->userID2,
-                'status' => $this->status,
-                'createdOn' => $this->createdOn
-            );
+        return array(
+            'userID1' => $this->userID1,
+            'userID2' => $this->userID2,
+            'status' => $this->status,
+            'createdOn' => $this->createdOn
+        );
     }
 
     public function setUserID1($userID1){

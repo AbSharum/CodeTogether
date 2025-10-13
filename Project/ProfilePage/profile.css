@@ -1,0 +1,166 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+.main > section {
+  flex: 2; /* The posts section will be twice as wide as the profile card */
+}
+
+.profile-card {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  align-self: flex-start;
+}
+
+.profile-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+#postForm {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; 
+}
+
+
+#newPost {
+  width: 100%; 
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+  font-size: 16px;
+  box-sizing: border-box; 
+  margin-bottom: 10px; 
+}
+
+
+#postForm button {
+  background-color: #1877f2; 
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease; 
+  width: 100%; 
+}
+
+#postForm button:hover {
+  background-color: #165ab7; 
+}
+
+
+#posts {
+  padding: 5px 0; 
+}
+
+
+.post {
+  background: #fff;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+#maid {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 120px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+#speech {
+  position: fixed;
+  bottom: 150px;
+  right: 20px;
+  max-width: 250px;
+  padding: 10px 15px;
+  background: #fff8c6;
+  border: 2px solid #f1d600;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.6s;
+  z-index: 101;
+  word-wrap: break-word;
+}
+
+#speech::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #fff8c6;
+  right: 20px;
+}
+
+#maidForm {
+  position: fixed;
+  bottom: 120px;
+  right: 160px;
+  z-index: 100;
+  display: flex;
+}
+
+#maidForm input {
+  padding: 5px 10px;
+  flex: 1;
+}
+
+#maidForm button {
+  margin-left: 5px;
+  padding: 5px 10px;
+}
+
+#personalityMenu {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  z-index: 200;
+}
+
+#openMenuBtn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 101;
+}
+
+.avatar {
+  border-radius: 50%;
+}
