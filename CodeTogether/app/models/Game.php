@@ -41,59 +41,59 @@ class Game implements JsonSerializable{
         );
     }
 
-    public function setGameID($gameID){
+    public function setGameID($gameID): void{
         $this->gameID=$gameID;
     }
 
-    public function getGameID(){
+    public function getGameID(): int{
         return $this->gameID;
     }
 
-    public function setDescription($description){
+    public function setDescription($description): void{
         $this->description=$description;
     }
 
-    public function getDescription(){
+    public function getDescription(): string{
         return $this->description;
     }
 
-    public function setPoints($points){
+    public function setPoints($points): void{
         $this->points=$points;
     }
 
-    public function getPoints(){
+    public function getPoints(): int{
         return $this->points;
     }
 
-    public function setTimeLimit($timeLimit){
+    public function setTimeLimit($timeLimit): void{
         $this->timeLimit=$timeLimit;
     }
 
-    public function getTimeLimit(){
+    public function getTimeLimit(): int{
         return $this->timeLimit;
     }
 
-    public function setDifficulty($difficulty){
+    public function setDifficulty($difficulty): void{
         $this->difficulty=$difficulty;
     }
 
-    public function getDifficulty(){
+    public function getDifficulty(): string{
         return $this->difficulty;
     }
 
-    public function setCreatedOn($createdOn){
+    public function setCreatedOn($createdOn): void{
         $this->createdOn=$createdOn;
     }
 
-    public function getCreatedOn(){
+    public function getCreatedOn(): string{
         return $this->createdOn;
     }
 
-    public function setLatestUpdate($latestUpdate){
+    public function setLatestUpdate($latestUpdate): void{
         $this->latestUpdate=$latestUpdate;
     }
 
-    public function getLatestUpdate(){
+    public function getLatestUpdate(): string{
         return $this->latestUpdate;
     }
     

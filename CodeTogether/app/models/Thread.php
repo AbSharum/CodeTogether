@@ -24,27 +24,27 @@ class Thread implements JsonSerializable{
             );
     }
 
-    public function setThreadID($threadID){
+    public function setThreadID($threadID): void{
         $this->threadID=$threadID;
     }
 
-    public function getThreadID(){
+    public function getThreadID(): int{
         return $this->threadID;
     }
 
-    public function setTitle($title){
+    public function setTitle($title): void{
         $this->title=$title;
     }
 
-    public function getTitle(){
+    public function getTitle(): string{
         return $this->title;
     }
 
-    public function setCreatedOn($createdOn){
+    public function setCreatedOn($createdOn): void{
         $this->createdOn=$createdOn;
     }
 
-    public function getCreatedOn(){
+    public function getCreatedOn(): string{
         return $this->createdOn;
     }
 }

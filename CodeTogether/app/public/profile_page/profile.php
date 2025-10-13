@@ -1,48 +1,61 @@
-
 <?php
-  declare(strict_types=1)
+header('Content-Type: application/json');
 
-  $filename = 'user.json';
+//Can remove these two later
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_PARSE);
 
-  // Initialize fake "database" if missing
-  if (!file_exists($filename)) {
-      $init = [
-          "username" => "sarcasticUser42",
-          "fullname" => "Alex Human",
-          "bio" => "Trying to look interesting on the internet since 2009.",
-          "location" => "Somewhere, Earth",
-          "joined" => "2021-03-14",
-          "followers" => 128,
-          "following" => 87,
-          "profilePic" => "default.png",
-          "posts" => []
-      ];
-      file_put_contents($filename, json_encode($init));
-  }
 
-  $data = json_decode(file_get_contents($filename), true);
+require_once __DIR__ . '/../../config/dbConn.php';
+require_once __DIR__ . '/../../models/User.php';
+require_once __DIR__ . '/../../models/Post.php';
+require_once __DIR__ . '/../../dao/PostDAO.php';
 
-  // Handle updates
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      if (isset($_POST['bio'])) {
-          $data['bio'] = $_POST['bio'];
-      }
-      if (isset($_FILES['profilePic']) && $_FILES['profilePic']['error'] === UPLOAD_ERR_OK) {
-          $target = "uploads/" . basename($_FILES['profilePic']['name']);
-          move_uploaded_file($_FILES['profilePic']['tmp_name'], $target);
-          $data['profilePic'] = $target;
-      }
-      if (isset($_POST['newPost'])) {
-          $data['posts'][] = [
-              "content" => $_POST['newPost'],
-              "time" => date("Y-m-d H:i:s")
-          ];
-      }
-      file_put_contents($filename, json_encode($data));
-      header("Location: profile.php");
-      exit;
-  }
+// Testing for user 1 for now. Will delete later
+$userId = 1;
+
+$conn = Database::getConnection();
+
+// --- Fetch user basic info ---
+$stmt = $conn->prepare("SELECT username, email, points, status FROM user WHERE user_id = ?");
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$userResult = $stmt->get_result();
+$user = $userResult->fetch_assoc();
+$stmt->close();
+
+// --- Follower / following counts from friend_list ---
+$stmt = $conn->prepare("SELECT COUNT(*) AS followers FROM friend_list WHERE user_id_2 = ? AND status = 'friends'");
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$followers = $stmt->get_result()->fetch_assoc()['followers'] ?? 0;
+$stmt->close();
+
+$stmt = $conn->prepare("SELECT COUNT(*) AS following FROM friend_list WHERE user_id_1 = ? AND status = 'friends'");
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$following = $stmt->get_result()->fetch_assoc()['following'] ?? 0;
+$stmt->close();
+
+// --- Get posts via DAO ---
+$postDAO = new PostDAO();
+$posts = $postDAO->getPostsByUser($userId);
+//$posts = $postDAO->getAllPosts();  //Use this if we wanted to get all of the posts
+
+Database::close();  //$conn->close();
+
+// --- Prepare JSON ---
+echo json_encode([
+    "username" => $user["username"],
+    "points" => $user["points"],
+    "status" => $user["status"],
+    "profilePic" => "/uploads/default.png", // or load from a profile table later
+    "followers" => (int)$followers,
+    "following" => (int)$following,
+    "posts" => array_map(fn($p) => $p->jsonSerialize(), $posts)
+]);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +101,7 @@
     </aside>
   </main>
 
-  <img src="maid.webp" id="maid" alt="AI assistant">
+  <img src="images/maid.webp" id="maid" alt="AI assistant">
   <div id="speech"></div>
 
   <form id="maidForm">

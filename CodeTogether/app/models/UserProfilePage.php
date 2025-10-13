@@ -13,11 +13,11 @@ class UserProfilePage{
         
     }
 
-    public function customizeTheme($themeColor){
+    public function customizeTheme($themeColor): void{
         $this->themeColor=$themeColor;
     }
 
-    public function uploadPfp($pfpUrl){
+    public function uploadPfp($pfpUrl): void{
         $this->pfpUrl=$pfpUrl;
     }
 

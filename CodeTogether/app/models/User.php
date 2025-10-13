@@ -1,7 +1,7 @@
 <?php
 class User implements JsonSerializable {
     private int $userID;
-    private $roleID;
+    private int $roleID;
     private $username;
     private $email;
     private $points;
@@ -32,7 +32,7 @@ class User implements JsonSerializable {
         $this->password = $row['password'];
     }
 
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed{ //PHP 8.1+
             return array(
                 'userID' => $this->userID,
                 'roleID' => $this->roleID,
@@ -46,7 +46,7 @@ class User implements JsonSerializable {
             );
     }
 
-    public function setUserID($userID){
+    public function setUserID($userID): void{
         $this->userID=$userID;
     }
 
@@ -54,67 +54,67 @@ class User implements JsonSerializable {
         return $this->userID;
     }
 
-    public function setRoleID($roleID){
+    public function setRoleID($roleID): void{
         $this->roleID=$roleID;
     }
 
-    public function getRoleID(){
+    public function getRoleID(): int{
         return $this->roleID;
     }
 
-    public function setUsername($username){
+    public function setUsername($username): void{
         $this->username=$username;
     }
 
-    public function getUsername(){
+    public function getUsername(): string{
         return $this->username;
     }
 
-    public function setEmail($email){
+    public function setEmail($email): void{
         $this->email=$email;
     }
 
-    public function getEmail(){
+    public function getEmail(): string{
         return $this->email;
     }
 
-    public function setPoints($points){
+    public function setPoints($points): void{
         $this->points=$points;
     }
 
-    public function getPoints(){
+    public function getPoints(): int{
         return $this->points;
     }
 
-    public function setStatus($status){
+    public function setStatus($status): void{
         $this->status=$status;
     }
 
-    public function getStatus(){
+    public function getStatus(): string{
         return $this->status;
     }
 
-    public function setCreatedOn($createdOn){
+    public function setCreatedOn($createdOn): void{
         $this->createdOn=$createdOn;
     }
 
-    public function getCreatedOn(){
+    public function getCreatedOn(): string{
         return $this->createdOn;
     }
 
-    public function setLatestUpdate($latestUpdate){
+    public function setLatestUpdate($latestUpdate): void{
         $this->latestUpdate=$latestUpdate;
     }
 
-    public function getLatestUpdate(){
+    public function getLatestUpdate(): string{
         return $this->latestUpdate;
     }
 
-    public function setPassword($password){
+    public function setPassword($password): void{
         $this->password=$password;
     }
 
-    public function getPassword(){
+    public function getPassword(): string{
         return $this->password;
     }
     

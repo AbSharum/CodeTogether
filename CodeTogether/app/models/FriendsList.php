@@ -28,35 +28,35 @@ class FriendsList implements JsonSerializable{
         );
     }
 
-    public function setUserID1($userID1){
+    public function setUserID1($userID1): void{
         $this->userID1=$userID1;
     }
 
-    public function getUserID1(){
+    public function getUserID1(): int{
         return $this->userID1;
     }
 
-    public function setUserID2($userID2){
+    public function setUserID2($userID2): void{
         $this->userID2=$userID2;
     }
 
-    public function getUserID2(){
+    public function getUserID2(): int{
         return $this->userID2;
     }
 
-    public function setStatus($status){
+    public function setStatus($status): void{
         $this->status=$status;
     }
 
-    public function getStatus(){
+    public function getStatus(): string{
         return $this->status;
     }
 
-    public function setCreatedOn($createdOn){
+    public function setCreatedOn($createdOn): void{
         $this->createdOn=$createdOn;
     }
 
-    public function getCreatedOn(){
+    public function getCreatedOn(): string{
         return $this->createdOn;
     }
 }

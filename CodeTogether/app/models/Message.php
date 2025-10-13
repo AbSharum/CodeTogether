@@ -45,67 +45,67 @@ class Message implements JsonSerializable{
         );
     }
 
-    public function setMessageID($messageID){
+    public function setMessageID($messageID): void{
         $this->messageID=$messageID;
     }
 
-    public function getMessageID(){
+    public function getMessageID(): int{
         return $this->messageID;
     }
 
-    public function setThreadID($threadID){
+    public function setThreadID($threadID): void{
         $this->threadID=$threadID;
     }
 
-    public function getThreadID(){
+    public function getThreadID(): int{
         return $this->threadID;
     }
 
-    public function setUserID($userID){
+    public function setUserID($userID): void{
         $this->userID=$userID;
     }
 
-    public function getUserID(){
+    public function getUserID(): int{
         return $this->userID;
     }
 
-    public function setChatID($chatID){
+    public function setChatID($chatID): void{
         $this->chatID=$chatID;
     }
 
-    public function getChatID(){
+    public function getChatID(): int{
         return $this->chatID;
     }
 
-    public function setContent($content){
+    public function setContent($content): void{
         $this->content=$content;
     }
 
-    public function getContent(){
+    public function getContent(): String{
         return $this->content;
     }
 
-    public function setIsDeleted($isDeleted){
+    public function setIsDeleted($isDeleted): void{
         $this->isDeleted=$isDeleted;
     }
 
-    public function getIsDeleted(){
+    public function getIsDeleted(): bool{
         return $this->isDeleted;
     }
 
-    public function setIsEdited($isEdited){
+    public function setIsEdited($isEdited): void{
         $this->isEdited=$isEdited;
     }
 
-    public function getIsEdited(){
+    public function getIsEdited(): bool{
         return $this->isEdited;
     }
 
-    public function setSentAt($sentAt){
+    public function setSentAt($sentAt): void{
         $this->sentAt=$sentAt;
     }
 
-    public function getSentAt(){
+    public function getSentAt(): String{
         return $this->sentAt;
     }
     

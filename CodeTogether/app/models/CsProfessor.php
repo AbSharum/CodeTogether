@@ -15,11 +15,11 @@ class CsProfessor extends Role{
     }
 
 
-    public function createGame(){
+    public function createGame(): void{
         #creates a game
     }
 
-    public function teachClass(){
+    public function teachClass(): void{
         #teaches a class
     }
 

@@ -63,15 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPersonality = localStorage.getItem('maidPersonality') || 'maid';
 
   const personalityImages = {
-    maid: 'maid.webp',
-    butler: 'butler.webp',
-    scientist: 'scientist.webp',
-    gamer: 'gamer.webp'
+    maid: 'images/maid.webp',
+    butler: 'images/butler.webp',
+    scientist: 'images/scientist.webp',
+    gamer: 'images/gamer.webp'
   };
 
   function updateMaidImage() {
     if (!maidImg) return;
-    const src = personalityImages[currentPersonality] || 'maid.webp';
+    const src = personalityImages[currentPersonality] || 'images/maid.webp';
     maidImg.src = src;
   }
 

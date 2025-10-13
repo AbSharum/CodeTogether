@@ -24,27 +24,27 @@ class Role implements JsonSerializable{
             );
     }
 
-    public function setRoleID($roleID){
+    public function setRoleID($roleID): void{
         $this->roleID=$roleID;
     }
 
-    public function getRoleID(){
+    public function getRoleID(): int{
         return $this->roleID;
     }
 
-    public function setRoleName($roleName){
+    public function setRoleName($roleName): void{
         $this->roleName=$roleName;
     }
 
-    public function getRoleName(){
+    public function getRoleName(): string{
         return $this->roleName;
     }
 
-    public function setPrivileges($privileges){
+    public function setPrivileges($privileges): void{
         $this->privileges=$privileges;
     }
 
-    public function getPrivileges(){
+    public function getPrivileges(): string{
         return $this->privileges;
     }
 }

@@ -12,15 +12,15 @@ class Moderator extends Role{
     }
 
 
-    public function banUser($user){
+    public function banUser($user): void{
         #bans user
     }
 
-    public function removesPost($post){
+    public function removesPost($post): void{
         #removesPost
     }
 
-    public function changeUserRole($user, $role){
+    public function changeUserRole($user, $role): void{
         #changes user Role
     }
 

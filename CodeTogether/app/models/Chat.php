@@ -33,7 +33,7 @@ class Chat implements JsonSerializable{
         $this->chatID=$chatID;
     }
 
-    public function getChatID(){
+    public function getChatID(): int{
         return $this->chatID;
     }
 
@@ -41,7 +41,7 @@ class Chat implements JsonSerializable{
         $this->chatType=$chatType;
     }
 
-    public function getChatType(){
+    public function getChatType(): string{
         return $this->chatType;
     }
 
@@ -49,7 +49,7 @@ class Chat implements JsonSerializable{
         $this->lastMessageAt=$lastMessageAt;
     }
 
-    public function getLastMessageAt(){
+    public function getLastMessageAt(): string{
         return $this->lastMessageAt;
     }
 
@@ -57,7 +57,7 @@ class Chat implements JsonSerializable{
         $this->createdOn=$createdOn;
     }
 
-    public function getCreatedOn(){
+    public function getCreatedOn(): string{
         return $this->createdOn;
     }
 }

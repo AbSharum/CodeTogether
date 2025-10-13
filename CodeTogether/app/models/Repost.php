@@ -17,7 +17,7 @@ class Repost extends Role{
     }
 
 
-    public function share($post){
+    public function share($post): void{
         #shares the repost
     }
 }

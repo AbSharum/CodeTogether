@@ -14,7 +14,7 @@ class CompetitiveGame extends Game{
     }
 
 
-    public function submitTeamCode($code){
+    public function submitTeamCode($code): void{
         #submits code
     }
 

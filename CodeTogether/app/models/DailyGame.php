@@ -14,7 +14,7 @@ class DailyGame extends Game{
     }
 
 
-    public function submitCode($code){
+    public function submitCode($code): void{
         #submits code
     }
 

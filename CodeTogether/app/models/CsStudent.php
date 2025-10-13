@@ -16,11 +16,11 @@ class CsStudent extends Role{
     }
 
 
-    public function playGame(){
+    public function playGame(): void{
         #plays a game
     }
 
-    public function viewRankings(){
+    public function viewRankings(): void{
         #view rankings
     }
 

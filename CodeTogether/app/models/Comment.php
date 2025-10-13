@@ -41,47 +41,47 @@ class Comment implements JsonSerializable{
         $this->commentID=$commentID;
     }
 
-    public function getCommentID(): String{
+    public function getCommentID(): string{
         return $this->commentID;
     }
 
-    public function setUserID($userID){
+    public function setUserID($userID): void{
         $this->userID=$userID;
     }
 
-    public function getUserID(){
+    public function getUserID(): int{
         return $this->userID;
     }
 
-    public function setPostID($postID){
+    public function setPostID($postID): void{
         $this->postID=$postID;
     }
 
-    public function getPostID(){
+    public function getPostID(): int{
         return $this->postID;
     }
 
-    public function setContents($contents){
+    public function setContents($contents): void{
         $this->contents=$contents;
     }
 
-    public function getContents(){
+    public function getContents(): string{
         return $this->contents;
     }
 
-    public function setIsDeleted($isDeleted){
+    public function setIsDeleted($isDeleted): void{
         $this->isDeleted=$isDeleted;
     }
 
-    public function getIsDeleted(){
+    public function getIsDeleted(): bool{
         return $this->isDeleted;
     }
 
-    public function setCreatedOn($createdOn){
+    public function setCreatedOn($createdOn): void{
         $this->createdOn=$createdOn;
     }
 
-    public function getCreatedOn(){
+    public function getCreatedOn(): string{
         return $this->createdOn;
     }
     

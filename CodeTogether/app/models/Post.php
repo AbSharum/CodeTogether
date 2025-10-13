@@ -1,8 +1,8 @@
 <?php
 class Post implements JsonSerializable{
-    private $postID;
-    private $userID;
-    private $threadID;
+    private int $postID;
+    private int $userID;
+    private int $threadID;
     private $contents;
     private $likes;
     private $caption;
@@ -39,7 +39,7 @@ class Post implements JsonSerializable{
         #deletes post
     }
 
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed {
             return array(
                 'postID' => $this->postID,
                 'userID' => $this->userID,
@@ -54,84 +54,84 @@ class Post implements JsonSerializable{
             );
     }
 
-    public function setPostID($postID){
+    public function setPostID($postID): void{
         $this->postID=$postID;
     }
 
-    public function getPostID(){
+    public function getPostID(): int{
         return $this->postID;
     }
 
-    public function setUserID($userID){
+    public function setUserID($userID): void{
         $this->userID=$userID;
     }
 
-    public function getuserID(){
+    public function getuserID(): int{
         return $this->userID;
     }
 
-    public function setThreadID($threadID){
+    public function setThreadID($threadID): void{
         $this->threadID=$threadID;
     }
 
-    public function getThreadID(){
+    public function getThreadID(): int{
         return $this->threadID;
     }
 
-    public function setContents($contents){
+    public function setContents($contents): void{
         $this->contents=$contents;
     }
 
-    public function getContents(){
+    public function getContents(): string{
         return $this->contents;
     }
 
-    public function setLikes($likes){
+    public function setLikes($likes): void{
         $this->likes=$likes;
     }
 
-    public function getLikes(){
+    public function getLikes(): int{
         return $this->likes;
     }
 
-    public function setCaption($caption){
+    public function setCaption($caption): void{
         $this->caption=$caption;
     }
 
-    public function getCaption(){
+    public function getCaption(): string{
         return $this->caption;
     }
 
-    public function setVisibility($visibility){
+    public function setVisibility($visibility): void{
         $this->visibility=$visibility;
     }
 
-    public function getVisibility(){
+    public function getVisibility(): string{
         return $this->visibility;
     }
 
-    public function setIsDeleted($isDeleted){
+    public function setIsDeleted($isDeleted): void{
         $this->isDeleted=$isDeleted;
         
     }
 
-    public function getIsDeleted(){
+    public function getIsDeleted(): bool{
         return $this->isDeleted;
     }
 
-    public function setCreatedOn($createdOn){
+    public function setCreatedOn($createdOn): void{
         $this->createdOn=$createdOn;
     }
 
-    public function getCreatedOn(){
+    public function getCreatedOn(): string{
         return $this->createdOn;
     }
 
-    public function setLatestUpdate($latestUpdate){
+    public function setLatestUpdate($latestUpdate): void{
         $this->latestUpdate=$latestUpdate;
     }
 
-    public function getLatestUpdate(){
+    public function getLatestUpdate(): string{
         return $this->latestUpdate;
     }
 
