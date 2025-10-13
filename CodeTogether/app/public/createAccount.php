@@ -1,7 +1,35 @@
 <?php
+declare(strict_types=1);
 
-session_start();
-require_once 'db_connect.php'; // need this to be verified too please. for database connection
+require_once 'dbConn.php'; 
+class Database {
+    private static ?mysqli $connection = null;
+
+    public static function getConnection(): mysqli {
+        if (self::$connection === null) {
+            $host = getenv('MYSQL_HOST') ?: 'mariadb';
+            $db   = getenv('MYSQL_DATABASE');
+            $user = getenv('MYSQL_USER');
+            $pass = getenv('MYSQL_PASSWORD');
+
+
+            self::$connection = new mysqli($host, $user, $pass, $db);
+
+            if (self::$connection->connect_error) {
+                throw new Exception('Connection failed: ' . self::$connection->connect_error);
+            }
+        }
+        return self::$connection;
+    }
+
+    public static function close(): void {
+        if (self::$connection !== null) {
+            self::$connection->close();
+            self::$connection = null;
+        }
+    }
+}
+getConnection();
 
 $error_message = "";
 
@@ -55,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         $stmt->close();
     }
-    $conn->close();
+    close();
 }
 ?>
 
