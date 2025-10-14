@@ -1,12 +1,12 @@
 <?php
-include_once "./dao/UserDao.php";
+include_once __DIR__ . "/../dao/UserDAO.php";
 
 class LoginController extends Controller {
     private $userDao;
 
     public function performAction() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->renderView("fancyLogin");
+            $this->renderView("fancylogin");
             return;
         }
 
@@ -14,7 +14,7 @@ class LoginController extends Controller {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
-            $this->userDao = new UserDao();
+            $this->userDao = new UserDAO();
             $result = $this->userDao->authenticate($email, $password);
 
             if ($result === null) {

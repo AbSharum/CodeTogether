@@ -5,7 +5,7 @@ require_once __DIR__ . '/../config/dbConn.php';
 class PostDAO {
 
     public function addPost(Post $post) {
-        $conn = Database::getConnection(); //$conn = getConnection();
+        $conn = Database::getConnection();
         if (!$conn) return;
 
         $stmt = $conn->prepare("INSERT INTO post (user_id, thread_id, contents, caption, visibility) VALUES (?, ?, ?, ?, ?)");
@@ -18,11 +18,11 @@ class PostDAO {
         );
         $stmt->execute();
         $stmt->close();
-        Database::close(); //$conn->close();
+        $conn->close();
     }
 
     public function getAllPosts() {
-        $conn = Database::getConnection(); //$conn = getConnection();
+        $conn = Database::getConnection();
         $stmt = $conn->prepare("SELECT * FROM post WHERE is_deleted = FALSE ORDER BY created_on DESC");
         $stmt->execute();
         $result = $stmt->get_result();
@@ -35,12 +35,12 @@ class PostDAO {
         }
 
         $stmt->close();
-        Database::close(); //$conn->close();
+        $conn->close();
         return $posts;
     }
 
     public function getPostsByUser($userId) {
-        $conn = Database::getConnection(); //$conn = getConnection();
+        $conn = Database::getConnection();
         $stmt = $conn->prepare("SELECT * FROM post WHERE user_id = ? AND is_deleted = FALSE ORDER BY created_on DESC");
         $stmt->bind_param("i", $userId);
         $stmt->execute();
@@ -54,18 +54,18 @@ class PostDAO {
         }
 
         $stmt->close();
-        Database::close(); //$conn->close();
+        $conn->close();
         return $posts;
     }
 
 
     public function deletePost($postID) {
-        $conn = Database::getConnection(); //$conn = getConnection();
+        $conn = Database::getConnection();
         $stmt = $conn->prepare("UPDATE post SET is_deleted = TRUE WHERE post_id = ?");
         $stmt->bind_param("i", $postID);
         $stmt->execute();
         $stmt->close();
-        Database::close(); //$conn->close();
+        $conn->close();
     }
 }
 ?>

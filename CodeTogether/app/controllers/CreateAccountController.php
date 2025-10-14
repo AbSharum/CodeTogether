@@ -1,5 +1,5 @@
 <?php
-include_once "./dao/UserDao.php";
+include_once __DIR__ . "/../dao/UserDAO.php";
 
 class CreateAccountController extends Controller {
     private $userDao;
@@ -18,7 +18,7 @@ class CreateAccountController extends Controller {
                 return;
             }
 
-            $this->userDao = new UserDao();
+            $this->userDao = new UserDAO();
 
             $success = $this->userDao->addUser($username, $password, $email);
 
