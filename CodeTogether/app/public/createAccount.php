@@ -1,92 +1,3 @@
-<?php
-declare(strict_types=1);
-
-require_once 'dbConn.php'; 
-class Database {
-    private static ?mysqli $connection = null;
-
-    public static function getConnection(): mysqli {
-        if (self::$connection === null) {
-            $host = getenv('MYSQL_HOST') ?: 'mariadb';
-            $db   = getenv('MYSQL_DATABASE');
-            $user = getenv('MYSQL_USER');
-            $pass = getenv('MYSQL_PASSWORD');
-
-
-            self::$connection = new mysqli($host, $user, $pass, $db);
-
-            if (self::$connection->connect_error) {
-                throw new Exception('Connection failed: ' . self::$connection->connect_error);
-            }
-        }
-        return self::$connection;
-    }
-
-    public static function close(): void {
-        if (self::$connection !== null) {
-            self::$connection->close();
-            self::$connection = null;
-        }
-    }
-}
-getConnection();
-
-$error_message = "";
-
-    //Server side Validation...
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-    $firstName = trim($_POST['firstName']);
-    $lastName = trim($_POST['lastName']);
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-    $confirmPassword = trim($_POST['confirmPassword']);
-
-    if($password !== $confirmPassword){
-        $error_message = "Passwords do not match. Please try again.";
-    }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $error_message = "Invalid email format.";
-    }else if(!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/', $password)){
-        $error_message = "Password does not meet the complexity requirements.";
-    }
-
-    // db side Validation...
-
-    if(empty($error_message)){
-        // First, check if the email already exists in the database
-        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->store_result();
-
-        if($stmt->num_rows > 0){
-            $error_message = "An account with this email address already exists.";
-        } else {
-            // Email is unique, proceed to insert the new user
-            // Securely hash the password before storing it
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-            // Prepare an INSERT statement
-            $insert_stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)");
-            $insert_stmt->bind_param("ssss", $firstName, $lastName, $email, $hashed_password);
-
-            // Execute the statement and check for success
-            if($insert_stmt->execute()){
-                // Redirect to the login page with a success message
-                header("location: fancyLogin.php?registration=success");
-                exit();
-            } else {
-                $error_message = "Something went wrong. Please try again later.";
-            }
-            $insert_stmt->close();
-        }
-        $stmt->close();
-    }
-    close();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
         <head>
@@ -102,15 +13,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="card p-4 text-bg-dark bg-opacity 75" style="max-width: 400px;">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">Code Together Account Creation</h2>
-                        <form action = "fancyLogin.php" method="POST"> 
-                            <form id="registration"> 
+                        <form action = "index.php?action=createAccount" method="POST" id="registration">  
                             <div class="mb-3">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email address</label>
@@ -128,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             </div>
                             </form>
                             <div class="d-grid gap-2">
-                                <button type="return" class="btn btn-success" onclick="window.location.href='fancyLogin.php'">Return to Login</button>
+                                <button type="return" class="btn btn-success" onclick="window.location.href='index.php?action=login'">Return to Login</button>
                             </div>
                         </div>
                     </div>

@@ -1,78 +1,3 @@
-<?php
-declare(strict_types=1);
-
-require_once 'dbConn.php'; 
-class Database {
-    private static ?mysqli $connection = null;
-
-    public static function getConnection(): mysqli {
-        if (self::$connection === null) {
-            $host = getenv('MYSQL_HOST') ?: 'mariadb';
-            $db   = getenv('MYSQL_DATABASE');
-            $user = getenv('MYSQL_USER');
-            $pass = getenv('MYSQL_PASSWORD');
-
-
-            self::$connection = new mysqli($host, $user, $pass, $db);
-
-            if (self::$connection->connect_error) {
-                throw new Exception('Connection failed: ' . self::$connection->connect_error);
-            }
-        }
-        return self::$connection;
-    }
-
-    public static function close(): void {
-        if (self::$connection !== null) {
-            self::$connection->close();
-            self::$connection = null;
-        }
-    }
-}
-getConnection();
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $rememberme = isset($_POST['rememberme']);
-
-    //authenticate user against the database
-
-    $stmt = $conn->prepare("SELECT id,password FROM users WHERE email = ?"); //  change naming here if needed for database;
-    if($stmt){
-        $stmt->bind_param("s",email);
-        $stmt ->execute();
-        $result == $stmt->get_result();
-
-        if($result->num_rows == 1){
-            $user = $result->fetch_assoc();
-            if(password_verify($password,$user['password'])){
-                $_SESSION['user_id'] = $user['id'];
-
-                if($rememberme){ //setting the user info to be stored into a yummi cookie so user will be remembered if desired to be.
-                    $token = bin2hex(random_bytes(32));
-                    $experiation_time = time() + (86400 * 30); //seconds in a day times 30 days
-                    $stmt = $conn->prepare("INSERT INTO remember_tokens (user_id, token, expires_at) VALUES (?, ?, ?)");
-                    $stmt->bind_param("iss",$user['id'],$token,date('Y-m-d H:i:s',$experiation_time));
-                    $stmt->execute();
-
-                    // setting the cookie.
-                    setcookie("remeber_me_token", $token,$experiation_time,"/");
-                }
-                header("location: home.php"); //redirect to home.php page can change the name its just here for now
-                exit();
-            }else{
-                $login_err = "Invalid login credentials."; // handles invalid login info
-            }
-        }else{
-            $login_err = "Invalid login credentials.";
-        }
-        $stmt->close();
-    }
-    close();        
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="card p-4 text-bg-dark bg-opacity 75" style="max-width: 400px;">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Code Together Login</h2>
-                <form action = "profile.html" method="POST">
+                <form action = "index.php?action=login" method="POST">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
                         <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
@@ -109,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </form>
                 
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-success" onclick="window.location.href='createAccount.html'">Create Account</button>
+                    <button type="button" class="btn btn-success" onclick="window.location.href='index.php?action=createAccount'">Create Account</button>
                 </div>
             </div>
         </div>
