@@ -1,5 +1,5 @@
 <?php
-    include_once "Controller.php";
+    include_once __DIR__ . "/Controller.php";
 
     class Router{
         public $controllers;

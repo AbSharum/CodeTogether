@@ -3,11 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
-include_once "./config/Controller.php";
-include_once "./config/Router.php";
-include_once "./controllers/LoginController.php";
-include_once "./controllers/CreateAccountController.php";
-include_once "./controllers/SocialFeedController.php";
+include_once __DIR__ . "/config/Controller.php";
+include_once __DIR__ . "/config/Router.php";
+include_once __DIR__ . "/controllers/LoginController.php";
+include_once __DIR__ . "/controllers/CreateAccountController.php";
+include_once __DIR__ . "/controllers/SocialFeedController.php";
 
 class MyRouter extends Router {
     public function authCheck($action) {
