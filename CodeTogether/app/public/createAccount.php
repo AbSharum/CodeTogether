@@ -29,6 +29,16 @@
                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                                 <input type="checkbox" onclick="showPassAndConf()">Show Password<br> 
                             </div>
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Role</label>
+                                <select class="form-select" id="role" name="role" required>
+                                    <option value="" disabled selected> Select your role...</option>
+                                    <option value="moderator">Moderator</option>
+                                    <option value="student">Student</option>
+                                    <option value="teacher">Teacher</option>
+                                </select>
+                            </div>
+                                
                             <div class="d-grid gap-2 mb-3">
                                 <button type="submit" class="btn btn-success">Create Account</button>
                             </div>
