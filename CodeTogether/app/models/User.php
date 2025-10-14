@@ -10,7 +10,7 @@ class User implements JsonSerializable {
     private $latestUpdate;
     private $password;
 
-    public function __construct($userID, $roleID, $username, $points, $status, $email, $password) {
+    public function __construct($userID=null, $roleID=null, $username=null, $points=null, $status=null, $email=null, $password=null) {
         $this->userID = $userID;
         $this->roleID = $roleID;
         $this->username = $username;
