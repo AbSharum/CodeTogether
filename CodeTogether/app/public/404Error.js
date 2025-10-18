@@ -1,100 +1,93 @@
-document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('matrix-canvas');
-            const context = canvas.getContext('2d');
+const canvas = document.getElementById('matrix-canvas');
+        const context = canvas.getContext('2d');
 
-            if (!context) {
-                console.error("Canvas context not supported or not found.");
-                return;
+        let fontSize = 16;
+        let columns;
+        let drops = [];
+        let animationFrameId;
+
+        // Custom character sequence for the pattern effect, SPACE CHARACTER REMOVED
+        const fixedChars = "404ERROR"; 
+        const charSequence = fixedChars.split('');
+        const sequenceLength = charSequence.length;
+
+        // Function to set canvas size and recalculate drops
+        const setCanvasSize = () => {
+            // Cancel any existing animation frame to restart smoothly
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
             }
 
-            let fontSize = 16;
-            let drops = [];
-            let animationFrameId = null;
-
-            // Rich character set for the classic Matrix look
-            const alphabet = '404Error';
-            const characters = alphabet.split('');
-            const sequenceLength = characters.length; 
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = Math.floor(canvas.width / fontSize);
             
-            // Interval for character updates (60ms = ~16.6 FPS)
-            const interval = 60; 
-            let lastTime = 0; 
-            
-            /* main animation loop function */
-            const draw = () => {
-                // Fading effect for the trails
-                context.fillStyle = 'rgba(0, 0, 0, 0.07)';
-                context.fillRect(0,0, canvas.width, canvas.height);
+            // Re-initialize or resize the drops array
+            if (drops.length !== columns) {
+                drops.length = columns;
+                // Determine the maximum number of rows
+                const maxRows = Math.floor(canvas.height / fontSize); 
 
-                context.fillStyle = '#0F0'; // Green text color
-                context.font = `${fontSize}px monospace`; 
-
-                for(let i = 0; i < drops.length; i++){
-                    // Pick a random character
-                    const charIndex = Math.floor(Math.random() * sequenceLength);
-                    const text = characters[charIndex]; 
-
-                    // Draw the character
-                    context.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                    // Check if the drop has fallen off the screen
-                    // If it has and a random check passes (0.975 probability of resetting), reset it
-                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
-                        drops[i] = 0;
-                    }
-                    // Move the drop down one row
-                    drops[i]++;
-                }
-            };
-
-            /* requestAnimationFrame loop */
-            const animate = (timestamp) => {
-                // Schedule the next frame
-                animationFrameId = requestAnimationFrame(animate); 
-                
-                const elapsed = timestamp - lastTime;
-
-                // Only draw if enough time has passed based on the interval
-                if (elapsed > interval) {
-                    // Compensate for the time overshoot
-                    lastTime = timestamp - (elapsed % interval); 
-                    draw();
-                }
-            }
-
-            /* Resizing and Initialization */
-            const setCanvasSize = () => {
-                // Cancel any existing loop before resizing/resetting
-                if (animationFrameId) {
-                    cancelAnimationFrame(animationFrameId);
-                    animationFrameId = null;
-                }
-
-                // Set canvas dimensions to viewport size
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-
-                const columns = Math.floor(canvas.width / fontSize);
-
-                // Re-initialize or resize drops array if column count changes
-                if(drops.length !== columns){
-                    drops.length = columns;
-
-                    const maxRows = Math.floor(canvas.height / fontSize);
-                    for(let i = 0; i < columns; i++){
-                        // Initialize drops to start randomly *above* the screen for immediate flow
-                        drops[i] = Math.floor(Math.random() * maxRows * -1); 
+                for(let i = 0; i < columns; i++){
+                    // Initialize drops at a random vertical position (y-index) for staggered start
+                    // This is key to breaking up horizontal synchronization
+                    if (drops[i] === undefined) {
+                        drops[i] = Math.floor(Math.random() * maxRows); 
                     }
                 }
-                
-                lastTime = 0; // Reset timer
-                // Start the animation loop
-                animationFrameId = requestAnimationFrame(animate); 
             }
+            
+            // Restart the animation loop
+            animate(0); // Pass 0 for initial timestamp
+        }
 
-            // Start everything when the DOM is ready
+        /* main animation loop */
+        const draw = () => {
+            /* Fade alpha remains crisp for short trails */
+            context.fillStyle = 'rgba(0, 0, 0, 0.07)';
+            context.fillRect(0,0, canvas.width, canvas.height);
+
+            context.fillStyle = '#0F0';
+            context.font = `${fontSize}px monospace`;
+
+            for(let i = 0; i < drops.length; i++){
+                // Use the vertical position (drops[i]) modulo the sequence length to pick a character
+                const charIndex = (drops[i]) % sequenceLength;
+                const text = charSequence[charIndex];
+
+                // Draw the character
+                context.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Check if the drop has fallen off the screen
+                if(drops[i] * fontSize > canvas.height){
+                    // Reset to 0 immediately to ensure a continuous, gapless flow
+                    drops[i] = 0;
+                }
+                
+                // Increment the drop position
+                drops[i]++;
+            }
+        };
+
+        // Use requestAnimationFrame for smoother animation transition
+        const interval = 60; // Speed control (in milliseconds)
+        let lastTime = 0;
+
+        function animate(timestamp) {
+            animationFrameId = requestAnimationFrame(animate);
+            const elapsed = timestamp - lastTime;
+
+            // Control the update rate using the 'interval'
+            if (elapsed > interval) {
+                lastTime = timestamp - (elapsed % interval);
+                draw();
+            }
+        }
+
+        // Initial setup on load
+        window.onload = function() {
             setCanvasSize();
+        };
 
-            // Handle resize events
-            window.addEventListener('resize', setCanvasSize);
-        });
+        // Adjust size on window resize
+        window.addEventListener('resize', setCanvasSize);
