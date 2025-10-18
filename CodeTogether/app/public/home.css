@@ -14,7 +14,9 @@ body{
 }
 .profile-card, .friends-card{
   background-color: rgba(45, 55, 72, 0.95);
-  border: none;
+  border-left: 5px solid #06a342;
+  border-radius: 0.75rem;
+  margin-bottom: 20px;
   border-radius: 1.5rem; /*rounded corners on the cards*/
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
   padding: 20px;
@@ -44,14 +46,16 @@ body{
 }
 .friend-item{
   display: flex;
-  align-items:center;
+  align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #4a5568;
   cursor: pointer;
 }
+
 .friend-item:last-child{
   border-bottom: none;
 }
+
 .friend-avatar{
   width: 40px;
   height: 40px;
@@ -62,12 +66,11 @@ body{
 
 .chat-open-btn {
   background: none;
-  border: 4px solid #06a342;
+  border: none;
   padding: none;
   line-height: 1;
-  border-radius: 1.5rem; /*rounded corners on the cards*/
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
 }
+
 .chat-box {
     position: fixed;
     bottom: 20px;
@@ -94,7 +97,7 @@ body{
 .chat-body {
     flex-grow: 1;
     overflow-y: auto;
-    background-color: #1e2735; /* Message area background */
+    background-color: rgba(45, 55, 72, 0.95);
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -110,6 +113,7 @@ body{
     border-radius: 12px;
     margin-bottom: 8px;
     max-width: 80%;
+    color: #06a342;
 }
 .message.sent {
     align-self: flex-end;
@@ -120,7 +124,7 @@ body{
 
 .message.received {
     align-self: flex-start;
-    background-color: #4a5568; /* Grey for friend's messages */
+    background-color: #035efc; /* blue for friend's messages */
     color: white;
     border-bottom-left-radius: 2px;
 }
@@ -132,4 +136,15 @@ body{
   .col-lg-3, .col-lg-6{
     width: 100%;
   }
+}
+
+@media(max-width: 450px) {
+    /* Mobile optimization for chat box */
+    .chat-box {
+        width: 95%;
+        height: 60vh;
+        bottom: 5px;
+        right: 2.5%;
+        left: 2.5%;
+    }
 }

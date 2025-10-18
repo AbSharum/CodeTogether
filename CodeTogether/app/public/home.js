@@ -114,6 +114,47 @@
     const chatCloseBtn = document.getElementById('chatCloseBtn');
     const chatFriendName = document.getElementById('chatFriendName');
     const chatOpenBtns = document.querySelectorAll('.chat-open-btn');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatBody = document.getElementById('chatBody');
+
+    const scrollToBottom = () => {
+        chatBody.scrollTop = chatBody.scrollHeight;
+    };
+
+    const sendMessage = () => {
+        const messageText = chatInput.value.trim();
+        
+        if (messageText !== "") {
+            // 1. Create a new message element
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'sent'); // 'sent' class applies the green styling
+            messageElement.textContent = messageText;
+
+            // 2. Append the message to the chat body
+            chatBody.appendChild(messageElement);
+
+            // 3. Clear the input field
+            chatInput.value = '';
+
+            // 4. Scroll to the new message
+            scrollToBottom();
+
+            // 5. Placeholder for sending to a server (e.g., using Firestore)
+            console.log(`Sending message to ${chatFriendName.textContent.replace('Chatting with: ', '')}: ${messageText}`);
+        }
+        // Always focus on the input after sending/trying to send
+        chatInput.focus();
+    };
+    // Event listeners for sending the message
+    chatSendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevents the default action (like form submission, though not in a form here)
+            sendMessage();
+        }
+    });
+    // End new messaging functionality
 
     // 1. Open Chat Box Logic
     chatOpenBtns.forEach(button => {
@@ -122,7 +163,7 @@
             event.stopPropagation();
 
             const friendName = button.getAttribute('data-friend-name');
-            chatFriendName.textContent = `Chatting with: ${friendName}`;
+            chatFriendName.textContent = `Transmitting: ${friendName}`;
             chatBox.style.display = 'flex'; // Show the chat box
             // Set initial position if not set (or reset to default for mobile)
             if (window.innerWidth > 450) {
