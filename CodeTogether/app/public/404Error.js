@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let animationFrameId = null;
 
             // Rich character set for the classic Matrix look
-            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' + '*/+-=[]{}<>!@#$%^&;,.';
+            const alphabet = '404Error';
             const characters = alphabet.split('');
             const sequenceLength = characters.length; 
             
