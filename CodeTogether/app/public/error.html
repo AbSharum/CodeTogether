@@ -1,4 +1,115 @@
-document.addEventListener('DOMContentLoaded', () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>404 | System Error</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom CSS from 404Error.css, optimized for single-file use */
+    body {
+        overflow: hidden; /* hides scrollbar */
+        background: #000;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Define Matrix green color variants using Tailwind's theme extension for cleaner use in HTML */
+    .text-matrix-green { color: #00ff41; }
+    .text-faint-green { color: #0f0; }
+    .bg-faint-green-hover:hover { background-color: rgba(0, 255, 0, 0.1); }
+
+    #matrix-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* puts canvas in background */
+    }
+
+    .card-matrix {
+        border: 1px solid rgba(0, 255, 0, 0.5);
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); /* Stronger glow effect */
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        color: #0f0;
+    }
+    
+    /* Button styles for aesthetic parity, using the original blue and adding a green alternative */
+    .btn-blue-pill, .btn-green-pill {
+        padding: 0.75rem 2.5rem;
+        border-radius: 9999px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        font-weight: bold;
+        white-space: nowrap; /* Prevent text wrap on small screens */
+    }
+
+    .btn-blue-pill {
+        background-color: #0066cc;
+        color: white;
+        box-shadow: 0 0 15px rgba(0, 102, 204, 0.8);
+    }
+    .btn-blue-pill:hover {
+        background-color: #004c99;
+    }
+    
+    .btn-green-pill {
+        background-color: #00aa00;
+        color: #fff;
+        box-shadow: 0 0 15px rgba(0, 170, 0, 0.8);
+    }
+    .btn-green-pill:hover {
+        background-color: #008800;
+    }
+
+    /* Pulse animation for the subheading */
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; text-shadow: 0 0 5px #0f0; }
+      50% { opacity: 0.7; text-shadow: none; }
+    }
+    .animate-pulse {
+      animation: pulse-glow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-black text-white antialiased font-mono">
+    <!-- Matrix Canvas Background -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Content Card (z-index 1 to appear above canvas) -->
+    <div class="flex items-center justify-center min-h-screen relative z-10 p-4">
+        <div class="card-matrix p-8 mx-auto text-center rounded-xl w-full max-w-lg transition-all duration-300">
+            <div class="card-body">
+                <!-- 404 Header -->
+                <h1 class="text-7xl sm:text-9xl font-extrabold mb-6 text-matrix-green tracking-widest">404</h1>
+                <!-- Subheading with Matrix glow/pulse effect -->
+                <h2 class="text-3xl sm:text-4xl font-mono mb-4 text-faint-green animate-pulse">It is...Inevitable.</h2>
+                <!-- Error Message -->
+                <p class="text-base sm:text-lg mb-8 text-gray-400">
+                    But that is how it is with you people. You don't care how it works...just that it works. And HERE WE ARE... looking at this 404 error in disbelief.
+                </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="window.location.href='/'" class="btn-blue-pill hover:scale-105">
+                    believe whatever you want to believe
+                </button>
+                <button onclick="alert('The Oracle says: I knew you would click here. Try the other button.')" class="btn-green-pill hover:scale-105">
+                    Ask the Oracle
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Matrix Rain Effect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
             // Get the canvas element and its 2D context
             const canvas = document.getElementById('matrix-canvas');
             const context = canvas.getContext('2d');
@@ -15,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let animationFrameId = null;
 
             // Character sequence for the "404ERROR" pattern effect, repeated for variation
-            const fixedChars = "404ERROR";
+            const fixedChars = "404ERROR404ERROR";
             const charSequence = fixedChars.split('');
             const sequenceLength = charSequence.length;
 
@@ -100,3 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Handle resize events to keep the canvas full-screen and responsive
             window.addEventListener('resize', setCanvasSize);
         });
+    </script>
+</body>
+</html>
