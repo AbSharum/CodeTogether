@@ -12,8 +12,9 @@
 
     <div class="container">
         <div class="card p-4 mx-4" style="max-width: 400px;">
-            <div class="card-body">
+            <div class="card-matrix w-full">
                 <h2 class="card-title text-center mb-4 text-2x1 font-bold" style="color:#0f0;">Code Together Login</h2>
+                
                 <form action = "index.php?action=login" method="POST">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>

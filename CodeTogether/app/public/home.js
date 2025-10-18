@@ -84,7 +84,7 @@
                 }
             };
 
-            setInterval(draw, 35);
+            setInterval(draw, 105);
 
             window.addEventListener('resize', () => {
                 canvas.width = window.innerWidth;

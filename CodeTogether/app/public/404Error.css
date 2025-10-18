@@ -5,11 +5,6 @@ body {
         font-family: 'Courier New', Courier, monospace;
     }
 
-    /* Define Matrix green color variants using Tailwind's theme extension for cleaner use in HTML */
-    .text-matrix-green { color: #00ff41; }
-    .text-faint-green { color: #0f0; }
-    .bg-faint-green-hover:hover { background-color: rgba(0, 255, 0, 0.1); }
-
     #matrix-canvas {
         position: fixed;
         top: 0;
@@ -25,26 +20,16 @@ body {
     height: 100vh;
     position: relative;
     z-index: 1;
+    
     }
-    .card{
-    border: 1px solid rgba(0, 255, 0, 0.5);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    color: #0f0;
-    max-width: 400px;
-    margin: 10vh auto;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    }
+    
 
     .card-matrix {
         border: 1px solid rgba(0, 255, 0, 0.5);
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); /* Stronger glow effect */
         background: rgba(0, 0, 0, 0.85);
         backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
+        
         color: #0f0;
     }
     .card-body p{
@@ -54,7 +39,7 @@ body {
     
     /* Button styles for aesthetic parity, using the original blue and adding a green alternative */
     .btn-blue-pill, .btn-red-pill {
-        padding: 0.75rem 2.5rem;
+        padding: 0.55rem 2.5rem;
         border-radius: 9999px;
         border: none;
         cursor: pointer;
@@ -79,7 +64,7 @@ body {
         box-shadow: 0 0 15px rgb(248, 1, 1);
     }
     .btn-red-pill:hover {
-        background-color: #ff0303;
+        background-color: #2c0202;
     }
 
     /* Pulse animation for the subheading */
