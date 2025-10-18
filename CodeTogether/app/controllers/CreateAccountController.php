@@ -45,7 +45,8 @@
         }
 
         public function renderView(string $view, $data = []):void {
-            include "./public/$view.php";
+            extract($data);
+            include "./public/views/$view.php";
         }
     }
 ?>

@@ -12,7 +12,7 @@
         }
 
         public function renderView(string $view, $data = []): void {
-            include "./public/$view.php";
+            include "./public/views/$view.php";
         }
     }
 ?>
