@@ -6,11 +6,11 @@
 
     class UserDAO {
 
-        public function addUser(string $username, string $password,string $email):void {
+        public function addUser(string $username, string $password,string $email, int $roleID):void {
             $conn = Database::getConnection();
-            $stmt = $conn->prepare("INSERT INTO user (username, password, email) VALUES (?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO user (username, password, email,role_id) VALUES (?, ?, ?,?)");
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $stmt->bind_param("sss", $username, $hashedPassword, $email);
+            $stmt->bind_param("sssi", $username, $hashedPassword, $email, $roleID);
             $stmt->execute();
             $stmt->close();
             
@@ -99,8 +99,7 @@
             
 
             return $user;
-    }
+        }
 
     }
 ?>
-

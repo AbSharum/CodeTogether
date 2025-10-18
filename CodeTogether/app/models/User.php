@@ -30,8 +30,8 @@
             $this->email = $row['email'];
             $this->points = $row['points'];
             $this->status = $row['status'];
-            $this->createdOn = $row['created_on'];
-            $this->latestUpdate = $row['latest_update'];
+            $this->createdOn = new DateTime($row['created_on']);
+            $this->latestUpdate = new DateTime($row['latest_update']);
             $this->password = $row['password'];
         }
 
