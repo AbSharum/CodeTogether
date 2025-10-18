@@ -29,7 +29,7 @@ body {
     }
     
     /* Button styles for aesthetic parity, using the original blue and adding a green alternative */
-    .btn-blue-pill, .btn-green-pill {
+    .btn-blue-pill, .btn-red-pill {
         padding: 0.75rem 2.5rem;
         border-radius: 9999px;
         border: none;
@@ -49,13 +49,13 @@ body {
         background-color: #004c99;
     }
     
-    .btn-green-pill {
-        background-color: #00aa00;
+    .btn-red-pill {
+        background-color: #fd0505;
         color: #fff;
-        box-shadow: 0 0 15px rgba(0, 170, 0, 0.8);
+        box-shadow: 0 0 15px rgb(248, 1, 1);
     }
-    .btn-green-pill:hover {
-        background-color: #008800;
+    .btn-red-pill:hover {
+        background-color: #ff0303;
     }
 
     /* Pulse animation for the subheading */
