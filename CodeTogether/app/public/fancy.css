@@ -1,6 +1,7 @@
 body{
     overflow: hidden; /*hides scrollbar */
     background:#000;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #matrix-canvas{

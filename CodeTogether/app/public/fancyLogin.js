@@ -1,21 +1,27 @@
 const canvas = document.getElementById('matrix-canvas');
 const context = canvas.getContext('2d');
 
+let fontSize = 16;
+let drops = [];
+let animationFrameId;
+
 const setCanvasSize = () => {
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
     const columns = Math.floor(canvas.width / fontSize);
     const newDrops = [];
     for(let i = 0; i < columns; i++){
         newDrops[i] = drops && drops[i] !== undefined ? drops[i] : 1;
     }
     drops = newDrops;
-}
 
-let fontSize = 16;
-let columns;
-let drops = [];
-let animationFrameId;
+    animate(0);
+}
 
 /* setting characters */
 const katakana = 'アイウエオカキクケコキャキュキョサシスセソシャシュショタチツテトチャチュチョナニヌネノニャニュニョハヒフヘホヒャヒュヒョマミムメモミャミュミョヤユエヨラリルレロリャリュリョワヰヱヲ';
@@ -24,7 +30,6 @@ const numbers = '1234567890';
 const symbols = '!@#$%^&*()<>?+=-_:';
 const alphabet = katakana + latin + numbers + symbols;
 const characters = alphabet.split('');
-
 
 setCanvasSize();
 
@@ -35,7 +40,7 @@ const draw = () => {
     context.fillRect(0,0, canvas.width, canvas.height);
 
     context.fillStyle = '#0F0';
-    context.font = '${fontSize}px monospace';
+    context.font = `${fontSize}px monospace`;
 
     for(let i = 0; i < drops.length; i++){
         const text = characters[Math.floor(Math.random() * characters.length)];
@@ -61,12 +66,9 @@ function animation(timestamp){
         draw();
     }
 }
- window.addEventListener('resize', setCanvasSize);
+window.addEventListener('resize', setCanvasSize);
 
- window.onload = function() {
-    if (animationFrameId){
-        this.cancelAnimationFrame(animationFrameId);
-    }
+window.onload = function() {
     animate(0);
 };
 
