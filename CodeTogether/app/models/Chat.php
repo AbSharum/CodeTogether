@@ -1,64 +1,64 @@
 <?php
-declare(strict_types=1);
-class Chat implements JsonSerializable{
-    private $chatID;
-    private $chatType;
-    private $lastMessageAt;
-    private $createdOn;
+    declare(strict_types=1);
+    class Chat implements JsonSerializable{
+        private int $chatID;
+        private string $chatType;
+        private DateTime $lastMessageAt;
+        private DateTime $createdOn;
 
-    public function __construct($chatID, $chatType, $lastMessageAt, $createdOn) {
-        $this->chatID = $chatID;
-        $this->chatType = $chatType;
-        $this->lastMessageAt = $lastMessageAt;
-        $this->createdOn= $createdOn;
-    }
+        public function __construct(int $chatID=-1, string $chatType='', ?DateTime $lastMessageAt=null, ?DateTime $createdOn=null) {
+            $this->chatID = $chatID;
+            $this->chatType = $chatType;
+            $this->lastMessageAt = $lastMessageAt;
+            $this->createdOn= $createdOn;
+        }
 
-    public function load($row) {
-        $this->chatID = $row['chat_id'];
-        $this->chatType = $row['chat_type'];
-        $this->lastMessageAt = $row['last_message_at'];
-        $this->createdOn= $row['created_on'];
-    }
+        public function load($row):void {
+            $this->chatID = $row['chat_id'];
+            $this->chatType = $row['chat_type'];
+            $this->lastMessageAt = $row['last_message_at'];
+            $this->createdOn= $row['created_on'];
+        }
 
-    public function jsonSerialize(): array{
-        return array(
-            'chatID' => $this->chatID,
-            'chatType' => $this->chatType,
-            'lastMessageAt' => $this->lastMessageAt,
-            'createdOn' => $this->createdOn
-        );
-    }
+        public function jsonSerialize(): array{
+            return array(
+                'chatID' => $this->chatID,
+                'chatType' => $this->chatType,
+                'lastMessageAt' => $this->lastMessageAt,
+                'createdOn' => $this->createdOn
+            );
+        }
 
-    public function setChatID($chatID){
-        $this->chatID=$chatID;
-    }
+        public function setChatID($chatID): void{
+            $this->chatID=$chatID;
+        }
 
-    public function getChatID(): int{
-        return $this->chatID;
-    }
+        public function getChatID(): int{
+            return $this->chatID;
+        }
 
-    public function setChatType($chatType){
-        $this->chatType=$chatType;
-    }
+        public function setChatType($chatType): void{
+            $this->chatType=$chatType;
+        }
 
-    public function getChatType(): string{
-        return $this->chatType;
-    }
+        public function getChatType(): string{
+            return $this->chatType;
+        }
 
-    public function setLastMessageAt($lastMessageAt){
-        $this->lastMessageAt=$lastMessageAt;
-    }
+        public function setLastMessageAt($lastMessageAt): void{
+            $this->lastMessageAt=$lastMessageAt;
+        }
 
-    public function getLastMessageAt(): string{
-        return $this->lastMessageAt;
-    }
+        public function getLastMessageAt(): DateTime{
+            return $this->lastMessageAt;
+        }
 
-    public function setCreatedOn($createdOn){
-        $this->createdOn=$createdOn;
-    }
+        public function setCreatedOn($createdOn): void{
+            $this->createdOn=$createdOn;
+        }
 
-    public function getCreatedOn(): string{
-        return $this->createdOn;
+        public function getCreatedOn(): DateTime{
+            return $this->createdOn;
+        }
     }
-}
 ?>
