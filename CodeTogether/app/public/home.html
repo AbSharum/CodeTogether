@@ -136,7 +136,9 @@
                             <div class="fw-bold text-white">John Smith</div>
                             <small class="text-success">Online</small>
                         </div>
-                        <button class="fas fa-comment text-info" onclick="openForm()"></i>
+                        <button class="btn btn-sm chat-open-btn" data-friend-name=""> <!--will need to put php to get friend name or id for here-->
+                            <i class="fas fa-comment text-info"></i>
+                        </button>
                     </div>
 
                     <div class="friend-item">
@@ -145,7 +147,9 @@
                             <div class="fw-bold text-white">Alice L.</div>
                             <small class="text-warning">Away</small>
                         </div>
-                        <i class="fas fa-comment text-info"></i>
+                        <button class="btn btn-sm chat-open-btn" data-friend-name=""><!--will need to put php to get friend name or id for here-->
+                            <i class="fas fa-comment text-info"></i>
+                        </button>
                     </div>
 
                     <div class="friend-item">
@@ -154,7 +158,9 @@
                             <div class="fw-bold text-white">Mike P.</div>
                             <small class="text-success">Online</small>
                         </div>
-                        <i class="fas fa-comment text-info"></i>
+                        <button class="btn btn-sm chat-open-btn" data-friend-name=""><!--will need to put php to get friend name or id for here-->
+                            <i class="fas fa-comment text-info"></i>
+                        </button>
                     </div>
 
                     <div class="friend-item">
@@ -163,7 +169,9 @@
                             <div class="fw-bold text-white">Sarah K.</div>
                             <small class="text-danger">Offline</small>
                         </div>
-                        <i class="fas fa-comment text-info"></i>
+                        <button class="btn btn-sm chat-open-btn" data-friend-name=""><!--will need to put php to get friend name or id for here-->
+                            <i class="fas fa-comment text-info"></i>
+                        </button>
                     </div>
 
                     <button class="btn btn-sm btn-secondary w-100 mt-3 rounded-pill">View All Friends</button>
@@ -173,6 +181,30 @@
         </div>
     </div>
         <!-- end of main container-->
+
+        <!-- FLOATING CHAT BOX UI -->
+    <div id="chatBox" class="chat-box shadow-lg">
+        <!-- Chat Header (Drag Handle) -->
+        <div id="chatHeader" class="chat-header p-2 d-flex justify-content-between align-items-center">
+            <h6 id="chatFriendName" class="mb-0 text-white">Transmitting:</h6>
+            <button id="chatCloseBtn" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
+
+        <!-- Chat Body (Messages) -->
+        <div id="chatBody" class="chat-body p-3">
+            <!-- Messages will be appended here -->
+            <div class="message received">Hi! Ready to code?</div>
+            <div class="message sent">Totally, what project are you working on?</div>
+            <div class="message received">Just trying to implement this chat box!</div>
+        </div>
+
+        <!-- Chat Footer (Input) -->
+        <div class="chat-footer d-flex p-2">
+            <input type="text" class="form-control me-2" placeholder="Type a message..." id="chatInput">
+            <button class="btn btn-success" id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <!-- END FLOATING CHAT BOX UI -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q" crossorigin="anonymous"></script>

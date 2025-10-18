@@ -14,7 +14,9 @@ body{
 }
 .profile-card, .friends-card{
   background-color: rgba(45, 55, 72, 0.95);
-  border: none;
+  border-left: 5px solid #06a342;
+  border-radius: 0.75rem;
+  margin-bottom: 20px;
   border-radius: 1.5rem; /*rounded corners on the cards*/
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
   padding: 20px;
@@ -44,14 +46,16 @@ body{
 }
 .friend-item{
   display: flex;
-  align-items:center;
+  align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #4a5568;
   cursor: pointer;
 }
+
 .friend-item:last-child{
   border-bottom: none;
 }
+
 .friend-avatar{
   width: 40px;
   height: 40px;
@@ -59,10 +63,88 @@ body{
   margin-right: 10px;
   object-fit: cover;
 }
+
+.chat-open-btn {
+  background: none;
+  border: none;
+  padding: none;
+  line-height: 1;
+}
+
+.chat-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px; /* fixed width */
+    height: 400px; /* fixed height */
+    background-color: rgba(45, 55, 72, 0.95);
+    border-radius: 1rem;
+    overflow: hidden;
+    z-index: 1050; /* Above navbars and modals */
+    display: none; /* Hidden by default */
+    border: 2px solid #06a342;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-out; /* For smooth opening */
+}
+.chat-header {
+    background-color: #06a342; /* Info color */
+    color: white;
+    cursor: grab; /* Indicates draggable area */
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+}
+.chat-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: rgba(45, 55, 72, 0.95);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-footer {
+    border-top: 1px solid #4a5568;
+    background-color: #2d3748;
+}
+
+.message {
+    padding: 8px 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    max-width: 80%;
+    color: #06a342;
+}
+.message.sent {
+    align-self: flex-end;
+    background-color: #06a342; /* Green for user's messages */
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.message.received {
+    align-self: flex-start;
+    background-color: #035efc; /* blue for friend's messages */
+    color: white;
+    border-bottom-left-radius: 2px;
+}
+
+
 /*responsive 3 column layout*/
 @media(max-width: 992px){
   /*tablet view and smaller will make posts full and stack friend/profile sidebars*/
   .col-lg-3, .col-lg-6{
     width: 100%;
   }
+}
+
+@media(max-width: 450px) {
+    /* Mobile optimization for chat box */
+    .chat-box {
+        width: 95%;
+        height: 60vh;
+        bottom: 5px;
+        right: 2.5%;
+        left: 2.5%;
+    }
 }

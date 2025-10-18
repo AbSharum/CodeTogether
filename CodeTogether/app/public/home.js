@@ -107,3 +107,128 @@
                 animate();
             };
         });
+
+// --- CHAT BOX FUNCTIONALITY ---
+    const chatBox = document.getElementById('chatBox');
+    const chatHeader = document.getElementById('chatHeader');
+    const chatCloseBtn = document.getElementById('chatCloseBtn');
+    const chatFriendName = document.getElementById('chatFriendName');
+    const chatOpenBtns = document.querySelectorAll('.chat-open-btn');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatBody = document.getElementById('chatBody');
+
+    const scrollToBottom = () => {
+        chatBody.scrollTop = chatBody.scrollHeight;
+    };
+
+    const sendMessage = () => {
+        const messageText = chatInput.value.trim();
+        
+        if (messageText !== "") {
+            // 1. Create a new message element
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'sent'); // 'sent' class applies the green styling
+            messageElement.textContent = messageText;
+
+            // 2. Append the message to the chat body
+            chatBody.appendChild(messageElement);
+
+            // 3. Clear the input field
+            chatInput.value = '';
+
+            // 4. Scroll to the new message
+            scrollToBottom();
+
+            // 5. Placeholder for sending to a server (e.g., using Firestore)
+            console.log(`Sending message to ${chatFriendName.textContent.replace('Chatting with: ', '')}: ${messageText}`);
+        }
+        // Always focus on the input after sending/trying to send
+        chatInput.focus();
+    };
+    // Event listeners for sending the message
+    chatSendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevents the default action (like form submission, though not in a form here)
+            sendMessage();
+        }
+    });
+    // End new messaging functionality
+
+    // 1. Open Chat Box Logic
+    chatOpenBtns.forEach(button => {
+        button.addEventListener('click', (event) => {
+            // Stop the friend-item click from propagating, if it had one.
+            event.stopPropagation();
+
+            const friendName = button.getAttribute('data-friend-name');
+            chatFriendName.textContent = `Transmitting: ${friendName}`;
+            chatBox.style.display = 'flex'; // Show the chat box
+            // Set initial position if not set (or reset to default for mobile)
+            if (window.innerWidth > 450) {
+                chatBox.style.bottom = '20px';
+                chatBox.style.right = '20px';
+                chatBox.style.left = 'unset';
+            }
+        });
+    });
+
+    // 2. Close Chat Box Logic
+    chatCloseBtn.addEventListener('click', () => {
+        chatBox.style.display = 'none';
+    });
+
+    // 3. Drag Functionality
+    let isDragging = false;
+    let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+
+    const dragStart = (e) => {
+        // Only allow dragging on desktop/larger screens to avoid mobile conflicts
+        if (window.innerWidth <= 450) return;
+
+        e.preventDefault(); // Prevent default drag behavior
+        initialX = e.clientX || e.touches[0].clientX;
+        initialY = e.clientY || e.touches[0].clientY;
+
+        isDragging = true;
+        chatHeader.style.cursor = 'grabbing';
+        chatBox.classList.add('dragging'); // Optional class for visual feedback
+    };
+
+    const dragEnd = () => {
+        isDragging = false;
+        chatHeader.style.cursor = 'grab';
+        chatBox.classList.remove('dragging');
+        // Store current offset for next drag
+        xOffset = parseInt(chatBox.style.left) || 0;
+        yOffset = parseInt(chatBox.style.top) || 0;
+    };
+
+    const drag = (e) => {
+        if (!isDragging) return;
+
+        e.preventDefault();
+        currentX = e.clientX || e.touches[0].clientX;
+        currentY = e.clientY || e.touches[0].clientY;
+
+        const dx = currentX - initialX;
+        const dy = currentY - initialY;
+
+        // Use 'top' and 'left' for positioning during drag
+        chatBox.style.left = (chatBox.offsetLeft + dx) + 'px';
+        chatBox.style.top = (chatBox.offsetTop + dy) + 'px';
+
+        // Update initial values for smooth movement
+        initialX = currentX;
+        initialY = currentY;
+    };
+
+    // Attach mouse and touch listeners to the chat header
+    chatHeader.addEventListener('mousedown', dragStart);
+    document.addEventListener('mouseup', dragEnd);
+    document.addEventListener('mousemove', drag);
+
+    chatHeader.addEventListener('touchstart', dragStart);
+    document.addEventListener('touchend', dragEnd);
+    document.addEventListener('touchmove', drag);
