@@ -13,23 +13,26 @@
                 $email = $_POST['email'] ?? '';
                 $password = $_POST['password'] ?? '';
                 $confirmPassword = $_POST['confirmPassword'] ?? '';
-                $role = $_POST['role'] ?? -1;
+                $role = $_POST['role'] ?? '';
 
-                if ($password !== $confirmPassword) {
-                    $this->renderView('createAccount', ['error' => 'Passwords do not match']);
+                if ($password === '' || $email === '' || $role === '' || $username === '') {
+                    $this->renderView('createAccount', ['error' => 'Please fill out all fields!']);
                     return;
                 }
+
 
                 $this->userDao = new UserDAO();
 
                 $existing = $this->userDao->getUserByName($username);
 
-                if ($existing === null) {
+                if ($existing !== null) {
                     $this->renderView('createAccount', ['error' => 'This username is taken!']);
                     return;
                 }
 
-                $this->userDao->addUser($username, $password, $email);
+                
+
+                $this->userDao->addUser($username, $password, $email,(int) $role);
                 $success = $this->userDao->authenticate($email,$password);
 
                 if ($success) {
