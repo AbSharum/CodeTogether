@@ -107,3 +107,87 @@
                 animate();
             };
         });
+
+// --- CHAT BOX FUNCTIONALITY ---
+    const chatBox = document.getElementById('chatBox');
+    const chatHeader = document.getElementById('chatHeader');
+    const chatCloseBtn = document.getElementById('chatCloseBtn');
+    const chatFriendName = document.getElementById('chatFriendName');
+    const chatOpenBtns = document.querySelectorAll('.chat-open-btn');
+
+    // 1. Open Chat Box Logic
+    chatOpenBtns.forEach(button => {
+        button.addEventListener('click', (event) => {
+            // Stop the friend-item click from propagating, if it had one.
+            event.stopPropagation();
+
+            const friendName = button.getAttribute('data-friend-name');
+            chatFriendName.textContent = `Chatting with: ${friendName}`;
+            chatBox.style.display = 'flex'; // Show the chat box
+            // Set initial position if not set (or reset to default for mobile)
+            if (window.innerWidth > 450) {
+                chatBox.style.bottom = '20px';
+                chatBox.style.right = '20px';
+                chatBox.style.left = 'unset';
+            }
+        });
+    });
+
+    // 2. Close Chat Box Logic
+    chatCloseBtn.addEventListener('click', () => {
+        chatBox.style.display = 'none';
+    });
+
+    // 3. Drag Functionality
+    let isDragging = false;
+    let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+
+    const dragStart = (e) => {
+        // Only allow dragging on desktop/larger screens to avoid mobile conflicts
+        if (window.innerWidth <= 450) return;
+
+        e.preventDefault(); // Prevent default drag behavior
+        initialX = e.clientX || e.touches[0].clientX;
+        initialY = e.clientY || e.touches[0].clientY;
+
+        isDragging = true;
+        chatHeader.style.cursor = 'grabbing';
+        chatBox.classList.add('dragging'); // Optional class for visual feedback
+    };
+
+    const dragEnd = () => {
+        isDragging = false;
+        chatHeader.style.cursor = 'grab';
+        chatBox.classList.remove('dragging');
+        // Store current offset for next drag
+        xOffset = parseInt(chatBox.style.left) || 0;
+        yOffset = parseInt(chatBox.style.top) || 0;
+    };
+
+    const drag = (e) => {
+        if (!isDragging) return;
+
+        e.preventDefault();
+        currentX = e.clientX || e.touches[0].clientX;
+        currentY = e.clientY || e.touches[0].clientY;
+
+        const dx = currentX - initialX;
+        const dy = currentY - initialY;
+
+        // Use 'top' and 'left' for positioning during drag
+        chatBox.style.left = (chatBox.offsetLeft + dx) + 'px';
+        chatBox.style.top = (chatBox.offsetTop + dy) + 'px';
+
+        // Update initial values for smooth movement
+        initialX = currentX;
+        initialY = currentY;
+    };
+
+    // Attach mouse and touch listeners to the chat header
+    chatHeader.addEventListener('mousedown', dragStart);
+    document.addEventListener('mouseup', dragEnd);
+    document.addEventListener('mousemove', drag);
+
+    chatHeader.addEventListener('touchstart', dragStart);
+    document.addEventListener('touchend', dragEnd);
+    document.addEventListener('touchmove', drag);
