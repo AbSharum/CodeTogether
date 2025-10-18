@@ -18,6 +18,26 @@ body {
         height: 100%;
         z-index: -1; /* puts canvas in background */
     }
+    .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+    }
+    .card{
+    border: 1px solid rgba(0, 255, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    color: #0f0;
+    max-width: 400px;
+    margin: 10vh auto;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    }
 
     .card-matrix {
         border: 1px solid rgba(0, 255, 0, 0.5);
@@ -26,6 +46,10 @@ body {
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
         color: #0f0;
+    }
+    .card-body p{
+    margin-bottom: 1rem;
+    text-align: center;
     }
     
     /* Button styles for aesthetic parity, using the original blue and adding a green alternative */
