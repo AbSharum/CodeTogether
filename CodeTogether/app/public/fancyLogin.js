@@ -1,8 +1,22 @@
 const canvas = document.getElementById('matrix-canvas');
 const context = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const setCanvasSize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const columns = Math.floor(canvas.width / fontSize);
+    const newDrops = [];
+    for(let i = 0; i < columns; i++){
+        newDrops[i] = drops && drops[i] !== undefined ? drops[i] : 1;
+    }
+    drops = newDrops;
+}
+
+let fontSize = 16;
+let columns;
+let drops = [];
+let animationFrameId;
+
 /* setting characters */
 const katakana = 'アイウエオカキクケコキャキュキョサシスセソシャシュショタチツテトチャチュチョナニヌネノニャニュニョハヒフヘホヒャヒュヒョマミムメモミャミュミョヤユエヨラリルレロリャリュリョワヰヱヲ';
 const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -11,13 +25,9 @@ const symbols = '!@#$%^&*()<>?+=-_:';
 const alphabet = katakana + latin + numbers + symbols;
 const characters = alphabet.split('');
 
-const fontSize = 16;
-const columns = Math.floor(canvas.width / fontSize);
-const drops = [];
 
-for(let i = 0; i < columns; i++){
-    drops[i] = 1;
-}
+setCanvasSize();
+
 /* main animation loopy loop */
 const draw = () => {
     /* fade affect */
@@ -38,30 +48,30 @@ const draw = () => {
     }
 };
 
-setInterval(draw, 35);
+//using requestAnimationFrame for smoother animation transition
+const interval = 35;
+let lastTime = 0;
 
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const columns = Math.floor(canvas.width / fontSize);
-    drops.length = columns;
-    for(let i = 0; i < columns; i++){
-        if(drops[i] === undefined){
-            drops[i] = 1;
-        }
+function animation(timestamp){
+    animationFrameId = requestAnimationFrame(animate);
+    const elapsed = timestamp - lastTime;
+
+    if(elapsed > interval){
+        lastTime = timestamp - (elapsed % interval);
+        draw();
     }
-});
-// Use requestAnimationFrame for a smoother animation loop
-function animate() {
-    draw();
-    requestAnimationFrame(animate);
 }
+ window.addEventListener('resize', setCanvasSize);
 
-window.onload = function() {
-    animate();
+ window.onload = function() {
+    if (animationFrameId){
+        this.cancelAnimationFrame(animationFrameId);
+    }
+    animate(0);
 };
+
 function showPass(){
-    var x = document.getElementById("password");
+    const x = document.getElementById("password");
     if(x.type === "password"){
         x.type = "text";
     }else{

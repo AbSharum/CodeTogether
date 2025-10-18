@@ -10,10 +10,10 @@
 <body class = "bg-dark text-light">
     <canvas id="matrix-canvas"></canvas>
 
-    <div class="container d-flex align-items-center justify-content-center vh-100 position-relative" style="z-index: 1;">
-        <div class="card p-4 text-bg-dark bg-opacity 75" style="max-width: 400px;">
+    <div class="container">
+        <div class="card p-4 mx-4" style="max-width: 400px;">
             <div class="card-body">
-                <h2 class="card-title text-center mb-4">Code Together Login</h2>
+                <h2 class="card-title text-center mb-4 text-2x1 font-bold" style="color:#0f0;">Code Together Login</h2>
                 <form action = "index.php?action=login" method="POST">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
@@ -22,20 +22,23 @@
                     <div class="mb-2">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
-                        <input type="checkbox" onclick="showPass()">Show Password<br>
-                        <input type="checkbox" id="rememberMe" name="rememberMe" value = "1">
-                        <label class="form-check-label" for="rememberMe">Remember Me</label>
-                    </div>
-                    
+                        <div class="text-sm mt-2 text-left" style="color:#0f0;">
+                            <input type="checkbox" onclick="showPass()" style="margin-rigth: 4px;">Show Password<br>
+                            <input type="checkbox" id="rememberMe" name="rememberMe" value = "1" style="margin-right: 4px;">
+                            <label class="form-check-label" for="rememberMe">Remember Me</label>
+                        </div>
+                    </div>  
                     
                     <div class="d-grid gap-2 mb-3">
-                        <button type="submit" class="btn btn-success">Login</button>
+                        <button type="submit" class="btn btn-success">Access System</button>
                     </div>
                 </form>
                 
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-success" onclick="window.location.href='index.php?action=createAccount'">Create Account</button>
                 </div>
+                <p class="mt-4"><a href="/public/Privacy.html">Privacy Policy</a></p><br> 
+                <p><a href="/public/Terms.html">Terms and Conditions</a></p>
             </div>
         </div>
     </div>
