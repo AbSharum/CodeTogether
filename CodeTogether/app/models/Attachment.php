@@ -1,11 +1,14 @@
 <?php
-class Attachment{
-    public $url;
-    public $fileData;
+    declare(strict_types=1);
 
-    public function __construct($url, $fileData){
-        $this->url=$url;
-        $this->fileData=$fileData;
+    class Attachment{
+        public string $url;
+        public string $fileData;
+    
+        public function __construct(string $url, string $fileData){
+            $this->url=$url;
+            $this->fileData=$fileData;
+        }
+    
     }
-
-}
+?>

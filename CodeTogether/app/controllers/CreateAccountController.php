@@ -1,37 +1,48 @@
 <?php
-include_once __DIR__ . "/../dao/UserDAO.php";
+    declare(strict_types=1);
+    include_once __DIR__ . "/../dao/UserDAO.php";
 
-class CreateAccountController extends Controller {
-    private $userDao;
+    class CreateAccountController extends Controller {
+        private UserDAO $userDao;
 
-    public function performAction() {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $this->renderView('createAccount');
-        } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'] ?? '';
-            $email = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
-            $confirmPassword = $_POST['confirmPassword'] ?? '';
+        public function performAction(): void {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $this->renderView('createAccount');
+            } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $username = $_POST['username'] ?? '';
+                $email = $_POST['email'] ?? '';
+                $password = $_POST['password'] ?? '';
+                $confirmPassword = $_POST['confirmPassword'] ?? '';
+                $role = $_POST['role'] ?? -1;
 
-            if ($password !== $confirmPassword) {
-                $this->renderView('createAccount', ['error' => 'Passwords do not match']);
-                return;
-            }
+                if ($password !== $confirmPassword) {
+                    $this->renderView('createAccount', ['error' => 'Passwords do not match']);
+                    return;
+                }
 
-            $this->userDao = new UserDAO();
+                $this->userDao = new UserDAO();
 
-            $success = $this->userDao->addUser($username, $password, $email);
+                $existing = $this->userDao->getUserByName($username);
 
-            if ($success) {
-                header('Location: index.php?action=login');
-                exit;
-            } else {
-                $this->renderView('createAccount', ['error' => 'Could not create account']);
+                if ($existing === null) {
+                    $this->renderView('createAccount', ['error' => 'This username is taken!']);
+                    return;
+                }
+
+                $this->userDao->addUser($username, $password, $email);
+                $success = $this->userDao->authenticate($email,$password);
+
+                if ($success) {
+                    header('Location: index.php?action=login');
+                    exit;
+                } else {
+                    $this->renderView('createAccount', ['error' => 'Could not create account']);
+                }
             }
         }
-    }
 
-    public function renderView($view, $data = []) {
-        include "./public/$view.php";
+        public function renderView(string $view, $data = []):void {
+            include "./public/$view.php";
+        }
     }
-}
+?>

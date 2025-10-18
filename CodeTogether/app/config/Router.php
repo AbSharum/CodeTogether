@@ -1,4 +1,5 @@
 <?php
+    declare(strict_types=1);
     include_once __DIR__ . "/Controller.php";
 
     class Router{
@@ -9,7 +10,7 @@
             $this->controllers=[];
         }
 
-        public function run(){
+        public function run(): void{
             $action="default";
 
             session_start();
@@ -24,15 +25,15 @@
             $controller->performAction();
         }
 
-        public function addController($action,$controller){
+        public function addController(string $action,Controller $controller): void{
             $this->controllers[$action] = $controller;
         }
 
-        public function authCheck($action){
+        public function authCheck(string $action): void{
             return;
         }
 
-        public function showErrors($debug){
+        public function showErrors(int $debug){
             if($debug==1){
                 ini_set('display_errors', 1);
                 ini_set('display_startup_errors', 1);

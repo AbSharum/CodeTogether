@@ -1,18 +1,19 @@
 <?php
-class Controller{
-    public $model;
+    declare(strict_types=1);
+    class Controller{
+        public $model;
 
-    public function performAction(){
-        return;
-    }
+        public function performAction(): void{
+            return;
+        }
 
-    public function renderView($view,$data=[]){
-        
-        include "./template/template.php";
-    }
+        public function renderView(string $view,$data=[]): void{
 
-    public function getAuth(){
-        return "PUBLIC";
+            include "./template/template.php";
+        }
+
+        public function getAuth(): string{
+            return "PUBLIC";
+        }
     }
-}
 ?>

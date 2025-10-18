@@ -11,7 +11,7 @@
             <canvas id="matrix-canvas"></canvas>
             <div class="container d-flex align-items-center justify-content-center vh-100 position-relative" style="z-index: 1;">
                 <div class="card p-4 text-bg-dark bg-opacity 75" style="max-width: 400px;">
-                    <div class="card-matrix">
+                    <div class="card-body">
                         <h2 class="card-title text-center mb-4">Code Together Account Creation</h2>
                         <form action = "index.php?action=createAccount" method="POST" id="registration">  
                             <div class="mb-3">
@@ -33,9 +33,9 @@
                                 <label for="role" class="form-label">Role</label>
                                 <select class="form-select" id="role" name="role" required>
                                     <option value="" disabled selected> Select your role...</option>
-                                    <option value="moderator">Moderator</option>
-                                    <option value="student">Student</option>
-                                    <option value="teacher">Teacher</option>
+                                    <option value="1">Moderator</option>
+                                    <option value="2">Student</option>
+                                    <option value="3">Teacher</option>
                                 </select>
                             </div>
                                 

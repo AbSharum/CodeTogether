@@ -1,21 +1,23 @@
 <?php
-require_once 'Game.php';
+    declare(strict_types=1);
+    require_once 'Game.php';
 
-class CompetitiveGame extends Game{
-    public $teams;
-    public $coopCodeSubmission;
 
-    public function __construct($gameID, $creatorID, $task, $programmingLanguage, $difficulty, $timeLimit, $pointsRewarded, $teams, $coopCodeSubmission){
-        parent::__construct($gameID, $creatorID, $task, $programmingLanguage, $difficulty, $timeLimit, $pointsRewarded);
+    class CompetitiveGame extends Game{
+        public string $teams;
+        public string $coopCodeSubmission;
 
-        $this->coopCodeSubmission=$coopCodeSubmission;
-        $this->teams=$teams;
+        public function __construct($gameID, $creatorID, $task, $programmingLanguage, $difficulty, $timeLimit, $pointsRewarded, $teams, $coopCodeSubmission){
+            parent::__construct($gameID, $creatorID, $task, $programmingLanguage, $difficulty, $timeLimit, $pointsRewarded);
+
+            $this->coopCodeSubmission=$coopCodeSubmission;
+            $this->teams=$teams;
+        }
+
+
+        public function submitTeamCode($code): void{
+            #submits code
+        }
 
     }
-
-
-    public function submitTeamCode($code): void{
-        #submits code
-    }
-
-}
+?>
