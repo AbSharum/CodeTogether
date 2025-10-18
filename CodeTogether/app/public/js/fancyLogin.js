@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let drops = [];
             let animationFrameId = null;
 
-            // Character sequence for the "404ERROR" pattern effect, repeated for variation
+            // Character sequence for the pattern effect, repeated for variation
             const katakana = 'アイウエオカキクケコキャキュキョサシスセソシャシュショタチツテトチャチュチョナニヌネノニャニュニョハヒフヘホヒャヒュヒョマミムメモミャミュミョヤユエヨラリルレロリャリュリョワヰヱヲ';
             const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const numbers = '1234567890';
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 for (let i = 0; i < drops.length; i++) {
                     // Use the drop's vertical position (drops[i]) modulo sequence length to pick the character
-                    const charIndex = (drops[i]) % characters;
+                    const charIndex = Math.floor(Math.random() * characters.length);
                     const text = characters[charIndex];
 
                     // Draw the character
