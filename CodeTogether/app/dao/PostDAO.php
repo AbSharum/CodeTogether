@@ -1,7 +1,7 @@
 <?php
+    declare(strict_types=1);
     require_once __DIR__ . '/../models/Post.php';
     require_once __DIR__ . '/../config/dbConn.php';
-    declare(strict_types=1);
 
     class PostDAO {
 
@@ -11,7 +11,7 @@
             $stmt->bind_param("iisss",$userID,$threadID,$contents,$caption,$visibility);
             $stmt->execute();
             $stmt->close();
-            $conn->close();
+            
         }
 
         public function getAllPosts(): array {
@@ -28,7 +28,7 @@
             }
 
             $stmt->close();
-            $conn->close();
+            
             return $posts;
         }
 
@@ -47,7 +47,7 @@
             }
 
             $stmt->close();
-            $conn->close();
+            
             return $posts;
         }
 
@@ -58,7 +58,7 @@
             $stmt->bind_param("i", $postID);
             $stmt->execute();
             $stmt->close();
-            $conn->close();
+            
         }
     }
 ?>

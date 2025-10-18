@@ -1,7 +1,7 @@
 <?php
+    declare(strict_types=1);
     require_once __DIR__ . '/../models/Comment.php';
     require_once __DIR__ . '/../config/dbConn.php';
-    declare(strict_types=1);
 
     class CommentDAO {
 
@@ -11,7 +11,7 @@
             $stmt->bind_param("iis",$userID,$postID,$contents);
             $stmt->execute();
             $stmt->close();
-            $conn->close();
+            
         }
 
         public function getAllUserComments(int $userID=-1): array {}
@@ -31,7 +31,7 @@
             }
 
             $stmt->close();
-            $conn->close();
+            
             return $posts;
         }
 
@@ -50,7 +50,7 @@
             }
 
             $stmt->close();
-            $conn->close();
+            
             return $posts;
         }
 
@@ -61,7 +61,7 @@
             $stmt->bind_param("i", $postID);
             $stmt->execute();
             $stmt->close();
-            $conn->close();
+            
         }
     }
 ?>

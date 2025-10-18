@@ -1,6 +1,6 @@
 <?php
-    require_once 'Game.php';
     declare(strict_types=1);
+    require_once 'Game.php';
 
     
     class DailyGame extends Game{

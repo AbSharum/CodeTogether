@@ -1,6 +1,6 @@
 <?php
-    include_once __DIR__ . "/../dao/UserDAO.php";
     declare(strict_types=1);
+    include_once __DIR__ . "/../dao/UserDAO.php";
 
     class CreateAccountController extends Controller {
         private UserDAO $userDao;
@@ -13,6 +13,7 @@
                 $email = $_POST['email'] ?? '';
                 $password = $_POST['password'] ?? '';
                 $confirmPassword = $_POST['confirmPassword'] ?? '';
+                $role = $_POST['role'] ?? -1;
 
                 if ($password !== $confirmPassword) {
                     $this->renderView('createAccount', ['error' => 'Passwords do not match']);
@@ -20,6 +21,13 @@
                 }
 
                 $this->userDao = new UserDAO();
+
+                $existing = $this->userDao->getUserByName($username);
+
+                if ($existing === null) {
+                    $this->renderView('createAccount', ['error' => 'This username is taken!']);
+                    return;
+                }
 
                 $this->userDao->addUser($username, $password, $email);
                 $success = $this->userDao->authenticate($email,$password);

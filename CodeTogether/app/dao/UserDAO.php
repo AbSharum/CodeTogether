@@ -1,7 +1,7 @@
 <?php
+    declare(strict_types=1);
     require_once __DIR__ . '/../models/User.php';
     require_once __DIR__ . '/../config/dbConn.php';
-    declare(strict_types=1);
 
 
     class UserDAO {
@@ -13,10 +13,10 @@
             $stmt->bind_param("sss", $username, $hashedPassword, $email);
             $stmt->execute();
             $stmt->close();
-            $conn->close();
+            
         }
 
-        public function getUser(int $userID):User|null{
+        public function getUserByID(int $userID):User|null{
             $conn = Database::getConnection();
             $stmt = $conn->prepare("SELECT * FROM user WHERE user_id = ?;");
             $stmt->bind_param("i", $userID);
@@ -28,7 +28,23 @@
                 $user->load($row);
             }
             $stmt->close();
-            $conn->close();
+            
+            return $user;
+        }
+
+        public function getUserByName(String $username):User|null{
+            $conn = Database::getConnection();
+            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ?;");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = null;
+            if($row = $result->fetch_assoc()){
+                $user = new User();
+                $user->load($row);
+            }
+            $stmt->close();
+            
             return $user;
         }
 
@@ -60,7 +76,6 @@
             $stmt->execute();
 
             $stmt->close();
-            $conn->close();
         }   
 
 
@@ -81,7 +96,7 @@
             }
 
             $stmt->close();
-            $conn->close();
+            
 
             return $user;
     }

@@ -33,9 +33,9 @@
                                 <label for="role" class="form-label">Role</label>
                                 <select class="form-select" id="role" name="role" required>
                                     <option value="" disabled selected> Select your role...</option>
-                                    <option value="moderator">Moderator</option>
-                                    <option value="student">Student</option>
-                                    <option value="teacher">Teacher</option>
+                                    <option value="1">Moderator</option>
+                                    <option value="2">Student</option>
+                                    <option value="3">Teacher</option>
                                 </select>
                             </div>
                                 
