@@ -28,7 +28,7 @@
                     $_SESSION['username'] = $result->getUsername();
                     $_SESSION['role'] = $result->getRoleID();
 
-                    header('Location: index.php?action=social-feed');
+                    header('Location: index.php?action=home');
                     exit;
                 }
             }
