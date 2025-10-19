@@ -30,7 +30,7 @@ p a {
     max-width: 400px; /*limit card with*/
     margin: 10vh auto; /*centers card horizontally and sets top/bottom margins*/
     padding: 2rem; /*inner spacing */
-    border-radius: 0.5rem; /*rounded corners*/
+    border-radius: 0.6rem; /*rounded corners*/
     text-align: center; /*center text */
 }
 

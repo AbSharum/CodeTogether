@@ -4,8 +4,8 @@
   <title>Code Together Account Login</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/public/css/fancy.css"> 
   <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/fancy.css"> 
 </head>
 <body class = "bg-dark text-light">
     <canvas id="matrix-canvas"></canvas>

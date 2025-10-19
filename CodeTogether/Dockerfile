@@ -4,7 +4,8 @@ RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
 RUN a2enmod rewrite
 
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+COPY ./apache-config.conf /etc/apache2/conf-available/app-overrides.conf
+RUN a2enconf app-overrides
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
