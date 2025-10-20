@@ -92,4 +92,7 @@
             return $this->createdOn;
         }
 
-        public function setLatestUpdate(DateTime $latestUpdate): vo
+        public function setLatestUpdate(DateTime $latestUpdate): void {
+
+        }
+}
