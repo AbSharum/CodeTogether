@@ -35,7 +35,8 @@
              * related to the action 
              */
             $protectedRoutes = [
-                'home' => ['student'] 
+                'home' => ['student','teacher','moderator'],
+                'accountSettings'=>['student','teacher','moderator'] 
             ];
         
             if (isset($protectedRoutes[$action])) {

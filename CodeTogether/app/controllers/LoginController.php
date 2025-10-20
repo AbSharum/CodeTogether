@@ -15,12 +15,12 @@
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $identefier = $_POST['identefier'] ?? '';
+                $identifier = $_POST['identifier'] ?? '';
                 $password = $_POST['password'] ?? '';
 
                 $this->userDao = new UserDAO();
                 $this->roleDao = new RoleDAO();
-                $result = $this->userDao->authenticate($identefier, $password);
+                $result = $this->userDao->authenticate($identifier, $password);
                 $role = $this->roleDao->getUserRole($result);
 
                 if ($result === null) {
