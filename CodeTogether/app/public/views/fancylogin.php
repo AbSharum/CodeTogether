@@ -17,8 +17,8 @@
                 
                 <form action = "index.php?action=login" method="POST">
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
+                        <label for="email" class="form-label">Username or Email</label>
+                        <input type="text" class="form-control" id="identefier" name="identefier" aria-describedby="emailHelp" required>
                     </div>
                     <div class="mb-2">
                         <label for="password" class="form-label">Password</label>
