@@ -232,3 +232,26 @@
     chatHeader.addEventListener('touchstart', dragStart);
     document.addEventListener('touchend', dragEnd);
     document.addEventListener('touchmove', drag);
+
+     // Get the current page's filename 
+    const currentPathParts = window.location.pathname.split('/');
+    const currentFileName = currentPathParts[currentPathParts.length - 1].toLowerCase();
+
+    // 2. Select all navigation links
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-item a');
+
+    navLinks.forEach(link => {
+    // 3. Get the filename from the link's href
+    const linkHref = link.getAttribute('href') || '';
+    const linkPathParts = linkHref.split('/');
+    const linkFileName = linkPathParts[linkPathParts.length - 1].toLowerCase();
+
+    // 4. Check if the link's filename matches the current page's filename
+    if (linkFileName && linkFileName === currentFileName) {
+    // 5. Hide the parent <li> element (the nav-item)
+        const parentItem = link.closest('.nav-item');
+        if (parentItem) {
+            parentItem.classList.add('d-none');
+        }
+    }
+});
