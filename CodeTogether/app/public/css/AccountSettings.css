@@ -9,7 +9,7 @@ body{
     top: 0; /* Aligns the canvas to the top edge */
     left: 0; /* Aligns the canvas to the left edge */
     width: 100%; /* Makes the canvas cover the full viewport width */
-     height: 100%; /* Makes the canvas cover the full viewport height */
+    height: 100%; /* Makes the canvas cover the full viewport height */
     z-index: -1; /* Puts the canvas behind all other content (the login card) */
 }
 
@@ -97,8 +97,9 @@ p {
 }
 
 /* Modal Content */
-.modal-content {
-  background-color: #fefefe;
+.deleteModal-content, .UsernameModal-content,
+.emailModal-content, .passwordModal-content {
+  background-color: #000;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -106,19 +107,30 @@ p {
 }
 
 /* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
+.dClose, .uClose, .eClose, .pClose {
+  color: #fd0303;
+  float: top;
   font-size: 28px;
   font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
   cursor: pointer;
 }
+
+.dClose:hover,.dClose:focus,
+.uClose:hover,.uClose:focus,
+.eClose:hover,.eClose:focus,
+.pClose:hover,.pClose:focus {
+    color: #03fd56;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 a{
     float: right;
 }
+
+.deleteContainer{
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically  */
+}
+
