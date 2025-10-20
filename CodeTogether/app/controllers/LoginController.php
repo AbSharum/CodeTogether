@@ -13,11 +13,11 @@
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $email = $_POST['email'] ?? '';
+                $identefier = $_POST['identefier'] ?? '';
                 $password = $_POST['password'] ?? '';
 
                 $this->userDao = new UserDAO();
-                $result = $this->userDao->authenticate($email, $password);
+                $result = $this->userDao->authenticate($identefier, $password);
 
                 if ($result === null) {
                     header('Location: index.php?action=login');

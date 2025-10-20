@@ -25,12 +25,19 @@
 
                 $existing = $this->userDao->getUserByName($username);
 
-                if ($existing !== null) {
-                    $this->renderView('createAccount', ['error' => 'This username is taken!']);
+                if (!is_null($existing)) {
+                    if ($existing->getUsername() === $username) {
+                        $this->renderView('createAccount', ['error' => 'An account with this username already exists!']);
+                        return;
+                    }
+                }
+
+
+                if ($this->userDao->checkExistingEmail($email)) {
+                    $this->renderView('createAccount', ['error' => $email .' is already associated with an account!']);
                     return;
                 }
 
-                
 
                 $this->userDao->addUser($username, $password, $email,(int) $role);
                 $success = $this->userDao->authenticate($email,$password);

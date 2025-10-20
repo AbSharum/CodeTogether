@@ -8,10 +8,12 @@ CREATE TABLE role (
 CREATE TABLE user (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     role_id INT,
+    profile_picture LONGBLOB,
     username VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE,
     points INT DEFAULT 0,
+    is_deleted BOOLEAN DEFAULT FALSE,
     status ENUM('active', 'banned', 'inactive') DEFAULT 'active',
     created_on DATETIME DEFAULT CURRENT_TIMESTAMP,
     latest_update DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -37,6 +39,7 @@ CREATE TABLE friend_list (
 CREATE TABLE thread (
     thread_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
+    is_deleted BOOLEAN DEFAULT FALSE,
     created_on DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -90,6 +93,7 @@ CREATE TABLE comment (
 CREATE TABLE chat (
     chat_id INT AUTO_INCREMENT PRIMARY KEY,
     chat_type VARCHAR(50),
+    is_deleted BOOLEAN DEFAULT false,
     created_on DATETIME DEFAULT CURRENT_TIMESTAMP,
     last_message_at DATETIME
 );

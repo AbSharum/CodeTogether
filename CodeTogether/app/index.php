@@ -39,7 +39,7 @@
     $router->addController('login', new LoginController());
     $router->addController('createAccount', new CreateAccountController());
     $router->addController('social-feed', new SocialFeedController());
-    $router->addController('home', new HomeController());
+     $router->addController('home', new HomeController());
 
     # Register default controller (used when no action is specified)
     $router->addController('default', new LoginController()); 

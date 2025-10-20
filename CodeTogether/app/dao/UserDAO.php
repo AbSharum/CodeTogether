@@ -78,11 +78,22 @@
             $stmt->close();
         }   
 
-
-        public function authenticate(string $email, string $passwd):User|null{
+        public function checkExistingEmail(string $email):bool {
             $conn = Database::getConnection();
-            $stmt = $conn->prepare("SELECT * FROM user WHERE email = ?");
+            $stmt = $conn->prepare("SELECT * FROM user WHERE email = ?;");
             $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+            return !($result->num_rows === 0);
+
+        }
+
+
+        public function authenticate(string $identefier,string $passwd):User|null{
+            $conn = Database::getConnection();
+            $stmt = $conn->prepare("SELECT * FROM user WHERE (email = ? OR username = ?);");
+            $stmt->bind_param("ss", $identefier,$identefier);
             $stmt->execute();
             $result = $stmt->get_result();
 

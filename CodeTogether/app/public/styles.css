@@ -1,0 +1,104 @@
+body {
+    background-color: azure; /* sets page background color */
+    display: flex; /* flexbox for layout */
+    align-items: center; /*vertically center contents in body */
+    justify-content: center; /*Horizontally center content in body */
+    font-family: sans-serif; /* sets font */
+    line-height: 1.5; /* line height */
+    min-height: 100vh; /* ensure full height of veiwport used */
+    flex-direction: column; /*stacks felx items vertically */
+    margin: 0; /* remove default body margin */
+}
+
+.container {
+    background-color: aqua; /* Sets the background color of the container to a cyan */
+    border: 2px solid black; /* Adds a 2-pixel solid black border */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Adds a shadow effect to the container */
+    padding: 10px 20px; /* Adds padding inside the container */
+    transition: transform 0.2s; /* Creates a smooth transition effect on the transform property */
+    width: 500px; /* Sets a fixed width for the container */
+    text-align: center; /* Centers text within the container */
+}
+
+h2 {
+    text-align: center; /* Centers the h2 heading */
+}
+
+.button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); /* Changes the shadow on hover */
+} 
+.button:active {
+    transform: translateY(4px); /* Moves the button down 4 pixels when it's clicked */
+}
+.button { /* button colors */
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #1e86af;
+    width: 100%;
+    font-size: 16px;
+}
+
+.button1:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); /* Changes the shadow on hover */
+}
+
+.button1:active {
+    transform: translateY(4px); /* Moves the button down 4 pixels when it's clicked */
+}
+
+label {
+    display: flex; /* Makes the label a flexbox container */
+    width: 100%; /* Sets the width of the label to 100% of its parent */
+    margin-top: 10px; /* Adds a top margin */
+    margin-bottom: 5px; /* Adds a bottom margin */
+    text-align: left; /* Aligns text to the left */
+    color: #0e0505; /* Sets the text color to black */
+    font-weight: bold; /* Makes the text bold */
+    justify-content: left; /* This is an invalid property value; should be flex-start */
+}
+
+input {
+    display: block; /* Makes the input element a block-level element, taking up the full width */
+    width: 100%; /* Sets the width of the input to 100% */
+    margin-bottom: 15px; /* Adds a bottom margin */
+    padding: 10px; /* Adds padding inside the input field */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    border: 1px solid #ddd; /* Adds a light gray border */
+    border-radius: 5px; /* Adds a slight curve to the corners of the border */
+}
+
+.checkbox {
+    display: flex;     /* Uses Flexbox to align items horizontally */
+    align-items: center;  /* Vertically aligns items in the middle */
+    justify-content: flex-start; /* Horizontally aligns items to the left side */
+    margin-top: 15px; /* Adds a 15px margin to the top of the element */
+}
+
+.checkbox label {
+    display: flex;  /* Uses Flexbox to align the checkbox and its text */
+    align-items: center;  /* Vertically aligns the items to the center */
+    margin-top: 0;  /* Removes the top and bottom margins */
+    margin-bottom: 0;
+    color: #0e0505;   /* Sets the text color to a black */
+    font-weight: bold; /* Makes the text bold */
+}
+
+.checkbox input[type="checkbox"] {
+    width: auto; /* Allows the input to take its natural width */
+    margin-right: 5px; /* Adds a 5px margin to the right, creating space between the checkbox and the label text */
+    margin-bottom: 0;  /* Removes the bottom margin */
+    display: inline;  /* Displays the input as an inline element */
+}
+
+.checkbox label[for="rememberme"] {
+    display: inline; /* Displays the label as an inline element */
+    width: auto; /* Allows the label to take its natural width */
+    color: green;
+}
+
+
