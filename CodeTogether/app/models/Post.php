@@ -4,18 +4,20 @@
     class Post implements JsonSerializable{
         private int $postID;
         private int $userID;
+        private string $username;
         private int $threadID;
         private string $contents;
         private int $likes;
-        private string$caption;
+        private string $caption;
         private string $visibility;
         private bool $isDeleted;
         private DateTime $createdOn;
         private DateTime $latestUpdate;
 
-        public function __construct(int $postID=-1,int $userID=-1,int $threadID=-1,string $contents='',string $caption='',string $visibility='') {
+        public function __construct(int $postID=-1,int $userID=-1, string $username='', int $threadID=-1,string $contents='',string $caption='',string $visibility='') {
             $this->postID = $postID;
             $this->userID = $userID;
+            $this->username = $username;
             $this->threadID = $threadID;
             $this->contents = $contents;
             $this->caption = $caption;
@@ -27,14 +29,15 @@
         public function load($row):void {
             $this->postID = $row['post_id'];
             $this->userID = $row['user_id'];
+            $this->username= $row['username'];
             $this->threadID = $row['thread_id'];
             $this->contents = $row['contents'];
             $this->likes = $row['likes'];
             $this->caption = $row['caption'];
             $this->visibility = $row['visibility'];
-            $this->isDeleted = $row['is_deleted'];
-            $this->createdOn = $row['created_on'];
-            $this->latestUpdate = $row['latest_update'];
+            $this->isDeleted = (bool)$row['is_deleted'];
+            $this->createdOn = new DateTime($row['created_on']);
+            $this->latestUpdate = new DateTime($row['latest_update']);
         }
 
         public function deletePost():void{
@@ -70,6 +73,14 @@
 
         public function getuserID(): int{
             return $this->userID;
+        }
+
+        public function setUsername($username): void{
+            $this->username=$username;
+        }
+
+        public function getUsername(): string{
+            return $this->username;
         }
 
         public function setThreadID($threadID): void{

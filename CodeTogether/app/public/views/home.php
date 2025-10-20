@@ -94,33 +94,19 @@
             <!-- middle column: posts will be 6/12 on large screens-->
             <div class="col-lg-6 mb-4 order-lg-2 order-3">
                 <h3 class="mb-4 text-white">Latest Posts</h3>
-                <!-- php integration will need to edit this stuff just a placeholder for now-->
-                <div class="post-card">
-                    <p class="fw-bold text-white mb-1">Jane Doe <span class="text-text-white fw-normal small">2 hours ago</span></p>
-                    <p class="mb-2 text-white">cramming info into my nugget like its gunna be eatin.</p>
-                    <div class="d-flex gap-3">
-                        <span class="text-white"><i class="fas fa-heart text-danger me-1"></i> 56</span>
-                        <span class="text-white"><i class="fas fa-comment me-1"></i> 12</span>
-                    </div>
-                </div>
-
-                <div class="post-card">
-                    <p class="fw-bold text-white mb-1">Jane Doe <span class="text-text-white fw-normal small">Yesterday</span></p>
-                    <p class="mb-2 text-white">Learning about the latest advancements in the Quantum computing. The future is comin in hot and fast!</p>
-                    <div class="d-flex gap-3">
-                        <span class="text-white"><i class="fas fa-heart text-danger me-1"></i> 102</span>
-                        <span class="text-white"><i class="fas fa-comment me-1"></i> 30</span>
-                    </div>
-                </div>
-
-                <div class="post-card">
-                    <p class="fw-bold text-white mb-1">Jane Doe <span class="text-text-white fw-normal small">3 days ago</span></p>
-                    <p class="mb-2 text-white">Morning run essentials: good playlist and a challenging my dark thoughts. I can run faster than them! 🏃‍♀️</p>
-                    <div class="d-flex gap-3">
-                        <span class="text-white"><i class="fas fa-heart text-danger me-1"></i> 88</span>
-                        <span class="text-white"><i class="fas fa-comment me-1"></i> 5</span>
-                    </div>
-                </div>
+                <!--php integration for posts somewhat complete. I added some fake posts and got them to display, but it could use some work-->
+                 <?php
+                    for ($index = 0; $index < count($posts); $index++) {
+                        echo "<div class=\"post-card\">";
+                        echo "<p class=\"fw-bold text-white mb-1\">".$posts[$index]->getUsername()."<span class=\"text-text-white fw-normal small\"> ".$posts[$index]->getCreatedOn()->format('Y-m-d H:i')."</span></p>";
+                        echo "<p class=\"mb-2 text-white\">".$posts[$index]->getCaption()."</p>";
+                        echo "<div class=\"d-flex gap-3\">";
+                        echo "<span class=\"text-white\"><i class=\"fas fa-heart text-danger me-1\"></i>".$posts[$index]->getLikes()."</span>";
+                        echo "<span class=\"text-white\"><i class=\"fas fa-comment me-1\"></i> 12</span>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                ?>
             </div>
             <!-- End Posts Feed (middle column) -->
 

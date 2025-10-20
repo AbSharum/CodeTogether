@@ -59,6 +59,7 @@ CREATE TABLE thread_bridge (
 CREATE TABLE post (
     post_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
+    username VARCHAR(100) NOT NULL,
     thread_id INT,
     contents LONGBLOB,
     likes INT DEFAULT 0,
@@ -160,3 +161,26 @@ INSERT INTO role (role_id, role_name, privileges, description) VALUES
 (1, 'moderator', 'manage_users,edit_content,game_mod,game_review', 'Moderates users, content, and games.'),
 (2, 'student', 'view_content,create_content,comment,participate_in_games', 'Can view content, create their own content, comment, and participate in games.'),
 (3, 'teacher', 'create_content,grade_students,game_review', 'Can create content, grade students, and review game code.');
+
+INSERT INTO thread (title)
+VALUES 
+('General Discussion'),
+('Announcements'),
+('Help and Support'),
+('Off Topic');
+
+INSERT INTO user (role_id, username, password, email, points, status)
+VALUES
+(1, 'Alice', 'password123', 'alice@example.com', 150, 'active'),
+(1, 'Bob', 'password123', 'bob@example.com', 90, 'active'),
+(1, 'Charlie', 'password123', 'charlie@example.com', 45, 'active'),
+(1, 'Dave', 'password123', 'dave@example.com', 30, 'active'),
+(1, 'Eve', 'password123', 'eve@example.com', 200, 'active');
+
+INSERT INTO post (user_id, username, thread_id, contents, caption, visibility)
+VALUES
+(1, 'Alice', 1, 'Just finished my first coding project!', 'Can’t believe how much I learned this week. #coding #progress', 'public'),
+(2, 'Bob', 1, 'Morning coffee', 'Some days, coffee is the only motivation I need.', 'friends'),
+(3, 'Charlie', 1, 'Weekend plans?', 'Thinking of taking a break from screens and going hiking. Anyone else need that reset?', 'public'),
+(5, 'Bob', 1, 'Testing engagement', 'If you could learn one skill instantly, what would it be?', 'public');
+
