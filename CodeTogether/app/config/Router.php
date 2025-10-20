@@ -29,9 +29,22 @@
             $this->controllers[$action] = $controller;
         }
 
-        public function authCheck(string $action): void{
-            return;
+        public function authCheck(string $action): void {
+            /*
+             * Add here the action and the roles that are allowed to access the page 
+             * related to the action 
+             */
+            $protectedRoutes = [
+                'home' => ['student'] 
+            ];
+        
+            if (isset($protectedRoutes[$action])) {
+                $requiredRoles = $protectedRoutes[$action];
+                require_once __DIR__ . '/../config/authCheck.php';
+            }
         }
+
+
 
         public function showErrors(int $debug){
             if($debug==1){

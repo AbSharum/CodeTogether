@@ -13,7 +13,7 @@
             $this->createdOn= $createdOn;
         }
 
-        public function load($row):void {
+        public function load(array $row): void {
             $this->chatID = $row['chat_id'];
             $this->chatType = $row['chat_type'];
             $this->lastMessageAt = $row['last_message_at'];
@@ -29,7 +29,7 @@
             );
         }
 
-        public function setChatID($chatID): void{
+        public function setChatID(int $chatID): void{
             $this->chatID=$chatID;
         }
 
@@ -37,7 +37,7 @@
             return $this->chatID;
         }
 
-        public function setChatType($chatType): void{
+        public function setChatType(string $chatType): void{
             $this->chatType=$chatType;
         }
 
@@ -45,7 +45,7 @@
             return $this->chatType;
         }
 
-        public function setLastMessageAt($lastMessageAt): void{
+        public function setLastMessageAt(DateTime $lastMessageAt): void{
             $this->lastMessageAt=$lastMessageAt;
         }
 
@@ -53,7 +53,7 @@
             return $this->lastMessageAt;
         }
 
-        public function setCreatedOn($createdOn): void{
+        public function setCreatedOn(DateTime $createdOn): void{
             $this->createdOn=$createdOn;
         }
 

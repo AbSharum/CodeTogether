@@ -19,7 +19,7 @@
             $this->createdOn = $createdOn;
         }
 
-        public function load($row): void {
+        public function load(array $row): void {
             $this->commentID = $row['comment_id'];
             $this->userID = $row['user_id'];
             $this->postID = $row['post_id'];
@@ -39,7 +39,7 @@
             );
         }
 
-        public function setCommentID($commentID): void{
+        public function setCommentID(int $commentID): void{
             $this->commentID=$commentID;
         }
 
@@ -47,7 +47,7 @@
             return $this->commentID;
         }
 
-        public function setUserID($userID): void{
+        public function setUserID(int $userID): void{
             $this->userID=$userID;
         }
 
@@ -55,7 +55,7 @@
             return $this->userID;
         }
 
-        public function setPostID($postID): void{
+        public function setPostID(int $postID): void{
             $this->postID=$postID;
         }
 
@@ -63,7 +63,7 @@
             return $this->postID;
         }
 
-        public function setContents($contents): void{
+        public function setContents(string $contents): void{
             $this->contents=$contents;
         }
 
@@ -71,7 +71,7 @@
             return $this->contents;
         }
 
-        public function setIsDeleted($isDeleted): void{
+        public function setIsDeleted(bool $isDeleted): void{
             $this->isDeleted=$isDeleted;
         }
 
@@ -79,7 +79,7 @@
             return $this->isDeleted;
         }
 
-        public function setCreatedOn($createdOn): void{
+        public function setCreatedOn(DateTime $createdOn): void{
             $this->createdOn=$createdOn;
         }
 

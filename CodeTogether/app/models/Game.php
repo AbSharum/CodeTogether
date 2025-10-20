@@ -22,7 +22,7 @@
             $this->latestUpdate= $latestUpdate;
         }
 
-        public function load($row): void {
+        public function load(array $row): void {
             $this->gameID = $row['game_id'];
             $this->description = $row['description'];
             $this->points = $row['points'];
@@ -44,7 +44,7 @@
             );
         }
 
-        public function setGameID($gameID): void{
+        public function setGameID(int $gameID): void{
             $this->gameID=$gameID;
         }
 
@@ -52,7 +52,7 @@
             return $this->gameID;
         }
 
-        public function setDescription($description): void{
+        public function setDescription(string $description): void{
             $this->description=$description;
         }
 
@@ -60,7 +60,7 @@
             return $this->description;
         }
 
-        public function setPoints($points): void{
+        public function setPoints(int $points): void{
             $this->points=$points;
         }
 
@@ -68,7 +68,7 @@
             return $this->points;
         }
 
-        public function setTimeLimit($timeLimit): void{
+        public function setTimeLimit(int $timeLimit): void{
             $this->timeLimit=$timeLimit;
         }
 
@@ -76,7 +76,7 @@
             return $this->timeLimit;
         }
 
-        public function setDifficulty($difficulty): void{
+        public function setDifficulty(string $difficulty): void{
             $this->difficulty=$difficulty;
         }
 
@@ -84,7 +84,7 @@
             return $this->difficulty;
         }
 
-        public function setCreatedOn($createdOn): void{
+        public function setCreatedOn(DateTime $createdOn): void{
             $this->createdOn=$createdOn;
         }
 
@@ -92,13 +92,4 @@
             return $this->createdOn;
         }
 
-        public function setLatestUpdate($latestUpdate): void{
-            $this->latestUpdate=$latestUpdate;
-        }
-
-        public function getLatestUpdate(): DateTime{
-            return $this->latestUpdate;
-        }
-
-    }
-?>
+        public function setLatestUpdate(DateTime $latestUpdate): vo

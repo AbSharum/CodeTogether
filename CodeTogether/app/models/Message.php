@@ -23,14 +23,14 @@
             $this->sentAt= $sentAt;
         }
 
-        public function load($row): void {
+        public function load(array $row): void {
             $this->messageID = $row['message_id'];
             $this->threadID = $row['thread_id'];
             $this->userID = $row['user_id'];
             $this->chatID = $row['chat_id'];
             $this->content = $row['content'];
-            $this->isDeleted = $row['is_deleted'];
-            $this->isEdited = $row['is_edited'];
+            $this->isDeleted = (bool) $row['is_deleted'];
+            $this->isEdited = (bool) $row['is_edited'];
             $this->sentAt = $row['sent_at'];
         }
 
@@ -47,7 +47,7 @@
             );
         }
 
-        public function setMessageID($messageID): void{
+        public function setMessageID(int $messageID): void{
             $this->messageID=$messageID;
         }
 
@@ -55,7 +55,7 @@
             return $this->messageID;
         }
 
-        public function setThreadID($threadID): void{
+        public function setThreadID(int $threadID): void{
             $this->threadID=$threadID;
         }
 
@@ -63,7 +63,7 @@
             return $this->threadID;
         }
 
-        public function setUserID($userID): void{
+        public function setUserID(int $userID): void{
             $this->userID=$userID;
         }
 
@@ -71,7 +71,7 @@
             return $this->userID;
         }
 
-        public function setChatID($chatID): void{
+        public function setChatID(int $chatID): void{
             $this->chatID=$chatID;
         }
 
@@ -79,15 +79,15 @@
             return $this->chatID;
         }
 
-        public function setContent($content): void{
+        public function setContent(string $content): void{
             $this->content=$content;
         }
 
-        public function getContent(): String{
+        public function getContent(): string{
             return $this->content;
         }
 
-        public function setIsDeleted($isDeleted): void{
+        public function setIsDeleted(bool $isDeleted): void{
             $this->isDeleted=$isDeleted;
         }
 
@@ -95,7 +95,7 @@
             return $this->isDeleted;
         }
 
-        public function setIsEdited($isEdited): void{
+        public function setIsEdited(bool $isEdited): void{
             $this->isEdited=$isEdited;
         }
 
@@ -103,7 +103,7 @@
             return $this->isEdited;
         }
 
-        public function setSentAt($sentAt): void{
+        public function setSentAt(DateTime $sentAt): void{
             $this->sentAt=$sentAt;
         }
 

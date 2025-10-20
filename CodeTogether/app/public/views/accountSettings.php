@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <!--navigation icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="AccountSettings.css"> <!--change for file path-->
+    <link rel="stylesheet" href="/public/css/accountSettings.css"> <!--change for file path-->
 </head>
 
 <body class = "bg-dark text-light">
@@ -43,7 +43,7 @@
     <!--end of navigation-->
 
     <div class="container d-flex align-items-center justify-content-center vh-100 position-relative">
-        <div class="card p-4 text-bg-dark bg-opacity 75" style="max-width: 400px;">
+        <div class="card p-4 mx-4" style="max-width: 400px;">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Code Together Account Settings</h2>
                 <form action = "#" method="POST" id="registration">  <!--may need to change im not sure how u peeps are running that side-->
@@ -114,8 +114,8 @@
         </div>
     </div>
     
+    <script src="/public/js/accountSettings.js"></script> <!--update for filepath for js-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q" crossorigin="anonymous"></script>
-    <script src="AccountSettings.js"></script> <!--update for filepath for js-->
 </body>
 </html>

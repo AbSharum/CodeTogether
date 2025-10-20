@@ -12,7 +12,7 @@
             $this->privileges = $privileges;
         }
 
-        public function load($row): void {
+        public function load(array $row): void {
             $this->roleID = $row['role_id'];
             $this->roleName = $row['role_name'];
             $this->privileges = $row['privileges'];
@@ -26,7 +26,7 @@
                 );
         }
 
-        public function setRoleID($roleID): void{
+        public function setRoleID(int $roleID): void{
             $this->roleID=$roleID;
         }
 
@@ -34,7 +34,7 @@
             return $this->roleID;
         }
 
-        public function setRoleName($roleName): void{
+        public function setRoleName(string $roleName): void{
             $this->roleName=$roleName;
         }
 
@@ -42,7 +42,7 @@
             return $this->roleName;
         }
 
-        public function setPrivileges($privileges): void{
+        public function setPrivileges(string $privileges): void{
             $this->privileges=$privileges;
         }
 

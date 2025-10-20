@@ -14,7 +14,7 @@
         private DateTime $createdOn;
         private DateTime $latestUpdate;
 
-        public function __construct(int $postID=-1,int $userID=-1, string $username='', int $threadID=-1,string $contents='',string $caption='',string $visibility='') {
+        public function __construct(int $postID=-1,int $userID=-1, string $username='', int $threadID=-1,string $contents='',string $caption='',string $visibility='',bool $is_deleted=false) {
             $this->postID = $postID;
             $this->userID = $userID;
             $this->username = $username;
@@ -23,10 +23,10 @@
             $this->caption = $caption;
             $this->visibility = $visibility;
             $this->likes = 0;
-            $this->isDeleted = false;
+            $this->isDeleted = $is_deleted;
         }
 
-        public function load($row):void {
+        public function load(array $row):void {
             $this->postID = $row['post_id'];
             $this->userID = $row['user_id'];
             $this->username= $row['username'];
@@ -59,7 +59,7 @@
                 );
         }
 
-        public function setPostID($postID): void{
+        public function setPostID(int $postID): void{
             $this->postID=$postID;
         }
 
@@ -67,7 +67,7 @@
             return $this->postID;
         }
 
-        public function setUserID($userID): void{
+        public function setUserID(int $userID): void{
             $this->userID=$userID;
         }
 
@@ -75,7 +75,7 @@
             return $this->userID;
         }
 
-        public function setUsername($username): void{
+        public function setUsername(string $username): void{
             $this->username=$username;
         }
 
@@ -83,7 +83,7 @@
             return $this->username;
         }
 
-        public function setThreadID($threadID): void{
+        public function setThreadID(int $threadID): void{
             $this->threadID=$threadID;
         }
 
@@ -91,7 +91,7 @@
             return $this->threadID;
         }
 
-        public function setContents($contents): void{
+        public function setContents(string $contents): void{
             $this->contents=$contents;
         }
 
@@ -99,7 +99,7 @@
             return $this->contents;
         }
 
-        public function setLikes($likes): void{
+        public function setLikes(int $likes): void{
             $this->likes=$likes;
         }
 
@@ -107,7 +107,7 @@
             return $this->likes;
         }
 
-        public function setCaption($caption): void{
+        public function setCaption(string $caption): void{
             $this->caption=$caption;
         }
 
@@ -115,7 +115,7 @@
             return $this->caption;
         }
 
-        public function setVisibility($visibility): void{
+        public function setVisibility(string $visibility): void{
             $this->visibility=$visibility;
         }
 
@@ -123,7 +123,7 @@
             return $this->visibility;
         }
 
-        public function setIsDeleted($isDeleted): void{
+        public function setIsDeleted(bool $isDeleted): void{
             $this->isDeleted=$isDeleted;
 
         }
@@ -132,7 +132,7 @@
             return $this->isDeleted;
         }
 
-        public function setCreatedOn($createdOn): void{
+        public function setCreatedOn(DateTime $createdOn): void{
             $this->createdOn=$createdOn;
         }
 
@@ -140,14 +140,12 @@
             return $this->createdOn;
         }
 
-        public function setLatestUpdate($latestUpdate): void{
+        public function setLatestUpdate(DateTime $latestUpdate): void{
             $this->latestUpdate=$latestUpdate;
         }
 
         public function getLatestUpdate(): DateTime{
             return $this->latestUpdate;
         }
-
-
     }
 ?>

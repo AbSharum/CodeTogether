@@ -11,6 +11,7 @@
     include_once __DIR__ . "/controllers/CreateAccountController.php";
     include_once __DIR__ . "/controllers/SocialFeedController.php";
     include_once __DIR__ . "/controllers/HomeController.php";
+    include_once __DIR__ . "/controllers/AccountSettingsController.php";
 
 
     class MyRouter extends Router {
@@ -39,7 +40,8 @@
     $router->addController('login', new LoginController());
     $router->addController('createAccount', new CreateAccountController());
     $router->addController('social-feed', new SocialFeedController());
-     $router->addController('home', new HomeController());
+    $router->addController('home', new HomeController());
+    $router->addController('accountSettings', new AccountSettingsController());
 
     # Register default controller (used when no action is specified)
     $router->addController('default', new LoginController()); 

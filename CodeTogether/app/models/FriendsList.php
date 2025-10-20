@@ -14,7 +14,7 @@
             $this->createdOn= $createdOn;
         }
     
-        public function load($row): void {
+        public function load(array $row): void {
             $this->userID1 = $row['user_id_1'];
             $this->userID2 = $row['user_id_2'];
             $this->status = $row['status'];
@@ -30,7 +30,7 @@
             );
         }
     
-        public function setUserID1($userID1): void{
+        public function setUserID1(int $userID1): void{
             $this->userID1=$userID1;
         }
     
@@ -38,7 +38,7 @@
             return $this->userID1;
         }
     
-        public function setUserID2($userID2): void{
+        public function setUserID2(int $userID2): void{
             $this->userID2=$userID2;
         }
     
@@ -46,7 +46,7 @@
             return $this->userID2;
         }
     
-        public function setStatus($status): void{
+        public function setStatus(string $status): void{
             $this->status=$status;
         }
     
@@ -54,7 +54,7 @@
             return $this->status;
         }
     
-        public function setCreatedOn($createdOn): void{
+        public function setCreatedOn(DateTime $createdOn): void{
             $this->createdOn=$createdOn;
         }
     

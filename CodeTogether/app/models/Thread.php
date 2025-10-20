@@ -6,44 +6,44 @@
         private string $title;
         private DateTime $createdOn;
     
-        public function __construct(int $threadID=-1,string $title='',?DateTime $createdOn=null) {
+        public function __construct(int $threadID=-1, string $title='', ?DateTime $createdOn=null) {
             $this->threadID = $threadID;
             $this->title = $title;
             $this->createdOn = $createdOn;
         }
     
-        public function load($row): void {
+        public function load(array $row): void {
             $this->threadID = $row['thread_id'];
             $this->title = $row['title'];
             $this->createdOn = $row['created_on'];
         }
     
         public function jsonSerialize(): array{
-                return array(
-                    'threadID' => $this->threadID,
-                    'title' => $this->title,
-                    'createdOn' => $this->createdOn,
-                );
+            return array(
+                'threadID' => $this->threadID,
+                'title' => $this->title,
+                'createdOn' => $this->createdOn,
+            );
         }
     
-        public function setThreadID($threadID): void{
-            $this->threadID=$threadID;
+        public function setThreadID(int $threadID): void{
+            $this->threadID = $threadID;
         }
     
         public function getThreadID(): int{
             return $this->threadID;
         }
     
-        public function setTitle($title): void{
-            $this->title=$title;
+        public function setTitle(string $title): void{
+            $this->title = $title;
         }
     
         public function getTitle(): string{
             return $this->title;
         }
     
-        public function setCreatedOn($createdOn): void{
-            $this->createdOn=$createdOn;
+        public function setCreatedOn(DateTime $createdOn): void{
+            $this->createdOn = $createdOn;
         }
     
         public function getCreatedOn(): DateTime{
