@@ -14,7 +14,11 @@
         <div class="card p-4 mx-4" style="max-width: 400px;">
             <div class="card-matrix w-full">
                 <h2 class="card-title text-center mb-4 text-2x1 font-bold" style="color:#0f0;">Code Together Login</h2>
-                
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= htmlspecialchars($error) ?>
+                    </div>
+                <?php endif; ?>
                 <form action = "index.php?action=login" method="POST">
                     <div class="mb-3">
                         <label for="email" class="form-label">Username or Email</label>

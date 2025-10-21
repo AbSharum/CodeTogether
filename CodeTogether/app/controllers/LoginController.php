@@ -18,13 +18,22 @@
                 $identifier = $_POST['identifier'] ?? '';
                 $password = $_POST['password'] ?? '';
 
+                if (empty(trim($identifier)) || empty(trim($password))) {
+                    $this->renderView("fancylogin",['error' =>  'Please fill out all fields']);
+                    exit;
+                }
+
                 $this->userDao = new UserDAO();
                 $this->roleDao = new RoleDAO();
                 $result = $this->userDao->authenticate($identifier, $password);
-                $role = $this->roleDao->getUserRole($result);
 
-                if ($result === null) {
-                    header('Location: index.php?action=login');
+                if ($result !== null) {
+                    $role = $this->roleDao->getUserRole($result);
+                }
+                
+
+                if ($result === null || $role === null) {
+                    $this->renderView("fancylogin",['error' =>  'An account with this username or email does not exist!']);
                     exit;
                 } else {
                     $_SESSION['loggedin'] = true;
@@ -38,6 +47,7 @@
         }
 
         public function renderView(string $view, $data = []): void {
+            extract($data);
             include "./public/views/$view.php";
         }
     }

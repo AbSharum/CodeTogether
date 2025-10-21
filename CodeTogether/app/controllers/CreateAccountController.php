@@ -15,7 +15,7 @@
                 $confirmPassword = $_POST['confirmPassword'] ?? '';
                 $role = $_POST['role'] ?? '';
 
-                if ($password === '' || $email === '' || $role === '' || $username === '') {
+                if (empty(trim($password)) || empty(trim($email)) || empty(trim($role)) || empty(trim($username))) {
                     $this->renderView('createAccount', ['error' => 'Please fill out all fields!']);
                     return;
                 }
