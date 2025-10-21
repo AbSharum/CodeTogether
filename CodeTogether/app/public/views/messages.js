@@ -1,3 +1,26 @@
+ // Get the current page's filename 
+const currentPathParts = window.location.pathname.split('/');
+const currentFileName = currentPathParts[currentPathParts.length - 1].toLowerCase();
+
+// 2. Select all navigation links
+const navLinks = document.querySelectorAll('.navbar-nav .nav-item a');
+
+navLinks.forEach(link => {
+// 3. Get the filename from the link's href
+const linkHref = link.getAttribute('href') || '';
+const linkPathParts = linkHref.split('/');
+const linkFileName = linkPathParts[linkPathParts.length - 1].toLowerCase();
+
+// 4. Check if the link's filename matches the current page's filename
+if (linkFileName && linkFileName === currentFileName) {
+// 5. Hide the parent <li> element (the nav-item)
+    const parentItem = link.closest('.nav-item');
+    if (parentItem) {
+        parentItem.classList.add('d-none');
+    }
+}
+});
+
 document.addEventListener('DOMContentLoaded', () => {
             // Get the canvas element and its 2D context
             const canvas = document.getElementById('matrix-canvas');
@@ -104,84 +127,4 @@ document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('resize', setCanvasSize);
         });
 
-
-const deleteModal = document.getElementById("deleteModal");
-const usernameModal = document.getElementById("UsernameModal");
-const emailModal = document.getElementById("emailModal");
-const passwordModal = document.getElementById("passwordModal");
-
-const deleteBtn = document.getElementById("delete");
-const usernameBtn = document.getElementById("changeUsername");
-const emailBtn = document.getElementById("changeEmail");
-const passwordBtn = document.getElementById("changePassword");
-
-const deleteClose = document.getElementsByClassName("dClose")[0];
-const usernameClose = document.getElementsByClassName("uClose")[0];
-const emailClose = document.getElementsByClassName("eClose")[0];
-const passwordClose = document.getElementsByClassName("pClose")[0];
-
-// Array of all modal objects for easy iteration and centralized window click handling
-const allModals = [
-    { button: deleteBtn, modal: deleteModal, close: deleteClose },
-    { button: usernameBtn, modal: usernameModal, close: usernameClose },
-    { button: emailBtn, modal: emailModal, close: emailClose },
-    { button: passwordBtn, modal: passwordModal, close: passwordClose }
-].filter(item => item.button && item.modal && item.close); // Filter out any elements that might not be found
-
-// 2. Attach separate listeners for opening and closing each modal
-allModals.forEach(item => {
-    // Open modal on button click
-    item.button.onclick = function() {
-        item.modal.style.display = "block";
-    };
-
-    // Close modal on 'x' span click
-    item.close.onclick = function() {
-        item.modal.style.display = "none";
-    };
-});
-
-
-// 3. Update the outside click listener to check all modals
-window.onclick = function(event) {
-    allModals.forEach(item => {
-        if (event.target === item.modal) {
-            item.modal.style.display = "none";
-        }
-    });
-};
-
-function showPassAndConf(){
-    var x = document.getElementById("password");
-    var y = document.getElementById("ChangePassword");
-    if(x.type === "password"){
-        x.type = "text";
-        y.type = "text";
-    }else{
-        x.type = "password";
-        y.type = "password";
-    }
-}
-
- // Get the current page's filename 
-const currentPathParts = window.location.pathname.split('/');
-const currentFileName = currentPathParts[currentPathParts.length - 1].toLowerCase();
-
-// 2. Select all navigation links
-const navLinks = document.querySelectorAll('.navbar-nav .nav-item a');
-
-navLinks.forEach(link => {
-// 3. Get the filename from the link's href
-const linkHref = link.getAttribute('href') || '';
-const linkPathParts = linkHref.split('/');
-const linkFileName = linkPathParts[linkPathParts.length - 1].toLowerCase();
-
-// 4. Check if the link's filename matches the current page's filename
-if (linkFileName && linkFileName === currentFileName) {
-// 5. Hide the parent <li> element (the nav-item)
-    const parentItem = link.closest('.nav-item');
-    if (parentItem) {
-        parentItem.classList.add('d-none');
-    }
-}
-});
+        

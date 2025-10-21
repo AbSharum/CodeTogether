@@ -1,0 +1,59 @@
+body{
+    overflow: hidden; /*hides scrollbar */
+    background:#000; /*backgroun is pure black*/
+    font-family: 'Consolas', 'Courier New', monospace; /*monospace font for command line look */
+}
+
+#matrix-canvas{
+    position: fixed;  /* Fixes the canvas position relative to the viewport */
+    top: 0; /* Aligns the canvas to the top edge */
+    left: 0; /* Aligns the canvas to the left edge */
+    width: 100%; /* Makes the canvas cover the full viewport width */
+    height: 100%; /* Makes the canvas cover the full viewport height */
+    z-index: -1; /* Puts the canvas behind all other content (the login card) */
+}
+
+.friends-card{
+  background-color: rgba(45, 55, 72, 0.95);
+  border-left: 5px solid #06a342;
+  border-radius: 0.75rem;
+  margin-bottom: 20px;
+  border-radius: 1.5rem; /*rounded corners on the cards*/
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+  padding: 20px;
+}
+
+.stat-item{
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+.stat-item:hover{
+  transform: translateY(-2px);
+  color:#06a342;
+}
+.post-card{
+  background-color: rgba(45, 55, 72, 0.95);
+  border-radius: 0.75rem;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-left: 5px solid #06a342;
+}
+.friend-item{
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #4a5568;
+  cursor: pointer;
+}
+
+.friend-item:last-child{
+  border-bottom: none;
+}
+
+.friend-avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  margin-right: 10px;
+  object-fit: cover;
+}

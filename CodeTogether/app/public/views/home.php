@@ -160,7 +160,7 @@
                         </button>
                     </div>
 
-                    <button class="btn btn-sm btn-secondary w-100 mt-3 rounded-pill">View All Friends</button>
+                    <button class="btn btn-sm btn-secondary w-100 mt-3 rounded-pill">View All Friends</button> <!-- need to have button show all friends -->
                 </div>
             </div>
             <!--end of friends list info cards (right column)-->
