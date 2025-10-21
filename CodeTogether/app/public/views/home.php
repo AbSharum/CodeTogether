@@ -94,7 +94,7 @@
             <!-- middle column: posts will be 6/12 on large screens-->
             <div class="col-lg-6 mb-4 order-lg-2 order-3">
                 <h3 class="mb-4 text-white">Latest Posts</h3>
-                <!--php integration for posts somewhat complete. I added some fake posts and got them to display, but it could use some work-->
+                <!--php integration for posts somewhat complete. I added some fake posts and got them to display, but it could use some work this need comments to show up properly, and the ability to display image/video-->
                  <?php
                     for ($index = 0; $index < count($posts); $index++) {
                         echo "<div class=\"post-card\">";
