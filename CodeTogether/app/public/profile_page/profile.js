@@ -1,3 +1,10 @@
+fetch('profile_api.php')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('username').textContent = data.username;
+  });
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const bubble = document.getElementById('speech');
   const maidForm = document.getElementById('maidForm');

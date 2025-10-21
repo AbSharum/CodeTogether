@@ -38,8 +38,8 @@
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-success" onclick="window.location.href='index.php?action=createAccount'">Create Account</button>
                 </div>
-                <p class="mt-4"><a href="/public/Privacy.html">Privacy Policy</a></p><br> 
-                <p><a href="/public/Terms.html">Terms and Conditions</a></p>
+                <p class="mt-4"><a href="/public/legal/privacyPolicy.php">Privacy Policy</a></p><br> 
+                <p><a href="/public/legal/terms.php">Terms and Conditions</a></p>
             </div>
         </div>
     </div>

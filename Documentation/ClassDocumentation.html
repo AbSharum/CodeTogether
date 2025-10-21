@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UserDAO PHP Class Documentation</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; color: #222; }
+    h1, h2 { color: #333; }
+    .method { background: #fff; border-radius: 6px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    code, pre { background: #eee; padding: 10px 14px; border-radius: 4px; display: block; line-height: 1.6; overflow-x: auto; white-space: pre; }
+    details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>UserDAO Class Documentation</h1>
+<p>This class provides methods to interact with the <code>user</code> table in a database. It allows creating, retrieving, updating, and authenticating users.</p>
+
+<!-- addUser -->
+<div class="method">
+    <h2>addUser(string $username, string $password, string $email, int $roleID): void</h2>
+    <p>Inserts a new user record into the database with a hashed password.</p>
+    <ul>
+        <li><b>$username</b> — User’s username.</li>
+        <li><b>$password</b> — Plain text password, hashed before insertion.</li>
+        <li><b>$email</b> — User’s email address.</li>
+        <li><b>$roleID</b> — Numeric role identifier.</li>
+    </ul>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new UserDAO();
+
+$dao->addUser(
+    "jdoe",
+    "securePass123",
+    "jdoe@example.com",
+    2
+);
+        </code></pre>
+    </details>
+</div>
+
+<!-- getUserByID -->
+<div class="method">
+    <h2>getUserByID(int $userID): User|null</h2>
+    <p>Retrieves a user by their unique ID. Returns a <code>User</code> object or <code>null</code> if not found.</p>
+    <ul>
+        <li><b>$userID</b> — User’s numeric identifier.</li>
+    </ul>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new UserDAO();
+
+$user = $dao->getUserByID(5);
+
+if ($user) {
+    echo $user->getUsername();
+}
+        </code></pre>
+    </details>
+</div>
+
+<!-- getUserByName -->
+<div class="method">
+    <h2>getUserByName(string $username): User|null</h2>
+    <p>Retrieves a user by their username. Returns a <code>User</code> object or <code>null</code> if not found.</p>
+    <ul>
+        <li><b>$username</b> — Username to search for.</li>
+    </ul>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new UserDAO();
+
+$user = $dao->getUserByName("jdoe");
+
+if ($user) {
+    echo $user->getEmail();
+}
+        </code></pre>
+    </details>
+</div>
+
+<!-- updateUser -->
+<div class="method">
+    <h2>updateUser(User $user): void</h2>
+    <p>Updates an existing user record. If the password is new and unhashed, it will be rehashed automatically.</p>
+    <ul>
+        <li><b>$user</b> — A <code>User</code> object with updated data.</li>
+    </ul>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new UserDAO();
+
+$user = $dao->getUserByID(5);
+
+$user->setEmail("newmail@example.com");
+$user->setPassword("newPass123");
+
+$dao->updateUser($user);
+        </code></pre>
+    </details>
+</div>
+
+<!-- authenticate -->
+<div class="method">
+    <h2>authenticate(string $email, string $passwd): User|null</h2>
+    <p>Authenticates a user by verifying the provided email and password. Returns the <code>User</code> object if credentials are valid, or <code>null</code> otherwise.</p>
+    <ul>
+        <li><b>$email</b> — User’s email address.</li>
+        <li><b>$passwd</b> — User’s plain text password.</li>
+    </ul>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new UserDAO();
+
+$user = $dao->authenticate(
+    "jdoe@example.com",
+    "securePass123"
+);
+
+if ($user) {
+    echo "Login successful: " . $user->getUsername();
+} else {
+    echo "Invalid credentials.";
+}
+        </code></pre>
+    </details>
+</div>
+
+<h1>PostDAO Class Documentation</h1>
+<p>This class provides data access operations for the <code>post</code> table, including creating, retrieving, and deleting posts.</p>
+
+<!-- addPost -->
+<div class="method">
+    <h2>addPost(int $userID, int $threadID, string $contents, string $caption, string $visibility): void</h2>
+    <p>Inserts a new post record into the database.</p>
+    <ul>
+        <li><b>$userID</b> — ID of the user creating the post.</li>
+        <li><b>$threadID</b> — ID of the thread the post belongs to.</li>
+        <li><b>$contents</b> — Main content of the post.</li>
+        <li><b>$caption</b> — Caption or title for the post.</li>
+        <li><b>$visibility</b> — Visibility setting (e.g., <code>public</code>, <code>private</code>).</li>
+    </ul>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new PostDAO();
+
+$dao->addPost(
+    3,                 // userID
+    7,                 // threadID
+    "This is my post content.",
+    "My first post",
+    "public"
+);
+        </code></pre>
+    </details>
+</div>
+
+<!-- getAllPosts -->
+<div class="method">
+    <h2>getAllPosts(): array</h2>
+    <p>Retrieves all non-deleted posts from the database, ordered by creation date (newest first).</p>
+    <p>Returns an array of <code>Post</code> objects.</p>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new PostDAO();
+
+$posts = $dao->getAllPosts();
+
+foreach ($posts as $post) {
+    echo $post->getCaption() . " - " . $post->getContents();
+}
+        </code></pre>
+    </details>
+</div>
+
+<!-- getPostsByUser -->
+<div class="method">
+    <h2>getPostsByUser(int $userId): array</h2>
+    <p>Retrieves all non-deleted posts created by a specific user, ordered by creation date (newest first).</p>
+    <ul>
+        <li><b>$userId</b> — ID of the user whose posts are being fetched.</li>
+    </ul>
+    <p>Returns an array of <code>Post</code> objects.</p>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new PostDAO();
+
+$userPosts = $dao->getPostsByUser(3);
+
+foreach ($userPosts as $post) {
+    echo $post->getCaption();
+}
+        </code></pre>
+    </details>
+</div>
+
+<!-- deletePost -->
+<div class="method">
+    <h2>deletePost(int $postID): void</h2>
+    <p>Marks a post as deleted by setting its <code>is_deleted</code> field to <code>TRUE</code>.</p>
+    <ul>
+        <li><b>$postID</b> — ID of the post to delete.</li>
+    </ul>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new PostDAO();
+
+$dao->deletePost(15);
+        </code></pre>
+    </details>
+</div>
+
+
+<h1>CommentDAO Class Documentation</h1>
+<p>This class provides data access operations for the <code>comment</code> table, including adding, retrieving, and deleting comments.</p>
+
+<!-- addComment -->
+<div class="method">
+    <h2>addComment(int $userID = -1, int $postID = -1, string $contents = ''): void</h2>
+    <p>Inserts a new comment into the database for a specific post and user.</p>
+    <ul>
+        <li><b>$userID</b> — ID of the user posting the comment (default: <code>-1</code>).</li>
+        <li><b>$postID</b> — ID of the post being commented on (default: <code>-1</code>).</li>
+        <li><b>$contents</b> — Text content of the comment.</li>
+    </ul>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new CommentDAO();
+
+$dao->addComment(
+    4,                     // userID
+    12,                    // postID
+    "This is an insightful post!"
+);
+        </code></pre>
+    </details>
+</div>
+
+<!-- getAllUserComments -->
+<div class="method">
+    <h2>getAllUserComments(int $userID = -1): array</h2>
+    <p>Intended to retrieve all comments made by a specific user. Currently not implemented.</p>
+    <details>
+        <summary>Example (Expected Future Usage)</summary>
+        <pre><code>
+$dao = new CommentDAO();
+
+$userComments = $dao->getAllUserComments(4);
+
+foreach ($userComments as $comment) {
+    echo $comment->getContents();
+}
+        </code></pre>
+    </details>
+</div>
+
+<!-- getAllPostComments -->
+<div class="method">
+    <h2>getAllPostComments(int $postID = -1): array</h2>
+    <p>Intended to retrieve all comments on a specific post. Currently not implemented.</p>
+    <details>
+        <summary>Example (Expected Future Usage)</summary>
+        <pre><code>
+$dao = new CommentDAO();
+
+$postComments = $dao->getAllPostComments(12);
+
+foreach ($postComments as $comment) {
+    echo $comment->getContents();
+}
+        </code></pre>
+    </details>
+</div>
+
+<!-- getAllComments -->
+<div class="method">
+    <h2>getAllComments(): array</h2>
+    <p>Retrieves all non-deleted comments from the database, ordered by creation date (newest first).</p>
+    <p><b>Note:</b> The current implementation incorrectly references <code>Post</code> instead of <code>Comment</code>. This likely requires correction.</p>
+    <details>
+        <summary>Example Usage</summary>
+        <pre><code>
+$dao = new CommentDAO();
+
+$comments = $dao->getAllComments();
+
+foreach ($comments as $comment) {
+    echo $comment->getContents();
+}
+        </code></pre>
+    </details>
+</div>
+
+<!-- getPostsByUser -->
+<div class="method">
+    <h2>getPostsByUser(int $userId): array</h2>
+    <p>This method appears misplaced. It retrieves posts, not comments, for a given user. It likely belongs to <code>PostDAO</code>.</p>
+    <details>
+        <summary>Example Usage (As Currently Implemented)</summary>
+        <pre><code>
+$dao = new CommentDAO();
+
+$posts = $dao->getPostsByUser(4);
+
+foreach ($posts as $post) {
+    echo $post->getCaption();
+}
+        </code></pre>
+    </details>
+</div>
+
+<!-- deletePost -->
+<div class="method">
+    <h2>deletePost(int $postID): void</h2>
+    <p>This method marks a post as deleted. It appears incorrectly placed inside <code>CommentDAO</code> and should be in <code>PostDAO</code>.</p>
+    <details>
+        <summary>Example Usage (As Currently Implemented)</summary>
+        <pre><code>
+$dao = new CommentDAO();
+
+$dao->deletePost(15);
+        </code></pre>
+    </details>
+</div>
+</body>
+</html>

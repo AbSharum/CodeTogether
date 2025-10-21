@@ -11,7 +11,7 @@
                 $user = getenv('MYSQL_USER');
                 $pass = getenv('MYSQL_PASSWORD');
             
-            
+                
                 self::$connection = new mysqli($host, $user, $pass, $db);
             
                 if (self::$connection->connect_error) {
