@@ -13,6 +13,7 @@
     include_once __DIR__ . "/controllers/HomeController.php";
     include_once __DIR__ . "/controllers/AccountSettingsController.php";
     include_once __DIR__ . "/controllers/MessagesController.php";
+    include_once __DIR__ . "/controllers/NotFoundController.php";
 
 
     class MyRouter extends Router {
@@ -25,12 +26,6 @@
 
             if ($controller) {
                 $access = $controller->getAuth();
-                #still working on the below. Trying to get it to redirect logged in users
-                #to the 404 page if what they try to go to isnt found.
-                if (!isset($this->controllers[$action])) {
-                    header("Location: index.php?action=404");
-                    exit;
-                }
                 if ($access != "PUBLIC" && !isset($_SESSION['loggedin'])) {
                     header("Location: index.php?action=login");
                     exit;
@@ -50,6 +45,7 @@
     $router->addController('home', new HomeController());
     $router->addController('accountSettings', new AccountSettingsController());
     $router->addController('messages', new MessagesController());
+    $router->addController('404', new NotFoundController());
 
     # Register default controller (used when no action is specified)
     $router->addController('default', new LoginController()); 

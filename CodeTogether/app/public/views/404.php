@@ -19,7 +19,7 @@
                 </div>
 
                 <div id="action-buttons" class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="window.location.href='/public/views/home.html'" class="btn-blue-pill hover:scale-105">
+                    <button onclick="window.location.href='/index.php?action=home'" class="btn-blue-pill hover:scale-105">
                         Return the Source
                     </button>
                     <button onclick="alert('The Oracle says: I knew you would click here. Try the other button.')" class="btn-red-pill hover:scale-105">
