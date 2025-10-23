@@ -1,4 +1,4 @@
-fetch('profile_api.php')
+fetch('/controllers/ProfileController.php')
   .then(res => res.json())
   .then(data => {
     document.getElementById('username').textContent = data.username;
@@ -146,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadProfile() {
     try {
-      const res = await fetch('profile.php');
+      const res = await fetch('/controllers/ProfileController.php');
+
       const data = await res.json();
 
       const bioElem = document.getElementById('bio');

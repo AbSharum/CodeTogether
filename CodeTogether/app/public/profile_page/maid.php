@@ -8,11 +8,13 @@ $question = $input["question"] ?? "";
 $personality = $input["personality"] ?? "maid";
 
 if ($event === "userChat" && $question) {
-    $apiKey = getenv('OPEN_API_KEY') ?: ($_ENV['OPEN_API_KEY'] ?? null); //$apiKey = $_ENV['OPEN_API_KEY'] ?? null;
+    $secretPath = '/run/secrets/openai_api_key';
+    $apiKey = is_readable($secretPath) ? trim(file_get_contents($secretPath)) : null;
     if (!$apiKey) {
-        echo json_encode(["error" => "API key missing"]);
+        echo json_encode(['error' => 'API key missing or unreadable secret']);
         exit;
     }
+
 
     // Define system prompts (AI "memories") for each personality
     $personalities = [
@@ -48,15 +50,18 @@ if ($event === "userChat" && $question) {
     ]);
 
     $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
     if (curl_errno($ch)) {
         echo json_encode(["error" => "cURL error: " . curl_error($ch)]);
+    } elseif ($httpCode !== 200) {
+        echo json_encode(["error" => "HTTP $httpCode", "response" => $response]);
     } else {
         echo $response;
     }
-
     curl_close($ch);
     exit;
+
 }
 
 // Fallback if no valid event
