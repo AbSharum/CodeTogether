@@ -20,12 +20,16 @@
                 $friends = $this->friendDao->getFriends($userID);
                 $friendPosts = $this->postDao->getPostsByFriends($friends);
                 $posts = $this->postDao->getPostsByUser($userID);
+                $friendsUser = $this->userDao->getFriendUsers($friends);
+
+
 
 
                 $this->renderView("home", [
                     'friendPosts' => $friendPosts,
                     'userPosts' => $posts,
                     'friends' => $friends,
+                    'friendsUser' => $friendsUser,
                     'user' => $user
                 ]);
                 return;

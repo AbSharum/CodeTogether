@@ -47,6 +47,7 @@
                     $_SESSION['userID'] = $result->getUserID();
                     $_SESSION['username'] = $result->getUsername();
                     $_SESSION['role'] = $role->getRoleName();
+                    $this->userDao->updateUserStatus('online',$_SESSION['userID']);
                     header('Location: index.php?action=home');
                     exit;
                 }

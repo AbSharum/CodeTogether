@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Settings</title>
     <!--bootsrap-->
-    <link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Font - Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <!--navigation icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/public/css/accountSettings.css"> <!--change for file path-->
 </head>
 
-<body class = "bg-dark text-light">
+<body class="bg-dark text-light">
     <canvas id="matrix-canvas"></canvas>
-     <!--NavBar-->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: black; border-bottom: 2px solid green;">
+    <!--NavBar-->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top"
+        style="background-color: black; border-bottom: 2px solid green;">
         <div class="container-fluid container-lg">
             <a class="navbar-brand fw-bold text-info" href="#">Code Together</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item" id="home-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=home"><i class="fas fa-home me-1"></i> Home</a> <!--need to verify correct paths -->
+                        <a class="nav-link text-white" href="index.php?action=home"><i class="fas fa-home me-1"></i>
+                            Home</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="game-nav-item">
-                        <a class="nav-link text-white" href="game.html"><i class="fas fa-gamepad me-1"></i> Game Page</a> <!--need to verify correct paths -->
+                        <a class="nav-link text-white" href="game.html"><i class="fas fa-gamepad me-1"></i> Game
+                            Page</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="message-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=messages"><i class="fas fa-envelope me-1"></i> Messages</a> <!--need to verify correct paths -->
+                        <a class="nav-link text-white" href="index.php?action=messages"><i
+                                class="fas fa-envelope me-1"></i> Messages</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="accountSettings-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=accountSettings"><i class="fas fa-cog me-1"></i> Account Settings</a> <!--need to verify correct paths -->
+                        <a class="nav-link text-white" href="index.php?action=accountSettings"><i
+                                class="fas fa-cog me-1"></i> Account Settings</a> <!--need to verify correct paths -->
                     </li>
                 </ul>
             </div>
@@ -46,44 +55,51 @@
         <div class="card p-4 mx-4" style="max-width: 400px;">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Code Together Account Settings</h2>
-                <form action = "#" method="POST" id="registration">  <!--may need to change im not sure how u peeps are running that side-->
+                <form action="#" method="POST" id="registration">
+                    <!--may need to change im not sure how u peeps are running that side-->
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
                     </div>
                     <!--modal for username change-->
                     <!--needs php-->
-                   <a href="#" id="changeUsername" class="form-label">Change Username</a><br>
-                        <div id="UsernameModal" class="modal">
-                            <div class="UsernameModal-content">
-                                <span class="uClose">&times;</span>
-                                <p>"Deja Vu is usually a glitch in the Matrix.</p><br>
-                                <p>It Happens When they change something."</p>
-                                <input type="text" class="form-control" id="username" name="username" required> 
-                                <input type="checkbox" onclick="changeUsername()">Confirm Change <!--needs js for username change and db change-->
-                            </div>
+                    <a href="#" id="changeUsername" class="form-label">Change Username</a><br>
+                    <div id="UsernameModal" class="modal">
+                        <div class="UsernameModal-content">
+                            <span class="uClose">&times;</span>
+                            <p>"Deja Vu is usually a glitch in the Matrix.</p><br>
+                            <p>It Happens When they change something."</p>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                            <input type="checkbox" onclick="changeUsername()">Confirm Change
+                            <!--needs js for username change and db change-->
                         </div>
+                    </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
+                        <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                            required>
                     </div>
                     <!--modal for email change-->
                     <!--needs php-->
                     <a href="#" id="changeEmail" class="form-label">Change Email</a><br>
                     <div id="emailModal" class="modal">
-                            <div class="emailModal-content">
-                                <span class="eClose">&times;</span>
-                                <p>"Deja Vu is usually a glitch in the Matrix.</p><br>
-                                <p>It Happens When they change something."</p>
-                                <input type="text" class="form-control" id="email" name="email" required> 
-                                <input type="checkbox" onclick="changeEmail()">Confirm Change <!--needs js for username change and db change-->
-                            </div>
+                        <div class="emailModal-content">
+                            <span class="eClose">&times;</span>
+                            <p>"Deja Vu is usually a glitch in the Matrix.</p><br>
+                            <p>It Happens When they change something."</p>
+                            <input type="text" class="form-control" id="email" name="email" required>
+                            <input type="checkbox" onclick="changeEmail()">Confirm Change
+                            <!--needs js for username change and db change-->
                         </div>
+                    </div>
                     <!--modal for password change-->
                     <!--needs php-->
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                        <input type="password" class="form-control" id="password" name="password"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                            required>
                     </div>
                     <a href="#" id="changePassword" class="form-label">Change Password</a><br><br>
                     <div id="passwordModal" class="modal">
@@ -91,8 +107,9 @@
                             <span class="pClose">&times;</span>
                             <p>"Deja Vu is usually a glitch in the Matrix.</p><br>
                             <p>It Happens When they change something."</p>
-                            <input type="text" class="form-control" id="changePassword" name="changePassword" required> 
-                            <input type="checkbox" onclick="changePassword()">Confirm Change <!--needs js for username change and db change-->
+                            <input type="text" class="form-control" id="changePassword" name="changePassword" required>
+                            <input type="checkbox" onclick="changePassword()">Confirm Change
+                            <!--needs js for username change and db change-->
                         </div>
                     </div>
                     <input type="checkbox" onclick="showPassAndConf()">Show Password<br><br>
@@ -105,17 +122,23 @@
                         <div class="deleteModal-content">
                             <span class="dClose">&times;</span>
                             <p>If you are ready to deactivate...</p>
-                            <input type="checkbox" onclick="deleteAccount()">Confirm Delete <!--needs js for account deletion and db deletion-->
+                            <input type="checkbox" onclick="deleteAccount()">Confirm Delete
+                            <!--needs js for account deletion and db deletion-->
                         </div>
                     </div>
-             
+
                 </form>
             </div>
         </div>
     </div>
-    
+
     <script src="/public/js/accountSettings.js"></script> <!--update for filepath for js-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

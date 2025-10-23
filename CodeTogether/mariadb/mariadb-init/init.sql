@@ -14,7 +14,7 @@ CREATE TABLE user (
     email VARCHAR(255) UNIQUE,
     points INT DEFAULT 0,
     is_deleted BOOLEAN DEFAULT FALSE,
-    status ENUM('active', 'banned', 'inactive') DEFAULT 'active',
+    status ENUM('online', 'banned', 'offline','away') DEFAULT 'offline',
     created_on DATETIME DEFAULT CURRENT_TIMESTAMP,
     latest_update DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (role_id) REFERENCES role(role_id)
@@ -169,18 +169,30 @@ VALUES
 ('Help and Support'),
 ('Off Topic');
 
-INSERT INTO user (role_id, username, password, email, points, status)
-VALUES
-(1, 'Alice', 'password123', 'alice@example.com', 150, 'active'),
-(1, 'Bob', 'password123', 'bob@example.com', 90, 'active'),
-(1, 'Charlie', 'password123', 'charlie@example.com', 45, 'active'),
-(1, 'Dave', 'password123', 'dave@example.com', 30, 'active'),
-(1, 'Eve', 'password123', 'eve@example.com', 200, 'active');
+-- Users table (passwords are hashed)
+--Alice through bob the passwords are password123
+INSERT INTO user (role_id, username, password, email, points) VALUES
+(1, 'Alice', '$2y$10$szc7v.HH8paPYGc01BSTlO2pbitka4mdQ1PBHpbcaO5mM.CQZhp4S', 'alice@example.com', 150),
+(1, 'Bob', '$2y$10$szc7v.HH8paPYGc01BSTlO2pbitka4mdQ1PBHpbcaO5mM.CQZhp4S', 'bob@example.com', 90),
+(1, 'Charlie', '$2y$10$szc7v.HH8paPYGc01BSTlO2pbitka4mdQ1PBHpbcaO5mM.CQZhp4S', 'charlie@example.com', 45),
+(1, 'Dave', '$2y$10$szc7v.HH8paPYGc01BSTlO2pbitka4mdQ1PBHpbcaO5mM.CQZhp4S', 'dave@example.com', 30),
+(1, 'Eve', '$2y$10$szc7v.HH8paPYGc01BSTlO2pbitka4mdQ1PBHpbcaO5mM.CQZhp4S', 'eve@example.com', 200),
+(1, 'abrahamsharum', '$2y$10$l9A2A/6gUe3L/j4ritpTde8n3Ta2h.B0Lfsv5E6qNmnqWIoc7Qy3q', 'abxbox13@gmail.com', 1000);
 
-INSERT INTO post (user_id, username, thread_id, contents, caption, visibility)
-VALUES
-(1, 'Alice', 1, 'Just finished my first coding project!', 'Can’t believe how much I learned this week. #coding #progress', 'public'),
-(2, 'Bob', 1, 'Morning coffee', 'Some days, coffee is the only motivation I need.', 'friends'),
-(3, 'Charlie', 1, 'Weekend plans?', 'Thinking of taking a break from screens and going hiking. Anyone else need that reset?', 'public'),
-(5, 'Bob', 1, 'Testing engagement', 'If you could learn one skill instantly, what would it be?', 'public');
+-- Each user has one post
+INSERT INTO post (user_id, username, thread_id, contents, caption, visibility) VALUES
+(1, 'Alice',1,'Hello from Alice', 'My first post!', 'public'),
+(2, 'Bob',1,'Hello from Bob', 'Excited to join!', 'public'),
+(3, 'Charlie',1,'Hello from Charlie', 'Just chilling.', 'public'),
+(4, 'Dave',1,'Hello from Dave', 'Learning PHP today.', 'public'),
+(5, 'Eve',1,'Hello from Eve', 'Loving coding!', 'public'),
+(6, 'abrahamsharum',1,'Hello from Abraham', 'Test post for setup.', 'public');
+
+INSERT INTO friend_list (user_id_1, user_id_2, status) VALUES
+(1,2,'friends'), (1,3,'friends'), (1,4,'friends'), (1,5,'friends'), (1,6,'friends'),
+(2,3,'friends'), (2,4,'friends'), (2,5,'friends'), (2,6,'friends'),
+(3,4,'friends'), (3,5,'friends'), (3,6,'friends'),
+(4,5,'friends'), (4,6,'friends'),
+(5,6,'friends');
+
 

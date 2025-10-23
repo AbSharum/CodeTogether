@@ -27,10 +27,12 @@ Seth W-->
         body {
             font-family: 'Courier New', Courier, monospace;
             background-color: #000;
-            color: #0f0; /* Green text */
+            color: #0f0;
+            /* Green text */
             margin: 0;
             padding: 40px 20px;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
         }
 
         #matrix-canvas {
@@ -39,22 +41,27 @@ Seth W-->
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Puts canvas in the background */
+            z-index: -1;
+            /* Puts canvas in the background */
         }
 
         .container {
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
-            position: relative; /* Ensure it's on top of the canvas */
+            position: relative;
+            /* Ensure it's on top of the canvas */
             z-index: 1;
         }
 
         .fading-heading {
-            text-shadow: 
-                0 0 5px #000,   /* A small, sharp shadow */
-                0 0 10px #000,  /* A slightly larger, softer shadow */
-                0 0 15px #000;  /* An even larger, very soft shadow */
+            text-shadow:
+                0 0 5px #000,
+                /* A small, sharp shadow */
+                0 0 10px #000,
+                /* A slightly larger, softer shadow */
+                0 0 15px #000;
+            /* An even larger, very soft shadow */
         }
 
         h1 {
@@ -86,7 +93,8 @@ Seth W-->
 
         /* --- Modal (Pop-up) Styling --- */
         .modal-overlay {
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -109,7 +117,7 @@ Seth W-->
             width: 90%;
             max-width: 500px;
         }
-        
+
         .modal-content h2 {
             text-align: center;
             text-shadow: 0 0 5px #0f0;
@@ -125,7 +133,7 @@ Seth W-->
             cursor: pointer;
             transition: color 0.2s;
         }
-        
+
         .close-btn:hover {
             color: #0f0;
             text-shadow: 0 0 5px #0f0;
@@ -144,7 +152,7 @@ Seth W-->
             resize: vertical;
             box-sizing: border-box;
         }
-        
+
         #post-input:focus {
             outline: none;
             box-shadow: 0 0 5px rgba(0, 255, 0, 0.75);
@@ -164,7 +172,7 @@ Seth W-->
             margin-top: 10px;
             transition: background-color 0.3s, box-shadow 0.3s;
         }
-        
+
         #submit-btn:hover {
             background-color: #0a0;
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.75);
@@ -185,7 +193,7 @@ Seth W-->
             border-radius: 5px;
             padding: 20px;
         }
-        
+
         .post-content {
             font-size: 1.1em;
             line-height: 1.5;
@@ -201,8 +209,9 @@ Seth W-->
         }
     </style>
 </head>
+
 <body>
-    
+
     <canvas id="matrix-canvas"></canvas>
 
     <div class="container">
@@ -210,7 +219,7 @@ Seth W-->
         <button id="show-modal-btn">>> Create Transmission</button>
 
         <div class="post-feed" id="post-feed-container">
-            </div>
+        </div>
     </div>
 
     <div id="post-modal" class="modal-overlay">
@@ -260,14 +269,14 @@ Seth W-->
         };
 
         let matrixInterval = setInterval(drawMatrix, 70);//The speed of the matrix background animation stuff! Lower is faster
-        
+
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             const newColumns = Math.floor(canvas.width / fontSize);
             drops.length = newColumns;
-            for(let i = 0; i < newColumns; i++){
-                if(drops[i] === undefined){
+            for (let i = 0; i < newColumns; i++) {
+                if (drops[i] === undefined) {
                     drops[i] = 1;
                 }
             }
@@ -298,7 +307,7 @@ Seth W-->
             }
         });
 
-        postForm.addEventListener('submit', function(event) {
+        postForm.addEventListener('submit', function (event) {
             event.preventDefault();
             const postText = postInput.value.trim();
 
@@ -330,4 +339,5 @@ Seth W-->
     </script>
 
 </body>
+
 </html>

@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-$user = $data['user'];
-$posts = $data['posts'];
-?>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Home Page</title>
     <!--bootsrap-->
-    <link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Font - Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <!--navigation icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/public/css/home.css">
 </head>
+
 <body>
     <canvas id="matrix-canvas"></canvas>
-     <!--NavBar-->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: black; border-bottom: 2px solid green;">
+    <!--NavBar-->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top"
+        style="background-color: black; border-bottom: 2px solid green;">
         <div class="container-fluid container-lg">
-            <a class="navbar-brand fw-bold text-info" href="/public/profile_page/profile.php">Code Together</a> 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand fw-bold text-info" href="/public/profile_page/profile.php">Code Together</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item" id="home-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=home"><i class="fas fa-home me-1"></i> Home</a> <!--need to verify correct paths -->
+                        <a class="nav-link text-white" href="index.php?action=home"><i class="fas fa-home me-1"></i>
+                            Home</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="game-nav-item">
-                        <a class="nav-link text-white" href="/public/views/game.html"><i class="fas fa-gamepad me-1"></i> Game Page</a> <!--need to verify correct paths -->
+                        <a class="nav-link text-white" href="/public/views/game.html"><i
+                                class="fas fa-gamepad me-1"></i> Game Page</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="message-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=messages"><i class="fas fa-envelope me-1"></i> Messages</a> <!--need to verify correct paths -->
+                        <a class="nav-link text-white" href="index.php?action=messages"><i
+                                class="fas fa-envelope me-1"></i> Messages</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="accountSettings-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=accountSettings"><i class="fas fa-cog me-1"></i> Account Settings</a> <!--need to verify correct paths -->
+                        <a class="nav-link text-white" href="index.php?action=accountSettings"><i
+                                class="fas fa-cog me-1"></i> Account Settings</a> <!--need to verify correct paths -->
                     </li>
                 </ul>
             </div>
@@ -54,26 +58,28 @@ $posts = $data['posts'];
                 <!--profile summary card-->
                 <div class="profile-card text-center mb-4">
                     <!-- if we get some avatar cards stored into the db we can use this just update the img src -->
-                    <img src="https://placehold.co/120x120/4a5568/ffffff?text=U" alt="Profile Avatar" class="profile-avatar mx-auto d-block">
+                    <img src="https://placehold.co/120x120/4a5568/ffffff?text=U" alt="Profile Avatar"
+                        class="profile-avatar mx-auto d-block">
                     <!--will need to change this info its just a placeholder as well-->
-                    <h2 class="mb-0 text-white"><?= htmlspecialchars($data['user']->getUserName())?></h2>
+                    <h2 class="mb-0 text-white"><?= htmlspecialchars($data['user']->getUserName()) ?></h2>
                     <!--will need to change this info its just a placeholder as well-->
-                    <p class="mb-2 text-white"><?= htmlspecialchars($data['user']->getEmail())?></p>
+                    <p class="mb-2 text-white"><?= htmlspecialchars($data['user']->getEmail()) ?></p>
                     <!--will need to change this info its just a placeholder as well-->
                     <span class="d-block mt-1 text-sm text-info mb-3">📍 Fort Smith, AR</span>
 
                     <!-- Statistics Section if its a cool thing to have or not idk but would need to get the php to pull the db info  -->
                     <div class="row mt-3">
                         <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars($data['user']->getPoints())?></h3>
+                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars($data['user']->getPoints()) ?></h3>
                             <small class="text-white">Game Points</small>
                         </div>
                         <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['friends']))?></h3>
+                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['friends'])) ?></h3>
                             <small class="text-white">Friends</small>
                         </div>
                         <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['friendPosts']))?></h3>
+                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['friendPosts'])) ?>
+                            </h3>
                             <small class="text-white">Posts</small>
                         </div>
                     </div>
@@ -85,11 +91,12 @@ $posts = $data['posts'];
                     <h4 class="text-info text-white d-flex justify-content-between align-items-center">
                         About Me
                     </h4>
-                <!-- php integration will need to edit this stuff just a placeholder for now-->
+                    <!-- php integration will need to edit this stuff just a placeholder for now-->
                     <div id="aboutMeContent" class="mb-3 text-white text-break">
                         Just a CS major tryin to make it happen while being fully caffinated and two screamin babies!
                     </div>
-                    <textarea id="aboutMeEditor" class="form-control" row="4" style="display: none; background-color: #4a4468; color: #fff; border: 1px solid #06a342; resize: none;">Just a CS major tryin to make it happen while being fully caffinated and two screamin babies!</textarea>
+                    <textarea id="aboutMeEditor" class="form-control" row="4"
+                        style="display: none; background-color: #4a4468; color: #fff; border: 1px solid #06a342; resize: none;">Just a CS major tryin to make it happen while being fully caffinated and two screamin babies!</textarea>
                     <button id="editSaveBtn" class="btn btn-sm btn-outline-info rounded-pill w-100 mt-2">Edit</button>
                 </div>
                 <!--end of the about me box-->
@@ -100,7 +107,7 @@ $posts = $data['posts'];
             <div class="col-lg-6 mb-4 order-lg-2 order-3">
                 <h3 class="mb-4 text-white">Latest Posts</h3>
                 <!--php integration for posts somewhat complete. I added some fake posts and got them to display, but it could use some work this need comments to show up properly, and the ability to display image/video-->
-                 <?php foreach ($data['friendPosts'] as $post): ?>
+                <?php foreach ($data['friendPosts'] as $post): ?>
                     <div class="post-card">
                         <p class="fw-bold text-white mb-1">
                             <?= htmlspecialchars($post->getUsername()) ?>
@@ -126,87 +133,73 @@ $posts = $data['posts'];
             <!--right side of page for friends list  will be 3/12 width on large screens-->
             <div class="col-lg-3 mb-4 order-lg-3 order-2">
                 <div class="friends-card">
-                    <h4 class="text-info mb-3 text-white">Online Friends (4)</h4>
+                    <h4 class="text-info mb-3 text-white">Online Friends (<?php echo count($data['friends']); ?>)</h4>
 
-                    <!-- php integration will need to edit this stuff just a placeholder for now-->
-                    <div class="friend-item">
-                        <img src="https://placehold.co/40x40/5cb85c/ffffff?text=J" alt="Friend Avatar" class="friend-avatar">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-white">John Smith</div>
-                            <small class="text-success">Online</small>
+                    <?php foreach ($data['friendsUser'] as $friendUser):
+                        $statusClass = 'text-danger';
+                        $imageColor = 'd9534f';
+                        $statusText = 'Offline';
+                        if ($friendUser->getStatus() === 'online') {
+                            $statusClass = 'text-success';
+                            $statusText = 'Online';
+                            $imageColor = '5cb85c';
+                        } elseif ($friendUser->getStatus() === 'away') {
+                            $statusClass = 'text-warning';
+                            $imageColor = 'f0ad4e';
+                            $statusText = 'Away';
+                        }
+                        ?>
+                        <div class="friend-item">
+                            <img src="https://placehold.co/40x40/<?=$imageColor?>/ffffff?text=<?= substr($friendUser->getUserName(), 0, 1) ?>"alt="Friend Avatar" class="friend-avatar">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold text-white"><?php echo htmlspecialchars($friendUser->getUserName()); ?>
+                                </div>
+                                <small class="<?php echo $statusClass; ?>"><?php echo $statusText; ?></small>
+                            </div>
+                            <button class="btn btn-sm chat-open-btn"
+                                data-friend-id="<?php echo $friendUser->getUserID(); ?>">
+                                <i class="fas fa-comment text-info"></i>
+                            </button>
                         </div>
-                        <button class="btn btn-sm chat-open-btn" data-friend-name=""> <!--will need to put php to get friend name or id for here-->
-                            <i class="fas fa-comment text-info"></i>
-                        </button>
-                    </div>
+                    <?php endforeach; ?>
 
-                    <div class="friend-item">
-                        <img src="https://placehold.co/40x40/f0ad4e/ffffff?text=A" alt="Friend Avatar" class="friend-avatar">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-white">Alice L.</div>
-                            <small class="text-warning">Away</small>
-                        </div>
-                        <button class="btn btn-sm chat-open-btn" data-friend-name=""><!--will need to put php to get friend name or id for here-->
-                            <i class="fas fa-comment text-info"></i>
-                        </button>
-                    </div>
-
-                    <div class="friend-item">
-                        <img src="https://placehold.co/40x40/337ab7/ffffff?text=M" alt="Friend Avatar" class="friend-avatar">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-white">Mike P.</div>
-                            <small class="text-success">Online</small>
-                        </div>
-                        <button class="btn btn-sm chat-open-btn" data-friend-name=""><!--will need to put php to get friend name or id for here-->
-                            <i class="fas fa-comment text-info"></i>
-                        </button>
-                    </div>
-
-                    <div class="friend-item">
-                        <img src="https://placehold.co/40x40/d9534f/ffffff?text=S" alt="Friend Avatar" class="friend-avatar">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-white">Sarah K.</div>
-                            <small class="text-danger">Offline</small>
-                        </div>
-                        <button class="btn btn-sm chat-open-btn" data-friend-name=""><!--will need to put php to get friend name or id for here-->
-                            <i class="fas fa-comment text-info"></i>
-                        </button>
-                    </div>
-
-                    <button class="btn btn-sm btn-secondary w-100 mt-3 rounded-pill">View All Friends</button> <!-- need to have button show all friends -->
+                    <button class="btn btn-sm btn-secondary w-100 mt-3 rounded-pill">View All Friends</button>
                 </div>
             </div>
-            <!--end of friends list info cards (right column)-->
-        </div>
-    </div>
-        <!-- end of main container-->
 
-        <!-- FLOATING CHAT BOX UI -->
-    <div id="chatBox" class="chat-box shadow-lg">
-        <!-- Chat Header (Drag Handle) -->
-        <div id="chatHeader" class="chat-header p-2 d-flex justify-content-between align-items-center">
-            <h6 id="chatFriendName" class="mb-0 text-white">Transmitting:</h6>
-            <button id="chatCloseBtn" class="btn-close btn-close-white" aria-label="Close"></button>
-        </div>
+            <!-- end of main container-->
 
-        <!-- Chat Body (Messages) -->
-        <div id="chatBody" class="chat-body p-3">
-            <!-- Messages will be appended here -->
-            <div class="message received">Hi! Ready to code?</div>
-            <div class="message sent">Totally, what project are you working on?</div>
-            <div class="message received">Just trying to implement this chat box!</div>
-        </div>
+            <!-- FLOATING CHAT BOX UI -->
+            <div id="chatBox" class="chat-box shadow-lg">
+                <!-- Chat Header (Drag Handle) -->
+                <div id="chatHeader" class="chat-header p-2 d-flex justify-content-between align-items-center">
+                    <h6 id="chatFriendName" class="mb-0 text-white">Transmitting:</h6>
+                    <button id="chatCloseBtn" class="btn-close btn-close-white" aria-label="Close"></button>
+                </div>
 
-        <!-- Chat Footer (Input) -->
-        <div class="chat-footer d-flex p-2">
-            <input type="text" class="form-control me-2" placeholder="Type a message..." id="chatInput">
-            <button class="btn btn-success" id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-    <!-- END FLOATING CHAT BOX UI -->
+                <!-- Chat Body (Messages) -->
+                <div id="chatBody" class="chat-body p-3">
+                    <!-- Messages will be appended here -->
+                    <div class="message received">Hi! Ready to code?</div>
+                    <div class="message sent">Totally, what project are you working on?</div>
+                    <div class="message received">Just trying to implement this chat box!</div>
+                </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q" crossorigin="anonymous"></script>
-    <script src="/public/js/home.js"></script>
+                <!-- Chat Footer (Input) -->
+                <div class="chat-footer d-flex p-2">
+                    <input type="text" class="form-control me-2" placeholder="Type a message..." id="chatInput">
+                    <button class="btn btn-success" id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+            <!-- END FLOATING CHAT BOX UI -->
+
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+                xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+                xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
+                crossorigin="anonymous"></script>
+            <script src="/public/js/home.js"></script>
 </body>
+
 </html>

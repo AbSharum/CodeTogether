@@ -31,6 +31,29 @@
             return $user;
         }
 
+        public function getFriendUsers(array $friends):array{
+            if (empty($friends)) return [];
+
+            $ids = [];
+            foreach ($friends as $friend) $ids[] = $friend->getFriendID(); 
+            $inClause = "('" . implode("','", $ids) . "')";
+
+            $conn = Database::getConnection();
+            $stmt = $conn->prepare("SELECT * FROM user WHERE user_id in $inClause;");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $users = [];
+            while($row = $result->fetch_assoc()){
+                $user = new User();
+                $user->load($row);
+                $users[] = $user;
+            }
+            $stmt->close();
+            
+            return $users;
+        }
+
+
         public function getUserByName(String $username):User|null{
             $conn = Database::getConnection();
             $stmt = $conn->prepare("SELECT * FROM user WHERE username = ?;");
@@ -45,6 +68,15 @@
             $stmt->close();
             
             return $user;
+        }
+
+        public function updateUserStatus(String $status,int $userID) {
+            $conn = Database::getConnection();
+
+            $stmt = $conn->prepare("UPDATE user SET status = ? WHERE user_id = ?;");
+            $stmt->bind_param("si", $status,$userID);
+            $stmt->execute();
+            $stmt->close();
         }
 
         public function updateUser(User $user):void {
