@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>User Profile</title>
   <link rel="stylesheet" href="/public/css/profile.css">
+
 </head>
 <body>
   <header>
@@ -42,27 +43,8 @@
     </aside>
   </main>
 
-  <img src="images/maid.webp" id="maid" alt="AI assistant">
-  <div id="speech"></div>
-
-  <form id="maidForm">
-    <input type="text" id="maidInput" placeholder="Ask the maid...">
-    <button type="submit">Send</button>
-  </form>
-
-  <div id="personalityMenu">
-    <h3>Select AI Personality</h3>
-    <select id="personalitySelect">
-      <option value="maid">Maid (default)</option>
-      <option value="butler">Butler</option>
-      <option value="scientist">Scientist</option>
-      <option value="gamer">Gamer</option>
-    </select><br><br>
-    <button id="savePersonality">Confirm</button>
-    <button id="closeMenu">Close</button>
-  </div>
-
-  <button id="openMenuBtn">Switch Personality</button>
+  <?php include __DIR__ . '/../ai/aiWidget.php'; ?>
+  <script src="/public/ai/ai.js"></script>
 
   <script src="/public/js/profile.js"></script>
 </body>

@@ -1,0 +1,135 @@
+/* ===== AI Assistant Layout ===== */
+#aiContainer {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  left: auto !important;
+  top: auto !important;
+  width: 340px;
+  text-align: right;
+  z-index: 99999;
+  font-family: sans-serif;
+}
+
+/* Control bar layout */
+#aiControls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+
+/* Character image */
+#aiCharacter {
+  width: 160px;
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#aiCharacter:hover {
+  transform: scale(1.05);
+}
+
+/* Speech bubble */
+#speech {
+  position: absolute;
+  bottom: 300px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px 15px;
+  max-width: 250px;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Form styling */
+#aiForm {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+#aiInput {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+#aiInput:focus {
+  border-color: #4b68ff;
+  box-shadow: 0 0 3px rgba(75, 104, 255, 0.4);
+}
+
+
+#aiForm button {
+  padding: 6px 10px;
+  border: none;
+  background: #4b68ff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#aiForm button:hover {
+  background: #3d58e0;
+}
+
+/* Menu popup */
+#aiPersonalityMenu {
+  display: none;
+  position: absolute;
+  bottom: 200px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+}
+
+/* Switch Personality button */
+#sendBtn {
+  padding: 8px 12px;
+  background: #4b68ff;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+
+#sendBtn:hover {
+  background: #3d58e0;
+}
+
+/* Switch personality button */
+#openMenuBtn {
+  padding: 8px 12px;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  position: relative !important;
+  float: none !important;
+}
+
+#openMenuBtn:hover {
+  background: #ddd;
+}
