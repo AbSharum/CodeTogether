@@ -8,8 +8,8 @@ $question = $input["question"] ?? "";
 $personality = $input["personality"] ?? "maid";
 
 if ($event === "userChat" && $question) {
-    $secretPath = '/run/secrets/openai_api_key';
-    $apiKey = is_readable($secretPath) ? trim(file_get_contents($secretPath)) : null;
+    $apiKey = $apiKey = getenv('OPENAI_API_KEY');
+
     if (!$apiKey) {
         echo json_encode(['error' => 'API key missing or unreadable secret']);
         exit;
