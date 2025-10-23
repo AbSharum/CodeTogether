@@ -39,7 +39,7 @@
             $inClause = "('" . implode("','", $ids) . "')";
 
             $conn = Database::getConnection();
-            $stmt = $conn->prepare("SELECT * FROM user WHERE user_id in $inClause;");
+            $stmt = $conn->prepare("SELECT * FROM user WHERE user_id in $inClause order by username asc;");
             $stmt->execute();
             $result = $stmt->get_result();
             $users = [];
