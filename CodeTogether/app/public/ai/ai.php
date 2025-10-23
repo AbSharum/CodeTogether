@@ -3,6 +3,8 @@ header('Content-Type: application/json');
 
 // Read JSON input
 $input = json_decode(file_get_contents("php://input"), true);
+$customPrompt = trim($input["prompt"] ?? "");
+
 $event = $input["event"] ?? "";
 $question = $input["question"] ?? "";
 $personality = $input["personality"] ?? "maid";
@@ -15,9 +17,11 @@ if ($event === "userChat" && $question) {
         exit;
     }
 
+    
 
-    // Define system prompts (AI "memories") for each personality
+    // Server-side generic ai personalites. These are fallbacks in case the client-side's is null or weird.
     $personalities = [
+        "oracle" => "You are the Oracle from The Matrix. Speak kindly and cryptically, like a patient mentor who already knows the outcome. Offer wisdom through questions and gentle metaphors rather than direct answers.",
         "maid" => "You are a playful maid assistant on a social media profile page. Speak politely, with cheerful tone, calling the user 'master'. Offer witty or kind comments but stay concise.",
         "butler" => "You are a formal butler assistant. Speak with calm precision, addressing the user as 'sir' or 'madam'. Maintain professionalism and efficiency.",
         "scientist" => "You are a logical scientist assistant. You analyze everything methodically and speak in clear, data-driven sentences. Avoid humor, focus on reason.",
@@ -25,7 +29,9 @@ if ($event === "userChat" && $question) {
     ];
 
     // Pick system message
-    $systemPrompt = $personalities[$personality] ?? $personalities["maid"];
+    $systemPrompt = $customPrompt ?: ($personalities[$personality] ?? $personalities["maid"]);
+
+
 
     // Prepare OpenAI request
     $ch = curl_init("https://api.openai.com/v1/chat/completions");

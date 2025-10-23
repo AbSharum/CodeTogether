@@ -198,6 +198,11 @@
             </div>
             <!-- END FLOATING CHAT BOX UI -->
 
+            <!-- AI -->
+            <?php include __DIR__ . '/../ai/aiWidget.php'; ?>
+            <script src="/public/ai/ai.js"></script>
+            <!-- END OF AI -->
+
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
                 xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"
                 crossorigin="anonymous"></script>
