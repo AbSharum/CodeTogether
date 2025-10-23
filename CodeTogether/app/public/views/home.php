@@ -58,8 +58,7 @@
                 <!--profile summary card-->
                 <div class="profile-card text-center mb-4">
                     <!-- if we get some avatar cards stored into the db we can use this just update the img src -->
-                    <img src="https://placehold.co/120x120/4a5568/ffffff?text=U" alt="Profile Avatar"
-                        class="profile-avatar mx-auto d-block">
+                    <img src="https://placehold.co/120x120/4a5568/ffffff?text=<?= substr($data['user']->getUserName(), 0, 1) ?>" alt="Profile Avatar" class="profile-avatar mx-auto d-block">
                     <!--will need to change this info its just a placeholder as well-->
                     <h2 class="mb-0 text-white"><?= htmlspecialchars($data['user']->getUserName()) ?></h2>
                     <!--will need to change this info its just a placeholder as well-->
