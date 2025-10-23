@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<?php
+$user = $data['user'];
+$posts = $data['posts'];
+?>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,26 +57,30 @@
                     <!-- if we get some avatar cards stored into the db we can use this just update the img src -->
                     <img src="https://placehold.co/120x120/4a5568/ffffff?text=U" alt="Profile Avatar" class="profile-avatar mx-auto d-block">
                     <!--will need to change this info its just a placeholder as well-->
-                    <h2 class="mb-0 text-white">John Doe</h2>
-                    <!--will need to change this info its just a placeholder as well-->
-                    <p class="mb-2 text-white">@john_codes_101</p>
-                    <!--will need to change this info its just a placeholder as well-->
-                    <span class="d-block mt-1 text-sm text-info mb-3">📍 Fort Smith, AR</span>
+                    <?php
+                    echo"<h2 class=\"mb-0 text-white\">".$user->getUsername()."</h2>";
+                    #<!--will need to change this info its just a placeholder as well-->
+                    echo"<p class=\"mb-2 text-white\">@".$user->getEmail()."</p>";
+                    #<!--will need to change this info its just a placeholder as well-->
+                    echo"<span class=\"d-block mt-1 text-sm text-info mb-3\">📍 Fort Smith, AR</span>";
 
-                    <!-- Statistics Section if its a cool thing to have or not idk but would need to get the php to pull the db info  -->
-                    <div class="row mt-3">
-                        <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white">100</h3>
-                            <small class="text-white">Game Points</small>
-                        </div>
-                        <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white">4</h3>
-                            <small class="text-white">Friends</small>
-                        </div>
-                        <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white">124</h3>
-                            <small class="text-white">Posts</small>
-                        </div>
+                    #<!-- Statistics Section if its a cool thing to have or not idk but would need to get the php to pull the db info  -->
+                    echo"<div class=\"row mt-3\">";
+                        echo"<div class=\"col-4 stat-item\">";
+                            echo"<h3 class=\"fw-bold mb-0 text-white\">".$user->getPoints()."</h3>";
+                            echo"<small class=\"text-white\">Game Points</small>";
+                        echo"</div>";
+                        echo"<div class=\"col-4 stat-item\">";
+                            echo"<h3 class=\"fw-bold mb-0 text-white\">4</h3>";
+                            echo"<small class=\"text-white\">Friends</small>";
+                        echo"</div>";
+                        echo"<div class=\"col-4 stat-item\">";
+                        #need to be able to call post number. May need to add to the user class or call it from the 
+                        #database and pass a different way
+                            echo"<h3 class=\"fw-bold mb-0 text-white\">124</h3>";
+                            echo"<small class=\"text-white\">Posts</small>";
+                        echo"</div>";
+                        ?>
                     </div>
                 </div>
                 <!--end of profile card-->
