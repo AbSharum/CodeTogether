@@ -31,7 +31,7 @@
             $this->content = $row['content'];
             $this->isDeleted = (bool) $row['is_deleted'];
             $this->isEdited = (bool) $row['is_edited'];
-            $this->sentAt = $row['sent_at'];
+            $this->sentAt = new DateTime($row['sent_at']);
         }
 
         public function jsonSerialize(): array{

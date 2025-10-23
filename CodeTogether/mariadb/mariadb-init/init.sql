@@ -25,7 +25,7 @@ CREATE TABLE user (
 CREATE TABLE friend_list (
     user_id_1 INT,
     user_id_2 INT,
-    status ENUM('friends','not-friends','blocked') DEFAULT 'not-friends',
+    status ENUM('friends','not-friends','blocked','pending') DEFAULT 'not-friends',
     created_on DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id_1, user_id_2),
     FOREIGN KEY (user_id_1) REFERENCES user(user_id)

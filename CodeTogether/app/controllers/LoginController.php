@@ -25,17 +25,24 @@
 
                 $this->userDao = new UserDAO();
                 $this->roleDao = new RoleDAO();
+
+                $checkUserByUsername = !$this->userDao->checkExistingUser($identifier);
+                $checkUserByEmail = !$this->userDao->checkExistingEmail($identifier);
+                $userDoesNotExist = $checkUserByEmail && $checkUserByUsername;
+
+                if ($userDoesNotExist) {
+                    $this->renderView("fancylogin",['error' =>  'No account associated with this user name or email!']);
+                    exit;
+                }
+
                 $result = $this->userDao->authenticate($identifier, $password);
 
-                if ($result !== null) {
-                    $role = $this->roleDao->getUserRole($result);
-                }
-                
 
-                if ($result === null || $role === null) {
-                    $this->renderView("fancylogin",['error' =>  'An account with this username or email does not exist!']);
+                if ($result === null) {
+                    $this->renderView("fancylogin",['error' =>  'The password you entered is incorrect!']);
                     exit;
                 } else {
+                    $role = $this->roleDao->getUserRole($result);
                     $_SESSION['loggedin'] = true;
                     $_SESSION['userID'] = $result->getUserID();
                     $_SESSION['username'] = $result->getUsername();
@@ -46,7 +53,7 @@
             }
         }
 
-        public function renderView(string $view, $data = []): void {
+        public function renderView(string $view, array $data = []): void {
             extract($data);
             include "./public/views/$view.php";
         }

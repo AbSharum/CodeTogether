@@ -3,21 +3,21 @@
     class Chat implements JsonSerializable{
         private int $chatID;
         private string $chatType;
-        private DateTime $lastMessageAt;
-        private DateTime $createdOn;
+        private ?DateTime $lastMessageAt;
+        private ?DateTime $createdOn;
 
         public function __construct(int $chatID=-1, string $chatType='', ?DateTime $lastMessageAt=null, ?DateTime $createdOn=null) {
             $this->chatID = $chatID;
             $this->chatType = $chatType;
-            $this->lastMessageAt = $lastMessageAt;
-            $this->createdOn= $createdOn;
+            $this->lastMessageAt = $lastMessageAt ?? new DateTime();
+            $this->createdOn= $createdOn ?? new DateTime();
         }
 
         public function load(array $row): void {
             $this->chatID = $row['chat_id'];
             $this->chatType = $row['chat_type'];
             $this->lastMessageAt = $row['last_message_at'];
-            $this->createdOn= $row['created_on'];
+            $this->createdOn= new DateTime($row['created_on']);
         }
 
         public function jsonSerialize(): array{

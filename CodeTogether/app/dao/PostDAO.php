@@ -32,7 +32,7 @@
             return $posts;
         }
 
-        public function getPostsByUser($userId): array {
+        public function getPostsByUser(int $userId): array {
             $conn = Database::getConnection();
             $stmt = $conn->prepare("SELECT * FROM post WHERE user_id = ? AND is_deleted = FALSE ORDER BY created_on DESC");
             $stmt->bind_param("i", $userId);
@@ -51,8 +51,37 @@
             return $posts;
         }
 
+        public function getPostsByFriends(array $friends): array {
+            if(empty($friends)) return [];
 
-        public function deletePost($postID): void {
+            $ids = [];
+
+            foreach ($friends as $friend) $ids[] = $friend->getFriendID(); 
+
+
+            $inClause = "('" . implode("','", $ids) . "')";
+
+            
+
+            $conn = Database::getConnection();
+            $stmt = $conn->prepare("SELECT * FROM post WHERE user_id in $inClause AND is_deleted = FALSE ORDER BY created_on DESC");
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $posts = [];
+            while ($row = $result->fetch_assoc()) {
+                $p = new Post();
+                $p->load($row);
+                $posts[] = $p;
+            }
+
+            $stmt->close();
+            
+            return $posts;
+        }
+
+
+        public function deletePost(int $postID): void {
             $conn = Database::getConnection();
             $stmt = $conn->prepare("UPDATE post SET is_deleted = TRUE WHERE post_id = ?");
             $stmt->bind_param("i", $postID);

@@ -13,7 +13,6 @@
             $stmt->bind_param("sssi", $username, $hashedPassword, $email, $roleID);
             $stmt->execute();
             $stmt->close();
-            
         }
 
         public function getUserByID(int $userID):User|null{
@@ -80,12 +79,22 @@
 
         public function checkExistingEmail(string $email):bool {
             $conn = Database::getConnection();
-            $stmt = $conn->prepare("SELECT * FROM user WHERE email = ?;");
+            $stmt = $conn->prepare("SELECT count(*) as cnt FROM user WHERE email = ?;");
             $stmt->bind_param("s", $email);
             $stmt->execute();
-            $result = $stmt->get_result();
+            $result = $stmt->get_result()->fetch_assoc();
             $stmt->close();
-            return !($result->num_rows === 0);
+            return $result['cnt'] > 0;
+        }
+
+        public function checkExistingUser(string $user):bool {
+            $conn = Database::getConnection();
+            $stmt = $conn->prepare("SELECT count(*) as cnt FROM user WHERE username = ?;");
+            $stmt->bind_param("s", $user);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            return $result['cnt'] > 0;
 
         }
 

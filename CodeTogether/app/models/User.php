@@ -10,11 +10,11 @@
         private int $points;
         private bool $isDeleted;
         private string $status;
-        private DateTime $createdOn;
-        private DateTime $latestUpdate;
+        private ?DateTime $createdOn;
+        private ?DateTime $latestUpdate;
         private string $password;
 
-        public function __construct(int $userID=-1, int $roleID=-1, string $username='', int $points=-1, string $status='', string $email='', string $password='', bool $isDeleted=false) {
+        public function __construct(int $userID=-1, int $roleID=-1, string $username='', int $points=-1, string $status='', string $email='', string $password='', bool $isDeleted=false,?DateTime $createdOn=null, ?DateTime $latestUpdate=null) {
             $this->userID = $userID;
             $this->roleID = $roleID;
             $this->username = $username;
@@ -23,6 +23,8 @@
             $this->email = $email;
             $this->password = $password;
             $this->isDeleted = $isDeleted;
+            $this->createdOn = $createdOn ?? new DateTime();
+            $this->latestUpdate = $latestUpdate ?? new DateTime();
         }
 
         public function load(array $row): void {

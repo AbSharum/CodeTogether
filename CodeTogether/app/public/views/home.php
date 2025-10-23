@@ -43,7 +43,6 @@
 
     <div class="container py-5">
         <div class="row justify-content-center">
-
             <!--left column; on lg screen it is 3/12 width-->
             <div class="col-lg-3 mb-4 order-lg-1 order-1">
                 <!--profile summary card-->
@@ -51,24 +50,24 @@
                     <!-- if we get some avatar cards stored into the db we can use this just update the img src -->
                     <img src="https://placehold.co/120x120/4a5568/ffffff?text=U" alt="Profile Avatar" class="profile-avatar mx-auto d-block">
                     <!--will need to change this info its just a placeholder as well-->
-                    <h2 class="mb-0 text-white">John Doe</h2>
+                    <h2 class="mb-0 text-white"><?= htmlspecialchars($data['user']->getUserName())?></h2>
                     <!--will need to change this info its just a placeholder as well-->
-                    <p class="mb-2 text-white">@john_codes_101</p>
+                    <p class="mb-2 text-white"><?= htmlspecialchars($data['user']->getEmail())?></p>
                     <!--will need to change this info its just a placeholder as well-->
                     <span class="d-block mt-1 text-sm text-info mb-3">📍 Fort Smith, AR</span>
 
                     <!-- Statistics Section if its a cool thing to have or not idk but would need to get the php to pull the db info  -->
                     <div class="row mt-3">
                         <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white">100</h3>
+                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars($data['user']->getPoints())?></h3>
                             <small class="text-white">Game Points</small>
                         </div>
                         <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white">4</h3>
+                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['friends']))?></h3>
                             <small class="text-white">Friends</small>
                         </div>
                         <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white">124</h3>
+                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['friendPosts']))?></h3>
                             <small class="text-white">Posts</small>
                         </div>
                     </div>
@@ -95,18 +94,26 @@
             <div class="col-lg-6 mb-4 order-lg-2 order-3">
                 <h3 class="mb-4 text-white">Latest Posts</h3>
                 <!--php integration for posts somewhat complete. I added some fake posts and got them to display, but it could use some work this need comments to show up properly, and the ability to display image/video-->
-                 <?php
-                    for ($index = 0; $index < count($posts); $index++) {
-                        echo "<div class=\"post-card\">";
-                        echo "<p class=\"fw-bold text-white mb-1\">".$posts[$index]->getUsername()."<span class=\"text-text-white fw-normal small\"> ".$posts[$index]->getCreatedOn()->format('Y-m-d H:i')."</span></p>";
-                        echo "<p class=\"mb-2 text-white\">".$posts[$index]->getCaption()."</p>";
-                        echo "<div class=\"d-flex gap-3\">";
-                        echo "<span class=\"text-white\"><i class=\"fas fa-heart text-danger me-1\"></i>".$posts[$index]->getLikes()."</span>";
-                        echo "<span class=\"text-white\"><i class=\"fas fa-comment me-1\"></i> 12</span>";
-                        echo "</div>";
-                        echo "</div>";
-                    }
-                ?>
+                 <?php foreach ($data['friendPosts'] as $post): ?>
+                    <div class="post-card">
+                        <p class="fw-bold text-white mb-1">
+                            <?= htmlspecialchars($post->getUsername()) ?>
+                            <span class="text-text-white fw-normal small">
+                                <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d H:i')) ?>
+                            </span>
+                        </p>
+                        <p class="mb-2 text-white"><?= htmlspecialchars($post->getCaption()) ?></p>
+                        <div class="d-flex gap-3">
+                            <span class="text-white">
+                                <i class="fas fa-heart text-danger me-1"></i>
+                                <?= htmlspecialchars($post->getLikes()) ?>
+                            </span>
+                            <span class="text-white">
+                                <i class="fas fa-comment me-1"></i> 12
+                            </span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
             <!-- End Posts Feed (middle column) -->
 

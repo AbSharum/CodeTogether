@@ -4,18 +4,18 @@
     class Thread implements JsonSerializable{
         private int $threadID;
         private string $title;
-        private DateTime $createdOn;
+        private ?DateTime $createdOn;
     
         public function __construct(int $threadID=-1, string $title='', ?DateTime $createdOn=null) {
             $this->threadID = $threadID;
             $this->title = $title;
-            $this->createdOn = $createdOn;
+            $this->createdOn = $createdOn ?? new DateTime();
         }
     
         public function load(array $row): void {
             $this->threadID = $row['thread_id'];
             $this->title = $row['title'];
-            $this->createdOn = $row['created_on'];
+            $this->createdOn = new DateTime($row['created_on']);
         }
     
         public function jsonSerialize(): array{

@@ -7,7 +7,7 @@
         private int $postID;
         private string $contents;
         private bool $isDeleted;
-        private DateTime $createdOn;
+        private ?DateTime $createdOn;
 
         public function __construct(int $commentID=-1, int $userID=-1, int $postID=-1, bool $isDeleted=false, ?DateTime $createdOn = null, string $contents = '') {
             $this->commentID = $commentID;
@@ -16,7 +16,7 @@
             $this->isDeleted = $isDeleted;
             $this->createdOn = $createdOn;
             $this->contents = $contents;
-            $this->createdOn = $createdOn;
+            $this->createdOn = $createdOn ?? new DateTime();
         }
 
         public function load(array $row): void {
@@ -25,7 +25,7 @@
             $this->postID = $row['post_id'];
             $this->contents = $row['contents'];
             $this->isDeleted = $row['is_deleted'];
-            $this->createdOn = $row['created_on'];
+            $this->createdOn = new DateTime($row['created_on']);
         }
 
         public function jsonSerialize(): array{

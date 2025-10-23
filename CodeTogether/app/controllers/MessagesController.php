@@ -11,7 +11,7 @@
             }
         }
 
-        public function renderView(string $view, $messages = []): void {
+        public function renderView(string $view, array $data = []): void {
             include "./public/views/$view.php";
         }
     }

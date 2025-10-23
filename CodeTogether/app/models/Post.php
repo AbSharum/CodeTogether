@@ -11,10 +11,10 @@
         private string $caption;
         private string $visibility;
         private bool $isDeleted;
-        private DateTime $createdOn;
-        private DateTime $latestUpdate;
+        private ?DateTime $createdOn;
+        private ?DateTime $latestUpdate;
 
-        public function __construct(int $postID=-1,int $userID=-1, string $username='', int $threadID=-1,string $contents='',string $caption='',string $visibility='',bool $is_deleted=false) {
+        public function __construct(int $postID=-1,int $userID=-1, string $username='', int $threadID=-1,string $contents='',string $caption='',string $visibility='',bool $is_deleted=false, ?DateTime $createdOn=null, ?DateTime $latestUpdate=null) {
             $this->postID = $postID;
             $this->userID = $userID;
             $this->username = $username;
@@ -24,6 +24,8 @@
             $this->visibility = $visibility;
             $this->likes = 0;
             $this->isDeleted = $is_deleted;
+            $this->createdOn = $createdOn ?? new DateTime();
+            $this->latestUpdate = $latestUpdate ?? new DateTime();
         }
 
         public function load(array $row):void {

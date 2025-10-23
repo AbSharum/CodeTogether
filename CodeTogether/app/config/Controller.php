@@ -7,7 +7,7 @@
             return;
         }
 
-        public function renderView(string $view,$data=[]): void{
+        public function renderView(string $view,array $data=[]): void{
 
             include "./template/template.php";
         }
