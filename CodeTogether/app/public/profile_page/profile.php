@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>User Profile</title>
-  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="/public/css/profile.css">
 </head>
 <body>
   <header>
@@ -64,6 +64,6 @@
 
   <button id="openMenuBtn">Switch Personality</button>
 
-  <script src="profile.js"></script>
+  <script src="/public/js/profile.js"></script>
 </body>
 </html>

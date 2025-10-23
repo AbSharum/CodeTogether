@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function askMaid(question) {
     try {
-      const res = await fetch('maid.php', {
+      const res = await fetch('/public/ai/ai.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ event: 'userChat', question, personality: currentPersonality })

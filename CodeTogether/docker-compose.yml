@@ -14,8 +14,6 @@ services:
       - mariadb
     networks:
       - app-network
-    secrets:
-      - openai_api_key
 
   mariadb:
     image: mariadb:latest
@@ -37,6 +35,3 @@ networks:
   app-network:
     driver: bridge
 
-secrets:
-  openai_api_key:
-    file: C:\secrets\openai_api_key.txt
