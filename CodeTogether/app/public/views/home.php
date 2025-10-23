@@ -27,6 +27,13 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <form class="d-flex flex-grow-1 mx-3" role="search" action="index.php?action=search" method="get">
+                <input class="form-control form-control-sm me-2 bg-dark text-white border-success"
+                    type="search" name="q" placeholder="Search users or posts..." aria-label="Search">
+                <button class="btn btn-outline-success btn-sm" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item" id="home-nav-item">
