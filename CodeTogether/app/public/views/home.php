@@ -45,6 +45,12 @@
                         <a class="nav-link text-white" href="index.php?action=accountSettings"><i
                                 class="fas fa-cog me-1"></i> Account Settings</a> <!--need to verify correct paths -->
                     </li>
+                    <li class="nav-item" id="login-nav-item">
+                        <a class="nav-link text-white" href="index.php?action=login"><i class="fa fa-sign-in" style="color: blue"></i> Login</a> <!--need to actually log user out-->
+                    </li>
+                    <li class="nav-item" id="logout-nav-item">
+                        <a class="nav-link text-white" href="#"><i class="fa fa-sign-out" style="color: red"></i>Logout</a> <!--need to actually log user out-->
+                    </li>
                 </ul>
             </div>
         </div>
