@@ -19,7 +19,7 @@
 <body>
     <canvas id="matrix-canvas"></canvas>
     <!--NavBar-->
-    <?php include 'navbar.php'; ?>
+    <?php include __DIR__ .'/../includes/navbar.php'; ?>
     <!--end of navigation-->
 
     <div class="container py-5">

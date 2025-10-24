@@ -14,6 +14,7 @@
     include_once __DIR__ . "/controllers/AccountSettingsController.php";
     include_once __DIR__ . "/controllers/MessagesController.php";
     include_once __DIR__ . "/controllers/NotFoundController.php";
+    include_once __DIR__ . "/controllers/LandingController.php";
 
 
     class MyRouter extends Router {
@@ -27,7 +28,7 @@
             if ($controller) {
                 $access = $controller->getAuth();
                 if ($access != "PUBLIC" && !isset($_SESSION['loggedin'])) {
-                    header("Location: index.php?action=login");
+                    header("Location: index.php?action=landing");
                     exit;
                 }
             }
@@ -46,9 +47,10 @@
     $router->addController('accountSettings', new AccountSettingsController());
     $router->addController('messages', new MessagesController());
     $router->addController('404', new NotFoundController());
+    $router->addController('landing',new LandingController());
 
     # Register default controller (used when no action is specified)
-    $router->addController('default', new LoginController()); 
+    $router->addController('default', new LandingController()); 
 
     # Run router
     $router->run();
