@@ -38,8 +38,7 @@
                      deep the rabbit hole goes."" 
                 </div>
                 <div class="mb-3">
-                    <button class="LogInButton">Rabbit Hole</button>
-                    <button class="DoNothingButton">Leave</button>
+                    <button class="LogInButton" onclick="window.location.href='index.php?action=login'">Rabbit Hole</button>
                 </div>
             </div>
         </div>

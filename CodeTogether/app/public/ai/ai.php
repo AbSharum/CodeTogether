@@ -5,12 +5,13 @@ header('Content-Type: application/json');
 $input = json_decode(file_get_contents("php://input"), true);
 $customPrompt = trim($input["prompt"] ?? "");
 
+
 $event = $input["event"] ?? "";
 $question = $input["question"] ?? "";
 $personality = $input["personality"] ?? "maid";
 
 if ($event === "userChat" && $question) {
-    $apiKey = $apiKey = getenv('OPENAI_API_KEY');
+    $apiKey = getenv('OPENAI_API_KEY');
 
     if (!$apiKey) {
         echo json_encode(['error' => 'API key missing or unreadable secret']);

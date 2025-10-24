@@ -14,13 +14,13 @@ session_start();
 //}
 
 // Temporary override for the Alice user, we can remove this once we get individual logins working
-if (!isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = 1; 
+if (!isset($_SESSION['usercreds']['userID'])) {
+    $_SESSION['usercreds']['userID'] = 1; 
 }
 
 
 
-$userId = (int)$_SESSION['user_id'];
+$userId = (int)$_SESSION['usercreds']['userID'];
 
 try {
     $dao = new ProfileDAO();

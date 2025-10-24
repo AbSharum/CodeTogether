@@ -15,7 +15,7 @@
                 $this->friendDao = new FriendListDAO();
                 $this->userDao = new UserDAO();
 
-                $userID = $_SESSION['userID'];
+                $userID = $_SESSION['usercreds']['userID'];
                 $user = $this->userDao->getUserByID($userID);
                 $friends = $this->friendDao->getFriends($userID);
                 $friendPosts = $this->postDao->getPostsByFriends($friends);

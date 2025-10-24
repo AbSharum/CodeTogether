@@ -15,32 +15,17 @@
     include_once __DIR__ . "/controllers/MessagesController.php";
     include_once __DIR__ . "/controllers/NotFoundController.php";
     include_once __DIR__ . "/controllers/LandingController.php";
+    include_once __DIR__ . "/controllers/LogoutController.php";
 
 
-    class MyRouter extends Router {
-        public function authCheck($action): void {
-            if (!isset($this->controllers[$action])) {
-                $action = 'default';
-            }
-
-            $controller = $this->controllers[$action];
-
-            if ($controller) {
-                $access = $controller->getAuth();
-                if ($access != "PUBLIC" && !isset($_SESSION['loggedin'])) {
-                    header("Location: index.php?action=landing");
-                    exit;
-                }
-            }
-        }
-    }
 
     # Create router instance
-    $router = new MyRouter();
+    $router = new Router();
     $router->showErrors(1);
 
     # Register controllers
     $router->addController('login', new LoginController());
+    $router->addController('logout', new LogoutController());
     $router->addController('createAccount', new CreateAccountController());
     $router->addController('social-feed', new SocialFeedController());
     $router->addController('home', new HomeController());

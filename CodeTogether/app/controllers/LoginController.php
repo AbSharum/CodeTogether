@@ -44,10 +44,13 @@
                 } else {
                     $role = $this->roleDao->getUserRole($result);
                     $_SESSION['loggedin'] = true;
-                    $_SESSION['userID'] = $result->getUserID();
-                    $_SESSION['username'] = $result->getUsername();
-                    $_SESSION['role'] = $role->getRoleName();
-                    $this->userDao->updateUserStatus('online',$_SESSION['userID']);
+                    $_SESSION['usercreds'] = [
+                        'userID' => $result->getUserID(),
+                        'username' => $result->getUsername(),
+                        'role' => $role->getRoleName()
+                    ];
+
+                    $this->userDao->updateUserStatus('online',$_SESSION['usercreds']['userID']);
                     header('Location: index.php?action=home');
                     exit;
                 }
