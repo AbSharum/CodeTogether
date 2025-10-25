@@ -153,5 +153,27 @@
             return $user;
         }
 
+
+        public function searchUsersByName(string $searchTerm): array {
+            $conn = Database::getConnection();
+
+            $stmt = $conn->prepare("SELECT * FROM user WHERE username LIKE CONCAT('%', ?, '%');");
+            $stmt->bind_param("s", $searchTerm);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            $users = [];
+
+            
+            while ($row = $result->fetch_assoc()) {
+                $user = new User();
+                $user->load($row);
+                $users[] = $user;
+            }
+
+            $stmt->close();
+
+            return $users;
+        }
     }
 ?>

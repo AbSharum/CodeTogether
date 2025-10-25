@@ -84,5 +84,27 @@
             $stmt->close();
             
         }
+
+         public function searchPostsByTerm(string $searchTerm): array {
+            $conn = Database::getConnection();
+
+            
+            $stmt = $conn->prepare("SELECT * FROM post WHERE caption LIKE CONCAT('%', ?, '%');");
+            $stmt->bind_param("s", $searchTerm);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            $posts = [];
+
+            while ($row = $result->fetch_assoc()) {
+                $post = new Post();
+                $post->load($row);
+                $posts[] = $post;
+            }
+
+            $stmt->close();
+
+            return $posts; // Return an array of post objects
+        }
     }
 ?>

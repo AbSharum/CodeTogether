@@ -8,6 +8,17 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
+                     <form class="d-flex w-25" role="search" action="index.php?action=search" method="POST">
+                        <input class="form-control me-2 w-100"
+                            type="search"
+                            name="search"
+                            placeholder="Search..."
+                            aria-label="Search">
+
+                        <button class="btn btn-outline-success" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
                     <li class="nav-item" id="home-nav-item">
                         <a class="nav-link text-white" href="index.php?action=home"><i class="fas fa-home me-1"></i>
                             Home</a> <!--need to verify correct paths -->
