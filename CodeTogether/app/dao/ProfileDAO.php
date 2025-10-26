@@ -19,19 +19,18 @@ class ProfileDAO {
     }
 
     public function getFollowerCount(int $userId): int {
-        $stmt = $this->conn->prepare("SELECT COUNT(*) AS followers FROM friend_list WHERE user_id_2 = ? AND status = 'friends'");
-        $stmt->bind_param("i", $userId);
+        $stmt = $this->conn->prepare(
+            "SELECT 
+                COUNT(*) AS friends
+            FROM friend_list
+            WHERE 
+                (user_id_1 = ? OR user_id_2 = ?)
+            AND 
+                status = 'friends';"
+        );
+        $stmt->bind_param("ii", $userId, $userId);
         $stmt->execute();
-        $count = $stmt->get_result()->fetch_assoc()['followers'] ?? 0;
-        $stmt->close();
-        return (int)$count;
-    }
-
-    public function getFollowingCount(int $userId): int {
-        $stmt = $this->conn->prepare("SELECT COUNT(*) AS following FROM friend_list WHERE user_id_1 = ? AND status = 'friends'");
-        $stmt->bind_param("i", $userId);
-        $stmt->execute();
-        $count = $stmt->get_result()->fetch_assoc()['following'] ?? 0;
+        $count = $stmt->get_result()->fetch_assoc()['friends'] ?? 0;
         $stmt->close();
         return (int)$count;
     }

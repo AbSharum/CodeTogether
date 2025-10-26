@@ -148,13 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
           .join('');
       }
 
-      const followersDiv = document.getElementById('followers');
-      if (followersDiv && data.followers !== undefined)
-        followersDiv.textContent = data.followers;
-
-      const followingDiv = document.getElementById('following');
-      if (followingDiv && data.following !== undefined)
-        followingDiv.textContent = data.following;
+      const friendsDiv = document.getElementById('friends');
+      if (friendsDiv) {
+        friendsDiv.textContent = data.friends || 0;
+      }
     } catch (err) {
       console.error('Error loading profile:', err);
     }

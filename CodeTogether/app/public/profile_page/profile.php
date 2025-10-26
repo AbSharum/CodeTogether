@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>User Profile</title>
+  
   <link rel="stylesheet" href="/public/css/profile.css">
-
   <!--bootsrap-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Font - Inter -->
@@ -52,8 +52,7 @@
 
       <p><strong>Location:</strong> <span id="location"></span></p>
       <p><strong>Joined:</strong> <span id="joined"></span></p>
-      <p><strong>Followers:</strong> <span id="followers"></span> | 
-         <strong>Following:</strong> <span id="following"></span></p>
+      <p><strong>Friends:</strong> <span id="friends"></span> | 
       <button type="button" class="btn btn-add">Add Friend</button>
       <button type="button" class="btn btn-add">Delete Friend</button>
       
