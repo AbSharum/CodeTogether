@@ -103,8 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Handle resize events to keep the canvas full-screen and responsive
             window.addEventListener('resize', setCanvasSize);
 
+            //coundown timer logic
 const timerElement = document.getElementById('countdown-timer');
     let totalSeconds = 15 * 60; // 15 minutes in seconds
+    let countdownInterval = null;
+    let isTimerRunning = false;
 
     function updateCountdown() {
         const minutes = Math.floor(totalSeconds / 60);
@@ -124,11 +127,22 @@ const timerElement = document.getElementById('countdown-timer');
         }
     }
 
+    function startTimer(){
+        if(isTimerRunning) return;
+
+        isTimerRunning = true;
+        updateCountdown();
+        countdownInterval = setInterval(updateCountdown, 1000);
+
+        //makes the timer appearnace indicate it is active/non-clickable
+        timerElement.ELEMENT_NODE.style.cursor = 'default';
+        timerElement.ELEMENT_NODE.style.boxShadow = 'none';
+    }
+
     // Call updateCountdown immediately to show initial time
     updateCountdown(); 
 
-    // Update the countdown every second
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    timerElement.addEventListener('click', startTimer);
 });
 
  

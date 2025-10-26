@@ -109,7 +109,7 @@ class FriendListDAO {
             WHERE 
                 (user_id_1 = ? OR user_id_2 = ?)
             AND 
-                status = 'friends'
+                (status = 'friends' OR status = 'pending')
         ");
         $stmt->bind_param("iii", $userID, $userID, $userID);
         $stmt->execute();
