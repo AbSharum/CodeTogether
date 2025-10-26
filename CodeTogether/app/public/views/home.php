@@ -119,8 +119,10 @@
                             $statusText = 'Away';
                         }
                         ?>
+                        <!-- href="index.php?action=accountSettings" --> 
+                         <!-- href="public/profile_page/profile.php?user_id=<?= $friendUser->getUserID(); ?>" -->
                         <div class="friend-item d-flex align-items-center mb-2">
-                            <a href="public/profile_page/profile.php?user_id=<?= $friendUser->getUserID(); ?>" class="d-flex align-items-center text-decoration-none flex-grow-1">
+                            <a href="index.php?action=profile&user_id=<?= $friendUser->getUserID(); ?>" class="d-flex align-items-center text-decoration-none flex-grow-1">
                                 <img src="https://placehold.co/40x40/<?= $imageColor ?>/ffffff?text=<?= substr($friendUser->getUserName(), 0, 1) ?>"
                                     alt="Friend Avatar"
                                     class="friend-avatar me-2 rounded-circle">
@@ -169,8 +171,8 @@
             <!-- END FLOATING CHAT BOX UI -->
 
             <!-- AI -->
-            <?php include __DIR__ . '/../ai/aiWidget.php'; ?>
-            <script src="/public/ai/ai.js"></script>
+            <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
+            <script src="/public/js/ai.js"></script>
             <!-- END OF AI -->
 
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

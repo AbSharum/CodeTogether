@@ -1,52 +1,59 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE);
-ini_set('display_errors', 0);
+    declare(strict_types=1);
 
-header('Content-Type: application/json');
+    include_once __DIR__ . "/../dao/UserDAO.php";
+    include_once __DIR__ . "/../dao/PostDAO.php";
+    include_once __DIR__ . "/../dao/FriendListDAO.php";
 
-require_once __DIR__ . '/../dao/ProfileDAO.php';
-session_start();
+    class ProfileController extends Controller {
+        private UserDAO $userDao;
+        private PostDAO $postDao;
+        private FriendListDAO $friendDao;
+
+        public function performAction(): void {
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $this->userDao = new UserDAO();
+                $this->postDao = new PostDAO();
+                $this->friendDao = new FriendListDAO();
 
 
-if (!isset($_SESSION['usercreds']['userID'])) {
-    $_SESSION['usercreds']['userID'] = 1; //fallback user is Alice
-}
+                $userID = isset($_GET['user_id']) ? (int)$_GET['user_id'] : ($_SESSION['usercreds']['userID'] ?? 0);
+                if ($userID <= 0) {
+                    http_response_code(400);
+                    echo "Invalid or missing user ID.";
+                    return;
+                }
 
 
-if (isset($_GET['user_id']) && is_numeric($_GET['user_id'])) {
-    $userId = (int)$_GET['user_id']; //viewing someone else's profile
-} else {
-    $userId = (int)$_SESSION['usercreds']['userID']; //viewing your own profile
-}
+                $user = $this->userDao->getUserByID($userID);
+                if (!$user) {
+                    http_response_code(404);
+                    echo "User not found.";
+                    return;
+                }
 
-try {
-    $dao = new ProfileDAO();
-    error_log("DEBUG userId: " . $userId);//Getting the id of the viewed user, just a debugging measure
-    $user = $dao->getUserData($userId);
 
-    if (!$user) {
-        http_response_code(404);
-        echo json_encode(['error' => 'User not found']);
-        exit;
+                $posts = $this->postDao->getPostsByUser($userID);
+                //$followers = $this->friendDao->getFollowers($userID);
+                //$following = $this->friendDao->getFollowing($userID);
+                $friends = $this->friendDao->getFriends($userID);
+                $friendsUser = $this->userDao->getFriendUsers($friends);
+
+                $this->renderView("profile", [
+                    'user' => $user,
+                    'posts' => $posts,
+                    //'followers' => $followers,
+                    //'following' => $following,
+                    'friends' => $friends,
+                    'friendsUser' => $friendsUser
+                ]);
+                return;
+            }
+        }
+
+        public function renderView(string $view, array $data = []): void {
+            extract($data);
+            include "./public/views/$view.php";
+        }
     }
-
-    $friends = $dao->getFollowerCount($userId);
-    $posts = $dao->getUserPosts($userId);
-
-    echo json_encode([
-        'username' => $user['username'],
-        'points' => $user['points'],
-        'status' => $user['status'],
-        'profilePic' => '/uploads/default.png',
-        'friends' => $friends,
-        'posts' => array_map(fn($p) => $p->jsonSerialize(), $posts)
-    ]);
-} catch (Throwable $e) {
-    http_response_code(500);
-    echo json_encode([
-        'error' => 'Server error',
-        'details' => $e->getMessage(),
-        'trace' => $e->getTraceAsString()
-    ]);
-}
 ?>

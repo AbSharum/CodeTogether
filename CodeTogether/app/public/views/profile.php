@@ -56,8 +56,8 @@
   </main>
 
   
-  <?php include __DIR__ . '/../ai/aiWidget.php'; ?>
-  <script src="/public/ai/ai.js"></script>
+  <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
+  <script src="/public/js/ai.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
     crossorigin="anonymous"></script>

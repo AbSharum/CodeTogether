@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="/public/ai/ai.css">
+<link rel="stylesheet" href="/public/css/ai.css">
 <div id="aiContainer">
-  <img src="/public/ai/images/maid.webp" id="aiCharacter" alt="AI assistant">
+  <img src="/public/images/maid.webp" id="aiCharacter" alt="AI assistant">
   <div id="speech"></div>
 
   <!-- unified control bar -->

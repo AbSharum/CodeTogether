@@ -79,13 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === Personality-specific images ===
   const personalityImages = {
-    oracle: '/public/ai/images/TheOracle.webp',
-    maid: '/public/ai/images/maid.webp',
-    agentsmith: '/public/ai/images/AgentSmith.webp',
-    butler: '/public/ai/images/butler.webp',
-    scientist: '/public/ai/images/scientist.webp',
-    gamer: '/public/ai/images/gamer.webp',
-    default: '/public/ai/images/default_ai.webp'
+    oracle: '/public/images/TheOracle.webp',
+    maid: '/public/images/maid.webp',
+    agentsmith: '/public/images/AgentSmith.webp',
+    butler: '/public/images/butler.webp',
+    scientist: '/public/images/scientist.webp',
+    gamer: '/public/images/gamer.webp',
+    default: '/public/images/default_ai.webp'
   };
 
   // === Helpers ===
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const prompt = personalityPrompts[currentPersonality] || personalityPrompts.default;
 
-      const res = await fetch('/public/ai/ai.php', {
+      const res = await fetch('/public/includes/ai.php', {
       method: 'POST',
         headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

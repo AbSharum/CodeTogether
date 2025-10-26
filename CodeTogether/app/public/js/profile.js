@@ -63,62 +63,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* main animation drawing function */
   const draw = () => {
-      // Fading effect: Draw a semi-transparent black rectangle over the previous frame
       context.fillStyle = 'rgba(0, 0, 0, 0.07)';
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      context.fillStyle = '#0F0'; // Green text color
+      context.fillStyle = '#0F0';
       context.font = `${fontSize}px monospace`; 
 
       for (let i = 0; i < drops.length; i++) {
-          // Use the drop's vertical position (drops[i]) modulo sequence length to pick the character
           const charIndex = Math.floor(Math.random() * characters.length);
           const text = characters[charIndex];
 
-          // Draw the character
           context.fillText(text, i * fontSize, drops[i] * fontSize);
 
-          // Check if the drop has fallen off the screen
           if (drops[i] * fontSize > canvas.height) {
-              // Reset to 0 immediately to ensure a continuous, gapless flow
               drops[i] = 0;
           }
           
-          // Increment the drop position
           drops[i]++;
       }
   };
 
-  // Using requestAnimationFrame for smoother animation transition
-  const interval = 60; // Speed control (in milliseconds), about 16.6 FPS
+  const interval = 60; 
   let lastTime = 0;
 
   function animate(timestamp) {
       animationFrameId = requestAnimationFrame(animate);
       const elapsed = timestamp - lastTime;
 
-      // Control the update rate using the 'interval'
       if (elapsed > interval) {
-          // Adjust lastTime to keep the animation synced despite frame drops
           lastTime = timestamp - (elapsed % interval);
           draw();
       }
   }
   
-  // Set up initial size and start the loop once the DOM is ready
+
   setCanvasSize();
 
-  // Handle resize events to keep the canvas full-screen and responsive
+
   window.addEventListener('resize', setCanvasSize);
 
-  // --- used to detect ?user_id= in the URL (For checking out other people's pages!) ---
+
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get('user_id');
+  //const profileUrl = userId
+  //  ? `/controllers/ProfileController.php?user_id=${encodeURIComponent(userId)}`
+  //  : '/controllers/ProfileController.php';
   const profileUrl = userId
-    ? `/controllers/ProfileController.php?user_id=${encodeURIComponent(userId)}`
-    : '/controllers/ProfileController.php';
+    ? `/index.php?action=profile&user_id=${encodeURIComponent(userId)}`
+    : '/index.php?action=profile';
 
-  // --- Initial username fetch ---
+
+
   fetch(profileUrl)
     .then(res => res.json())
     .then(data => {
@@ -127,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error('Error loading username:', err));
 
-  // --- Function to load profile ---
+
   async function loadProfile() {
     try {
       const res = await fetch(profileUrl);
@@ -157,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Event handlers for updating logged-in user only ---
+ 
   const saveBioBtn = document.getElementById('saveBio');
   if (saveBioBtn) {
     saveBioBtn.addEventListener('click', async () => {

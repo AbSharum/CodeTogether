@@ -17,6 +17,7 @@
     include_once __DIR__ . "/controllers/LogoutController.php";
     include_once __DIR__ . "/controllers/SearchController.php";
     include_once __DIR__ . "/controllers/GameController.php";
+    include_once __DIR__ . "/controllers/ProfileController.php";
 
 
 
@@ -35,6 +36,7 @@
     $router->addController('landing',new LandingController());
     $router->addController('search',new SearchController());
     $router->addController('game',new GameController());
+    $router->addController('profile',new ProfileController());
 
     # Register default controller (used when no action is specified)
     $router->addController('default', new LandingController()); 
