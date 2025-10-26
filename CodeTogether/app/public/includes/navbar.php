@@ -7,6 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
                 <form class="d-flex w-100 w-lg-auto me-lg-3" style="max-width: 300px;" role="search" action="index.php?action=search" method="POST">
                     <input class="form-control me-2 w-100"
                         type="search"
@@ -17,7 +18,7 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
-                    <ul class="navbar-nav">
+                    
                     <li class="nav-item" id="home-nav-item">
                         <a class="nav-link text-white" href="index.php?action=home"><i class="fas fa-home me-1"></i>
                             Home</a> <!--need to verify correct paths -->

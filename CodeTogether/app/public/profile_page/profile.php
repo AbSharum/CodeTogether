@@ -40,6 +40,9 @@
       <p><strong>Joined:</strong> <span id="joined"></span></p>
       <p><strong>Followers:</strong> <span id="followers"></span> | 
          <strong>Following:</strong> <span id="following"></span></p>
+      <button type="button" class="btn btn-add">Add Friend</button>
+      <button type="button" class="btn btn-add">Delete Friend</button>
+      
     </aside>
   </main>
 

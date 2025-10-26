@@ -164,3 +164,24 @@ body {
 .avatar {
   border-radius: 50%;
 }
+
+.btn-add {
+   --tw-bg-opacity: 1; /* utility variable for background opacity */
+    background-color: #0c0; /*background color */
+    color: #000; /* black text */
+    padding: 0.75rem 1.5rem; /*padding inside button */
+    border-radius: 0.25rem; /* rounded corners */
+    border: none; /* no border */
+    cursor: pointer; /*changes the cursor on hover */
+    transition: all 0.3s; /* smooth transition on hover */
+}
+.btn-delete{
+   --tw-bg-opacity: 1; /* utility variable for background opacity */
+    background-color: #0c0; /*background color */
+    color: #000; /* black text */
+    padding: 0.75rem 1.5rem; /*padding inside button */
+    border-radius: 0.25rem; /* rounded corners */
+    border: none; /* no border */
+    cursor: pointer; /*changes the cursor on hover */
+    transition: all 0.3s; /* smooth transition on hover */
+}
