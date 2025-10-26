@@ -11,6 +11,7 @@
 
             if (isset($_SESSION['usercreds']) || !empty($_SESSION['usercreds']['userID'])) {
                 $this->userDao->updateUserStatus('offline',$_SESSION['usercreds']['userID']);
+                $_SESSION = [];
                 session_destroy();
                 $this->renderView('landing');
             } else {

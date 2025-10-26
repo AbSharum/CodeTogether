@@ -18,7 +18,6 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
-                    
                     <li class="nav-item" id="home-nav-item">
                         <a class="nav-link text-white" href="index.php?action=home"><i class="fas fa-home me-1"></i>
                             Home</a> <!--need to verify correct paths -->
