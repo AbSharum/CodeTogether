@@ -1,14 +1,12 @@
 /* ===== AI Assistant Layout ===== */
 #aiContainer {
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  left: auto !important;
-  top: auto !important;
-  width: 340px;
-  text-align: right;
-  z-index: 99999;
-  font-family: sans-serif;
+  display: flex;
+  background-color: rgba(45, 55, 72, 0.95);
+  border-radius: 0.75rem;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-left: 5px solid #06a342;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Control bar layout */
@@ -44,7 +42,7 @@
   padding: 10px 15px;
   max-width: 250px;
   color: #333;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
   opacity: 0;
   transition: opacity 0.4s ease;
   font-size: 0.9rem;
@@ -64,27 +62,27 @@
   flex: 1;
   padding: 8px 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #06a342;
   font-size: 0.9rem;
 }
 
 #aiInput:focus {
-  border-color: #4b68ff;
-  box-shadow: 0 0 3px rgba(75, 104, 255, 0.4);
+  border-color: #06a342;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
 }
 
 
 #aiForm button {
   padding: 6px 10px;
   border: none;
-  background: #4b68ff;
+  background: #4a5568;
   color: white;
   border-radius: 4px;
   cursor: pointer;
 }
 
 #aiForm button:hover {
-  background: #3d58e0;
+  background: #4a5568;
 }
 
 /* Menu popup */
@@ -104,7 +102,7 @@
 /* Switch Personality button */
 #sendBtn {
   padding: 8px 12px;
-  background: #4b68ff;
+  background: #4a5568;
   border: none;
   color: #fff;
   border-radius: 6px;
@@ -120,8 +118,8 @@
 /* Switch personality button */
 #openMenuBtn {
   padding: 8px 12px;
-  background: #eee;
-  border: 1px solid #ccc;
+  background: #fff;
+  border: 1px solid #000;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -131,5 +129,5 @@
 }
 
 #openMenuBtn:hover {
-  background: #ddd;
+  background: #4a5568;
 }

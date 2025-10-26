@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5"
       crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/public/css/home.css">
+  <link rel="stylesheet" href="/public/css/profile.css">
 
 </head>
 <body>
@@ -60,6 +60,9 @@
     </aside>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+                xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
+                crossorigin="anonymous"></script>
   <?php include __DIR__ . '/../ai/aiWidget.php'; ?>
   <script src="/public/ai/ai.js"></script>
 

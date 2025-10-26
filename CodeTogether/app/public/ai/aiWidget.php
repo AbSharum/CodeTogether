@@ -6,7 +6,7 @@
   <!-- unified control bar -->
   <div id="aiControls">
     <form id="aiForm">
-      <input type="text" id="aiInput" placeholder="Ask your AI...">
+      <input type="text" id="aiInput" placeholder="Ask your Question...">
       <button type="submit" id="sendBtn">Send</button>
     </form>
 
