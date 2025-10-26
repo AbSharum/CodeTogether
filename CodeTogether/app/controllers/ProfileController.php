@@ -7,23 +7,21 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/../dao/ProfileDAO.php';
 session_start();
 
-//if (!isset($_SESSION['user_id'])) {
-//    http_response_code(401);
-//    echo json_encode(['error' => 'Not logged in']);
-//    exit;
-//}
 
-// Temporary override for the Alice user, we can remove this once we get individual logins working
 if (!isset($_SESSION['usercreds']['userID'])) {
-    $_SESSION['usercreds']['userID'] = 1; 
+    $_SESSION['usercreds']['userID'] = 1; //fallback user is Alice
 }
 
 
-
-$userId = (int)$_SESSION['usercreds']['userID'];
+if (isset($_GET['user_id']) && is_numeric($_GET['user_id'])) {
+    $userId = (int)$_GET['user_id']; //viewing someone else's profile
+} else {
+    $userId = (int)$_SESSION['usercreds']['userID']; //viewing your own profile
+}
 
 try {
     $dao = new ProfileDAO();
+    error_log("DEBUG userId: " . $userId);//Getting the id of the viewed user, just a debugging measure
     $user = $dao->getUserData($userId);
 
     if (!$user) {
@@ -45,15 +43,12 @@ try {
         'following' => $following,
         'posts' => array_map(fn($p) => $p->jsonSerialize(), $posts)
     ]);
-} //catch (Throwable $e) {
-    //http_response_code(500);
-    //echo json_encode(['error' => 'Server error']);
-    catch (Throwable $e) {
-        http_response_code(500);
-        echo json_encode([
-            'error' => 'Server error',
-            'details' => $e->getMessage(),
-            'trace' => $e->getTraceAsString()
-        ]);
+} catch (Throwable $e) {
+    http_response_code(500);
+    echo json_encode([
+        'error' => 'Server error',
+        'details' => $e->getMessage(),
+        'trace' => $e->getTraceAsString()
+    ]);
 }
 ?>

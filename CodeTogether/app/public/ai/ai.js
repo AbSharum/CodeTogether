@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'I’m just a humble maid, but I think you look cool today.'
     ],
     agentsmith: [
-      'Human beings are a disease, a cancer of this planet. You are a plague, and we are the cure.'
+      'Human beings are a disease, a cancer of this planet. You are a plague, and we are the cure.',
+      'Test.'
     ],
     butler: [
       'Shall I prepare your schedule, sir?',
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bubbleTimer = setTimeout(() => {
       bubble.style.opacity = 0;
-      if (override) setTimeout(() => (autoActive = true), 5000);
+      if (override) setTimeout(() => (autoActive = true), 30000);
     }, duration);
   }
 
@@ -123,25 +124,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // === Core AI call ===
   async function askAI(question) {
     try {
-        const prompt = personalityPrompts[currentPersonality] || personalityPrompts.default;
+      const prompt = personalityPrompts[currentPersonality] || personalityPrompts.default;
 
-        const res = await fetch('/public/ai/ai.php', {
-        method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    event: 'userChat',
-                    question,
-                    personality: currentPersonality,
-                    prompt
-            })
-        });
+      const res = await fetch('/public/ai/ai.php', {
+      method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event: 'userChat',
+            question,
+            personality: currentPersonality,
+            prompt
+        })
+      });
 
-        const data = await res.json();
-        return (
-            data.choices?.[0]?.message?.content?.trim() ||
-            data.reply ||
-            'No response available.'
-        );
+      const data = await res.json();
+      return (
+          data.choices?.[0]?.message?.content?.trim() ||
+          data.reply ||
+          'No response available.'
+      );
     } catch (err) {
       console.error('AI API error:', err);
       return 'Sorry, I could not reach the server of wisdom.';

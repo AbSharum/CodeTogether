@@ -5,8 +5,22 @@
   <title>User Profile</title>
   <link rel="stylesheet" href="/public/css/profile.css">
 
+  <!--bootsrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Font - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <!--navigation icons-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5"
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/public/css/home.css">
+
 </head>
 <body>
+  <canvas id="matrix-canvas"></canvas>
+
+  <?php include __DIR__ .'/../includes/navbar.php'; ?>
+
   <header>
     <div>
       <img src="https://via.placeholder.com/80" alt="User avatar" class="avatar">
