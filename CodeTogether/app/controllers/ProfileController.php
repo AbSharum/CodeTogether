@@ -30,8 +30,7 @@ try {
         exit;
     }
 
-    $followers = $dao->getFollowerCount($userId);
-    $following = $dao->getFollowingCount($userId);
+    $friends = $dao->getFollowerCount($userId);
     $posts = $dao->getUserPosts($userId);
 
     echo json_encode([
@@ -39,8 +38,7 @@ try {
         'points' => $user['points'],
         'status' => $user['status'],
         'profilePic' => '/uploads/default.png',
-        'followers' => $followers,
-        'following' => $following,
+        'friends' => $friends,
         'posts' => array_map(fn($p) => $p->jsonSerialize(), $posts)
     ]);
 } catch (Throwable $e) {
