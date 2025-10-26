@@ -9,7 +9,6 @@
     include_once __DIR__ . "/config/Router.php";
     include_once __DIR__ . "/controllers/LoginController.php";
     include_once __DIR__ . "/controllers/CreateAccountController.php";
-    include_once __DIR__ . "/controllers/SocialFeedController.php";
     include_once __DIR__ . "/controllers/HomeController.php";
     include_once __DIR__ . "/controllers/AccountSettingsController.php";
     include_once __DIR__ . "/controllers/MessagesController.php";
@@ -34,7 +33,6 @@
     $router->addController('messages', new MessagesController());
     $router->addController('404', new NotFoundController());
     $router->addController('landing',new LandingController());
-    $router->addController('search',new SearchController());
 
     # Register default controller (used when no action is specified)
     $router->addController('default', new LandingController()); 
