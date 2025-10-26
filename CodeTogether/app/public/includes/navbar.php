@@ -24,7 +24,7 @@
                             Home</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="game-nav-item">
-                        <a class="nav-link text-white" href="/public/views/game.html"><i
+                        <a class="nav-link text-white" href="index.php?action=game"><i
                                 class="fas fa-gamepad me-1"></i> Game Page</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="message-nav-item">

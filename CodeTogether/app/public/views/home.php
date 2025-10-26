@@ -181,4 +181,5 @@
                 crossorigin="anonymous"></script>
             <script src="/public/js/home.js"></script>
 </body>
+
 </html>
