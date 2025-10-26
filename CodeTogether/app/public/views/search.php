@@ -13,9 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/public/css/home.css">
 </head>
 
@@ -36,7 +35,7 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users"
                                 type="button" role="tab" aria-controls="users" aria-selected="true">
-                            Users (<?= count($users ?? []) ?>)
+                            Users (<?= count($users ?? []) + count($friendsUsers ?? []) -1 ?>)
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -51,18 +50,51 @@
 
                     <!-- USERS TAB -->
                     <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
-                        <?php if (empty($users)): ?>
+                        <?php if (empty($users) && empty($friendsUser)): ?>
                             <p class="text-white">No users found.</p>
                         <?php else: ?>
-                            <?php foreach ($users as $user): ?>
-                                <div class="profile-card mb-3 p-3 d-flex align-items-center">
+                            <?php foreach ($friendsUsers as $user): ?>
+                                <div class="profile-card mb-3 p-3 d-flex align-items-start">
                                     <img src="https://placehold.co/50x50/4a5568/ffffff?text=<?= substr($user->getUserName(), 0, 1) ?>"
-                                         alt="User Avatar" class="rounded-circle me-3">
+                                        alt="User Avatar" class="rounded-circle me-3">
+
                                     <div>
-                                        <h5 class="mb-0 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
-                                        <small class="text-white"><?= htmlspecialchars($user->getEmail()) ?></small>
+                                        <h5 class="mb-1 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
+                                        <small class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
+
+                                        <form method="POST" action="index.php?action=search" class="mb-0">
+                                            <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+                                            <input type="hidden" name="task" value="request">
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                Friends
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
+                            <?php endforeach; ?>
+                            
+                            <?php foreach ($users as $user): ?>
+                                <?php if ($user->getUserID()!=$userID): ?>
+                                <div class="profile-card mb-3 p-3 d-flex align-items-start">
+                                    <img src="https://placehold.co/50x50/4a5568/ffffff?text=<?= substr($user->getUserName(), 0, 1) ?>"
+                                        alt="User Avatar" class="rounded-circle me-3">
+
+                                    <div>
+                                        <h5 class="mb-1 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
+                                        <small class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
+
+                                        <form method="POST" action="index.php?action=search" class="mb-0">
+                                            <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+                                            <input type="hidden" name="task" value="request">
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                Add Friend
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
