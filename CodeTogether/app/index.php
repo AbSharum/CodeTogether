@@ -9,7 +9,6 @@
     include_once __DIR__ . "/config/Router.php";
     include_once __DIR__ . "/controllers/LoginController.php";
     include_once __DIR__ . "/controllers/CreateAccountController.php";
-    include_once __DIR__ . "/controllers/SocialFeedController.php";
     include_once __DIR__ . "/controllers/HomeController.php";
     include_once __DIR__ . "/controllers/AccountSettingsController.php";
     include_once __DIR__ . "/controllers/MessagesController.php";
@@ -28,7 +27,6 @@
     $router->addController('login', new LoginController());
     $router->addController('logout', new LogoutController());
     $router->addController('createAccount', new CreateAccountController());
-    $router->addController('social-feed', new SocialFeedController());
     $router->addController('home', new HomeController());
     $router->addController('accountSettings', new AccountSettingsController());
     $router->addController('messages', new MessagesController());

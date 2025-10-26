@@ -28,42 +28,33 @@
                 <div class="friends-card">
                     <h4 class="text-info mb-3 text-white">Transmit Messages </h4>
 
-                    <!-- php integration will need to edit this stuff just a placeholder for now-->
-                    <div class="friend-item">
-                        <img src="https://placehold.co/40x40/5cb85c/ffffff?text=J" alt="Friend Avatar"
-                            class="friend-avatar">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-white">John Smith</div>
-                            <small class="text-success">Online</small>
+                    <?php foreach ($data['friendsUser'] as $friendUser):
+                        $statusClass = 'text-danger';
+                        $imageColor = 'd9534f';
+                        $statusText = 'Offline';
+                        if ($friendUser->getStatus() === 'online') {
+                            $statusClass = 'text-success';
+                            $statusText = 'Online';
+                            $imageColor = '5cb85c';
+                        } elseif ($friendUser->getStatus() === 'away') {
+                            $statusClass = 'text-warning';
+                            $imageColor = 'f0ad4e';
+                            $statusText = 'Away';
+                        }
+                        ?>
+                        <div class="friend-item">
+                            <img src="https://placehold.co/40x40/<?=$imageColor?>/ffffff?text=<?= substr($friendUser->getUserName(), 0, 1) ?>"alt="Friend Avatar" class="friend-avatar">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold text-white"><?php echo htmlspecialchars($friendUser->getUserName()); ?>
+                                </div>
+                                <small class="<?php echo $statusClass; ?>"><?php echo $statusText; ?></small>
+                            </div>
+                            <button class="btn btn-sm chat-open-btn"
+                                data-friend-id="<?php echo $friendUser->getUserID(); ?>">
+                                <i class="fas fa-comment text-info"></i>
+                            </button>
                         </div>
-                    </div>
-
-                    <div class="friend-item">
-                        <img src="https://placehold.co/40x40/f0ad4e/ffffff?text=A" alt="Friend Avatar"
-                            class="friend-avatar">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-white">Alice L.</div>
-                            <small class="text-warning">Away</small>
-                        </div>
-                    </div>
-
-                    <div class="friend-item">
-                        <img src="https://placehold.co/40x40/337ab7/ffffff?text=M" alt="Friend Avatar"
-                            class="friend-avatar">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-white">Mike P.</div>
-                            <small class="text-success">Online</small>
-                        </div>
-                    </div>
-
-                    <div class="friend-item">
-                        <img src="https://placehold.co/40x40/d9534f/ffffff?text=S" alt="Friend Avatar"
-                            class="friend-avatar">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-white">Sarah K.</div>
-                            <small class="text-danger">Offline</small>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
 
                     <button class="btn btn-sm btn-secondary w-100 mt-3 rounded-pill">View All Friends</button>
                 </div>
