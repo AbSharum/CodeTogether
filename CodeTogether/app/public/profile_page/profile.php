@@ -50,7 +50,7 @@
       <button type="button" class="btn btn-add">Delete Friend</button>
       <div>
         <img src="https://via.placeholder.com/80" alt="User avatar" class="avatar">
-        <button onclick="window.location='/public/views/home.php'">Go to Home</button>
+        <button onclick="window.location='public/views/index.php?action=home'">Go to Home</button>
     </div>
     </aside>
   </main>
