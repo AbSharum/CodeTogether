@@ -27,12 +27,12 @@
     $router->addController('login', new LoginController());
     $router->addController('logout', new LogoutController());
     $router->addController('createAccount', new CreateAccountController());
-    $router->addController('social-feed', new SocialFeedController());
     $router->addController('home', new HomeController());
     $router->addController('accountSettings', new AccountSettingsController());
     $router->addController('messages', new MessagesController());
     $router->addController('404', new NotFoundController());
     $router->addController('landing',new LandingController());
+    $router->addController('search',new SearchController());
 
     # Register default controller (used when no action is specified)
     $router->addController('default', new LandingController()); 
