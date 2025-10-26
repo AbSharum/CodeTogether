@@ -10,7 +10,7 @@
         }
 
         public function renderView(string $view, array $data = []): void {
-            include "./public/views/$view.php";
+            parent::renderView($view,$data);;
         }
     }
 ?>

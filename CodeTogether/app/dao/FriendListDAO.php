@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__ . '/../config/dbConn.php';
+require_once __DIR__ . '/../config/DbConn.php';
+require_once __DIR__ . '/../config/EventDispatcher.php';
 require_once __DIR__ . '/../models/Friend.php';
-
 class FriendListDAO {
 
     public function sendFriendRequest(int $userID, int $friendID): bool {
@@ -27,20 +27,38 @@ class FriendListDAO {
         $success = $stmt->execute();
         $stmt->close();
 
+        if ($success) {
+            EventDispatcher::broadcast([
+                'event' => 'friendRequest',
+                'data'  => ['sender'=>$userID,'reciever'=>$friendID]
+            ]);
+        }
+
         return $success;
     }
 
     // Accept a pending friend request
-    public function acceptFriendRequest(int $userID, int $friendID): bool {
+    public function acceptFriendRequest(int $userID, int $friendID, String $status): bool {
         $user1 = min($userID, $friendID);
         $user2 = max($userID, $friendID);
 
+        if ($user1 === $user2) {
+            return false;
+        }
+
         $conn = Database::getConnection();
-        $stmt = $conn->prepare("UPDATE friend_list SET status = 'friends' WHERE user_id_1 = ? AND user_id_2 = ? AND status = 'pending'");
-        $stmt->bind_param("ii", $user1, $user2);
+        $stmt = $conn->prepare("UPDATE friend_list SET status = ? WHERE user_id_1 = ? AND user_id_2 = ? AND status = 'pending'");
+        $stmt->bind_param("sii", $status, $user1, $user2);
         $stmt->execute();
         $success = $stmt->affected_rows > 0;
         $stmt->close();
+
+        if ($success) {
+            EventDispatcher::broadcast([
+                'event' => 'friendRequestResponse',
+                'data'  => ['user'=>$userID,'friend'=>$friendID,'response'=>$status]
+            ]);
+        }
 
         return $success;
     }

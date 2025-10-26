@@ -52,8 +52,7 @@
         }
 
         public function renderView(string $view, array $data = []): void {
-            extract($data);
-            include "./public/views/$view.php";
+            parent::renderView($view,$data);;
         }
     }
 ?>

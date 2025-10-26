@@ -1,17 +1,28 @@
 <?php
     declare(strict_types=1);
     require_once __DIR__ . '/../models/Post.php';
-    require_once __DIR__ . '/../config/dbConn.php';
-
+    require_once __DIR__ . '/../config/DbConn.php';
+    require_once __DIR__ . '/../config/EventDispatcher.php';
     class PostDAO {
 
         public function addPost(int $userID, int $threadID, string $contents, string $caption, string $visibility): void {
             $conn = Database::getConnection();
             $stmt = $conn->prepare("INSERT INTO post (user_id, thread_id, contents, caption, visibility) VALUES (?, ?, ?, ?, ?)");
             $stmt->bind_param("iisss",$userID,$threadID,$contents,$caption,$visibility);
-            $stmt->execute();
+            $validStmt = $stmt->execute();
             $stmt->close();
-            
+
+            if ($validStmt) {
+                EventDispatcher::broadcast([
+                    'event'=>'newPost',
+                    'data'=>[
+                        'userID'=>$userID,
+                        'caption'=>$caption,
+                        'visibility'=>$visibility,
+                        'time'=>time()
+                    ]
+                ]);
+            }
         }
 
         public function getAllPosts(): array {
@@ -80,8 +91,15 @@
             $conn = Database::getConnection();
             $stmt = $conn->prepare("UPDATE post SET is_deleted = TRUE WHERE post_id = ?");
             $stmt->bind_param("i", $postID);
-            $stmt->execute();
+            $validStmt = $stmt->execute();
             $stmt->close();
+
+            if ($validStmt) {
+                EventDispatcher::broadcast([
+                    'event'=>'deletePost',
+                    'data'=>['postID'=>$postID]
+                ]);
+            }
             
         }
 

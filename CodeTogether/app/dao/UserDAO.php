@@ -1,8 +1,8 @@
 <?php
     declare(strict_types=1);
     require_once __DIR__ . '/../models/User.php';
-    require_once __DIR__ . '/../config/dbConn.php';
-
+    require_once __DIR__ . '/../config/DbConn.php';
+    require_once __DIR__ . '/../config/EventDispatcher.php';
 
     class UserDAO {
 
@@ -11,7 +11,14 @@
             $stmt = $conn->prepare("INSERT INTO user (username, password, email,role_id) VALUES (?, ?, ?,?)");
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $stmt->bind_param("sssi", $username, $hashedPassword, $email, $roleID);
-            $stmt->execute();
+            $validStmt = $stmt->execute();
+
+            if ($validStmt) {
+                EventDispatcher::broadcast([
+                    'event'=>'newUser',
+                    'data'=>['username'=>$username,'email'=>$email]
+                ]);
+            }
             $stmt->close();
         }
 
@@ -75,7 +82,13 @@
 
             $stmt = $conn->prepare("UPDATE user SET status = ? WHERE user_id = ?;");
             $stmt->bind_param("si", $status,$userID);
-            $stmt->execute();
+            $validStmt = $stmt->execute();
+            if ($validStmt) {
+                EventDispatcher::broadcast([
+                    'event'=>'statusChange',
+                    'data'=>['userID'=>$userID,'status'=>$status]
+                ]);
+            }
             $stmt->close();
         }
 

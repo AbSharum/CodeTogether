@@ -3,6 +3,9 @@ FROM php:8.2-apache
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
 RUN a2enmod rewrite
+RUN a2enmod proxy
+RUN a2enmod proxy_wstunnel
+RUN a2enmod proxy_http
 
 COPY ./apache-config.conf /etc/apache2/conf-available/app-overrides.conf
 RUN a2enconf app-overrides

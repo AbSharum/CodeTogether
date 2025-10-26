@@ -8,8 +8,9 @@
         }
 
         public function renderView(string $view,array $data=[]): void{
-
-            include "./template/template.php";
+            extract($data);
+            include "./public/template/template.php";
+            include "./public/views/$view.php";
         }
 
         public function getAuth(): string{

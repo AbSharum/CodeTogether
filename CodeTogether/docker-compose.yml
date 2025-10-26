@@ -12,6 +12,7 @@ services:
       - .env
     depends_on:
       - mariadb
+      - websocket
     networks:
       - app-network
 
@@ -30,6 +31,23 @@ services:
       - ./mariadb/mariadb-init:/docker-entrypoint-initdb.d
     networks:
       - app-network
+
+  websocket:
+    build:
+      context: .
+      dockerfile: Dockerfile.websocket
+    container_name: websocket-server
+    working_dir: /var/www/html
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+    volumes:
+      - ./app:/var/www/html
+      - /var/www/html/vendor  
+    depends_on:
+      - mariadb
+
 
 networks:
   app-network:
