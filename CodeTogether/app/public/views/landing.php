@@ -33,9 +33,11 @@
                      It is the world that has been pulled over your eyes to blind you from the truth". 
                 </div>
                 <div class="mb-3">
-                    "You take the blue pill, the story ends, you leave this site and go do whatever you
-                     want to do. You take the red pill, you move through the site, and I show you how
-                     deep the rabbit hole goes."" 
+                    "Here you will meet friends both new and old. Chat with each other, make some posts about how coding make 
+                    you want to bang your head. Challenge your friends in a code battle on who can write workable code the cleanest 
+                    and the fastest to gain amazing points. Here at Code Together we are bringing people together to get better at coding
+                    and to make friends to become more social... to help break free from the matrix. So come let us show you how far 
+                    the rabit hole goes."
                 </div>
                 <div class="mb-3">
                     <button class="LogInButton" onclick="window.location.href='index.php?action=login'">Rabbit Hole</button>

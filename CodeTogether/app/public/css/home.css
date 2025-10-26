@@ -75,7 +75,7 @@ body{
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 300px; /* fixed width */
+    width: 100px; /* fixed width */
     height: 400px; /* fixed height */
     background-color: rgba(45, 55, 72, 0.95);
     border-radius: 1rem;
@@ -147,4 +147,24 @@ body{
         right: 2.5%;
         left: 2.5%;
     }
+}
+
+/* CSS for the search button in navbar */
+.brand-green {
+  color: #06a342;
+}
+
+.custom-search-form {
+  max-width: 200px;
+}
+
+.search-input-green-border {
+  border-color: #06a342;
+  background-color: #2d3748;
+  color: #fff;
+}
+
+.search-input-green-border:focus {
+  border-color: #06a342;
+  box-shadow: 0 0 0 0.25rem rgba(6,163,66, 0.25)
 }
