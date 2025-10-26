@@ -21,13 +21,6 @@
 
   <?php include __DIR__ .'/../includes/navbar.php'; ?>
 
-  <header>
-    <div>
-      <img src="https://via.placeholder.com/80" alt="User avatar" class="avatar">
-      <button onclick="window.location='/public/views/home.php'">Go to Home</button>
-    </div>
-  </header>
-
   <main class="main">
     <section>
       <h2>Posts</h2>
@@ -56,16 +49,19 @@
          <strong>Following:</strong> <span id="following"></span></p>
       <button type="button" class="btn btn-add">Add Friend</button>
       <button type="button" class="btn btn-add">Delete Friend</button>
-      
+      <div>
+        <img src="https://via.placeholder.com/80" alt="User avatar" class="avatar">
+        <button onclick="window.location='/public/views/home.php'">Go to Home</button>
+    </div>
     </aside>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-                xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
-                crossorigin="anonymous"></script>
+  
   <?php include __DIR__ . '/../ai/aiWidget.php'; ?>
   <script src="/public/ai/ai.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
+    crossorigin="anonymous"></script>
   <script src="/public/js/profile.js"></script>
 </body>
 </html>
