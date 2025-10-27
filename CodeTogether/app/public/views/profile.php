@@ -2,65 +2,155 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>User Profile</title>
-  
+  <title><?= htmlspecialchars($user->getUserName()) ?>'s Profile</title>
   <link rel="stylesheet" href="/public/css/profile.css">
-  <!--bootsrap-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Font - Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-  <!--navigation icons-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5"
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/public/css/profile.css">
-
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
   <canvas id="matrix-canvas"></canvas>
 
-  <?php include __DIR__ .'/../includes/navbar.php'; ?>
+  <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-  <main class="main">
-    <section>
-      <h2>Posts</h2>
-      <form id="postForm">
-        <textarea name="newPost" id="newPost" rows="3" placeholder="What's on your mind?"></textarea><br>
-        <button type="submit">Post</button>
-      </form>
-      <div id="posts"></div>
-    </section>
+  <main class="main container py-5">
+    <div class="row justify-content-center">
+      <!-- Left column -->
+      <aside class="col-lg-3 mb-4">
+      <div class="profile-card text-center p-3">
+        <?php
+          $initial   = substr($user->getUserName(), 0, 1);
+          $avatarUrl = "https://placehold.co/120x120/4a5568/ffffff?text=" . urlencode($initial);
 
-    <aside class="profile-card">
-      <img id="profilePic" src="default.png" alt="Profile picture">
-      <form id="picForm" enctype="multipart/form-data">
-        <input type="file" name="profilePic" id="profilePicInput"><br>
-        <button type="submit">Change Picture</button>
-      </form>
+          $loggedInID   = $_SESSION['usercreds']['userID'] ?? 0;
+          $isOwnProfile = ($loggedInID === $user->getUserID());
 
-      <h3 id="fullname"></h3>
-      <p id="username"></p>
-      <textarea id="bio" rows="3"></textarea><br>
-      <button id="saveBio">Save Bio</button>
+          //check if logged in user is already friends with this profile user
+          $isFriend = false;
+          foreach ($friends as $friend) {
+              if (method_exists($friend, 'getFriendID') &&
+                  $friend->getFriendID() === $user->getUserID()) {
+                  $isFriend = true;
+                  break;
+              }
+          }
+        ?>
 
-      <p><strong>Location:</strong> <span id="location"></span></p>
-      <p><strong>Joined:</strong> <span id="joined"></span></p>
-      <p><strong>Friends:</strong> <span id="friends"></span> | 
-      <button type="button" class="btn btn-add">Add Friend</button>
-      <button type="button" class="btn btn-add">Delete Friend</button>
-      <div>
-        <img src="https://via.placeholder.com/80" alt="User avatar" class="avatar">
-        <button onclick="window.location='public/views/index.php?action=home'">Go to Home</button>
+        <img src="<?= $avatarUrl ?>" alt="Profile picture"
+            class="rounded-circle mb-3"
+            style="width:120px;height:120px;object-fit:cover;">
+
+        <h3 class="text-white"><?= htmlspecialchars($user->getUserName()) ?></h3>
+        <p class="text-info mb-2"><?= htmlspecialchars($user->getEmail() ?? 'No email') ?></p>
+
+        <div class="row mt-3 text-white">
+          <div class="col-6">
+            <strong>Points</strong><br><?= htmlspecialchars($user->getPoints()) ?>
+          </div>
+          <div class="col-6">
+            <strong>Status</strong><br><?= htmlspecialchars($user->getStatus()) ?>
+          </div>
+        </div>
+
+        <p class="text-secondary small mt-3">
+          Joined: <?= htmlspecialchars($user->getCreatedOn()->format('Y-m-d')) ?>
+        </p>
+
+        <?php if (!$isOwnProfile): ?>
+            <!-- Show only when viewing another user's profile -->
+            <?php if ($isFriend): ?>
+                <form action="index.php?action=removeFriend" method="POST" class="mb-2">
+                    <input type="hidden" name="friend_id" value="<?= $user->getUserID(); ?>">
+                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                        <i class="fas fa-user-minus me-1"></i> Remove Friend
+                    </button>
+                </form>
+            <?php else: ?>
+                <form action="index.php?action=addFriend" method="POST" class="mb-2">
+                    <input type="hidden" name="friend_id" value="<?= $user->getUserID(); ?>">
+                    <button type="submit" class="btn btn-outline-success btn-sm w-100">
+                        <i class="fas fa-user-plus me-1"></i> Add Friend
+                    </button>
+                </form>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <button class="btn btn-outline-info btn-sm mt-2 w-100"
+                onclick="window.location='index.php?action=home'">
+          <i class="fas fa-home me-1"></i> Back to Home
+        </button>
+      </div>
+
+
+
+        <!-- Friends list -->
+        <div class="friends-card mt-4 p-3">
+          <h5 class="text-info mb-3">Friends (<?= count($friendsUser) ?>)</h5>
+          <?php foreach ($friendsUser as $friendUser): ?>
+            <?php
+              $statusClass = 'text-danger';
+              $statusText  = 'Offline';
+              $color = 'd9534f';
+              if ($friendUser->getStatus() === 'online') {
+                  $statusClass = 'text-success'; $statusText = 'Online'; $color = '5cb85c';
+              } elseif ($friendUser->getStatus() === 'away') {
+                  $statusClass = 'text-warning'; $statusText = 'Away'; $color = 'f0ad4e';
+              }
+            ?>
+            <div class="friend-item d-flex align-items-center mb-2">
+              <a href="index.php?action=profile&user_id=<?= $friendUser->getUserID(); ?>"
+                 class="d-flex align-items-center text-decoration-none flex-grow-1">
+                <img src="https://placehold.co/40x40/<?= $color ?>/ffffff?text=<?= substr($friendUser->getUserName(),0,1) ?>"
+                     alt="Friend Avatar"
+                     class="friend-avatar me-2 rounded-circle">
+                <div>
+                  <div class="fw-bold text-white"><?= htmlspecialchars($friendUser->getUserName()); ?></div>
+                  <small class="<?= $statusClass; ?>"><?= $statusText; ?></small>
+                </div>
+              </a>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </aside>
+
+      <!-- Middle column: posts -->
+      <section class="col-lg-6 mb-4">
+        <h2 class="text-white mb-3"><?= htmlspecialchars($user->getUserName()) ?>'s Posts</h2>
+        <?php if (empty($userPosts)): ?>
+          <p class="text-secondary">No posts yet.</p>
+        <?php else: ?>
+          <?php foreach ($userPosts as $post): ?>
+            <div class="post-card mb-3 p-3 border border-success rounded-3">
+              <p class="fw-bold text-white mb-1">
+                <?= htmlspecialchars($user->getUserName()) ?>
+                <span class="text-secondary small">
+                  <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d H:i')) ?>
+                </span>
+              </p>
+              <p class="text-white"><?= htmlspecialchars($post->getCaption()) ?></p>
+              <div class="d-flex gap-3">
+                <span class="text-white">
+                  <i class="fas fa-heart text-danger me-1"></i>
+                  <?= htmlspecialchars($post->getLikes()) ?>
+                </span>
+                <span class="text-white">
+                  <i class="fas fa-comment me-1"></i> Comments TBD
+                </span>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </section>
     </div>
-    </aside>
   </main>
 
-  
   <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
   <script src="/public/js/ai.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
-    crossorigin="anonymous"></script>
+          crossorigin="anonymous"></script>
   <script src="/public/js/profile.js"></script>
 </body>
 </html>

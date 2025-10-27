@@ -104,7 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   const urlParams = new URLSearchParams(window.location.search);
+  //console.error('urlParams = ', urlParams);
   const userId = urlParams.get('user_id');
+  //console.error('userId = ', userId);
   //const profileUrl = userId
   //  ? `/controllers/ProfileController.php?user_id=${encodeURIComponent(userId)}`
   //  : '/controllers/ProfileController.php';
@@ -112,15 +114,28 @@ document.addEventListener('DOMContentLoaded', () => {
     ? `/index.php?action=profile&user_id=${encodeURIComponent(userId)}`
     : '/index.php?action=profile';
 
-
+  console.error('profileUrl = ', profileUrl);
 
   fetch(profileUrl)
-    .then(res => res.json())
+    .then(async res => {
+      console.log('Response object:', res); // logs the Response metadata
+      const text = await res.text();        // read the raw body as text
+      console.log('Raw response body:', text); // print what the server actually sent
+      try {
+        const data = JSON.parse(text);      // manually parse it to catch bad JSON
+        console.log('Parsed JSON:', data);
+        return data;
+      } catch (err) {
+        console.error('Failed to parse JSON:', err);
+        throw err; // rethrow so the outer .catch still runs
+      }
+    })
     .then(data => {
       const usernameElem = document.getElementById('username');
       if (usernameElem) usernameElem.textContent = data.username || 'Unknown';
     })
     .catch(err => console.error('Error loading username:', err));
+
 
 
   async function loadProfile() {
