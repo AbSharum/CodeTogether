@@ -3,7 +3,6 @@
     require_once __DIR__ . '/../models/Role.php';
     require_once __DIR__ . '/../models/User.php';
     require_once __DIR__ . '/../config/DbConn.php';
-    require_once __DIR__ . '/../config/EventDispatcher.php';
 
     class RoleDAO {
 
