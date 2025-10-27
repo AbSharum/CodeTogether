@@ -37,12 +37,14 @@ class Router
     public function authCheck(string $action): void
     {
         $protectedRoutes = [
-            'home' => ['student', 'teacher', 'moderator'],
-            'accountSettings' => ['student', 'teacher', 'moderator'],
-            'messages' => ['student', 'teacher', 'moderator'],
-            'game' => ['student', 'teacher', 'moderator'],
-            'profile' => ['student', 'teacher', 'moderator'],
-            'search' => ['student', 'teacher', 'moderator']
+            'home' => ['student','teacher','moderator'],
+            'accountSettings' => ['student','teacher','moderator'],
+            'messages' => ['student','teacher','moderator'],
+            'game' => ['student','teacher','moderator'],
+            'profile' => ['student','teacher','moderator'],
+            'search' => ['student','teacher','moderator'],
+            'privacyPolicy' => ['student','teacher','moderator'],
+            'terms' => ['student','teacher','moderator']
         ];
 
         if (isset($protectedRoutes[$action])) {
