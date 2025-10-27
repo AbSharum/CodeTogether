@@ -11,21 +11,36 @@ class CreateAccountController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->renderView('createAccount');
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'] ?? '';
-            $email = $_POST['email'] ?? '';
+            $username = trim($_POST['username'] ?? '');
+            $email = trim($_POST['email'] ?? '');
             $password = $_POST['password'] ?? '';
             $confirmPassword = $_POST['confirmPassword'] ?? '';
-            $role = $_POST['role'] ?? '';
+            $role = trim(($_POST['role'] ?? 0));
+            $keyEntered = trim($_POST['roleKey'] ?? '');
 
-            if (empty(trim($password)) || empty(trim($email)) || empty(trim($role)) || empty(trim($username))) {
+            if (empty(trim($password)) || empty($email) || empty($role) || empty($username)) {
                 $this->renderView('createAccount', ['error' => 'Please fill out all fields!']);
                 return;
             }
 
 
+            $role = (int) $role;
             $this->userDao = new UserDAO();
 
             $existing = $this->userDao->getUserByName($username);
+
+            $moderatorKey = getenv('MODERATOR_KEY');
+            $teacherKey = getenv('TEACHER_KEY');
+
+            if ($role === 1 && $keyEntered !== $moderatorKey) {
+                $this->renderView('createAccount', ['error' => 'Invalid access key for Moderator role.']);
+                return;
+            }
+
+            if ($role === 3 && $keyEntered !== $teacherKey) {
+                $this->renderView('createAccount', ['error' => 'Invalid access key for Teacher role.']);
+                return;
+            }
 
             if (!is_null($existing)) {
                 if ($existing->getUsername() === $username) {
@@ -48,7 +63,7 @@ class CreateAccountController extends Controller
             }
 
 
-            $this->userDao->addUser($username, $password, $email, (int) $role);
+            $this->userDao->addUser($username, $password, $email, $role);
             $success = $this->userDao->authenticate($email, $password);
 
             if ($success) {
