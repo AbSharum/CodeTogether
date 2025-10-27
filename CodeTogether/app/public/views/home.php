@@ -53,6 +53,9 @@
                             <small class="text-white">Posts</small>
                         </div>
                     </div>
+                    <a href="index.php?action=addPost" class="btn btn-success w-100 mt-3 rounded-pill">
+                    <i class="fas fa-plus me-2"></i> Add New Post
+                    </a>
                 </div>
                 <!--end of profile card-->
 
@@ -81,11 +84,27 @@
                     <div class="post-card">
                         <p class="fw-bold text-white mb-1">
                             <?= htmlspecialchars($post->getUsername()) ?>
-                            <span class="text-text-white fw-normal small">
+                            <span class="text-white fw-normal small">
                                 <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d H:i')) ?>
                             </span>
                         </p>
                         <p class="mb-2 text-white"><?= htmlspecialchars($post->getCaption()) ?></p>
+
+                        <?php if (!empty($post->getContents())): ?>
+                            <?php
+                               $filePath = '/public/uploads/' . $post->getContents();
+                                $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+                            ?>
+                            <?php if (in_array(strtolower($extension), ['jpg','jpeg','png','gif'])): ?>
+                                <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
+                            <?php elseif (in_array(strtolower($extension), ['mp4','webm','ogg'])): ?>
+                                <video controls class="w-100 rounded mb-2">
+                                    <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">
+                                    Your browser does not support the video tag.
+                                </video>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
                         <div class="d-flex gap-3">
                             <span class="text-white">
                                 <i class="fas fa-heart text-danger me-1"></i>
@@ -182,6 +201,7 @@
                 xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
                 crossorigin="anonymous"></script>
             <script src="/public/js/home.js"></script>
+            
 </body>
 
 </html>
