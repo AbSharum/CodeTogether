@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/../config/DbConn.php';
-require_once __DIR__ . '/../config/EventDispatcher.php';
 require_once __DIR__ . '/../models/Friend.php';
 class FriendListDAO {
 
@@ -53,12 +52,6 @@ class FriendListDAO {
         $success = $stmt->affected_rows > 0;
         $stmt->close();
 
-        if ($success) {
-            EventDispatcher::broadcast([
-                'event' => 'friendRequestResponse',
-                'data'  => ['user'=>$userID,'friend'=>$friendID,'response'=>$status]
-            ]);
-        }
 
         return $success;
     }
