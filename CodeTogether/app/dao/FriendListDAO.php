@@ -18,20 +18,13 @@ class FriendListDAO {
             return false;
         }
 
-        $stmt = $conn->prepare("
-            INSERT INTO friend_list (user_id_1, user_id_2, status)
-            VALUES (?, ?, 'pending')
+        $stmt = $conn->prepare("INSERT 
+            INTO friend_list (user_id_1, user_id_2, status,initiated_by)
+            VALUES (?, ?, 'pending',?)
         ");
-        $stmt->bind_param("ii", $user1, $user2);
+        $stmt->bind_param("iii", $user1, $user2, $userID);
         $success = $stmt->execute();
         $stmt->close();
-
-        if ($success) {
-            EventDispatcher::broadcast([
-                'event' => 'friendRequest',
-                'data'  => ['sender'=>$userID,'reciever'=>$friendID]
-            ]);
-        }
 
         return $success;
     }
@@ -70,6 +63,37 @@ class FriendListDAO {
         return $success;
     }
 
+
+    public function getAllRelationships(int $userID): array {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT 
+                CASE 
+                    WHEN user_id_1 = ? THEN user_id_2 
+                    ELSE user_id_1 
+                END AS friend_id,
+                status,
+                created_on,
+                initiated_by
+            FROM friend_list
+            WHERE user_id_1 = ? OR user_id_2 = ?
+        ");
+        $stmt->bind_param("iii", $userID, $userID, $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $relations = [];
+        while ($row = $result->fetch_assoc()) {
+            $relations[$row['friend_id']] = [
+                'status' => $row['status'],
+                'initiated_by' => $row['initiated_by']
+            ];
+        }
+
+        $stmt->close();
+        return $relations;
+    }
+
+
     // Block a user
     public function blockUser(int $userID, int $friendID): bool {
         $user1 = min($userID, $friendID);
@@ -102,7 +126,7 @@ class FriendListDAO {
             WHERE 
                 (user_id_1 = ? OR user_id_2 = ?)
             AND 
-                (status = 'friends' OR status = 'pending')
+                status = 'friends'
         ");
         $stmt->bind_param("iii", $userID, $userID, $userID);
         $stmt->execute();

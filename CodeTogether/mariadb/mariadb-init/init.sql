@@ -27,6 +27,7 @@ CREATE TABLE friend_list (
     user_id_2 INT,
     status ENUM('friends','not-friends','blocked','pending') DEFAULT 'not-friends',
     created_on DATETIME DEFAULT CURRENT_TIMESTAMP,
+    initiated_by INT DEFAULT -1,
     PRIMARY KEY (user_id_1, user_id_2),
     FOREIGN KEY (user_id_1) REFERENCES user(user_id)
         ON DELETE CASCADE

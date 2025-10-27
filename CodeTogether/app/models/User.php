@@ -13,8 +13,9 @@
         private ?DateTime $createdOn;
         private ?DateTime $latestUpdate;
         private string $password;
+        private int $requestInitiatorID;
 
-        public function __construct(int $userID=-1, int $roleID=-1, string $username='', int $points=-1, string $status='', string $email='', string $password='', bool $isDeleted=false,?DateTime $createdOn=null, ?DateTime $latestUpdate=null) {
+        public function __construct(int $userID=-1, int $roleID=-1, string $username='', int $points=-1, string $status='', string $email='', string $password='', bool $isDeleted=false,?DateTime $createdOn=null, ?DateTime $latestUpdate=null, int $requestInitiatorID=-1) {
             $this->userID = $userID;
             $this->roleID = $roleID;
             $this->username = $username;
@@ -25,6 +26,7 @@
             $this->isDeleted = $isDeleted;
             $this->createdOn = $createdOn ?? new DateTime();
             $this->latestUpdate = $latestUpdate ?? new DateTime();
+            $this->requestInitiatorID = $requestInitiatorID;
         }
 
         public function load(array $row): void {
@@ -51,8 +53,18 @@
                 'isDeleted' => $this->isDeleted,
                 'createdOn' => $this->createdOn,
                 'latestUpdate' => $this->latestUpdate,
-                'password' => $this->password
+                'password' => $this->password,
+                'requestInitiatorID' => $this->requestInitiatorID
             );
+        }
+
+
+        public function setRequestInitiatorID(int $id): void {
+            $this->requestInitiatorID = $id;
+        }
+
+        public function getRequestInitiatorID(): int {
+            return $this->requestInitiatorID;
         }
 
         public function setUserID(int $userID): void {

@@ -15,25 +15,52 @@
                 $this->userDao = new UserDAO();
                 $this->friendDao= new FriendListDAO();
 
-                # Take off any extra spaces
+                // Take off any extra spaces
                 $search = trim($_POST['search'] ?? '');
                 $userID = $_SESSION['usercreds']['userID'];
 
                 // Sends friend request if task is assigned
-                if (isset($_POST['friendId']) && $_POST['friendId'] !== '') {
-                    $friendID = (int)$_POST['friendId'];
-                    $this->friendDao->sendFriendRequest($userID, $friendID);
+                $task = $_POST['task'] ?? null;
+                $friendID = isset($_POST['friendId']) ? (int)$_POST['friendId'] : null;
+
+                if ($friendID && $task) {
+                    switch ($task) {
+                        case 'request':
+                            $this->friendDao->sendFriendRequest($userID, $friendID);
+                            break;
+                        
+                        case 'accept':
+                            $this->friendDao->acceptFriendRequest($userID, $friendID, 'friends');
+                            break;
+                        
+                        case 'reject':
+                            $this->friendDao->removeFriend($userID, $friendID);
+                            break;
+                    }
                 }
 
-                $friends = $this->friendDao->getFriends($userID) ?? [];
-                $friendsUsers = $this->userDao->getFriendUsers($friends);
 
+                $relations = $this->friendDao->getAllRelationships($userID);
                 $users = $this->userDao->searchUsersByName($search);
                 $posts = $this->postDao->searchPostsByTerm($search);
 
-                // Remove users that are already friends from users
-                $friendIds = array_map(fn($user) => $user->getUserId(), $friendsUsers);
-                $users = array_filter($users, fn($user) => !in_array($user->getUserId(), $friendIds));
+                foreach ($users as $user) {
+                    $tempUserID = $user->getUserId();
+                    if (isset($relations[$tempUserID])) {
+                        $user->setStatus($relations[$tempUserID]['status']);
+                        $user->setRequestInitiatorID($relations[$tempUserID]['initiated_by']);
+                    } else {
+                        $user->setStatus('not-friends');
+                        $user->setRequestInitiatorID(-1);
+                    }
+                }
+
+                $friendsUsers = array_filter($users, fn($user) => $user->getStatus() === 'friends');
+
+                $friendIDs = array_map(fn($u) => $u->getUserId(), $friendsUsers);
+                $users = array_filter($users, fn($u) => !in_array($u->getUserId(), $friendIDs));
+
+
 
                 // Render view
                 $this->renderView("search", [

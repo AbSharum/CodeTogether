@@ -50,52 +50,75 @@
 
                     <!-- USERS TAB -->
                     <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
-                        <?php if (empty($users) && empty($friendsUser)): ?>
+                        <?php if (empty($users) && empty($friendsUsers)): ?>
                             <p class="text-white">No users found.</p>
                         <?php else: ?>
+                        
+                            <!-- FRIEND USERS (already connected) -->
                             <?php foreach ($friendsUsers as $user): ?>
-                                <div class="profile-card mb-3 p-3 d-flex align-items-start">
-                                    <img src="https://placehold.co/50x50/4a5568/ffffff?text=<?= substr($user->getUserName(), 0, 1) ?>"
-                                        alt="User Avatar" class="rounded-circle me-3">
-
-                                    <div>
-                                        <h5 class="mb-1 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
-                                        <small class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
-
-                                        <form method="POST" action="index.php?action=search" class="mb-0">
-                                            <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
-                                            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
-                                            <input type="hidden" name="task" value="request">
-                                            <button type="submit" class="btn btn-success btn-sm">
-                                                Friends
-                                            </button>
-                                        </form>
+                                <?php if ($user->getStatus() !== 'blocked'): ?>
+                                    <div class="profile-card mb-3 p-3 d-flex align-items-start">
+                                        <img src="https://placehold.co/50x50/4a5568/ffffff?text=<?= substr($user->getUserName(), 0, 1) ?>"
+                                             alt="User Avatar" class="rounded-circle me-3">
+                                
+                                        <div>
+                                            <h5 class="mb-1 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
+                                            <small class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
+                                
+                                            <button class="btn btn-secondary btn-sm" disabled>Friends</button>
+                                        </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
-                            
-                            <?php foreach ($users as $user): ?>
-                                <?php if ($user->getUserID()!=$userID): ?>
-                                <div class="profile-card mb-3 p-3 d-flex align-items-start">
-                                    <img src="https://placehold.co/50x50/4a5568/ffffff?text=<?= substr($user->getUserName(), 0, 1) ?>"
-                                        alt="User Avatar" class="rounded-circle me-3">
-
-                                    <div>
-                                        <h5 class="mb-1 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
-                                        <small class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
-
-                                        <form method="POST" action="index.php?action=search" class="mb-0">
-                                            <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
-                                            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
-                                            <input type="hidden" name="task" value="request">
-                                            <button type="submit" class="btn btn-success btn-sm">
-                                                Add Friend
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
+                                
+                            <!-- SEARCHED USERS (not yet friends) -->
+                            <?php foreach ($users as $user): ?>
+                                <?php
+                                    // skip self or blocked users
+                                    if ($user->getUserID() == $userID || $user->getStatus() === 'blocked') continue;
+                                    $status = $user->getStatus();
+                                ?>
+                                <div class="profile-card mb-3 p-3 d-flex align-items-start">
+                                    <img src="https://placehold.co/50x50/4a5568/ffffff?text=<?= substr($user->getUserName(), 0, 1) ?>"
+                                         alt="User Avatar" class="rounded-circle me-3">
+                            
+                                    <div>
+                                        <h5 class="mb-1 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
+                                        <small class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
+                            
+                                        <?php if ($status === 'pending'): ?>
+                                            <?php if ($user->getRequestInitiatorID() === $userID): ?>
+                                                <!-- You sent it -->
+                                                <button class="btn btn-warning btn-sm" disabled>Pending</button>
+                                            <?php else: ?>
+                                                <!-- You received it -->
+                                                <form method="POST" action="index.php?action=search" class="d-inline">
+                                                    <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                    <input type="hidden" name="task" value="accept">
+                                                    <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                                                </form>
+                                                <form method="POST" action="index.php?action=search" class="d-inline">
+                                                    <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                    <input type="hidden" name="task" value="reject">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                                </form>
+                                            <?php endif; ?>
+
+                                        <?php elseif ($status === 'friends'): ?>
+                                            <button class="btn btn-secondary btn-sm" disabled>Friends</button>
+                                        
+                                        <?php else: ?>
+                                            <form method="POST" action="index.php?action=search" class="mb-0">
+                                                <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+                                                <input type="hidden" name="task" value="request">
+                                                <button type="submit" class="btn btn-success btn-sm">Add Friend</button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                                        
                         <?php endif; ?>
                     </div>
 
