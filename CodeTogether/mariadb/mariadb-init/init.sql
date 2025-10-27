@@ -62,7 +62,7 @@ CREATE TABLE post (
     user_id INT NOT NULL,
     username VARCHAR(100) NOT NULL,
     thread_id INT,
-    contents LONGBLOB,
+    contents VARCHAR(255),
     likes INT DEFAULT 0,
     caption VARCHAR(255),
     visibility ENUM('public', 'friends', 'private') DEFAULT 'public',
