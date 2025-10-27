@@ -47,6 +47,12 @@
             <div class="mb-3">
                 <button class="LogInButton" onclick="window.location.href='index.php?action=login'">Rabbit Hole</button>
             </div>
+            <div class="mb-3">
+                <button class="Button" onclick="window.location.href='index.php?action=terms'">Terms of Service</button>
+            </div>
+            <div class="mb-3">
+                <button class="Button" onclick="window.location.href='index.php?action=privacyPolicy'">Privacy Policy</button>
+            </div>
             </div>
         </div>
     </div>

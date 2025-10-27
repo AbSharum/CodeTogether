@@ -19,6 +19,8 @@
     include_once __DIR__ . "/controllers/GameController.php";
     include_once __DIR__ . "/controllers/ProfileController.php";
     include_once __DIR__ . "/controllers/AddPostController.php";
+    include_once __DIR__ . "/controllers/PrivacyPolicyController.php";
+    include_once __DIR__ . "/controllers/TermsController.php";
 
 
 
@@ -40,6 +42,8 @@
     $router->addController('game',new GameController());
     $router->addController('profile',new ProfileController());
     $router->addController('addPost',new AddPostController());
+    $router->addController('privacyPolicy',new PrivacyPolicyController());
+    $router->addController('terms',new TermsController());
     # Register default controller (used when no action is specified)
     $router->addController('default', new LandingController()); 
 
