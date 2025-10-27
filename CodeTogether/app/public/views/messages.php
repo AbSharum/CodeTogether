@@ -19,7 +19,7 @@
 <body class="bg-dark text-light">
     <canvas id="matrix-canvas"></canvas>
     <!--NavBar-->
-    <?php include __DIR__ .'/../includes/navbar.php'; ?>
+    <?php include __DIR__ . '/../includes/navbar.php'; ?>
     <!--end of navigation-->
 
     <div class="container py-5">
@@ -43,7 +43,8 @@
                         }
                         ?>
                         <div class="friend-item">
-                            <img src="https://placehold.co/40x40/<?=$imageColor?>/ffffff?text=<?= substr($friendUser->getUserName(), 0, 1) ?>"alt="Friend Avatar" class="friend-avatar">
+                            <img src="https://placehold.co/40x40/<?= $imageColor ?>/ffffff?text=<?= substr($friendUser->getUserName(), 0, 1) ?>"
+                                alt="Friend Avatar" class="friend-avatar">
                             <div class="flex-grow-1">
                                 <div class="fw-bold text-white"><?php echo htmlspecialchars($friendUser->getUserName()); ?>
                                 </div>

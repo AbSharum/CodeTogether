@@ -5,12 +5,14 @@ include_once __DIR__ . "/../dao/UserDAO.php";
 include_once __DIR__ . "/../dao/PostDAO.php";
 include_once __DIR__ . "/../dao/FriendListDAO.php";
 
-class ProfileController extends Controller {
+class ProfileController extends Controller
+{
     private UserDAO $userDao;
     private PostDAO $postDao;
     private FriendListDAO $friendDao;
 
-    public function performAction(): void {
+    public function performAction(): void
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             // Initialize DAOs
@@ -40,21 +42,22 @@ class ProfileController extends Controller {
             }
 
             // --- Gather profile-related data ---
-            $posts       = $this->postDao->getPostsByUser($userID);
-            $friends     = $this->friendDao->getFriends($userID);
+            $posts = $this->postDao->getPostsByUser($userID);
+            $friends = $this->friendDao->getFriends($userID);
             $friendsUser = $this->userDao->getFriendUsers($friends);
 
             // --- Render profile view (server-side) ---
             $this->renderView("profile", [
-                'user'        => $user,
-                'userPosts'   => $posts,
-                'friends'     => $friends,
+                'user' => $user,
+                'userPosts' => $posts,
+                'friends' => $friends,
                 'friendsUser' => $friendsUser
             ]);
         }
     }
 
-    public function renderView(string $view, array $data = []): void {
+    public function renderView(string $view, array $data = []): void
+    {
         parent::renderView($view, $data);
     }
 }

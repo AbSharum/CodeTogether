@@ -19,7 +19,7 @@
 <body>
     <canvas id="matrix-canvas"></canvas>
     <!--NavBar-->
-    <?php include __DIR__ .'/../includes/navbar.php'; ?>
+    <?php include __DIR__ . '/../includes/navbar.php'; ?>
     <!--end of navigation-->
 
     <div class="container py-5">
@@ -29,7 +29,8 @@
                 <!--profile summary card-->
                 <div class="profile-card text-center mb-4">
                     <!-- if we get some avatar cards stored into the db we can use this just update the img src -->
-                    <img src="https://placehold.co/120x120/4a5568/ffffff?text=<?= substr($data['user']->getUserName(), 0, 1) ?>" alt="Profile Avatar" class="profile-avatar mx-auto d-block">
+                    <img src="https://placehold.co/120x120/4a5568/ffffff?text=<?= substr($data['user']->getUserName(), 0, 1) ?>"
+                        alt="Profile Avatar" class="profile-avatar mx-auto d-block">
                     <!--will need to change this info its just a placeholder as well-->
                     <h2 class="mb-0 text-white"><?= htmlspecialchars($data['user']->getUserName()) ?></h2>
                     <!--will need to change this info its just a placeholder as well-->
@@ -48,13 +49,13 @@
                             <small class="text-white">Friends</small>
                         </div>
                         <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['friendPosts'])) ?>
+                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['userPosts'])) ?>
                             </h3>
                             <small class="text-white">Posts</small>
                         </div>
                     </div>
                     <a href="index.php?action=addPost" class="btn btn-success w-100 mt-3 rounded-pill">
-                    <i class="fas fa-plus me-2"></i> Add New Post
+                        <i class="fas fa-plus me-2"></i> Add New Post
                     </a>
                 </div>
                 <!--end of profile card-->
@@ -80,7 +81,7 @@
             <div class="col-lg-6 mb-4 order-lg-2 order-3">
                 <h3 class="mb-4 text-white">Latest Posts</h3>
                 <!--php integration for posts somewhat complete. I added some fake posts and got them to display, but it could use some work this need comments to show up properly, and the ability to display image/video-->
-                <?php foreach ($data['friendPosts'] as $post): ?>
+                <?php foreach ($data['userAndFriendPosts'] as $post): ?>
                     <div class="post-card">
                         <p class="fw-bold text-white mb-1">
                             <?= htmlspecialchars($post->getUsername()) ?>
@@ -92,12 +93,12 @@
 
                         <?php if (!empty($post->getContents())): ?>
                             <?php
-                               $filePath = '/public/uploads/' . $post->getContents();
-                                $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+                            $filePath = '/public/uploads/' . $post->getContents();
+                            $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                             ?>
-                            <?php if (in_array(strtolower($extension), ['jpg','jpeg','png','gif'])): ?>
+                            <?php if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif'])): ?>
                                 <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
-                            <?php elseif (in_array(strtolower($extension), ['mp4','webm','ogg'])): ?>
+                            <?php elseif (in_array(strtolower($extension), ['mp4', 'webm', 'ogg'])): ?>
                                 <video controls class="w-100 rounded mb-2">
                                     <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">
                                     Your browser does not support the video tag.
@@ -105,11 +106,21 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <div class="d-flex gap-3">
-                            <span class="text-white">
-                                <i class="fas fa-heart text-danger me-1"></i>
-                                <?= htmlspecialchars($post->getLikes()) ?>
-                            </span>
+                        <div class="d-flex gap-3 align-items-center">
+                            <?php
+                            $isLiked = in_array($post->getPostID(), $data['likedPosts']);
+                            $heartClass = $isLiked ? 'text-danger' : 'text-secondary';
+                            ?>
+                            <form action="index.php?action=likePost" method="POST" class="d-inline">
+                                <input type="hidden" name="action" value="likePost">
+                                <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
+                                <button type="submit" class="btn btn-sm btn-link text-decoration-none text-white p-0">
+                                    <i class="fas fa-heart <?= $heartClass ?> me-1"></i>
+                                    <?= htmlspecialchars($post->getLikes()) ?>
+                                </button>
+                            </form>
+
+
                             <span class="text-white">
                                 <i class="fas fa-comment me-1"></i> 12
                             </span>
@@ -138,13 +149,14 @@
                             $statusText = 'Away';
                         }
                         ?>
-                        <!-- href="index.php?action=accountSettings" --> 
-                         <!-- href="public/profile_page/profile.php?user_id=<?= $friendUser->getUserID(); ?>" -->
-                        <div class="friend-item d-flex align-items-center mb-2" data-friend-id="<?= $friendUser->getUserID(); ?>">
-                            <a href="index.php?action=profile&user_id=<?= $friendUser->getUserID(); ?>" class="d-flex align-items-center text-decoration-none flex-grow-1">
+                        <!-- href="index.php?action=accountSettings" -->
+                        <!-- href="public/profile_page/profile.php?user_id=<?= $friendUser->getUserID(); ?>" -->
+                        <div class="friend-item d-flex align-items-center mb-2"
+                            data-friend-id="<?= $friendUser->getUserID(); ?>">
+                            <a href="index.php?action=profile&user_id=<?= $friendUser->getUserID(); ?>"
+                                class="d-flex align-items-center text-decoration-none flex-grow-1">
                                 <img src="https://placehold.co/40x40/<?= $imageColor ?>/ffffff?text=<?= substr($friendUser->getUserName(), 0, 1) ?>"
-                                    alt="Friend Avatar"
-                                    class="friend-avatar me-2 rounded-circle">
+                                    alt="Friend Avatar" class="friend-avatar me-2 rounded-circle">
                                 <div>
                                     <div class="fw-bold text-white">
                                         <?= htmlspecialchars($friendUser->getUserName()); ?>
@@ -152,8 +164,7 @@
                                     <small class="<?= $statusClass; ?>"><?= $statusText; ?></small>
                                 </div>
                             </a>
-                            <button class="btn btn-sm chat-open-btn ms-2"
-                                    data-friend-id="<?= $friendUser->getUserID(); ?>">
+                            <button class="btn btn-sm chat-open-btn ms-2" data-friend-id="<?= $friendUser->getUserID(); ?>">
                                 <i class="fas fa-comment text-info"></i>
                             </button>
                         </div>
@@ -201,7 +212,7 @@
                 xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
                 crossorigin="anonymous"></script>
             <script src="/public/js/home.js"></script>
-            
+
 </body>
 
 </html>

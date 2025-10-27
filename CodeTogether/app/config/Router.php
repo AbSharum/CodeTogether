@@ -2,10 +2,12 @@
 declare(strict_types=1);
 include_once __DIR__ . "/Controller.php";
 
-class Router {
+class Router
+{
     public $controllers;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->showErrors(0);
         $this->controllers = [];
         if (session_status() === PHP_SESSION_NONE) {
@@ -13,7 +15,8 @@ class Router {
         }
     }
 
-    public function run(): void {
+    public function run(): void
+    {
         $action = $_REQUEST['action'] ?? 'default';
 
         $this->authCheck($action);
@@ -26,18 +29,20 @@ class Router {
         $controller->performAction();
     }
 
-    public function addController(string $action, Controller $controller): void {
+    public function addController(string $action, Controller $controller): void
+    {
         $this->controllers[$action] = $controller;
     }
 
-    public function authCheck(string $action): void {
+    public function authCheck(string $action): void
+    {
         $protectedRoutes = [
-            'home' => ['student','teacher','moderator'],
-            'accountSettings' => ['student','teacher','moderator'],
-            'messages' => ['student','teacher','moderator'],
-            'game' => ['student','teacher','moderator'],
-            'profile' => ['student','teacher','moderator'],
-            'search' => ['student','teacher','moderator']
+            'home' => ['student', 'teacher', 'moderator'],
+            'accountSettings' => ['student', 'teacher', 'moderator'],
+            'messages' => ['student', 'teacher', 'moderator'],
+            'game' => ['student', 'teacher', 'moderator'],
+            'profile' => ['student', 'teacher', 'moderator'],
+            'search' => ['student', 'teacher', 'moderator']
         ];
 
         if (isset($protectedRoutes[$action])) {
@@ -54,7 +59,8 @@ class Router {
         }
     }
 
-    public function showErrors(int $debug): void {
+    public function showErrors(int $debug): void
+    {
         if ($debug === 1) {
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);

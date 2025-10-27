@@ -34,7 +34,7 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users"
                             type="button" role="tab" aria-controls="users" aria-selected="true">
-                            Users (<?= count($users ?? [])?>)
+                            Users (<?= count($users ?? []) ?>)
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -97,13 +97,13 @@
                                                     value="<?= htmlspecialchars($user->getUserId()) ?>">
                                                 <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
                                                 <input type="hidden" name="task" value="block">
-                                            </form> 
+                                            </form>
                                             <form method="POST" action="index.php?action=search" class="d-inline">
-                                            <input type="hidden" name="friendId"
-                                                value="<?= htmlspecialchars($user->getUserId()) ?>">
-                                            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
-                                            <input type="hidden" name="task" value="remove">
-                                            <button type="submit" class="btn btn-warning btn-sm">Remove Friend</button>
+                                                <input type="hidden" name="friendId"
+                                                    value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+                                                <input type="hidden" name="task" value="remove">
+                                                <button type="submit" class="btn btn-warning btn-sm">Remove Friend</button>
                                             </form>
                                             <form method="POST" action="index.php?action=search" class="d-inline">
                                                 <input type="hidden" name="friendId"
@@ -166,22 +166,34 @@
                                     <?php if (!empty($post->getContents())): ?>
                                         <?php
                                         $filePath = '/public/uploads/' . $post->getContents();
-                                            $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+                                        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                                         ?>
-                                        <?php if (in_array(strtolower($extension), ['jpg','jpeg','png','gif'])): ?>
-                                            <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
-                                        <?php elseif (in_array(strtolower($extension), ['mp4','webm','ogg','mov'])): ?>
+                                        <?php if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif'])): ?>
+                                            <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2"
+                                                alt="Post file">
+                                        <?php elseif (in_array(strtolower($extension), ['mp4', 'webm', 'ogg', 'mov'])): ?>
                                             <video controls class="w-100 rounded mb-2">
-                                                <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">
+                                                <source src="<?= htmlspecialchars($filePath) ?>"
+                                                    type="video/<?= strtolower($extension) ?>">
                                                 Your browser does not support the video tag.
                                             </video>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                     <div class="d-flex gap-3">
-                                        <span class="text-white">
-                                            <i class="fas fa-heart text-danger me-1"></i>
-                                            <?= htmlspecialchars($post->getLikes()) ?>
-                                        </span>
+                                        <?php
+                                        $isLiked = in_array($post->getPostID(), $data['likedPosts']);
+                                        $heartClass = $isLiked ? 'text-danger' : 'text-secondary';
+                                        ?>
+                                        <form action="index.php?action=likePost" method="POST" class="d-inline">
+                                            <input type="hidden" name="action" value="likePost">
+                                            <input type="hidden" name="redirect" value="<?= $_SERVER['REQUEST_URI']; ?>">
+                                            <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
+                                            <button type="submit"
+                                                class="btn btn-sm btn-link text-decoration-none text-white p-0">
+                                                <i class="fas fa-heart <?= $heartClass ?> me-1"></i>
+                                                <?= htmlspecialchars($post->getLikes()) ?>
+                                            </button>
+                                        </form>
                                         <span class="text-white">
                                             <i class="fas fa-comment me-1"></i> 12
                                         </span>

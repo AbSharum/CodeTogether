@@ -13,9 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/public/css/home.css">
@@ -28,7 +27,8 @@
     <!-- Navbar -->
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-    <div class="container d-flex align-items-center justify-content-center vh-100 position-relative" style="z-index: 1;">
+    <div class="container d-flex align-items-center justify-content-center vh-100 position-relative"
+        style="z-index: 1;">
         <div class="card p-4 mx-4" style="max-width: 400px;">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Create a Post</h2>
@@ -73,7 +73,7 @@
 
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-secondary"
-                            onclick="window.location.href='index.php?action=home'">
+                        onclick="window.location.href='index.php?action=home'">
                         Return to Home
                     </button>
                 </div>
@@ -84,4 +84,5 @@
     <script src="/public/js/createAccount.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

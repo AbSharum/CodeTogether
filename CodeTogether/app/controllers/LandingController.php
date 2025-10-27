@@ -1,16 +1,20 @@
 <?php
-    declare(strict_types=1);
+declare(strict_types=1);
 
-    class LandingController extends Controller {
+class LandingController extends Controller
+{
 
-        public function performAction(): void {
-            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $this->renderView('landing');
-            }
-        }
-
-        public function renderView(string $view, array $data = []): void {
-            parent::renderView($view,$data);;
+    public function performAction(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->renderView('landing');
         }
     }
+
+    public function renderView(string $view, array $data = []): void
+    {
+        parent::renderView($view, $data);
+        ;
+    }
+}
 ?>

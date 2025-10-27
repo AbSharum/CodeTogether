@@ -15,6 +15,7 @@ services:
       - mariadb
     networks:
       - app-network
+    user: "${UID}:${GID}"
 
   mariadb:
     image: mariadb:latest

@@ -19,131 +19,149 @@
 <body>
     <canvas id="matrix-canvas"></canvas>
     <!--NavBar-->
-    <?php include __DIR__ .'/../includes/navbar.php'; ?>
+    <?php include __DIR__ . '/../includes/navbar.php'; ?>
     <!--end of navigation-->
 
-<div class="container-fluid container-lg py-5">
+    <div class="container-fluid container-lg py-5">
         <!--the challenge box-->
-    <div class="challenge-box"> 
-        <div class="row justify-content-center">   
-            <div class="col-12 col-mid-10 p-2">
-                <h1 class="text-2xl font-bold text-teal-400 mb-2">The Challenge</h1>
-                <p class="text-lg">Implement a function that will recursively add all elements of an integer array.</p>
-                <p class="mt-4 text-xs text-secondary">Word Count: 500 | Difficulty: beginner</p>
-            </div> 
-        </div>
-    </div>
-    
-
-    <!-- 2. Control Row (Switch | Timer | Switch) equal width between them-->
-    <div class="row justify-content-center align-items-center mb-5 gx-3">
-    
-        <!-- Left Switch Box -->
-        <div class="col-4  col-md-3 d-flex justify-content-center">
-            <button class="switchA w-75">Switch A</button><!--needs to be connected to the players in team A to be able to swap-->
+        <div class="challenge-box">
+            <div class="row justify-content-center">
+                <div class="col-12 col-mid-10 p-2">
+                    <h1 class="text-2xl font-bold text-teal-400 mb-2">The Challenge</h1>
+                    <p class="text-lg">Implement a function that will recursively add all elements of an integer array.
+                    </p>
+                    <p class="mt-4 text-xs text-secondary">Word Count: 500 | Difficulty: beginner</p>
+                </div>
+            </div>
         </div>
 
-        <!-- Center Timer Box (2 Columns visual width) -->
-        <div class="col-4 col-md-4 d-flex justify-content-center">
-            <div id="countdown-timer" class="timer-box mx-auto">15:00</div>
+
+        <!-- 2. Control Row (Switch | Timer | Switch) equal width between them-->
+        <div class="row justify-content-center align-items-center mb-5 gx-3">
+
+            <!-- Left Switch Box -->
+            <div class="col-4  col-md-3 d-flex justify-content-center">
+                <button class="switchA w-75">Switch
+                    A</button><!--needs to be connected to the players in team A to be able to swap-->
+            </div>
+
+            <!-- Center Timer Box (2 Columns visual width) -->
+            <div class="col-4 col-md-4 d-flex justify-content-center">
+                <div id="countdown-timer" class="timer-box mx-auto">15:00</div>
+            </div>
+
+            <!-- Right Switch Box (2 Columns visual width) -->
+            <div class="col-4 col-md-4 d-flex justify-content-center">
+                <button class="switchB w-75">Switch B</button>
+                <!--needs to be connected to the players in team B to be able to swap-->
+            </div>
         </div>
 
-        <!-- Right Switch Box (2 Columns visual width) -->
-        <div class="col-4 col-md-4 d-flex justify-content-center">
-            <button class="switchB w-75">Switch B</button> <!--needs to be connected to the players in team B to be able to swap-->
-        </div>
-    </div>
-    
-     <!-- 3. Main Coding Row (12-Column Grid for Desktop) -->
-    <div class="row justify-content-center align-items-stretch g-3">
-        <!--Team A info-->
-        <div class="col-12 col-md-2 d-flex flex-column align-items-md-start align-items-center">
-            <div class="team-info-box teamA-style w-100">
-                <h2 class="text-xl font-bold text-green-400 mb-4 text-center text-md-start">Team A</h2>
-                <!-- User Profiles -->
-                <div class="space-y-3 d-flex flex-column align-items-start align-items-md-start">
-                    <div class="d-flex align-items-center space-x-3 mb-2">
-                        <img src="https://placehold.co/40x40/000000/FFFFFF?text=J" class="profile-pic" onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=J'" alt="User Profile J"> <!--needs db info -->
-                        <span class="text-sm">Jona H. (Captain)</span>
+        <!-- 3. Main Coding Row (12-Column Grid for Desktop) -->
+        <div class="row justify-content-center align-items-stretch g-3">
+            <!--Team A info-->
+            <div class="col-12 col-md-2 d-flex flex-column align-items-md-start align-items-center">
+                <div class="team-info-box teamA-style w-100">
+                    <h2 class="text-xl font-bold text-green-400 mb-4 text-center text-md-start">Team A</h2>
+                    <!-- User Profiles -->
+                    <div class="space-y-3 d-flex flex-column align-items-start align-items-md-start">
+                        <div class="d-flex align-items-center space-x-3 mb-2">
+                            <img src="https://placehold.co/40x40/000000/FFFFFF?text=J" class="profile-pic"
+                                onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=J'"
+                                alt="User Profile J"> <!--needs db info -->
+                            <span class="text-sm">Jona H. (Captain)</span>
+                        </div>
+                        <div class="d-flex align-items-center space-x-3 mb-2">
+                            <img src="https://placehold.co/40x40/000000/FFFFFF?text=K" class="profile-pic"
+                                onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=K'"
+                                alt="User Profile K"> <!--needs db info -->
+                            <span class="text-sm">Kira M.</span>
+                        </div>
+                        <div class="d-flex align-items-center space-x-3 mb-2">
+                            <img src="https://placehold.co/40x40/000000/FFFFFF?text=A" class="profile-pic"
+                                onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=A'"
+                                alt="User Profile A"> <!--needs db info -->
+                            <span class="text-sm">Alex R.</span>
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center space-x-3 mb-2">
-                        <img src="https://placehold.co/40x40/000000/FFFFFF?text=K" class="profile-pic" onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=K'" alt="User Profile K"> <!--needs db info -->
-                        <span class="text-sm">Kira M.</span>
-                    </div>
-                    <div class="d-flex align-items-center space-x-3 mb-2">
-                        <img src="https://placehold.co/40x40/000000/FFFFFF?text=A" class="profile-pic" onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=A'" alt="User Profile A"> <!--needs db info -->
-                        <span class="text-sm">Alex R.</span>
+                </div>
+            </div>
+            <!-- Team A Code Editor (3 Columns) -->
+            <div class="col-12 col-md-4">
+                <div class="code-box">
+                    <textarea placeholder="// Team A Code Here..."></textarea>
+                </div>
+            </div>
+            <!-- Team B Code Editor (4 Columns) -->
+            <div class="col-12 col-md-4">
+                <div class="code-box">
+                    <textarea placeholder="// Team B Code Here..."></textarea>
+                </div>
+            </div>
+
+            <!-- Team B Info (2 Columns) -->
+            <div class="col-12 col-md-2 d-flex flex-column align-items-md-end align-items-center">
+                <div class="team-info-box teamB-style w-100">
+                    <h2 class="text-xl font-bold text-danger mb-4 text-center text-md-end">Team B</h2>
+                    <!-- User Profiles -->
+                    <div class="space-y-3 d-flex flex-column align-items-end align-items-md-end">
+                        <div class="d-flex align-items-center space-x-3 mb-2">
+                            <span class="text-sm text-md-end me-2">Sam L. (Captain)</span>
+                            <img src="https://placehold.co/40x40/000000/FFFFFF?text=S" class="profile-pic"
+                                onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=S'"
+                                alt="User Profile S">
+                        </div>
+                        <div class="d-flex align-items-center space-x-3 mb-2">
+                            <span class="text-sm text-md-end me-2">Ben V.</span>
+                            <img src="https://placehold.co/40x40/000000/FFFFFF?text=B" class="profile-pic"
+                                onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=B'"
+                                alt="User Profile B">
+                        </div>
+                        <div class="d-flex align-items-center space-x-3 mb-2">
+                            <span class="text-sm text-md-end me-2">Mia G.</span>
+                            <img src="https://placehold.co/40x40/000000/FFFFFF?text=M" class="profile-pic"
+                                onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=M'"
+                                alt="User Profile M">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Team A Code Editor (3 Columns) -->
-        <div class="col-12 col-md-4">
-            <div class="code-box">
-                <textarea placeholder="// Team A Code Here..."></textarea>
-            </div>
-        </div>
-        <!-- Team B Code Editor (4 Columns) -->
-        <div class="col-12 col-md-4">
-            <div class="code-box">
-                <textarea placeholder="// Team B Code Here..."></textarea>
-            </div>
-        </div>
 
-        <!-- Team B Info (2 Columns) -->
-        <div class="col-12 col-md-2 d-flex flex-column align-items-md-end align-items-center">
-            <div class="team-info-box teamB-style w-100">
-                <h2 class="text-xl font-bold text-danger mb-4 text-center text-md-end">Team B</h2>
-                <!-- User Profiles -->
-                <div class="space-y-3 d-flex flex-column align-items-end align-items-md-end">
-                    <div class="d-flex align-items-center space-x-3 mb-2">
-                        <span class="text-sm text-md-end me-2">Sam L. (Captain)</span>
-                        <img src="https://placehold.co/40x40/000000/FFFFFF?text=S" class="profile-pic" onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=S'" alt="User Profile S">
-                    </div>
-                    <div class="d-flex align-items-center space-x-3 mb-2">
-                        <span class="text-sm text-md-end me-2">Ben V.</span>
-                        <img src="https://placehold.co/40x40/000000/FFFFFF?text=B" class="profile-pic" onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=B'" alt="User Profile B">
-                    </div>
-                    <div class="d-flex align-items-center space-x-3 mb-2">
-                        <span class="text-sm text-md-end me-2">Mia G.</span>
-                        <img src="https://placehold.co/40x40/000000/FFFFFF?text=M" class="profile-pic" onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=M'" alt="User Profile M">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. Moderator Box and Winner Box (now in a row below the main content) -->
-    <!-- will need db info and php here too for moderator -->
-    <!-- moderator has control only for the timer to start. must click the timer to begin countdown-->
-    <div class="row justify-content-center mt-5 mb-4 g-3">
-        <div class="col-12 d-flex justify-content-center">
-            <div class="box w-100 p-3 d-flex align-items-center rounded-3xl" style="background-color: rgba(0, 0, 100, 0.4); max-width: 400px;>
-                <img src="https://placehold.co/50x50/000000/FFFFFF?text=MOD" class="profile-pic" style="width: 50px; height: 50px; border-color: #0307ff;" alt="Moderator Profile">
-                <div class="ms-3">
-                    <span class="font-bold text-lg text-info d-block">Moderator</span>
-                    <span class="text-sm text-light">Control Panel Active</span>
-                </div>
-            </div>
-        </div>
-        <!--Winner box-->
-        <div class="row justify-content-center mb-5 g-3">
+        <!-- 4. Moderator Box and Winner Box (now in a row below the main content) -->
+        <!-- will need db info and php here too for moderator -->
+        <!-- moderator has control only for the timer to start. must click the timer to begin countdown-->
+        <div class="row justify-content-center mt-5 mb-4 g-3">
             <div class="col-12 d-flex justify-content-center">
-                <div class="box w-100 p-3 flex-column text-center rounded-3x1 h-100" style="background-color: rgba(45, 55, 72, 0.95); max-width: 450px;">
-                <span class="text-3xl font-extrabold text-danger">WINNER</span>
-                <span class="text-xs mt-2 text-light">Final results displayed here.</span>
+                <div class="box w-100 p-3 d-flex align-items-center rounded-3xl" style="background-color: rgba(0, 0, 100, 0.4); max-width: 400px;>
+                <img src=" https://placehold.co/50x50/000000/FFFFFF?text=MOD" class="profile-pic"
+                    style="width: 50px; height: 50px; border-color: #0307ff;" alt="Moderator Profile">
+                    <div class="ms-3">
+                        <span class="font-bold text-lg text-info d-block">Moderator</span>
+                        <span class="text-sm text-light">Control Panel Active</span>
+                    </div>
+                </div>
             </div>
+            <!--Winner box-->
+            <div class="row justify-content-center mb-5 g-3">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="box w-100 p-3 flex-column text-center rounded-3x1 h-100"
+                        style="background-color: rgba(45, 55, 72, 0.95); max-width: 450px;">
+                        <span class="text-3xl font-extrabold text-danger">WINNER</span>
+                        <span class="text-xs mt-2 text-light">Final results displayed here.</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
 
-</div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
-        crossorigin="anonymous"></script>
-    <script src="/public/js/games.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
+            crossorigin="anonymous"></script>
+        <script src="/public/js/games.js"></script>
 </body>
+
 </html>

@@ -3,14 +3,17 @@ require_once __DIR__ . '/../config/DbConn.php';
 require_once __DIR__ . '/../dao/PostDAO.php';
 require_once __DIR__ . '/../config/EventDispatcher.php';
 
-class ProfileDAO {
+class ProfileDAO
+{
     private mysqli $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conn = Database::getConnection();
     }
 
-    public function getUserData(int $userId): ?array {
+    public function getUserData(int $userId): ?array
+    {
         $stmt = $this->conn->prepare("SELECT username, email, points, status FROM user WHERE user_id = ?");
         $stmt->bind_param("i", $userId);
         $stmt->execute();
@@ -19,7 +22,8 @@ class ProfileDAO {
         return $result ?: null;
     }
 
-    public function getFollowerCount(int $userId): int {
+    public function getFollowerCount(int $userId): int
+    {
         $stmt = $this->conn->prepare(
             "SELECT 
                 COUNT(*) AS friends
@@ -33,15 +37,17 @@ class ProfileDAO {
         $stmt->execute();
         $count = $stmt->get_result()->fetch_assoc()['friends'] ?? 0;
         $stmt->close();
-        return (int)$count;
+        return (int) $count;
     }
 
-    public function getUserPosts(int $userId): array {
+    public function getUserPosts(int $userId): array
+    {
         $postDAO = new PostDAO();
         return $postDAO->getPostsByUser($userId);
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         Database::close();
     }
 }

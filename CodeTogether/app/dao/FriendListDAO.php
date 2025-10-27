@@ -19,7 +19,7 @@ class FriendListDAO
 
         if ($this->friendshipExists($user1, $user2)) {
             return false;
-        } elseif($this->relationShipExists($user1,$user2)) {
+        } elseif ($this->relationShipExists($user1, $user2)) {
             $stmt = $conn->prepare("UPDATE 
                 friend_list SET status = 'pending' WHERE user_id_1 = ? AND user_id_2 = ?
             ");
@@ -50,7 +50,7 @@ class FriendListDAO
 
         $conn = Database::getConnection();
         $stmt = $conn->prepare("UPDATE friend_list SET status = 'friends' WHERE user_id_1 = ? AND user_id_2 = ? AND status = 'pending'");
-        $stmt->bind_param("ii",  $user1, $user2);
+        $stmt->bind_param("ii", $user1, $user2);
         $stmt->execute();
         $success = $stmt->affected_rows > 0;
         $stmt->close();
@@ -66,7 +66,7 @@ class FriendListDAO
 
         $conn = Database::getConnection();
         $stmt = $conn->prepare("UPDATE friend_list SET status = 'not-friends', initiated_by = -1 WHERE user_id_1 = ? AND user_id_2 = ?");
-        $stmt->bind_param("ii",  $user1, $user2);
+        $stmt->bind_param("ii", $user1, $user2);
         $stmt->execute();
         $success = $stmt->affected_rows > 0;
         $stmt->close();
