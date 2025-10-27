@@ -2,9 +2,11 @@
 declare(strict_types=1);
 require_once __DIR__ . '/../config/DbConn.php';
 require_once __DIR__ . '/../models/Friend.php';
-class FriendListDAO {
+class FriendListDAO
+{
 
-    public function sendFriendRequest(int $userID, int $friendID): bool {
+    public function sendFriendRequest(int $userID, int $friendID): bool
+    {
         $user1 = min($userID, $friendID);
         $user2 = max($userID, $friendID);
 
@@ -13,16 +15,23 @@ class FriendListDAO {
         }
 
         $conn = Database::getConnection();
+        $stmt = null;
 
         if ($this->friendshipExists($user1, $user2)) {
             return false;
+        } elseif($this->relationShipExists($user1,$user2)) {
+            $stmt = $conn->prepare("UPDATE 
+                friend_list SET status = 'pending' WHERE user_id_1 = ? AND user_id_2 = ?
+            ");
+            $stmt->bind_param("ii", $user1, $user2);
+        } else {
+            $stmt = $conn->prepare("INSERT 
+                INTO friend_list (user_id_1, user_id_2, status,initiated_by)
+                VALUES (?, ?, 'pending',?)
+            ");
+            $stmt->bind_param("iii", $user1, $user2, $userID);
         }
 
-        $stmt = $conn->prepare("INSERT 
-            INTO friend_list (user_id_1, user_id_2, status,initiated_by)
-            VALUES (?, ?, 'pending',?)
-        ");
-        $stmt->bind_param("iii", $user1, $user2, $userID);
         $success = $stmt->execute();
         $stmt->close();
 
@@ -30,7 +39,8 @@ class FriendListDAO {
     }
 
     // Accept a pending friend request
-    public function acceptFriendRequest(int $userID, int $friendID, String $status): bool {
+    public function acceptFriendRequest(int $userID, int $friendID): bool
+    {
         $user1 = min($userID, $friendID);
         $user2 = max($userID, $friendID);
 
@@ -39,8 +49,8 @@ class FriendListDAO {
         }
 
         $conn = Database::getConnection();
-        $stmt = $conn->prepare("UPDATE friend_list SET status = ? WHERE user_id_1 = ? AND user_id_2 = ? AND status = 'pending'");
-        $stmt->bind_param("sii", $status, $user1, $user2);
+        $stmt = $conn->prepare("UPDATE friend_list SET status = 'friends' WHERE user_id_1 = ? AND user_id_2 = ? AND status = 'pending'");
+        $stmt->bind_param("ii",  $user1, $user2);
         $stmt->execute();
         $success = $stmt->affected_rows > 0;
         $stmt->close();
@@ -49,13 +59,14 @@ class FriendListDAO {
         return $success;
     }
 
-    public function removeFriend(int $userID, int $friendID): bool {
+    public function removeFriend(int $userID, int $friendID): bool
+    {
         $user1 = min($userID, $friendID);
         $user2 = max($userID, $friendID);
 
         $conn = Database::getConnection();
-        $stmt = $conn->prepare("UPDATE friend_list SET status = 'not-friends' WHERE user_id_1 = ? AND user_id_2 = ?");
-        $stmt->bind_param("ii", $user1, $user2);
+        $stmt = $conn->prepare("UPDATE friend_list SET status = 'not-friends', initiated_by = -1 WHERE user_id_1 = ? AND user_id_2 = ?");
+        $stmt->bind_param("ii",  $user1, $user2);
         $stmt->execute();
         $success = $stmt->affected_rows > 0;
         $stmt->close();
@@ -64,7 +75,8 @@ class FriendListDAO {
     }
 
 
-    public function getAllRelationships(int $userID): array {
+    public function getAllRelationships(int $userID): array
+    {
         $conn = Database::getConnection();
         $stmt = $conn->prepare("SELECT 
                 CASE 
@@ -95,13 +107,14 @@ class FriendListDAO {
 
 
     // Block a user
-    public function blockUser(int $userID, int $friendID): bool {
+    public function blockUser(int $userID, int $friendID): bool
+    {
         $user1 = min($userID, $friendID);
         $user2 = max($userID, $friendID);
 
         $conn = Database::getConnection();
-        $stmt = $conn->prepare("UPDATE friend_list SET status = 'blocked' WHERE user_id_1 = ? AND user_id_2 = ?");
-        $stmt->bind_param("ii", $user1, $user2);
+        $stmt = $conn->prepare("UPDATE friend_list SET status = 'blocked', initiated_by = ? WHERE user_id_1 = ? AND user_id_2 = ?");
+        $stmt->bind_param("iii", $userID, $user1, $user2);
         $stmt->execute();
         $success = $stmt->affected_rows > 0;
         $stmt->close();
@@ -109,7 +122,25 @@ class FriendListDAO {
         return $success;
     }
 
-    public function getFriends(int $userID): array {
+
+    public function unblockUser(int $userID, int $friendID): bool
+    {
+        $user1 = min($userID, $friendID);
+        $user2 = max($userID, $friendID);
+
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("UPDATE friend_list SET status = 'not-friends' WHERE user_id_1 = ? AND user_id_2 = ? AND initiated_by = ?");
+        $stmt->bind_param("iii", $user1, $user2, $userID);
+        $stmt->execute();
+        $success = $stmt->affected_rows > 0;
+        $stmt->close();
+
+        return $success;
+    }
+
+
+    public function getFriends(int $userID): array
+    {
         $conn = Database::getConnection();
         $stmt = $conn->prepare("SELECT 
                 CASE 
@@ -143,7 +174,21 @@ class FriendListDAO {
         return $friends;
     }
 
-    public function friendshipExists(int $user1, int $user2): bool {
+    public function friendshipExists(int $user1, int $user2): bool
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM friend_list WHERE user_id_1 = ? AND user_id_2 = ? AND status = 'friends'");
+        $stmt->bind_param("ii", $user1, $user2);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        return $result['cnt'] > 0;
+    }
+
+
+    public function relationShipExists(int $user1, int $user2): bool
+    {
         $conn = Database::getConnection();
         $stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM friend_list WHERE user_id_1 = ? AND user_id_2 = ?");
         $stmt->bind_param("ii", $user1, $user2);
@@ -154,7 +199,8 @@ class FriendListDAO {
         return $result['cnt'] > 0;
     }
 
-    public function getPendingRequests(int $userID): array {
+    public function getPendingRequests(int $userID): array
+    {
         $conn = Database::getConnection();
         $stmt = $conn->prepare("SELECT 
                 CASE 
