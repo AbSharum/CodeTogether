@@ -48,8 +48,8 @@
                     <button type="button" class="btn btn-success"
                         onclick="window.location.href='index.php?action=createAccount'">Create Account</button>
                 </div>
-                <p class="mt-4"><a href="/public/legal/privacyPolicy.php">Privacy Policy</a></p><br>
-                <p><a href="/public/legal/terms.php">Terms and Conditions</a></p>
+                <p class="mt-4"><a href="index.php?action=privacyPolicy">Privacy Policy</a></p><br>
+                <p><a href="index.php?action=terms">Terms and Conditions</a></p>
             </div>
         </div>
     </div>
