@@ -32,6 +32,13 @@
                     }
                 }
 
+                if(($email)) {
+                    if(!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+                        $this->renderView('createAccount', ['error' => 'Must be a valid email address!']);
+                        return;
+                    }
+                }
+
 
                 if ($this->userDao->checkExistingEmail($email)) {
                     $this->renderView('createAccount', ['error' => $email .' is already associated with an account!']);

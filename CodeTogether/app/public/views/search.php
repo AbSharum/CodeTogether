@@ -34,7 +34,7 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users"
                             type="button" role="tab" aria-controls="users" aria-selected="true">
-                            Users (<?= count($users ?? []) + count($friendsUsers ?? []) - 1 ?>)
+                            Users (<?= count($users ?? [])?>)
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">

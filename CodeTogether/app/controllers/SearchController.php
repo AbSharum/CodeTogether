@@ -67,16 +67,11 @@
                     }
                 }
 
-                $friendsUsers = array_filter($users, fn($user) => $user->getStatus() === 'friends');
-
-
-
 
                 // Render view
                 $this->renderView("search", [
                     'posts' => $posts,
                     'users' => $users,
-                    'friendsUsers' => $friendsUsers,
                     'search' => $search,
                     'userID' => $userID
                 ]);
