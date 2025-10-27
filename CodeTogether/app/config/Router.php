@@ -36,7 +36,8 @@ class Router {
             'accountSettings' => ['student','teacher','moderator'],
             'messages' => ['student','teacher','moderator'],
             'game' => ['student','teacher','moderator'],
-            'profile' => ['student','teacher','moderator']
+            'profile' => ['student','teacher','moderator'],
+            'search' => ['student','teacher','moderator']
         ];
 
         if (isset($protectedRoutes[$action])) {
