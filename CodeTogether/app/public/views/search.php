@@ -12,9 +12,8 @@
     <!-- Google Font - Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/public/css/home.css">
 </head>
 
@@ -34,13 +33,13 @@
                 <ul class="nav nav-tabs mb-3" id="searchTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users"
-                                type="button" role="tab" aria-controls="users" aria-selected="true">
-                            Users (<?= count($users ?? []) + count($friendsUsers ?? []) -1 ?>)
+                            type="button" role="tab" aria-controls="users" aria-selected="true">
+                            Users (<?= count($users ?? []) + count($friendsUsers ?? []) - 1 ?>)
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts"
-                                type="button" role="tab" aria-controls="posts" aria-selected="false">
+                            type="button" role="tab" aria-controls="posts" aria-selected="false">
                             Posts (<?= count($posts ?? []) ?>)
                         </button>
                     </li>
@@ -50,42 +49,27 @@
 
                     <!-- USERS TAB -->
                     <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
-                        <?php if (empty($users) && empty($friendsUsers)): ?>
+                        <?php if (empty($users)): ?>
                             <p class="text-white">No users found.</p>
                         <?php else: ?>
-                        
-                            <!-- FRIEND USERS (already connected) -->
-                            <?php foreach ($friendsUsers as $user): ?>
-                                <?php if ($user->getStatus() !== 'blocked'): ?>
-                                    <div class="profile-card mb-3 p-3 d-flex align-items-start">
-                                        <img src="https://placehold.co/50x50/4a5568/ffffff?text=<?= substr($user->getUserName(), 0, 1) ?>"
-                                             alt="User Avatar" class="rounded-circle me-3">
-                                
-                                        <div>
-                                            <h5 class="mb-1 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
-                                            <small class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
-                                
-                                            <button class="btn btn-secondary btn-sm" disabled>Friends</button>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                                
-                            <!-- SEARCHED USERS (not yet friends) -->
+
+                            <!-- SEARCHED USERS -->
                             <?php foreach ($users as $user): ?>
                                 <?php
-                                    // skip self or blocked users
-                                    if ($user->getUserID() == $userID || $user->getStatus() === 'blocked') continue;
-                                    $status = $user->getStatus();
+                                // skip self
+                                if ($user->getUserID() == $userID)
+                                    continue;
+                                $status = $user->getStatus();
                                 ?>
                                 <div class="profile-card mb-3 p-3 d-flex align-items-start">
                                     <img src="https://placehold.co/50x50/4a5568/ffffff?text=<?= substr($user->getUserName(), 0, 1) ?>"
-                                         alt="User Avatar" class="rounded-circle me-3">
-                            
+                                        alt="User Avatar" class="rounded-circle me-3">
+
                                     <div>
                                         <h5 class="mb-1 text-white"><?= htmlspecialchars($user->getUserName()) ?></h5>
-                                        <small class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
-                            
+                                        <small
+                                            class="d-block text-white mb-2"><?= htmlspecialchars($user->getEmail()) ?></small>
+
                                         <?php if ($status === 'pending'): ?>
                                             <?php if ($user->getRequestInitiatorID() === $userID): ?>
                                                 <!-- You sent it -->
@@ -93,12 +77,14 @@
                                             <?php else: ?>
                                                 <!-- You received it -->
                                                 <form method="POST" action="index.php?action=search" class="d-inline">
-                                                    <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                    <input type="hidden" name="friendId"
+                                                        value="<?= htmlspecialchars($user->getUserId()) ?>">
                                                     <input type="hidden" name="task" value="accept">
                                                     <button type="submit" class="btn btn-success btn-sm">Accept</button>
                                                 </form>
                                                 <form method="POST" action="index.php?action=search" class="d-inline">
-                                                    <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                    <input type="hidden" name="friendId"
+                                                        value="<?= htmlspecialchars($user->getUserId()) ?>">
                                                     <input type="hidden" name="task" value="reject">
                                                     <button type="submit" class="btn btn-danger btn-sm">Reject</button>
                                                 </form>
@@ -106,19 +92,60 @@
 
                                         <?php elseif ($status === 'friends'): ?>
                                             <button class="btn btn-secondary btn-sm" disabled>Friends</button>
-                                        
+                                            <form method="POST" action="index.php?action=search" class="d-inline">
+                                                <input type="hidden" name="friendId"
+                                                    value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+                                                <input type="hidden" name="task" value="block">
+                                            </form> 
+                                            <form method="POST" action="index.php?action=search" class="d-inline">
+                                            <input type="hidden" name="friendId"
+                                                value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+                                            <input type="hidden" name="task" value="remove">
+                                            <button type="submit" class="btn btn-warning btn-sm">Remove Friend</button>
+                                            </form>
+                                            <form method="POST" action="index.php?action=search" class="d-inline">
+                                                <input type="hidden" name="friendId"
+                                                    value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+                                                <input type="hidden" name="task" value="block">
+                                                <button type="submit" class="btn btn-danger btn-sm">Block</button>
+                                            </form>
+
+                                        <?php elseif ($status === 'blocked'): ?>
+                                            <?php if ($user->getRequestInitiatorID() === $userID): ?>
+                                                <!-- You received it -->
+                                                <form method="POST" action="index.php?action=search" class="d-inline">
+                                                    <input type="hidden" name="friendId"
+                                                        value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                    <input type="hidden" name="task" value="unblock">
+                                                    <button type="submit" class="btn btn-success btn-sm">Unblock</button>
+                                                </form>
+                                            <?php endif; ?>
+                                            <button class="btn btn-danger btn-sm" disabled>Blocked</button>
+
+
                                         <?php else: ?>
-                                            <form method="POST" action="index.php?action=search" class="mb-0">
-                                                <input type="hidden" name="friendId" value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                            <form method="POST" action="index.php?action=search" class="d-inline">
+                                                <input type="hidden" name="friendId"
+                                                    value="<?= htmlspecialchars($user->getUserId()) ?>">
                                                 <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
                                                 <input type="hidden" name="task" value="request">
                                                 <button type="submit" class="btn btn-success btn-sm">Add Friend</button>
+                                            </form>
+                                            <form method="POST" action="index.php?action=search" class="d-inline">
+                                                <input type="hidden" name="friendId"
+                                                    value="<?= htmlspecialchars($user->getUserId()) ?>">
+                                                <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+                                                <input type="hidden" name="task" value="block">
+                                                <button type="submit" class="btn btn-danger btn-sm">Block</button>
                                             </form>
                                         <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
-                                        
+
                         <?php endif; ?>
                     </div>
 
@@ -171,9 +198,9 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-            crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <script src="/public/js/home.js"></script>
 </body>
 

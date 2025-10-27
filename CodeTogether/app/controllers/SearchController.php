@@ -29,9 +29,21 @@
                             $this->friendDao->sendFriendRequest($userID, $friendID);
                             break;
                         
-                        case 'accept':
-                            $this->friendDao->acceptFriendRequest($userID, $friendID, 'friends');
+                        case 'block':
+                            $this->friendDao->blockUser($userID, $friendID);
                             break;
+
+                        case 'unblock':
+                            $this->friendDao->unblockUser($userID, $friendID);
+                            break;
+                        
+                        case 'accept':
+                            $this->friendDao->acceptFriendRequest($userID, $friendID);
+                            break;
+
+                        case 'remove':
+                            $this->friendDao->removeFriend($userID, $friendID);
+                            break;    
                         
                         case 'reject':
                             $this->friendDao->removeFriend($userID, $friendID);
@@ -57,8 +69,6 @@
 
                 $friendsUsers = array_filter($users, fn($user) => $user->getStatus() === 'friends');
 
-                $friendIDs = array_map(fn($u) => $u->getUserId(), $friendsUsers);
-                $users = array_filter($users, fn($u) => !in_array($u->getUserId(), $friendIDs));
 
 
 
