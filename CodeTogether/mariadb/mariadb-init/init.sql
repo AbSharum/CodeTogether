@@ -178,7 +178,8 @@ INSERT INTO user (role_id, username, password, email, points) VALUES
 (1, 'Charlie', '$2y$10$szc7v.HH8paPYGc01BSTlO2pbitka4mdQ1PBHpbcaO5mM.CQZhp4S', 'charlie@example.com', 45),
 (1, 'Dave', '$2y$10$szc7v.HH8paPYGc01BSTlO2pbitka4mdQ1PBHpbcaO5mM.CQZhp4S', 'dave@example.com', 30),
 (1, 'Eve', '$2y$10$szc7v.HH8paPYGc01BSTlO2pbitka4mdQ1PBHpbcaO5mM.CQZhp4S', 'eve@example.com', 200),
-(1, 'abrahamsharum', '$2y$10$l9A2A/6gUe3L/j4ritpTde8n3Ta2h.B0Lfsv5E6qNmnqWIoc7Qy3q', 'abxbox13@gmail.com', 1000);
+(1, 'abrahamsharum', '$2y$10$l9A2A/6gUe3L/j4ritpTde8n3Ta2h.B0Lfsv5E6qNmnqWIoc7Qy3q', 'abxbox13@gmail.com', 1000),
+(1, 'seth', '$2y$10$l9A2A/6gUe3L/j4ritpTde8n3Ta2h.B0Lfsv5E6qNmnqWIoc7Qy3q', 'seth@matrixmail.com', 1000);
 
 -- Each user has one post
 INSERT INTO post (user_id, username, thread_id, contents, caption, visibility) VALUES
@@ -187,13 +188,15 @@ INSERT INTO post (user_id, username, thread_id, contents, caption, visibility) V
 (3, 'Charlie',1,'Hello from Charlie', 'Just chilling.', 'public'),
 (4, 'Dave',1,'Hello from Dave', 'Learning PHP today.', 'public'),
 (5, 'Eve',1,'Hello from Eve', 'Loving coding!', 'public'),
-(6, 'abrahamsharum',1,'Hello from Abraham', 'Test post for setup.', 'public');
+(6, 'abrahamsharum',1,'Hello from Abraham', 'Test post for setup.', 'public'),
+(7, 'seth',1,'Hello from Seth', 'This is crazy!', 'public');
 
 INSERT INTO friend_list (user_id_1, user_id_2, status) VALUES
 (1,2,'friends'), (1,3,'friends'), (1,4,'friends'), (1,5,'friends'), (1,6,'friends'),
 (2,3,'friends'), (2,4,'friends'), (2,5,'friends'), (2,6,'friends'),
 (3,4,'friends'), (3,5,'friends'), (3,6,'friends'),
 (4,5,'friends'), (4,6,'friends'),
-(5,6,'friends');
+(5,6,'friends'),
+(6,7,'friends');
 
 
