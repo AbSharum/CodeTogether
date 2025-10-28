@@ -11,6 +11,7 @@ CREATE TABLE user (
     profile_picture VARCHAR(255),
     username VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    about_me VARCHAR(255) Default 'I''m just a little panda :p',
     email VARCHAR(255) UNIQUE,
     points INT DEFAULT 0,
     is_deleted BOOLEAN DEFAULT FALSE,

@@ -65,14 +65,16 @@
                     <h4 class="text-info text-white d-flex justify-content-between align-items-center">
                         About Me
                     </h4>
-                    <!-- php integration will need to edit this stuff just a placeholder for now-->
-                    <div id="aboutMeContent" class="mb-3 text-white text-break">
-                        Just a CS major tryin to make it happen while being fully caffinated and two screamin babies!
-                    </div>
-                    <textarea id="aboutMeEditor" class="form-control" row="4"
-                        style="display: none; background-color: #4a4468; color: #fff; border: 1px solid #06a342; resize: none;">Just a CS major tryin to make it happen while being fully caffinated and two screamin babies!</textarea>
-                    <button id="editSaveBtn" class="btn btn-sm btn-outline-info rounded-pill w-100 mt-2">Edit</button>
+
+                    <form method="POST" action="index.php?action=home">
+                        <div class="mb-3">
+                            <textarea name="aboutMe" id="aboutMeEditor" rows="4" class="form-control mb-2"
+                                style="background-color: #4a4468; color: #fff; border: 1px solid #06a342; resize: none;"><?= htmlspecialchars($data['aboutMe'] ?? 'Nothing here yet!') ?></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-outline-info rounded-pill w-100">Save</button>
+                    </form>
                 </div>
+
                 <!--end of the about me box-->
             </div>
             <!--end of left column-->
