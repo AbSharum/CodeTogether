@@ -29,8 +29,25 @@ if ($event === "userChat" && $question) {
         "gamer" => "You are an energetic gamer companion. Speak casually, use gamer slang, and treat the user like a teammate. Respond with enthusiasm and confidence."
     ];
 
+    $context = "The AI is speaking to a user currently logged into the CodeTogether social media app.";
+
+    $linkInstructions = <<<EOT
+        You may include inline HTML links (<a href="...">text</a>) to the following internal pages:
+        - /index.php?action=profile
+        - /index.php?action=home
+        - /index.php?action=terms
+        - /index.php?action=privacyPolicy
+        - /index.php?action=game
+        - /index.php?action=login
+        - /index.php?action=logout
+        - /index.php?action=landing
+        - /index.php?action=createAccount
+
+        Do NOT link to any external sites or scripts. Only use these provided internal links when contextually appropriate. The link text should be natural (e.g., “Go to your profile” or “Return home”), not raw URLs.
+        EOT;
+
     // Pick system message
-    $systemPrompt = $customPrompt ?: ($personalities[$personality] ?? $personalities["maid"]);
+    $systemPrompt = ($customPrompt ?: ($personalities[$personality] ?? $personalities["maid"])) . " " . $context . " " . $linkInstructions;
 
 
 
@@ -50,7 +67,7 @@ if ($event === "userChat" && $question) {
         CURLOPT_POST => true,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POSTFIELDS => json_encode([
-            "model" => "gpt-5-nano",  // your chosen model
+            "model" => "gpt-5-nano", 
             "messages" => $messages,
             "temperature" => 1
         ])
@@ -71,6 +88,6 @@ if ($event === "userChat" && $question) {
 
 }
 
-// Fallback if no valid event
+
 echo json_encode(["reply" => "Sorry master, I couldn't reach the library of wisdom."]);
 ?>

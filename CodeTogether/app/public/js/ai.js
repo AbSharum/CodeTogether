@@ -129,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
     responseContainer.scrollTop = responseContainer.scrollHeight;
   }
 
-  // === Core AI request ===
   async function askAI(question) {
     try {
       const prompt = personalityPrompts[currentPersonality] || personalityPrompts.default;
@@ -156,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // === Form Submission ===
+
   aiForm.addEventListener("submit", async e => {
     e.preventDefault();
     const question = aiInput.value.trim();
@@ -168,12 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const reply = await askAI(question);
     appendResponse(reply);
-    showSpeech(getRandomLine()); // resets bubble chatter
+    showSpeech(getRandomLine()); 
 
     aiInput.value = "";
   });
 
-  // === Personality Menu ===
+
   aiImg.addEventListener("click", () =>
     showSpeech("Personal space! Robots have boundaries too.", true)
   );
