@@ -39,7 +39,7 @@ class AddPostController extends Controller
                 return;
             }
 
-            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'mp4'];
 
             if (!in_array($extension, $allowedExtensions)) {
                 $this->renderView('addPost', [
