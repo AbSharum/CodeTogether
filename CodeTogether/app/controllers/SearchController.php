@@ -47,7 +47,7 @@ class SearchController extends Controller
             }
 
             
-            $redirect = $_POST['redirect'] ?? "Location: index.php?action=search&search=" . urlencode($search);
+            $redirect = $_POST['redirect'] ??  "index.php?action=search&search=".$search;
             header("Location: $redirect");
             exit;
         }

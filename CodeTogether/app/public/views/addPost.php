@@ -47,8 +47,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="caption" class="form-label">Caption</label>
-                        <input type="text" class="form-control" id="caption" name="caption" required>
+                        <label for="caption" class="form-label">Contents</label>
+                        <input type="text" class="form-control" id="contents" name="contents" required>
                     </div>
 
                     <div class="mb-3">

@@ -18,7 +18,7 @@ class AddPostController extends Controller
             $this->renderView('addPost');
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $title = $_POST['title'] ?? '';
-            $contents = $_POST['caption'] ?? '';
+            $contents = $_POST['contents'] ?? '';
             $visibility = $_POST['visibility'] ?? '';
 
             $fileName = '';
