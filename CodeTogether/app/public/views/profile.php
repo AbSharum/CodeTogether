@@ -15,6 +15,8 @@
   <canvas id="matrix-canvas"></canvas>
 
   <?php include __DIR__ . '/../includes/navbar.php'; ?>
+  <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
+
 
   <main class="main container py-5">
     <div class="row justify-content-center">
@@ -127,10 +129,11 @@
             <?php endif; ?>
 
             <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
-                <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
-                <div class="text-white text-break" style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
-                    <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
-                </div>
+              <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
+              <div class="text-white text-break"
+                style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
+                <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
+              </div>
             </div>
           <?php endif; ?>
 
@@ -148,28 +151,52 @@
             <?php
             $statusClass = 'text-danger';
             $statusText = 'Offline';
-            $color = 'd9534f';
+            $imageColor = 'd9534f';
             if ($friendUser->getStatus() === 'online') {
               $statusClass = 'text-success';
               $statusText = 'Online';
-              $color = '5cb85c';
+              $imageColor = '5cb85c';
             } elseif ($friendUser->getStatus() === 'away') {
               $statusClass = 'text-warning';
               $statusText = 'Away';
-              $color = 'f0ad4e';
+              $imageColor = 'f0ad4e';
             }
             ?>
-            <div class="friend-item d-flex align-items-center mb-2">
+            <div class="friend-item d-flex align-items-center mb-2" data-friend-id="<?= $friendUser->getUserID(); ?>">
+
               <a href="index.php?action=profile&user_id=<?= $friendUser->getUserID(); ?>"
                 class="d-flex align-items-center text-decoration-none flex-grow-1">
-                <img
-                  src="https://placehold.co/40x40/<?= $color ?>/ffffff?text=<?= substr($friendUser->getUserName(), 0, 1) ?>"
-                  alt="Friend Avatar" class="friend-avatar me-2 rounded-circle">
+
+                <?php
+                $profilePic = $friendUser->getProfilePicture() ?? '';
+                $absolutePath = __DIR__ . '/../uploads/' . $profilePic;
+                $webPath = '/public/uploads/' . $profilePic;
+                $fileExists = !empty($profilePic) && file_exists($absolutePath);
+
+                // Fallback color + placeholder text (initial)
+                $initial = substr($friendUser->getUserName(), 0, 1);
+                $placeholderUrl = "https://placehold.co/40x40/{$imageColor}/ffffff?text={$initial}";
+                ?>
+
+                <?php if ($fileExists): ?>
+                  <img src="<?= htmlspecialchars($webPath) ?>" alt="" class="friend-avatar me-2 rounded-circle"
+                    style="width:40px; height:40px; object-fit:cover;">
+                <?php else: ?>
+                  <img src="<?= $placeholderUrl ?>" alt="Friend Avatar" class="friend-avatar me-2 rounded-circle"
+                    style="width:40px; height:40px; object-fit:cover;">
+                <?php endif; ?>
+
                 <div>
-                  <div class="fw-bold text-white"><?= htmlspecialchars($friendUser->getUserName()); ?></div>
+                  <div class="fw-bold text-white">
+                    <?= htmlspecialchars($friendUser->getUserName()); ?>
+                  </div>
                   <small class="<?= $statusClass; ?>"><?= $statusText; ?></small>
                 </div>
               </a>
+
+              <button class="btn btn-sm chat-open-btn ms-2" data-friend-id="<?= $friendUser->getUserID(); ?>">
+                <i class="fas fa-comment text-info"></i>
+              </button>
             </div>
           <?php endforeach; ?>
         </div>
@@ -206,7 +233,7 @@
                     Your browser does not support the video tag.
                   </video>
                 <?php endif; ?>
-                
+
               <?php endif; ?>
               <div class="d-flex gap-3 align-items-center">
                 <?php
@@ -214,20 +241,20 @@
                 $heartClass = $isLiked ? 'text-danger' : 'text-secondary';
                 ?>
                 <form action="index.php?action=likePost" method="POST" class="d-inline">
-                    <input type="hidden" name="action" value="likePost">
-                    <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
-                    <input type="hidden" name="redirect" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
-                    <button type="submit" class="btn btn-sm btn-link text-decoration-none text-white p-0">
-                        <i class="fas fa-heart <?= $heartClass ?> me-1"></i>
-                        <?= htmlspecialchars($post->getLikes()) ?>
-                    </button>
+                  <input type="hidden" name="action" value="likePost">
+                  <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
+                  <input type="hidden" name="redirect" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
+                  <button type="submit" class="btn btn-sm btn-link text-decoration-none text-white p-0">
+                    <i class="fas fa-heart <?= $heartClass ?> me-1"></i>
+                    <?= htmlspecialchars($post->getLikes()) ?>
+                  </button>
                 </form>
 
 
                 <span class="text-white">
-                    <i class="fas fa-comment me-1"></i> 12
+                  <i class="fas fa-comment me-1"></i> 12
                 </span>
-            </div>
+              </div>
             </div>
           <?php endforeach; ?>
         <?php endif; ?>
@@ -235,7 +262,6 @@
     </div>
   </main>
 
-  <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
   <script src="/public/js/ai.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
   <script src="/public/js/profile.js"></script>

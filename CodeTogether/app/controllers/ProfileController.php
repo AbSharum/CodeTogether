@@ -13,76 +13,37 @@ class ProfileController extends Controller
 
     public function performAction(): void
     {
-
-        // Initialize DAOs
         $this->userDao = new UserDAO();
         $this->postDao = new PostDAO();
         $this->friendDao = new FriendListDAO();
 
-        // --- Determine which profile to show ---
-        // If ?user_id= is provided in the URL, show that user's profile
-        // Otherwise, fall back to the logged-in user's profile
-        $userID = isset($_GET['user_id'])
-            ? (int) $_GET['user_id']
-            : (int) ($_SESSION['usercreds']['userID'] ?? 0);
+        $userID = $_GET['user_id'] ?? ($_SESSION['usercreds']['userID'] ?? 0);
+        if (!$userID) {
+            header('Location: index.php?action=login');
+            exit;
+        }   
 
-            if ($userID <= 0) {
-                // No valid ID? redirect or error
-                header('Location: index.php?action=login');
-                exit;
-            }
+        $userID = (int) $userID;
 
-            // --- Fetch main user profile data ---
-            $user = $this->userDao->getUserByID($userID);
-            if (!$user) {
-                http_response_code(404);
-                echo "User not found.";
-                return;
-            }
-
-            // --- Gather profile-related data ---
-            $posts = $this->postDao->getPostsByUser($userID);
-            $friends = $this->friendDao->getFriends($userID);
-            $friendsUser = $this->userDao->getFriendUsers($friends);
-            $loggedInID = $_SESSION['usercreds']['userID'] ?? 0;
-            $likedPosts = $this->postDao->getLikedPostIdsByUser($loggedInID);
-
-            // --- Render profile view (server-side) ---
-            $this->renderView("profile", [
-                'user' => $user,
-                'userPosts' => $posts,
-                'friends' => $friends,
-                'friendsUser' => $friendsUser,
-                'likedPosts' => $likedPosts
-            ]);
-        }
-
-        // --- Fetch main user profile data ---
-        $user = $this->userDao->getUserByID($userID);
+        $user = $this->userDao->getUserByID((int) $userID);
         if (!$user) {
             http_response_code(404);
             echo "User not found.";
             return;
         }
 
-        // --- Gather profile-related data ---
         $posts = $this->postDao->getPostsByUser($userID);
         $friends = $this->friendDao->getFriends($userID);
         $friendsUser = $this->userDao->getFriendUsers($friends);
+        $likedPosts = $this->postDao->getLikedPostIdsByUser($userID);
 
-        // --- Render profile view (server-side) ---
-        $this->renderView("profile", [
+        $this->renderView('profile', [
             'user' => $user,
-            'userPosts' => $posts,
             'friends' => $friends,
-            'friendsUser' => $friendsUser
+            'friendsUser' => $friendsUser,
+            'userPosts' => $posts,
+            'likedPosts' => $likedPosts
         ]);
-
-    }
-
-    public function renderView(string $view, array $data = []): void
-    {
-        parent::renderView($view, $data);
     }
 }
 ?>

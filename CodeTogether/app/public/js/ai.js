@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     butler: "/public/images/butler.webp",
     scientist: "/public/images/scientist.webp",
     gamer: "/public/images/gamer.webp",
-    default: "/public/images/default_ai.webp"
+    default: "/public/images/ProfilePicture_default.webp"
   };
 
   // === Helpers ===

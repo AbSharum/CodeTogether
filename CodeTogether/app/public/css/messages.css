@@ -57,3 +57,44 @@ body{
   margin-right: 10px;
   object-fit: cover;
 }
+
+#messageForm {
+  display: flex;
+  justify-content: center;      
+  align-items: center;          
+  gap: 0.5rem;                  
+  width: 100%;
+  margin: 0 auto;
+}
+
+#messageInput {
+  width: 70%;                  
+  max-width: 400px;             
+  text-align: center;
+  background-color: #444;
+  border: 1px solid #06a342;
+  color: #fff;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+#messageInput::placeholder {
+  color: #bbb;
+}
+
+#messageForm button {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#messageArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;   
+  padding-bottom: 1rem;
+}

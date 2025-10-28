@@ -12,7 +12,7 @@ class UserDAO
         $stmt = $conn->prepare("INSERT INTO user (username, password, email,role_id) VALUES (?, ?, ?,?)");
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt->bind_param("sssi", $username, $hashedPassword, $email, $roleID);
-        $validStmt = $stmt->execute();
+        $stmt->execute();
 
         $stmt->close();
     }

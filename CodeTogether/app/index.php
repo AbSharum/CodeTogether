@@ -24,6 +24,7 @@ include_once __DIR__ . "/controllers/PrivacyPolicyController.php";
 include_once __DIR__ . "/controllers/TermsController.php";
 include_once __DIR__ . "/controllers/AddProfilePictureController.php";
 include_once __DIR__ . "/controllers/NoPermissionController.php";
+include_once __DIR__ . "/controllers/MessagesController.php";
 
 
 
@@ -50,6 +51,11 @@ $router->addController('privacyPolicy',new PrivacyPolicyController());
 $router->addController('terms',new TermsController());
 $router->addController('addProfilePicture',new AddProfilePictureController());
 $router->addController('noPermission', new NoPermissionController());
+$messagesController  = new MessagesController();
+$router->addController('messages', $messagesController);
+$router->addController('getMessages', $messagesController);
+$router->addController('sendMessage', $messagesController);
+
 
 # Register default controller (used when no action is specified)
 $router->addController('default', new LandingController());

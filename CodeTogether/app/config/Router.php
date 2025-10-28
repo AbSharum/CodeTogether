@@ -21,6 +21,17 @@ class Router
 
         $this->authCheck($action);
 
+        $action = $_REQUEST['action'] ?? 'default';
+        
+        if (in_array($action, ['getMessages', 'sendMessage'])) {
+            $messagesController = $this->controllers['messages'];
+            if (method_exists($messagesController, $action)) {
+                $messagesController->$action();
+                exit;
+            }
+        }
+
+
         if (!isset($this->controllers[$action])) {
             $action = 'default';
         }
@@ -37,12 +48,12 @@ class Router
     public function authCheck(string $action): void
     {
         $protectedRoutes = [
-            'home' => ['student','teacher','moderator'],
+            'home' => ['student', 'teacher', 'moderator'],
             'accountSettings' => ['moderator'],
-            'messages' => ['student','teacher','moderator'],
-            'game' => ['student','teacher','moderator'],
-            'profile' => ['student','teacher','moderator'],
-            'search' => ['student','teacher','moderator']
+            'messages' => ['student', 'teacher', 'moderator'],
+            'game' => ['student', 'teacher', 'moderator'],
+            'profile' => ['student', 'teacher', 'moderator'],
+            'search' => ['student', 'teacher', 'moderator']
         ];
 
         if (isset($protectedRoutes[$action])) {

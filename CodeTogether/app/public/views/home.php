@@ -195,7 +195,7 @@
 
                                 // Fallback color + placeholder text (initial)
                                 $initial = substr($friendUser->getUserName(), 0, 1);
-                                $placeholderUrl = "https://placehold.co/40x40/{$imageColor}/ffffff?text={$initial}" ;
+                                $placeholderUrl = "https://placehold.co/40x40/{$imageColor}/ffffff?text={$initial}";
                                 ?>
 
                                 <?php if ($fileExists): ?>
@@ -215,10 +215,6 @@
                                     <small class="<?= $statusClass; ?>"><?= $statusText; ?></small>
                                 </div>
                             </a>
-
-                            <button class="btn btn-sm chat-open-btn ms-2" data-friend-id="<?= $friendUser->getUserID(); ?>">
-                                <i class="fas fa-comment text-info"></i>
-                            </button>
                         </div>
 
                     <?php endforeach; ?>
