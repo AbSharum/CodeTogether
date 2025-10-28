@@ -45,13 +45,16 @@ class ProfileController extends Controller
             $posts = $this->postDao->getPostsByUser($userID);
             $friends = $this->friendDao->getFriends($userID);
             $friendsUser = $this->userDao->getFriendUsers($friends);
+            $loggedInID = $_SESSION['usercreds']['userID'] ?? 0;
+            $likedPosts = $this->postDao->getLikedPostIdsByUser($loggedInID);
 
             // --- Render profile view (server-side) ---
             $this->renderView("profile", [
                 'user' => $user,
                 'userPosts' => $posts,
                 'friends' => $friends,
-                'friendsUser' => $friendsUser
+                'friendsUser' => $friendsUser,
+                'likedPosts' => $likedPosts
             ]);
         }
     }
