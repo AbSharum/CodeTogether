@@ -111,11 +111,10 @@
               </form>
             <?php endif; ?>
 
-            <!-- About Me card (read-only) -->
             <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
                 <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
                 <div class="text-white text-break" style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
-                    <?= htmlspecialchars($data['aboutMe'] ?? 'Nothing here yet!') ?></textarea>
+                    <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
                 </div>
             </div>
           <?php endif; ?>
@@ -192,6 +191,7 @@
                     Your browser does not support the video tag.
                   </video>
                 <?php endif; ?>
+                
               <?php endif; ?>
               <div class="d-flex gap-3 align-items-center">
                 <?php
