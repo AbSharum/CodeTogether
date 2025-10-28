@@ -135,6 +135,20 @@
                 </span>
               </p>
               <p class="text-white"><?= htmlspecialchars($post->getCaption()) ?></p>
+              <?php if (!empty($post->getContents())): ?>
+                                        <?php
+                                        $filePath = '/public/uploads/' . $post->getContents();
+                                          $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+                ?>
+                <?php if (in_array(strtolower($extension), ['jpg','jpeg','png','gif'])): ?>
+                <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
+                <?php elseif (in_array(strtolower($extension), ['mp4','webm','ogg','mov'])): ?>
+                  <video controls class="w-100 rounded mb-2">
+                  <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">
+                   Your browser does not support the video tag.
+                   </video>
+                <?php endif; ?>
+              <?php endif; ?>
               <div class="d-flex gap-3">
                 <span class="text-white">
                   <i class="fas fa-heart text-danger me-1"></i>
