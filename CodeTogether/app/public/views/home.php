@@ -107,11 +107,14 @@
                     <div class="post-card">
                         <p class="fw-bold text-white mb-1">
                             <?= htmlspecialchars($post->getUsername()) ?>
+                            <span class="small text-white" style="text-decoration: underline;">
+                                <?= htmlspecialchars($post->getCaption()) ?>
+                            </span>
                             <span class="text-white fw-normal small">
                                 <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d H:i')) ?>
                             </span>
                         </p>
-                        <p class="mb-2 text-white"><?= htmlspecialchars($post->getCaption()) ?></p>
+                        <p class="mb-2 text-white"><?= htmlspecialchars($post->getContents()) ?></p>
 
                         <?php if (!empty($post->getContents())): ?>
                             <?php

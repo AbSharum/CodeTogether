@@ -11,7 +11,7 @@ $question = $input["question"] ?? "";
 $personality = $input["personality"] ?? "maid";
 
 if ($event === "userChat" && $question) {
-    $apiKey = getenv('OPENAI_API_KEY');
+    $apiKey = getenv('API_KEY');
 
     if (!$apiKey) {
         echo json_encode(['error' => 'API key missing or unreadable secret']);

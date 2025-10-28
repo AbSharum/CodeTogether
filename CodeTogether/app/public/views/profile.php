@@ -110,6 +110,14 @@
                 </button>
               </form>
             <?php endif; ?>
+
+            <!-- About Me card (read-only) -->
+            <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
+                <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
+                <div class="text-white text-break" style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
+                    <?= htmlspecialchars($data['aboutMe'] ?? 'Nothing here yet!') ?></textarea>
+                </div>
+            </div>
           <?php endif; ?>
 
           <button class="btn btn-outline-info btn-sm mt-2 w-100" onclick="window.location='index.php?action=home'">
@@ -163,11 +171,14 @@
             <div class="post-card mb-3 p-3 border border-success rounded-3">
               <p class="fw-bold text-white mb-1">
                 <?= htmlspecialchars($user->getUserName()) ?>
+                <span class="small text-white" style="text-decoration: underline;">
+                  <?= htmlspecialchars($post->getCaption()) ?>
+                </span>
                 <span class="text-secondary small">
                   <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d H:i')) ?>
                 </span>
               </p>
-              <p class="text-white"><?= htmlspecialchars($post->getCaption()) ?></p>
+              <p class="text-white"><?= htmlspecialchars($post->getContents()) ?></p>
               <?php if (!empty($post->getContents())): ?>
                 <?php
                 $filePath = '/public/uploads/' . $post->getContents();
