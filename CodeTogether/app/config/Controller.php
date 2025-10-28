@@ -2,8 +2,6 @@
 declare(strict_types=1);
 class Controller
 {
-    public $model;
-
     public function performAction(): void
     {
         return;
@@ -14,11 +12,6 @@ class Controller
         extract($data);
         include "./public/template/template.php";
         include "./public/views/$view.php";
-    }
-
-    public function getAuth(): string
-    {
-        return "PUBLIC";
     }
 }
 ?>
