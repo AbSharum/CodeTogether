@@ -38,7 +38,7 @@ class Router
     {
         $protectedRoutes = [
             'home' => ['student','teacher','moderator'],
-            'accountSettings' => ['student','teacher','moderator'],
+            'accountSettings' => ['moderator'],
             'messages' => ['student','teacher','moderator'],
             'game' => ['student','teacher','moderator'],
             'profile' => ['student','teacher','moderator'],

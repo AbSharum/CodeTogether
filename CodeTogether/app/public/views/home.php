@@ -20,6 +20,7 @@
     <canvas id="matrix-canvas"></canvas>
     <!--NavBar-->
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
+    <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
     <!--end of navigation-->
 
     <div class="container py-5">
@@ -29,25 +30,29 @@
                 <!--profile summary card-->
                 <div class="profile-card text-center mb-4">
                     <?php
-                    $profilePic = '/public/uploads/' . $data['user']->getProfilePicture() ?? '';
+                    $profilePic = $data['user']->getProfilePicture() ?? '';
+                    $absolutePath = __DIR__ . '/../uploads/' . $profilePic;
+                    $webPath = '/public/uploads/' . $profilePic;
+                    $fileExists = !empty($profilePic) && file_exists($absolutePath);
+
+
 
 
                     // Check extension type
-                    $extension = !empty($profilePic) ? strtolower(pathinfo($profilePic, PATHINFO_EXTENSION)) : '';?>
+                    $extension = !empty($profilePic) ? strtolower(pathinfo($profilePic, PATHINFO_EXTENSION)) : ''; ?>
 
-                    <?php if (!empty($profilePic)): ?>
+                    <?php if ($fileExists): ?>
                         <?php if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-                            <img src="<?= htmlspecialchars($profilePic) ?>"
+                            <img src="<?= htmlspecialchars($webPath) ?>"
                                 class="profile-avatar mx-auto d-block rounded-circle mb-3" alt=""
                                 style="width:120px;height:120px;object-fit:cover;">
                         <?php elseif (in_array($extension, ['mp4', 'webm', 'ogg'])): ?>
                             <video controls class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
-                                <source src="<?= htmlspecialchars($profilePic) ?>" type="video/<?= $extension ?>">
+                                <source src="<?= htmlspecialchars($webPath) ?>" type="video/<?= $extension ?>">
                                 Your browser does not support the video tag.
                             </video>
                         <?php endif; ?>
                     <?php else: ?>
-                        <?= "this is not working"?>
                         <!-- Fallback placeholder -->
                         <img src="https://placehold.co/120x120/4a5568/ffffff?text=<?= substr($data['user']->getUserName(), 0, 1) ?>"
                             alt="Profile Avatar" class="profile-avatar mx-auto d-block rounded-circle mb-3"
@@ -178,10 +183,31 @@
                         <!-- href="public/profile_page/profile.php?user_id=<?= $friendUser->getUserID(); ?>" -->
                         <div class="friend-item d-flex align-items-center mb-2"
                             data-friend-id="<?= $friendUser->getUserID(); ?>">
+
                             <a href="index.php?action=profile&user_id=<?= $friendUser->getUserID(); ?>"
                                 class="d-flex align-items-center text-decoration-none flex-grow-1">
-                                <img src="https://placehold.co/40x40/<?= $imageColor ?>/ffffff?text=<?= substr($friendUser->getUserName(), 0, 1) ?>"
-                                    alt="Friend Avatar" class="friend-avatar me-2 rounded-circle">
+
+                                <?php
+                                $profilePic = $friendUser->getProfilePicture() ?? '';
+                                $absolutePath = __DIR__ . '/../uploads/' . $profilePic;
+                                $webPath = '/public/uploads/' . $profilePic;
+                                $fileExists = !empty($profilePic) && file_exists($absolutePath);
+
+                                // Fallback color + placeholder text (initial)
+                                $initial = substr($friendUser->getUserName(), 0, 1);
+                                $placeholderUrl = "https://placehold.co/40x40/{$imageColor}/ffffff?text={$initial}" ;
+                                ?>
+
+                                <?php if ($fileExists): ?>
+                                    <img src="<?= htmlspecialchars($webPath) ?>" alt=""
+                                        class="friend-avatar me-2 rounded-circle"
+                                        style="width:40px; height:40px; object-fit:cover;">
+                                <?php else: ?>
+                                    <img src="<?= $placeholderUrl ?>" alt="Friend Avatar"
+                                        class="friend-avatar me-2 rounded-circle"
+                                        style="width:40px; height:40px; object-fit:cover;">
+                                <?php endif; ?>
+
                                 <div>
                                     <div class="fw-bold text-white">
                                         <?= htmlspecialchars($friendUser->getUserName()); ?>
@@ -189,10 +215,12 @@
                                     <small class="<?= $statusClass; ?>"><?= $statusText; ?></small>
                                 </div>
                             </a>
+
                             <button class="btn btn-sm chat-open-btn ms-2" data-friend-id="<?= $friendUser->getUserID(); ?>">
                                 <i class="fas fa-comment text-info"></i>
                             </button>
                         </div>
+
                     <?php endforeach; ?>
 
                     <button class="btn btn-sm btn-secondary w-100 mt-3 rounded-pill">View All Friends</button>
@@ -226,7 +254,6 @@
             <!-- END FLOATING CHAT BOX UI -->
 
             <!-- AI -->
-            <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
             <script src="/public/js/ai.js"></script>
             <!-- END OF AI -->
 

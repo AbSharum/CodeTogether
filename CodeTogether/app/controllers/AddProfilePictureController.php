@@ -8,46 +8,48 @@ class AddProfilePictureController extends Controller
 
     public function performAction(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $this->renderView('updateProfilePicture');
-        } 
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $fileName = '';
+        $fileName = '';
 
-            if (isset($_FILES['profilePic']) && $_FILES['profilePic']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = __DIR__ . '/../public/uploads/';
-
-                $originalName = basename($_FILES['profilePic']['name']);
-                $extension = pathinfo($originalName, PATHINFO_EXTENSION);
-
-                $newFileName = uniqid('pfp_', true) . '.' . $extension;
-                $filePath = $uploadDir . $newFileName;
-
-                if (!move_uploaded_file($_FILES['profilePic']['tmp_name'], $filePath)) {
-                    $this->renderView('addProfilePicture', ['error' => 'Failed to upload the file.']);
-                    return;
-                }
-
-                $fileName = $newFileName;
-            } 
-            else {
-                $this->renderView('addProfilePicture', ['error' => 'Please select a file to upload.']);
-                return;
-            }
-
-            $this->userDao = new UserDAO();
-            $userID = $_SESSION['usercreds']['userID'];
-
-            $success = $this->userDao->updateProfilePicture($userID, $fileName);
-
-            if (!$success) {
-                $this->renderView('addProfilePicture', ['error' => 'Database update failed.']);
-                return;
-            }
-
+        if (!isset($_FILES['profilePic']) || $_FILES['profilePic']['error'] !== UPLOAD_ERR_OK) {
+            $_SESSION['upload_error'] = 'Please select a valid file to upload.';
             header('Location: index.php?action=profile');
             exit;
         }
+
+        $uploadDir = __DIR__ . '/../public/uploads/';
+        $originalName = basename($_FILES['profilePic']['name']);
+        $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($extension, $allowedExtensions)) {
+            $_SESSION['upload_error'] = "Invalid file type: .$extension — allowed types are JPG, JPEG, PNG, GIF.";
+            header('Location: index.php?action=profile');
+            exit;
+        }
+
+        $newFileName = uniqid('pfp_', true) . '.' . $extension;
+        $filePath = $uploadDir . $newFileName;
+
+        if (!move_uploaded_file($_FILES['profilePic']['tmp_name'], $filePath)) {
+            $_SESSION['upload_error'] = 'Failed to upload the file. Please try again.';
+            header('Location: index.php?action=profile');
+            exit;
+        }
+
+        $this->userDao = new UserDAO();
+        $userID = $_SESSION['usercreds']['userID'];
+
+        $success = $this->userDao->updateProfilePicture($userID, $newFileName);
+
+        if (!$success) {
+            $_SESSION['upload_error'] = 'Database update failed.';
+            header('Location: index.php?action=profile');
+            exit;
+        }
+
+        $_SESSION['upload_success'] = 'Profile picture updated successfully!';
+        header('Location: index.php?action=profile');
+        exit;
     }
 
     public function renderView(string $view, array $data = []): void

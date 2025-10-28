@@ -40,19 +40,22 @@
           ?>
 
           <?php
-          $profilePic = '/public/uploads/' . $data['user']->getProfilePicture() ?? '';
+          $profilePic = $data['user']->getProfilePicture() ?? '';
+          $absolutePath = __DIR__ . '/../uploads/' . $profilePic;
+          $webPath = '/public/uploads/' . $profilePic;
+
 
 
           // Check extension type
           $extension = !empty($profilePic) ? strtolower(pathinfo($profilePic, PATHINFO_EXTENSION)) : ''; ?>
 
-          <?php if (!empty($profilePic)): ?>
+          <?php if (!empty($profilePic) && file_exists($absolutePath)): ?>
             <?php if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-              <img src="<?= htmlspecialchars($profilePic) ?>" class="profile-avatar mx-auto d-block rounded-circle mb-3"
-                alt="" style="width:120px;height:120px;object-fit:cover;">
+              <img src="<?= htmlspecialchars($webPath) ?>" class="profile-avatar mx-auto d-block rounded-circle mb-3" alt=""
+                style="width:120px;height:120px;object-fit:cover;">
             <?php elseif (in_array($extension, ['mp4', 'webm', 'ogg'])): ?>
               <video controls class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
-                <source src="<?= htmlspecialchars($profilePic) ?>" type="video/<?= $extension ?>">
+                <source src="<?= htmlspecialchars($webPath) ?>" type="video/<?= $extension ?>">
                 Your browser does not support the video tag.
               </video>
             <?php endif; ?>
@@ -72,6 +75,18 @@
             </form>
           <?php endif; ?>
 
+
+          <?php if (isset($_SESSION['upload_error'])): ?>
+            <div class="alert alert-danger text-center">
+              <?= htmlspecialchars($_SESSION['upload_error']); ?>
+            </div>
+            <?php unset($_SESSION['upload_error']); ?>
+          <?php elseif (isset($_SESSION['upload_success'])): ?>
+            <div class="alert alert-success text-center">
+              <?= htmlspecialchars($_SESSION['upload_success']); ?>
+            </div>
+            <?php unset($_SESSION['upload_success']); ?>
+          <?php endif; ?>
 
           <h3 class="text-white"><?= htmlspecialchars($user->getUserName()) ?></h3>
           <p class="text-info mb-2"><?= htmlspecialchars($user->getEmail() ?? 'No email') ?></p>
@@ -113,10 +128,11 @@
 
             <!-- About Me card (read-only) -->
             <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
-                <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
-                <div class="text-white text-break" style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
-                    <?= htmlspecialchars($data['aboutMe'] ?? 'Nothing here yet!') ?></textarea>
-                </div>
+              <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
+              <div class="text-white text-break"
+                style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
+                <?= htmlspecialchars($data['aboutMe'] ?? 'Nothing here yet!') ?></textarea>
+              </div>
             </div>
           <?php endif; ?>
 

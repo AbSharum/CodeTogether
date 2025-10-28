@@ -39,6 +39,15 @@ class AddPostController extends Controller
                 return;
             }
 
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+            if (!in_array($extension, $allowedExtensions)) {
+                $this->renderView('addPost', [
+                    'error' => "Invalid file type: .$extension — allowed types are JPG, JPEG, PNG, GIF."
+                ]);
+                return;
+            }
+
 
             $this->userDao = new UserDAO();
             $this->threadDao = new ThreadDAO();
