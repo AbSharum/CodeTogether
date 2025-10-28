@@ -126,13 +126,11 @@
               </form>
             <?php endif; ?>
 
-            <!-- About Me card (read-only) -->
             <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
-              <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
-              <div class="text-white text-break"
-                style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
-                <?= htmlspecialchars($data['aboutMe'] ?? 'Nothing here yet!') ?></textarea>
-              </div>
+                <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
+                <div class="text-white text-break" style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
+                    <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
+                </div>
             </div>
           <?php endif; ?>
 
@@ -208,16 +206,28 @@
                     Your browser does not support the video tag.
                   </video>
                 <?php endif; ?>
+                
               <?php endif; ?>
-              <div class="d-flex gap-3">
+              <div class="d-flex gap-3 align-items-center">
+                <?php
+                $isLiked = in_array($post->getPostID(), $data['likedPosts']);
+                $heartClass = $isLiked ? 'text-danger' : 'text-secondary';
+                ?>
+                <form action="index.php?action=likePost" method="POST" class="d-inline">
+                    <input type="hidden" name="action" value="likePost">
+                    <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
+                    <input type="hidden" name="redirect" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
+                    <button type="submit" class="btn btn-sm btn-link text-decoration-none text-white p-0">
+                        <i class="fas fa-heart <?= $heartClass ?> me-1"></i>
+                        <?= htmlspecialchars($post->getLikes()) ?>
+                    </button>
+                </form>
+
+
                 <span class="text-white">
-                  <i class="fas fa-heart text-danger me-1"></i>
-                  <?= htmlspecialchars($post->getLikes()) ?>
+                    <i class="fas fa-comment me-1"></i> 12
                 </span>
-                <span class="text-white">
-                  <i class="fas fa-comment me-1"></i> Comments TBD
-                </span>
-              </div>
+            </div>
             </div>
           <?php endforeach; ?>
         <?php endif; ?>

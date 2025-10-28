@@ -26,10 +26,35 @@ class ProfileController extends Controller
             ? (int) $_GET['user_id']
             : (int) ($_SESSION['usercreds']['userID'] ?? 0);
 
-        if ($userID <= 0) {
-            // No valid ID? redirect or error
-            header('Location: index.php?action=login');
-            exit;
+            if ($userID <= 0) {
+                // No valid ID? redirect or error
+                header('Location: index.php?action=login');
+                exit;
+            }
+
+            // --- Fetch main user profile data ---
+            $user = $this->userDao->getUserByID($userID);
+            if (!$user) {
+                http_response_code(404);
+                echo "User not found.";
+                return;
+            }
+
+            // --- Gather profile-related data ---
+            $posts = $this->postDao->getPostsByUser($userID);
+            $friends = $this->friendDao->getFriends($userID);
+            $friendsUser = $this->userDao->getFriendUsers($friends);
+            $loggedInID = $_SESSION['usercreds']['userID'] ?? 0;
+            $likedPosts = $this->postDao->getLikedPostIdsByUser($loggedInID);
+
+            // --- Render profile view (server-side) ---
+            $this->renderView("profile", [
+                'user' => $user,
+                'userPosts' => $posts,
+                'friends' => $friends,
+                'friendsUser' => $friendsUser,
+                'likedPosts' => $likedPosts
+            ]);
         }
 
         // --- Fetch main user profile data ---
