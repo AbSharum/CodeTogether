@@ -35,6 +35,7 @@
 
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">(Ex: somePa$$123)</label>
                         <input type="password" class="form-control" id="password" name="password"
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                     </div>
