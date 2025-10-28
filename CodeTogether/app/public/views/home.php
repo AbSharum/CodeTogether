@@ -28,17 +28,36 @@
             <div class="col-lg-3 mb-4 order-lg-1 order-1">
                 <!--profile summary card-->
                 <div class="profile-card text-center mb-4">
-                    <!-- if we get some avatar cards stored into the db we can use this just update the img src -->
-                    <img src="https://placehold.co/120x120/4a5568/ffffff?text=<?= substr($data['user']->getUserName(), 0, 1) ?>"
-                        alt="Profile Avatar" class="profile-avatar mx-auto d-block">
-                    <!--will need to change this info its just a placeholder as well-->
+                    <?php
+                    $profilePic = '/public/uploads/' . $data['user']->getProfilePicture() ?? '';
+
+
+                    // Check extension type
+                    $extension = !empty($profilePic) ? strtolower(pathinfo($profilePic, PATHINFO_EXTENSION)) : '';?>
+
+                    <?php if (!empty($profilePic)): ?>
+                        <?php if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+                            <img src="<?= htmlspecialchars($profilePic) ?>"
+                                class="profile-avatar mx-auto d-block rounded-circle mb-3" alt=""
+                                style="width:120px;height:120px;object-fit:cover;">
+                        <?php elseif (in_array($extension, ['mp4', 'webm', 'ogg'])): ?>
+                            <video controls class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
+                                <source src="<?= htmlspecialchars($profilePic) ?>" type="video/<?= $extension ?>">
+                                Your browser does not support the video tag.
+                            </video>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?= "this is not working"?>
+                        <!-- Fallback placeholder -->
+                        <img src="https://placehold.co/120x120/4a5568/ffffff?text=<?= substr($data['user']->getUserName(), 0, 1) ?>"
+                            alt="Profile Avatar" class="profile-avatar mx-auto d-block rounded-circle mb-3"
+                            style="width:120px;height:120px;object-fit:cover;">
+                    <?php endif; ?>
+
                     <h2 class="mb-0 text-white"><?= htmlspecialchars($data['user']->getUserName()) ?></h2>
-                    <!--will need to change this info its just a placeholder as well-->
                     <p class="mb-2 text-white"><?= htmlspecialchars($data['user']->getEmail()) ?></p>
-                    <!--will need to change this info its just a placeholder as well-->
                     <span class="d-block mt-1 text-sm text-info mb-3">📍 Fort Smith, AR</span>
 
-                    <!-- Statistics Section if its a cool thing to have or not idk but would need to get the php to pull the db info  -->
                     <div class="row mt-3">
                         <div class="col-4 stat-item">
                             <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars($data['user']->getPoints()) ?></h3>
@@ -49,15 +68,16 @@
                             <small class="text-white">Friends</small>
                         </div>
                         <div class="col-4 stat-item">
-                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['userPosts'])) ?>
-                            </h3>
+                            <h3 class="fw-bold mb-0 text-white"><?= htmlspecialchars(count($data['userPosts'])) ?></h3>
                             <small class="text-white">Posts</small>
                         </div>
                     </div>
+
                     <a href="index.php?action=addPost" class="btn btn-success w-100 mt-3 rounded-pill">
                         <i class="fas fa-plus me-2"></i> Add New Post
                     </a>
                 </div>
+
                 <!--end of profile card-->
 
                 <!-- the about me info card-->

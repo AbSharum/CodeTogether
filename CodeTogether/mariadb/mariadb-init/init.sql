@@ -8,7 +8,7 @@ CREATE TABLE role (
 CREATE TABLE user (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     role_id INT,
-    profile_picture VARCHAR(255),
+    profile_picture VARCHAR(255) DEFAULT '',
     username VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     about_me VARCHAR(255) Default 'I''m just a little panda :p',

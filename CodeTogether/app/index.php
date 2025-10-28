@@ -22,6 +22,7 @@ include_once __DIR__ . "/controllers/AddPostController.php";
 include_once __DIR__ . "/controllers/LikePostController.php";
 include_once __DIR__ . "/controllers/PrivacyPolicyController.php";
 include_once __DIR__ . "/controllers/TermsController.php";
+include_once __DIR__ . "/controllers/AddProfilePictureController.php";
 
 
 
@@ -46,6 +47,7 @@ $router->addController('addPost', new AddPostController());
 $router->addController('likePost', new LikePostController());
 $router->addController('privacyPolicy',new PrivacyPolicyController());
 $router->addController('terms',new TermsController());
+$router->addController('addProfilePicture',new AddProfilePictureController());
 
 # Register default controller (used when no action is specified)
 $router->addController('default', new LandingController());

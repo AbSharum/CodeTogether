@@ -22,11 +22,9 @@
       <aside class="col-lg-3 mb-4">
         <div class="profile-card text-center p-3">
           <?php
-          $initial = substr($user->getUserName(), 0, 1);
-          $avatarUrl = "https://placehold.co/120x120/4a5568/ffffff?text=" . urlencode($initial);
-
           $loggedInID = $_SESSION['usercreds']['userID'] ?? 0;
           $isOwnProfile = ($loggedInID === $user->getUserID());
+          $status;
 
           //check if logged in user is already friends with this profile user
           $isFriend = false;
@@ -41,8 +39,39 @@
           }
           ?>
 
-          <img src="<?= $avatarUrl ?>" alt="Profile picture" class="rounded-circle mb-3"
-            style="width:120px;height:120px;object-fit:cover;">
+          <?php
+          $profilePic = '/public/uploads/' . $data['user']->getProfilePicture() ?? '';
+
+
+          // Check extension type
+          $extension = !empty($profilePic) ? strtolower(pathinfo($profilePic, PATHINFO_EXTENSION)) : ''; ?>
+
+          <?php if (!empty($profilePic)): ?>
+            <?php if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+              <img src="<?= htmlspecialchars($profilePic) ?>" class="profile-avatar mx-auto d-block rounded-circle mb-3"
+                alt="" style="width:120px;height:120px;object-fit:cover;">
+            <?php elseif (in_array($extension, ['mp4', 'webm', 'ogg'])): ?>
+              <video controls class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
+                <source src="<?= htmlspecialchars($profilePic) ?>" type="video/<?= $extension ?>">
+                Your browser does not support the video tag.
+              </video>
+            <?php endif; ?>
+          <?php else: ?>
+            <?= "this is not working" ?>
+            <!-- Fallback placeholder -->
+            <img src="https://placehold.co/120x120/4a5568/ffffff?text=<?= substr($data['user']->getUserName(), 0, 1) ?>"
+              alt="Profile Avatar" class="profile-avatar mx-auto d-block rounded-circle mb-3"
+              style="width:120px;height:120px;object-fit:cover;">
+          <?php endif; ?>
+          <?php if ($isOwnProfile): ?>
+            <form action="index.php?action=addProfilePicture" method="POST" enctype="multipart/form-data" class="mt-2">
+              <input type="file" name="profilePic" accept="image/*" class="form-control form-control-sm mb-2" required>
+              <button type="submit" class="btn btn-outline-info btn-sm w-100">
+                <i class="fas fa-upload me-1"></i> Update Picture
+              </button>
+            </form>
+          <?php endif; ?>
+
 
           <h3 class="text-white"><?= htmlspecialchars($user->getUserName()) ?></h3>
           <p class="text-info mb-2"><?= htmlspecialchars($user->getEmail() ?? 'No email') ?></p>
@@ -63,15 +92,19 @@
           <?php if (!$isOwnProfile): ?>
             <!-- Show only when viewing another user's profile -->
             <?php if ($isFriend): ?>
-              <form action="index.php?action=removeFriend" method="POST" class="mb-2">
+              <form action="index.php?action=search" method="POST" class="mb-2">
                 <input type="hidden" name="friend_id" value="<?= $user->getUserID(); ?>">
+                <input type="hidden" name="redirect" value="<?= $_SERVER['REQUEST_URI']; ?>">
+                <input type="hidden" name="task" value="remove">
                 <button type="submit" class="btn btn-outline-danger btn-sm w-100">
                   <i class="fas fa-user-minus me-1"></i> Remove Friend
                 </button>
               </form>
             <?php else: ?>
-              <form action="index.php?action=addFriend" method="POST" class="mb-2">
+              <form action="index.php?action=search" method="POST" class="mb-2">
                 <input type="hidden" name="friend_id" value="<?= $user->getUserID(); ?>">
+                <input type="hidden" name="redirect" value="<?= $_SERVER['REQUEST_URI']; ?>">
+                <input type="hidden" name="task" value="request">
                 <button type="submit" class="btn btn-outline-success btn-sm w-100">
                   <i class="fas fa-user-plus me-1"></i> Add Friend
                 </button>
@@ -136,17 +169,17 @@
               </p>
               <p class="text-white"><?= htmlspecialchars($post->getCaption()) ?></p>
               <?php if (!empty($post->getContents())): ?>
-                                        <?php
-                                        $filePath = '/public/uploads/' . $post->getContents();
-                                          $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+                <?php
+                $filePath = '/public/uploads/' . $post->getContents();
+                $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                 ?>
-                <?php if (in_array(strtolower($extension), ['jpg','jpeg','png','gif'])): ?>
-                <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
-                <?php elseif (in_array(strtolower($extension), ['mp4','webm','ogg','mov'])): ?>
+                <?php if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif'])): ?>
+                  <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
+                <?php elseif (in_array(strtolower($extension), ['mp4', 'webm', 'ogg', 'mov'])): ?>
                   <video controls class="w-100 rounded mb-2">
-                  <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">
-                   Your browser does not support the video tag.
-                   </video>
+                    <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">
+                    Your browser does not support the video tag.
+                  </video>
                 <?php endif; ?>
               <?php endif; ?>
               <div class="d-flex gap-3">

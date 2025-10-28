@@ -38,13 +38,17 @@ class SearchController extends Controller
                         $this->friendDao->acceptFriendRequest($userID, $friendID);
                         break;
                     case 'remove':
+                        $this->friendDao->removeFriend($userID, $friendID);
+                        break;
                     case 'reject':
                         $this->friendDao->removeFriend($userID, $friendID);
                         break;
                 }
             }
 
-            header("Location: index.php?action=search&search=" . urlencode($search));
+            
+            $redirect = $_POST['redirect'] ?? "Location: index.php?action=search&search=" . urlencode($search);
+            header("Location: $redirect");
             exit;
         }
 
