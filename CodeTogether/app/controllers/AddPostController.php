@@ -18,7 +18,7 @@ class AddPostController extends Controller
             $this->renderView('addPost');
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $title = $_POST['title'] ?? '';
-            $caption = $_POST['caption'] ?? '';
+            $contents = $_POST['caption'] ?? '';
             $visibility = $_POST['visibility'] ?? '';
 
             $fileName = '';
@@ -34,7 +34,7 @@ class AddPostController extends Controller
                 $fileName = $newFileName;
             }
 
-            if (empty(trim($title)) || empty(trim($caption)) || empty(trim($visibility))) {
+            if (empty(trim($title)) || empty(trim($contents)) || empty(trim($visibility))) {
                 $this->renderView('addPost', ['error' => 'Please fill out all fields!']);
                 return;
             }
@@ -60,7 +60,7 @@ class AddPostController extends Controller
             $thread = $this->threadDao->getThreadByTitle($title);
             $threadId = $thread->getThreadID();
 
-            $this->postDao->addPost($userID, $threadId, $username, $fileName, $caption, $visibility);
+            $this->postDao->addPost($userID, $threadId, $username, $fileName, $title, $visibility,$contents);
 
             header('Location: index.php?action=home');
             exit;

@@ -5,14 +5,14 @@ require_once __DIR__ . '/../config/DbConn.php';
 class PostDAO
 {
 
-    public function addPost(int $userID, int $threadID, string $username, ?string $filePath, string $caption, string $visibility): void
+    public function addPost(int $userID, int $threadID, string $username, ?string $filePath, string $caption, string $visibility, string $contents): void
     {
         $conn = Database::getConnection();
         $stmt = $conn->prepare("
-                INSERT INTO post (user_id, username, thread_id, contents, caption, visibility) 
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO post (user_id, username, thread_id, file_path, caption, visibility, contents) 
+                VALUES (?, ?, ?, ?, ?, ?,?)
             ");
-        $stmt->bind_param("isssss", $userID, $username, $threadID, $filePath, $caption, $visibility);
+        $stmt->bind_param("issssss", $userID, $username, $threadID, $filePath, $caption, $visibility, $contents);
         $stmt->execute();
         $stmt->close();
     }

@@ -63,6 +63,7 @@ CREATE TABLE post (
     user_id INT NOT NULL,
     username VARCHAR(100) NOT NULL,
     thread_id INT,
+    file_path VARCHAR(255),
     contents VARCHAR(255),
     likes INT DEFAULT 0,
     caption VARCHAR(255),

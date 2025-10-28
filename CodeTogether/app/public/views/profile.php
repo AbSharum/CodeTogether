@@ -219,14 +219,14 @@
                   <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d H:i')) ?>
                 </span>
               </p>
-              <p class="text-white"><?= htmlspecialchars($post->getContents()) ?></p>
               <?php if (!empty($post->getContents())): ?>
                 <?php
-                $filePath = '/public/uploads/' . $post->getContents();
+                $filePath = '/public/uploads/' . $post->getFilePath();
                 $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                 ?>
                 <?php if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif'])): ?>
                   <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
+                  <p class="text-white"><?= htmlspecialchars($post->getContents()) ?></p>
                 <?php elseif (in_array(strtolower($extension), ['mp4', 'webm', 'ogg', 'mov'])): ?>
                   <video controls class="w-100 rounded mb-2">
                     <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">

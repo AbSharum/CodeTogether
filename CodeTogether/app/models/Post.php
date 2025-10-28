@@ -11,17 +11,19 @@ class Post implements JsonSerializable
     private int $likes;
     private string $caption;
     private string $visibility;
+    private string $filePath;
     private bool $isDeleted;
     private ?DateTime $createdOn;
     private ?DateTime $latestUpdate;
 
-    public function __construct(int $postID = -1, int $userID = -1, string $username = '', int $threadID = -1, string $contents = '', string $caption = '', string $visibility = '', bool $is_deleted = false, ?DateTime $createdOn = null, ?DateTime $latestUpdate = null)
+    public function __construct(int $postID = -1, int $userID = -1, string $username = '', int $threadID = -1, string $contents = '', string $caption = '', string $visibility = '', bool $is_deleted = false, ?DateTime $createdOn = null, ?DateTime $latestUpdate = null, string $filepath = '')
     {
         $this->postID = $postID;
         $this->userID = $userID;
         $this->username = $username;
         $this->threadID = $threadID;
         $this->contents = $contents;
+        $this->filePath = $filepath;
         $this->caption = $caption;
         $this->visibility = $visibility;
         $this->likes = 0;
@@ -37,6 +39,7 @@ class Post implements JsonSerializable
         $this->username = $row['username'];
         $this->threadID = $row['thread_id'];
         $this->contents = $row['contents'];
+        $this->filePath = $row['file_path'] ?? '';
         $this->likes = $row['likes'];
         $this->caption = $row['caption'];
         $this->visibility = $row['visibility'];
@@ -57,6 +60,7 @@ class Post implements JsonSerializable
             'userID' => $this->userID,
             'threadID' => $this->threadID,
             'contents' => $this->contents,
+            'filePath' => $this->filePath,
             'likes' => $this->likes,
             'caption' => $this->caption,
             'visibility' => $this->visibility,
@@ -64,6 +68,14 @@ class Post implements JsonSerializable
             'createdOn' => $this->createdOn,
             'latestUpdate' => $this->latestUpdate
         );
+    }
+
+    public function getFilePath(): string{
+        return $this->filePath;
+    }
+
+    public function setFilePath(string $filePath):void {
+        $this->filePath = $filePath;
     }
 
     public function setPostID(int $postID): void
