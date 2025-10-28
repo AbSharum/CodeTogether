@@ -11,12 +11,13 @@ class User implements JsonSerializable
     private int $points;
     private bool $isDeleted;
     private string $status;
+    private string $aboutMe;
     private ?DateTime $createdOn;
     private ?DateTime $latestUpdate;
     private string $password;
     private int $requestInitiatorID;
 
-    public function __construct(int $userID = -1, int $roleID = -1, string $username = '', int $points = -1, string $status = '', string $email = '', string $password = '', bool $isDeleted = false, ?DateTime $createdOn = null, ?DateTime $latestUpdate = null, int $requestInitiatorID = -1)
+    public function __construct(int $userID = -1, int $roleID = -1, string $username = '', int $points = -1, string $status = '', string $email = '', string $password = '', bool $isDeleted = false, ?DateTime $createdOn = null, ?DateTime $latestUpdate = null, int $requestInitiatorID = -1, string $aboutMe = '')
     {
         $this->userID = $userID;
         $this->roleID = $roleID;
@@ -29,6 +30,7 @@ class User implements JsonSerializable
         $this->createdOn = $createdOn ?? new DateTime();
         $this->latestUpdate = $latestUpdate ?? new DateTime();
         $this->requestInitiatorID = $requestInitiatorID;
+        $this->aboutMe = $aboutMe;
     }
 
     public function load(array $row): void
@@ -43,6 +45,7 @@ class User implements JsonSerializable
         $this->createdOn = new DateTime($row['created_on']);
         $this->latestUpdate = new DateTime($row['latest_update']);
         $this->password = $row['password'];
+        $this->aboutMe = $row['about_me'];
     }
 
     public function jsonSerialize(): array
@@ -58,11 +61,20 @@ class User implements JsonSerializable
             'createdOn' => $this->createdOn,
             'latestUpdate' => $this->latestUpdate,
             'password' => $this->password,
-            'requestInitiatorID' => $this->requestInitiatorID
+            'requestInitiatorID' => $this->requestInitiatorID,
+            'aboutMe' => $this->aboutMe
         );
     }
 
 
+    public function setAboutMe(string $aboutMe): void
+    {
+        $this->aboutMe = $aboutMe;
+    }
+    public function getAboutme(): string
+    {
+        return $this->aboutMe;
+    }
     public function setRequestInitiatorID(int $id): void
     {
         $this->requestInitiatorID = $id;

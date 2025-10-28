@@ -12,12 +12,23 @@ class HomeController extends Controller
 
     public function performAction(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->postDao = new PostDAO();
-            $this->friendDao = new FriendListDAO();
-            $this->userDao = new UserDAO();
+        $userID = $_SESSION['usercreds']['userID'];
+        $this->postDao = new PostDAO();
+        $this->friendDao = new FriendListDAO();
+        $this->userDao = new UserDAO();
 
-            $userID = $_SESSION['usercreds']['userID'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $aboutMe = trim($_POST['aboutMe'] ?? '');
+
+            if (!empty($aboutMe)) {
+                $this->userDao->updateAboutMe($userID, $aboutMe);
+            }
+
+            header("Location: index.php?action=home");
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $user = $this->userDao->getUserByID($userID);
             $friends = $this->friendDao->getFriends($userID);
             $friendPosts = $this->postDao->getPostsByFriends($friends);
@@ -25,8 +36,7 @@ class HomeController extends Controller
             $friendsUser = $this->userDao->getFriendUsers($friends);
             $userAndFriendPosts = $this->postDao->getPostsByFriendsAndUser($friends, $userID);
             $likedPosts = $this->postDao->getLikedPostIdsByUser($userID);
-
-
+            $aboutMe = $this->userDao->getAboutMe($userID);
 
 
             $this->renderView("home", [
@@ -36,7 +46,8 @@ class HomeController extends Controller
                 'userAndFriendPosts' => $userAndFriendPosts,
                 'friends' => $friends,
                 'friendsUser' => $friendsUser,
-                'user' => $user
+                'user' => $user,
+                'aboutMe' => $aboutMe
             ]);
             return;
         }

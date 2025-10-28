@@ -34,6 +34,26 @@ class UserDAO
         return $user;
     }
 
+
+    public function updateAboutMe(int $userID, string $aboutMe): void
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("UPDATE user SET about_me = ? WHERE user_id = ?;");
+        $stmt->bind_param("si", $aboutMe, $userID);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function getAboutMe(int $userId): string
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT about_me FROM user WHERE user_id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['about_me'];
+    }
+
     public function getFriendUsers(array $friends): array
     {
         if (empty($friends))
