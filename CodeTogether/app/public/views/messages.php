@@ -75,7 +75,7 @@
                                     <small class="<?= $statusClass; ?>"><?= $statusText; ?></small>
                                 </div>
                             </a>
-                            <button class="btn btn-sm chat-open-btn" data-friend-id="<?= $friendUser->getUserID(); ?>">
+                            <button class="btn btn-sm chat-open-btn" data-friend-id="<?= $friendUser->getUserID();?>">
                                 <i class="fas fa-comment text-info"></i>
                             </button>
                         </div>
@@ -106,11 +106,11 @@
         </div>
     </div>
 
+    <script src="/public/js/messages.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         crossorigin="anonymous"></script>
-    <script src="/public/js/messages.js"></script>
 </body>
 
 </html>

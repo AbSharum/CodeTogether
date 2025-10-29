@@ -23,14 +23,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (messages.length > 0) {
         messages.forEach((msg) => {
+          const rawTime = msg.sent_at;
           const div = document.createElement("div");
+          const datePart = new Date(rawTime).toLocaleDateString('en-US', {
+            weekday: 'long', 
+            month: 'long',
+            day: 'numeric'
+          });
+
+          const timePart = new Date(rawTime).toLocaleTimeString('en-US', {
+            hour: 'numeric',  
+            minute: '2-digit',
+            hour12: true,
+            timeZone: 'America/Chicago'
+          });
+
+          const displayTime = `${datePart} ${timePart}`;
           div.classList.add("p-2", "mb-2", "rounded");
           div.style.backgroundColor = msg.isSender ? "#4a9468" : "#444";
           div.innerHTML = `
-            <strong>${msg.username}</strong><br>
-            <span>${msg.content}</span><br>
-            <small class="text-muted">${msg.sent_at}</small>
-          `;
+          <strong>${msg.username}</strong><br>
+          <span>${msg.content}</span><br>
+          <small class="text-muted">${displayTime}</small>`;
           chatMessages.appendChild(div);
         });
 
@@ -44,22 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   friendButtons.forEach((btn) => {
     btn.addEventListener("click", async () => {
-      console.log("Chat button clicked:", btn.dataset.friendId);if (messages.length > 0) {
-        messages.forEach((msg) => {
-          const div = document.createElement("div");
-          div.classList.add("p-2", "mb-2", "rounded");
-          div.style.backgroundColor = msg.isSender ? "#4a9468" : "#444";
-          div.innerHTML = `
-            <strong>${msg.username}</strong><br>
-            <span>${msg.content}</span><br>
-            <small class="text-muted">${msg.sent_at}</small>
-          `;
-          chatMessages.appendChild(div);
-        });
-
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        lastMessageTime = messages[messages.length - 1].sent_at;
-      }
+      console.log("Chat button clicked:", btn.dataset.friendId);
 
       clearInterval(pollInterval);
       chatMessages.innerHTML = '<p class="text-secondary">Loading...</p>';
@@ -236,5 +235,3 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle resize events to keep the canvas full-screen and responsive
   window.addEventListener('resize', setCanvasSize);
 });
-
-

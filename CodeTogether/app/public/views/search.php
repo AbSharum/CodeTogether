@@ -157,15 +157,15 @@
                             <?php foreach ($posts as $post): ?>
                                 <div class="post-card mb-4 p-3">
                                     <p class="fw-bold text-white mb-1">
-                                        <?= htmlspecialchars($post->getUsername()) ?>
+                                        <?= htmlspecialchars($post->getUsername()) . ":" ?>
                                         <span class="text-white fw-normal small">
-                                            <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d H:i')) ?>
+                                            <?= htmlspecialchars($post->getCreatedOn()->format('l, F j h:i:A')) ?>
                                         </span>
                                     </p>
                                     <p class="mb-2 text-white"><?= htmlspecialchars($post->getCaption()) ?></p>
                                     <?php if (!empty($post->getContents())): ?>
                                         <?php
-                                        $filePath = '/public/uploads/' . $post->getContents();
+                                        $filePath = '/public/uploads/' . $post->getFilePath();
                                         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                                         ?>
                                         <?php if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif'])): ?>
@@ -178,6 +178,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         <?php endif; ?>
+                                        <p class="text-white"><?= htmlspecialchars($post->getContents()) ?></p>
                                     <?php endif; ?>
                                     <div class="d-flex gap-3">
                                         <?php

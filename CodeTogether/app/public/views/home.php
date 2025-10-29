@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <!--navigation icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/public/css/home.css">
 </head>
 
@@ -110,12 +110,13 @@
                 <?php foreach ($data['userAndFriendPosts'] as $post): ?>
                     <div class="post-card">
                         <p class="fw-bold text-white mb-1">
-                            <?= htmlspecialchars($post->getUsername()) ?>
+                            <?= htmlspecialchars($post->getUsername()).":"?>
+                            <span class="text-white fw-normal small">
+                                <?= htmlspecialchars($post->getCreatedOn()->format('l, F j h:i A')) ?>
+                            </span>
+                            <br>
                             <span class="small text-white" style="text-decoration: underline;">
                                 <?= htmlspecialchars($post->getCaption()) ?>
-                            </span>
-                            <span class="text-white fw-normal small">
-                                <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d h:i:A')) ?>
                             </span>
                         </p>
 
