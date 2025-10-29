@@ -1,2 +1,3 @@
 .env
 CodeTogether/mariadb/mariadb-data/
+CodeTogether/app/public/uploads/
