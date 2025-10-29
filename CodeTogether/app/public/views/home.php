@@ -61,7 +61,6 @@
 
                     <h2 class="mb-0 text-white"><?= htmlspecialchars($data['user']->getUserName()) ?></h2>
                     <p class="mb-2 text-white"><?= htmlspecialchars($data['user']->getEmail()) ?></p>
-                    <span class="d-block mt-1 text-sm text-info mb-3">📍 Fort Smith, AR</span>
 
                     <div class="row mt-3">
                         <div class="col-4 stat-item">
@@ -116,7 +115,7 @@
                                 <?= htmlspecialchars($post->getCaption()) ?>
                             </span>
                             <span class="text-white fw-normal small">
-                                <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d H:i')) ?>
+                                <?= htmlspecialchars($post->getCreatedOn()->format('Y-m-d h:i:A')) ?>
                             </span>
                         </p>
 
@@ -127,13 +126,13 @@
                             ?>
                             <?php if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif'])): ?>
                                 <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
-                                <p class="mb-2 text-white"><?= htmlspecialchars($post->getContents()) ?></p>
                             <?php elseif (in_array(strtolower($extension), ['mp4', 'webm', 'ogg'])): ?>
                                 <video controls class="w-100 rounded mb-2">
                                     <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">
                                     Your browser does not support the video tag.
                                 </video>
                             <?php endif; ?>
+                            <p class="mb-2 text-white"><?= htmlspecialchars($post->getContents()) ?></p>
                         <?php endif; ?>
 
                         <div class="d-flex gap-3 align-items-center">

@@ -39,7 +39,7 @@ class PostDAO
     public function getPostsByUser(int $userId): array
     {
         $conn = Database::getConnection();
-        $stmt = $conn->prepare("SELECT * FROM post WHERE user_id = ? AND is_deleted = FALSE ORDER BY created_on DESC");
+        $stmt = $conn->prepare("SELECT * FROM post WHERE user_id = ? AND is_deleted = FALSE ORDER BY created_on DESC LIMIT 100");
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -67,7 +67,7 @@ class PostDAO
         $inClause = "('" . implode("','", $ids) . "')";
 
         $conn = Database::getConnection();
-        $stmt = $conn->prepare("SELECT * FROM post WHERE user_id in $inClause AND is_deleted = FALSE AND visibility in ('public','friends') ORDER BY created_on DESC ");
+        $stmt = $conn->prepare("SELECT * FROM post WHERE user_id in $inClause AND is_deleted = FALSE AND visibility in ('public','friends') ORDER BY created_on DESC LIMIT 100");
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -118,7 +118,7 @@ class PostDAO
         SELECT * FROM post WHERE user_id in $inClause AND is_deleted = FALSE AND visibility in ('public','friends')
         UNION ALL
         SELECT * FROM post WHERE user_id = ? AND is_deleted = FALSE
-        ORDER BY created_on DESC");
+        ORDER BY created_on DESC LIMIT 100");
         $stmt->bind_param("i", $userID);
         $stmt->execute();
         $result = $stmt->get_result();

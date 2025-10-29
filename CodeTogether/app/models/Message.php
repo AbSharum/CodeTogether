@@ -49,7 +49,7 @@ class Message implements JsonSerializable
             'content' => $this->content,
             'isDeleted' => $this->isDeleted,
             'isEdited' => $this->isEdited,
-            'sentAt' => $this->sentAt?->format('Y-m-d H:i:s'),
+            'sentAt' => $this->sentAt?->format('Y-m-d H:i:A'),
             'username' => $this->username,
         ];
     }

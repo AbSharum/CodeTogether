@@ -20,6 +20,7 @@ class AddPostController extends Controller
             $title = $_POST['title'] ?? '';
             $contents = $_POST['contents'] ?? '';
             $visibility = $_POST['visibility'] ?? '';
+            $extension = '';
 
             $fileName = '';
 
@@ -41,7 +42,7 @@ class AddPostController extends Controller
 
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'mp4'];
 
-            if (!in_array($extension, $allowedExtensions)) {
+            if (!empty(trim($extension)) && !in_array($extension, $allowedExtensions)) {
                 $this->renderView('addPost', [
                     'error' => "Invalid file type: .$extension — allowed types are JPG, JPEG, PNG, GIF."
                 ]);

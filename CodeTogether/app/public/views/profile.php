@@ -226,7 +226,6 @@
                 ?>
                 <?php if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif'])): ?>
                   <img src="<?= htmlspecialchars($filePath) ?>" class="img-fluid rounded mb-2" alt="Post file">
-                  <p class="text-white"><?= htmlspecialchars($post->getContents()) ?></p>
                 <?php elseif (in_array(strtolower($extension), ['mp4', 'webm', 'ogg', 'mov'])): ?>
                   <video controls class="w-100 rounded mb-2">
                     <source src="<?= htmlspecialchars($filePath) ?>" type="video/<?= strtolower($extension) ?>">
@@ -234,6 +233,7 @@
                   </video>
                 <?php endif; ?>
 
+                <p class="text-white"><?= htmlspecialchars($post->getContents()) ?></p>
               <?php endif; ?>
               <div class="d-flex gap-3 align-items-center">
                 <?php

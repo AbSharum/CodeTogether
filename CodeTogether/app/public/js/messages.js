@@ -44,7 +44,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   friendButtons.forEach((btn) => {
     btn.addEventListener("click", async () => {
-      console.log("Chat button clicked:", btn.dataset.friendId);
+      console.log("Chat button clicked:", btn.dataset.friendId);if (messages.length > 0) {
+        messages.forEach((msg) => {
+          const div = document.createElement("div");
+          div.classList.add("p-2", "mb-2", "rounded");
+          div.style.backgroundColor = msg.isSender ? "#4a9468" : "#444";
+          div.innerHTML = `
+            <strong>${msg.username}</strong><br>
+            <span>${msg.content}</span><br>
+            <small class="text-muted">${msg.sent_at}</small>
+          `;
+          chatMessages.appendChild(div);
+        });
+
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        lastMessageTime = messages[messages.length - 1].sent_at;
+      }
 
       clearInterval(pollInterval);
       chatMessages.innerHTML = '<p class="text-secondary">Loading...</p>';

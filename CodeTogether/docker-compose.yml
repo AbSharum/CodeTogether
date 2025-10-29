@@ -24,6 +24,8 @@ services:
       MARIADB_DATABASE: ${MYSQL_DATABASE}
       MARIADB_USER: ${MYSQL_USER}
       MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: America/Chicago
+      MARIADB_INITDB_SKIP_TZINFO: 0 
     ports:
       - "3305:3306"
     volumes:

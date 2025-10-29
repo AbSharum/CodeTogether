@@ -58,7 +58,7 @@ class MessagesController extends Controller
         $data = array_map(fn($msg) => [
             'username' => $msg->getUsername(),
             'content' => $msg->getContent(),
-            'sent_at' => $msg->getSentAt()->format('Y-m-d H:i:s'),
+            'sent_at' => $msg->getSentAt()->format('Y-m-d H:i:A'),
             'isSender' => $msg->getUserID() === $userID
         ], $messages);
 
