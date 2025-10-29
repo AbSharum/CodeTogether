@@ -122,6 +122,8 @@ const timerElement = document.getElementById('countdown-timer');
         if (totalSeconds <= 0) {
             clearInterval(countdownInterval);
             timerElement.textContent = "Time's Up!";
+            timerElement.classList.add('timer-end');
+            showWinnerPopup('Team B'); // this needs some back end love 
         } else {
             totalSeconds--;
         }
@@ -138,7 +140,7 @@ const timerElement = document.getElementById('countdown-timer');
         timerElement.ELEMENT_NODE.style.cursor = 'default';
         timerElement.ELEMENT_NODE.style.boxShadow = 'none';
     }
-
+    // backend love needed here too for the actual winner
     function showWinnerPopup(winnerName) {
         if (typeof bootstrap === 'undefined' || !bootstrap.Modal) {
             console.error("Bootstrap's Modal functionality is not available.");
