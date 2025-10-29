@@ -139,6 +139,36 @@ const timerElement = document.getElementById('countdown-timer');
         timerElement.ELEMENT_NODE.style.boxShadow = 'none';
     }
 
+    function showWinnerPopup(winnerName) {
+        if (typeof bootstrap === 'undefined' || !bootstrap.Modal) {
+            console.error("Bootstrap's Modal functionality is not available.");
+            return;
+        }
+
+        const winnerModalElement = document.getElementById('winnerModal');
+        const winningTeamNameElement = document.getElementById('winningTeamName');
+
+        if (winnerModalElement && winningTeamNameElement) {
+            winningTeamNameElement.textContent = winnerName + ' Wins!';
+
+            let textColor = '#fff';
+            // Set specific colors based on the winning team
+            if (winnerName.includes('A')) {
+                // Team A color (Red - danger)
+                textColor = '#dc3545';
+            } else if (winnerName.includes('B')) {
+                // Team B color (Blue - primary)
+                textColor = '#0d6efd';
+            }
+
+            winningTeamNameElement.style.color = textColor;
+            winningTeamNameElement.style.textShadow = `0 0 10px ${textColor}`;
+
+            const winnerModal = new bootstrap.Modal(winnerModalElement);
+            winnerModal.show();
+        }
+    }
+
     // Call updateCountdown immediately to show initial time
     updateCountdown(); 
 

@@ -62,7 +62,7 @@
             <!--Team A info-->
             <div class="col-12 col-md-2 d-flex flex-column align-items-md-start align-items-center">
                 <div class="team-info-box teamA-style w-100">
-                    <h2 class="text-xl font-bold text-green-400 mb-4 text-center text-md-start">Team A</h2>
+                    <h2 class="text-xl font-bold text-danger mb-4 text-center text-md-start">Team A</h2>
                     <!-- User Profiles -->
                     <div class="space-y-3 d-flex flex-column align-items-start align-items-md-start">
                         <div class="d-flex align-items-center space-x-3 mb-2">
@@ -102,7 +102,7 @@
             <!-- Team B Info (2 Columns) -->
             <div class="col-12 col-md-2 d-flex flex-column align-items-md-end align-items-center">
                 <div class="team-info-box teamB-style w-100">
-                    <h2 class="text-xl font-bold text-danger mb-4 text-center text-md-end">Team B</h2>
+                    <h2 class="text-xl font-bold text-primary mb-4 text-center text-md-end">Team B</h2>
                     <!-- User Profiles -->
                     <div class="space-y-3 d-flex flex-column align-items-end align-items-md-end">
                         <div class="d-flex align-items-center space-x-3 mb-2">
@@ -133,7 +133,7 @@
         <!-- moderator has control only for the timer to start. must click the timer to begin countdown-->
         <div class="row justify-content-center mt-5 mb-4 g-3">
             <div class="col-12 d-flex justify-content-center">
-                <div class="box w-100 p-3 d-flex align-items-center rounded-3xl" style="background-color: rgba(0, 0, 100, 0.4); max-width: 400px;>
+                <div class="box w-100 p-3 d-flex align-items-center rounded-3xl" style="background-color: rgba(0, 0, 100, 0.4); max-width: 400px;">
                 <img src=" https://placehold.co/50x50/000000/FFFFFF?text=MOD" class="profile-pic"
                     style="width: 50px; height: 50px; border-color: #0307ff;" alt="Moderator Profile">
                     <div class="ms-3">
@@ -142,26 +142,35 @@
                     </div>
                 </div>
             </div>
-            <!--Winner box-->
-            <div class="row justify-content-center mb-5 g-3">
-                <div class="col-12 d-flex justify-content-center">
-                    <div class="box w-100 p-3 flex-column text-center rounded-3x1 h-100"
-                        style="background-color: rgba(45, 55, 72, 0.95); max-width: 450px;">
-                        <span class="text-3xl font-extrabold text-danger">WINNER</span>
-                        <span class="text-xs mt-2 text-light">Final results displayed here.</span>
+        </div>
+        <!--Winner modal box-->
+        <div id="winnerModal" class="modal fade" tabindex="-1" aria-labelledby="winnerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content winner-popup-content">
+                    <div class="modal-header border-0 pb-0">
+                        <h5 class="modal-title w-100 text-center font-extrabold text-white" id="winnerModalLabel">
+                            CHALLENGE COMPLETE!</h5>
+                    </div>
+                    <div class="modal-body pt-0 text-center">
+                        <h1 id="winningTeamName" class="display-3 font-extrabold text-uppercase">Team A Wins!</h1>
+                        <p class="text-light mt-3">Congratulations on completing the code challenge.</p>
+                    </div>
+                    <div class="modal-footer border-0 pt-0 justify-content-center">
+                        <button type="button" class="btn btn-outline-secondary text-light"
+                            data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-
         </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-            xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
-            crossorigin="anonymous"></script>
-        <script src="/public/js/games.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
+        crossorigin="anonymous"></script>
+    <script src="/public/js/games.js"></script>
+
 </body>
-
 </html>
