@@ -119,6 +119,13 @@ p{
     cursor: pointer;
 }
 
+.timer-end {
+    font-size: 2.2em;
+    font-weight: bold;
+    background-color: #dc3545;
+    color: #fff;
+}
+
 textarea {
     width: 100%;
     height: 350px;
