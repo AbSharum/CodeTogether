@@ -17,6 +17,8 @@ class ProfileController extends Controller
         $this->postDao = new PostDAO();
         $this->friendDao = new FriendListDAO();
 
+
+
         $userID = $_GET['user_id'] ?? ($_SESSION['usercreds']['userID'] ?? 0);
         if (!$userID) {
             header('Location: index.php?action=login');
@@ -32,6 +34,8 @@ class ProfileController extends Controller
             return;
         }
 
+        
+
         $posts = $this->postDao->getPostsByUser($userID);
         $friends = $this->friendDao->getFriends($userID);
         $friendsUser = $this->userDao->getFriendUsers($friends);
@@ -44,6 +48,10 @@ class ProfileController extends Controller
             'userPosts' => $posts,
             'likedPosts' => $likedPosts
         ]);
+
+        
     }
+
+
 }
 ?>

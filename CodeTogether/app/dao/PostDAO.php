@@ -135,6 +135,39 @@ class PostDAO
         return $posts;
     }
 
+    public function getPostByID(int $postID): ?Post
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM post WHERE post_id = ?");
+        $stmt->bind_param("i", $postID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        if ($row) {
+            $post = new Post();
+            $post->load($row);
+            return $post;
+        }
+
+        return null;
+    }
+
+    public function updatePostContents(int $postID, string $newContents): bool
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("UPDATE post SET contents = ?, latest_update = NOW() WHERE post_id = ?");
+        $stmt->bind_param("si", $newContents, $postID);
+        $success = $stmt->execute();
+        $stmt->close();
+
+        return $success;
+    }
+
+
+
 
     public function deletePost(int $postID): void
     {
@@ -229,6 +262,8 @@ class PostDAO
         $stmt->close();
         return $likedPosts;
     }
+
+
 
 
 }
