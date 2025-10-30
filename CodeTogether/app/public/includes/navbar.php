@@ -31,6 +31,10 @@
                         <a class="nav-link text-white" href="index.php?action=messages"><i
                                 class="fas fa-envelope me-1"></i> Messages</a> <!--need to verify correct paths -->
                     </li>
+                    <li class="nav-item" id="game-nav-item">
+                        <a class="nav-link text-white" href="index.php?action=profile"><i
+                                class="fas fa-solid fa-user"></i> Profile Page</a> <!--need to verify correct paths -->
+                    </li>
                     <li class="nav-item" id="accountSettings-nav-item">
                         <a class="nav-link text-white" href="index.php?action=accountSettings"><i
                                 class="fas fa-cog me-1"></i> Account Settings</a> <!--need to verify correct paths -->

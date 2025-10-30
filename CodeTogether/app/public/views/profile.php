@@ -65,7 +65,6 @@
               </video>
             <?php endif; ?>
           <?php else: ?>
-            <?= "this is not working" ?>
             <!-- Fallback placeholder -->
             <img src="https://placehold.co/120x120/4a5568/ffffff?text=<?= substr($data['user']->getUserName(), 0, 1) ?>"
               alt="Profile Avatar" class="profile-avatar mx-auto d-block rounded-circle mb-3"
