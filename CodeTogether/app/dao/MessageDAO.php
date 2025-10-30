@@ -58,7 +58,7 @@ class MessageDAO
         FROM message m
         JOIN user u ON u.user_id = m.user_id
         WHERE m.chat_id = ? AND m.is_deleted = FALSE AND m.sent_at > ?
-        ORDER BY m.sent_at ASC
+        ORDER BY m.sent_at ASC LIMIT 100
     ");
         $stmt->bind_param("is", $chatID, $since);
         $stmt->execute();
@@ -84,7 +84,7 @@ class MessageDAO
             FROM message m
             JOIN user u ON u.user_id = m.user_id
             WHERE m.chat_id = ? AND m.is_deleted = FALSE
-            ORDER BY m.sent_at ASC
+            ORDER BY m.sent_at ASC LIMIT 100
         ");
         $stmt->bind_param("i", $chatID);
         $stmt->execute();
