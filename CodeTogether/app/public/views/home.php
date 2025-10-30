@@ -133,7 +133,16 @@
                                     Your browser does not support the video tag.
                                 </video>
                             <?php endif; ?>
-                            <p class="mb-2 text-white"><?= htmlspecialchars($post->getContents()) ?></p>
+                            <div class="post-content" id="post-content-<?= $post->getPostID(); ?>">
+                                <?= nl2br(htmlspecialchars($post->getContents())) ?>
+                            </div>
+
+                            <form action="index.php?action=editPost" method="POST" class="edit-post-form d-none" id="edit-form-<?= $post->getPostID(); ?>">
+                                <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
+                                <textarea name="content" class="form-control mb-2"><?= htmlspecialchars($post->getContents()) ?></textarea>
+                                <button type="submit" class="btn btn-success btn-sm">Save</button>
+                                <button type="button" class="btn btn-secondary btn-sm cancel-edit" data-post-id="<?= $post->getPostID(); ?>">Cancel</button>
+                            </form>
                         <?php endif; ?>
 
                         <div class="d-flex gap-3 align-items-center">
@@ -154,6 +163,11 @@
                             <span class="text-white">
                                 <i class="fas fa-comment me-1"></i> 12
                             </span>
+                            <?php if ((int)$post->getUserID() === (int)$user->getUserID()): ?><!--Edit Post Button-->
+                                <button class="btn btn-sm btn-outline-light edit-post-btn" data-post-id="<?= $post->getPostID(); ?>">
+                                    Edit
+                                </button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -249,9 +263,9 @@
             </div>
             <!-- END FLOATING CHAT BOX UI -->
 
-            <!-- AI -->
+
             <script src="/public/js/ai.js"></script>
-            <!-- END OF AI -->
+            <script src="/public/js/post.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
                 xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"

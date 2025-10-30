@@ -11,7 +11,7 @@
   <div id="aiResponseContainer">
     <!-- AI responses will be appended here -->
     <div>
-      <strong>You:</strong>
+      <strong>Start of your conversation:</strong>
     </div>
   </div>
 
@@ -28,12 +28,12 @@
   <div id="aiPersonalityMenu">
     <h3 class="menu-heading">Select AI Personality</h3>
     <select id="personalitySelect">
-      <option value="oracle">The Oracle</option>
-      <option value="maid">Maid</option>
-      <option value="agentsmith">Agent Smith</option>
-      <option value="butler">Butler</option>
-      <option value="scientist">Scientist</option>
-      <option value="gamer">Gamer</option>
+      <option value="Oracle">The Oracle</option>
+      <option value="Maid">Maid</option>
+      <option value="AgentSmith">Agent Smith</option>
+      <option value="Butler">Butler</option>
+      <option value="Scientist">Scientist</option>
+      <option value="Gamer">Gamer</option>
     </select><br><br>
     <button id="savePersonality">Confirm</button>
     <button id="closeMenu">Close</button>

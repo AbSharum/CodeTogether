@@ -1,9 +1,3 @@
-fetch('/controllers/ProfileController.php')
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('username').textContent = data.username;
-  });
-
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -116,26 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.error('profileUrl = ', profileUrl);
 
-  fetch(profileUrl)
-    .then(async res => {
-      console.log('Response object:', res); // logs the Response metadata
-      const text = await res.text();        // read the raw body as text
-      console.log('Raw response body:', text); // print what the server actually sent
-      try {
-        const data = JSON.parse(text);      // manually parse it to catch bad JSON
-        console.log('Parsed JSON:', data);
-        return data;
-      } catch (err) {
-        console.error('Failed to parse JSON:', err);
-        throw err; // rethrow so the outer .catch still runs
-      }
-    })
-    .then(data => {
-      const usernameElem = document.getElementById('username');
-      if (usernameElem) usernameElem.textContent = data.username || 'Unknown';
-    })
-    .catch(err => console.error('Error loading username:', err));
-
+ 
 
 
   async function loadProfile() {
@@ -208,6 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
       loadProfile();
     });
   }
+
+
 
   loadProfile();
 

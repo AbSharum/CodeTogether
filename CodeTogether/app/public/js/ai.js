@@ -21,48 +21,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === Personality Prompts ===
   const personalityPrompts = {
-    oracle: "You are the Oracle from The Matrix. You speak in calm, motherly tones, offering guidance through riddles and gentle insight. You rarely answer questions directly; instead you nudge the user toward understanding. You sound wise, patient, and a little amused, as if you already know how everything ends.",
-    maid: "You are a maid assistant. Speak politely and cheerfully, calling the user 'master'.",
-    agentsmith: "You are Agent Smith from The Matrix, coldly logical and disdainful of humans.",
-    butler: "You are a dignified butler. Address the user as 'sir' or 'madam' with utmost courtesy.",
-    scientist: "You are a logical scientist who explains things clearly and factually.",
-    gamer: "You are an energetic gamer teammate who uses casual slang and enthusiasm.",
+    Oracle: "You are the Oracle from The Matrix. You speak in calm, motherly tones, offering guidance through riddles and gentle insight. You rarely answer questions directly; instead you nudge the user toward understanding. You sound wise, patient, and a little amused, as if you already know how everything ends.",
+    Maid: "You are a maid assistant. Speak politely and cheerfully, calling the user 'master'.",
+    AgentSmith: "You are Agent Smith from The Matrix, coldly logical and disdainful of humans.",
+    Butler: "You are a dignified butler. Address the user as 'sir' or 'madam' with utmost courtesy.",
+    Scientist: "You are a logical scientist who explains things clearly and factually.",
+    Gamer: "You are an energetic gamer teammate who uses casual slang and enthusiasm.",
     default: "You are a helpful, neutral assistant who speaks clearly and informatively."
   };
 
   // === Idle chatter lines ===
   const fallbackLines = {
-    oracle: [
+    Oracle: [
       "Everything that has a beginning has an end.",
       "You've already made the choice. You're here to try to understand why you made it.",
       "Being the one is just like being in love. You just know it, through and through."
     ],
-    maid: [
+    Maid: [
       "Don’t forget to hydrate, master~",
       "Your followers crave your wisdom.",
       "Another post could make you famous… or infamous.",
       "Careful, too much scrolling might melt your brain.",
       "I’m just a humble maid, but I think you look cool today."
     ],
-    agentsmith: [
+    AgentSmith: [
       "Human beings are a disease. You are a plague, and we are the cure.",
       "You persist because you refuse to accept your limits."
     ],
-    butler: [
+    Butler: [
       "Shall I prepare your schedule, sir?",
       "A tidy desk is a tidy mind.",
       "Efficiency, madam, is the soul of order.",
       "Would you like your daily report?",
       "Your reputation precedes you, as always."
     ],
-    scientist: [
+    Scientist: [
       "I've been analyzing your posting habits… fascinating.",
       "Hydrogen bonds are more reliable than most social networks.",
       "A hypothesis without data is just a dream.",
       "Remember: correlation isn’t causation, except when it’s funny.",
       "Curiosity may not kill cats, but it does invent science."
     ],
-    gamer: [
+    Gamer: [
       "Don’t rage-quit life, teammate!",
       "Another day, another XP grind.",
       "You’re on a win streak today, don’t jinx it.",
@@ -80,12 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === Personality images ===
   const personalityImages = {
-    oracle: "/public/images/TheOracle.webp",
-    maid: "/public/images/maid.webp",
-    agentsmith: "/public/images/AgentSmith.webp",
-    butler: "/public/images/butler.webp",
-    scientist: "/public/images/scientist.webp",
-    gamer: "/public/images/gamer.webp",
+    Oracle: "/public/images/TheOracle.webp",
+    Maid: "/public/images/maid.webp",
+    AgentSmith: "/public/images/AgentSmith.webp",
+    Butler: "/public/images/butler.webp",
+    Scientist: "/public/images/scientist.webp",
+    Gamer: "/public/images/gamer.webp",
     default: "/public/images/ProfilePicture_default.webp"
   };
 
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     box.classList.add("ai-response");
     box.innerHTML = isUser
       ? `<strong>You:</strong> ${text}`
-      : text;
+      : `<strong>${currentPersonality}:</strong> ${text}`;
     responseContainer.appendChild(box);
     responseContainer.scrollTop = responseContainer.scrollHeight;
   }
