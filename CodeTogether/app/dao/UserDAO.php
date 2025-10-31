@@ -232,5 +232,28 @@ class UserDAO
         return $row['profile_picture'];
     }
 
+    public function getTopUsersByPoints(int $limit = 3): array
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM user ORDER BY points DESC LIMIT ?");
+        $stmt->bind_param("i", $limit);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $users = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $user = new User();
+            $user->load($row);
+            $users[] = $user;
+        }
+
+        $stmt->close();
+
+        return $users;
+    }
+
+
+
 }
 ?>

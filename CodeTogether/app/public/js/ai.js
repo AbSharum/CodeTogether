@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // === State ===
   let autoActive = true;
   let currentPersonality = localStorage.getItem('aiPersonality') || 'default';
+  let lastAiResponse = null;
 
   // === Personality Prompts ===
   const personalityPrompts = {
@@ -132,12 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
   async function askAI(question) {
     try {
       const prompt = personalityPrompts[currentPersonality] || personalityPrompts.default;
+      const context = lastAiResponse
+        ? `\nPrevious AI response: "${lastAiResponse}"\nNow respond to: ${question}`
+        : question;
       const res = await fetch("/public/includes/ai.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           event: "userChat",
-          question,
+          question: context,
           personality: currentPersonality,
           prompt
         })
@@ -165,9 +169,15 @@ document.addEventListener('DOMContentLoaded', () => {
     appendResponse(question, true);
     showSpeech("Thinking...", true);
 
-    const reply = await askAI(question);
-    appendResponse(reply);
-    showSpeech(getRandomLine()); 
+  const reply = await askAI(question);
+
+  lastAiResponse = reply;
+
+  localStorage.setItem('aiLastResponse', reply);
+
+  appendResponse(reply);
+  showSpeech(getRandomLine());
+
 
     aiInput.value = "";
   });
@@ -190,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === Init ===
   select.value = currentPersonality;
+  lastAiResponse = localStorage.getItem('aiLastResponse') || null;
   updateAiImage();
   setInterval(cycleSpeech, 10000);
 });
