@@ -85,6 +85,33 @@
       transform: rotate(360deg);
     }
   }
+
+    @media (max-width: 768px) {
+    .loading-gif {
+        width: 45vw; 
+        max-width: none;
+    }
+
+    .blur-glow {
+        width: 60vw;
+        height: 60vw;
+    }
+    }
+
+    @media (max-width: 480px) {
+    .loading-gif {
+        width: 70vw;
+    }
+
+    .blur-glow {
+        width: 85vw;
+        height: 85vw;
+    }
+
+    .spinner {
+        top: 75%;
+    }
+    }
 </style>
 
 <script>

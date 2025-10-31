@@ -139,7 +139,7 @@
                             data-friend-id="<?= $friendUser->getUserID(); ?>">
 
                             <a href="index.php?action=profile&user_id=<?= $friendUser->getUserID(); ?>"
-                                class="d-flex align-items-center text-decoration-none flex-grow-1">
+                                class="d-flex align-items-center text-decoration-none flex-grow-1 nav-fade">
 
                                 <?php
                                 $profilePic = $friendUser->getProfilePicture() ?? '';

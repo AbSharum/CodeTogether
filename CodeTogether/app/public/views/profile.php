@@ -148,7 +148,7 @@
 
         <!-- Friends list -->
         <div class="friends-card mt-4 p-3">
-          <h5 class="text-info mb-3">Friends (<?= count($friendsUser) ?>)</h5>
+          <h5 class="text-info mb-3"><?= htmlspecialchars($user->getUserName()) ?>'s Friends (<?= count($friendsUser) ?>)</h5>
           <?php foreach ($friendsUser as $friendUser): ?>
             <?php
             $statusClass = 'text-danger';
@@ -167,7 +167,7 @@
             <div class="friend-item d-flex align-items-center mb-2" data-friend-id="<?= $friendUser->getUserID(); ?>">
 
               <a href="index.php?action=profile&user_id=<?= $friendUser->getUserID(); ?>"
-                class="d-flex align-items-center text-decoration-none flex-grow-1">
+                class="d-flex align-items-center text-decoration-none flex-grow-1 nav-fade">
 
                 <?php
                 $profilePic = $friendUser->getProfilePicture() ?? '';
