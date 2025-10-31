@@ -1,3 +1,8 @@
+<!--Loading Screen. Threw it here since we are most likely going to have the navbar on everypage anyways.-->
+<?php include __DIR__ . '/loadingScreen.php'; ?>
+
+
+<!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top"
         style="background-color: black; border-bottom: 2px solid green;">
         <div class="container-fluid container-lg">
@@ -20,30 +25,30 @@
                 </form>
                     
                     <li class="nav-item" id="home-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=home"><i class="fas fa-home me-1"></i>
+                        <a class="nav-link text-white nav-fade" href="index.php?action=home"><i class="fas fa-home me-1"></i>
                             Home</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="game-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=game"><i
+                        <a class="nav-link text-white nav-fade" href="index.php?action=game"><i
                                 class="fas fa-gamepad me-1"></i> Game Page</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="message-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=messages"><i
+                        <a class="nav-link text-white nav-fade" href="index.php?action=messages"><i
                                 class="fas fa-envelope me-1"></i> Messages</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="game-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=profile"><i
+                        <a class="nav-link text-white nav-fade" href="index.php?action=profile"><i
                                 class="fas fa-solid fa-user"></i> Profile Page</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="accountSettings-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=accountSettings"><i
+                        <a class="nav-link text-white nav-fade" href="index.php?action=accountSettings"><i
                                 class="fas fa-cog me-1"></i> Account Settings</a> <!--need to verify correct paths -->
                     </li>
                     <li class="nav-item" id="login-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=login"><i class="fa fa-sign-in" style="color: blue"></i> Login</a> <!--need to actually log user out-->
+                        <a class="nav-link text-white nav-fade" href="index.php?action=login"><i class="fa fa-sign-in" style="color: blue"></i> Login</a> <!--need to actually log user out-->
                     </li>
                     <li class="nav-item" id="logout-nav-item">
-                        <a class="nav-link text-white" href="index.php?action=logout"><i class="fa fa-sign-out" style="color: red"></i>Logout</a> <!--need to actually log user out-->
+                        <a class="nav-link text-white nav-fade" href="index.php?action=logout"><i class="fa fa-sign-out" style="color: red"></i>Logout</a> <!--need to actually log user out-->
                     </li>
                 </ul>
             </div>

@@ -33,7 +33,8 @@ class LikePostController extends Controller
         $newLikes = $this->postDao->countLikes($postId);
         $this->postDao->updateLikes($postId, $newLikes);
 
-        $redirect = $_POST['redirect'] ?? 'index.php?action=home';
+        //$redirect = $_POST['redirect'] ?? 'index.php?action=home';
+        $redirect = $_SERVER['HTTP_REFERER'] ?? 'index.php?action=home';
         header("Location: $redirect");
         exit;
     }
