@@ -17,7 +17,6 @@
   <?php include __DIR__ . '/../includes/navbar.php'; ?>
   <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
   <script src="/public/js/ai.js"></script>
-  <script src="/public/js/post.js"></script>
   <script src="/public/js/profile.js"></script>
 
 
@@ -217,7 +216,7 @@
       </section>
     </div>
   </main>
-  
+  <script src="/public/js/post.js"></script>
   <!--Need this for the bootstrap plus Popper for drop downs and other cool things.-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>

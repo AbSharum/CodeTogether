@@ -8,7 +8,6 @@ class LikePostController extends Controller
 
     public function performAction(): void
     {
-
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header("Location: index.php?action=home");
             exit;
@@ -26,14 +25,29 @@ class LikePostController extends Controller
 
         if ($this->postDao->hasUserLikedPost($postId, $userId)) {
             $this->postDao->removeLike($postId, $userId);
+            $liked = false;
         } else {
             $this->postDao->addLike($postId, $userId);
+            $liked = true;
         }
 
         $newLikes = $this->postDao->countLikes($postId);
         $this->postDao->updateLikes($postId, $newLikes);
 
-        //$redirect = $_POST['redirect'] ?? 'index.php?action=home';
+        //detect AJAX request, because reloading the page just for liking a post is dumb and I hate it!
+        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+                  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'success' => true,
+                'liked' => $liked,
+                'likes' => $newLikes
+            ]);
+            exit;
+        }
+
         $redirect = $_SERVER['HTTP_REFERER'] ?? 'index.php?action=home';
         header("Location: $redirect");
         exit;

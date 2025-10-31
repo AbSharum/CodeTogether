@@ -1,6 +1,7 @@
 <?php
 //Expects: $post (Post object), $user (User object), and optionally $likedPosts (array)
 ?>
+
 <link rel="stylesheet" href="/public/css/postVisual.css">
 <div class="post-card">
   <p class="fw-bold text-white mb-1">
@@ -68,13 +69,14 @@
       $isLiked = isset($likedPosts) && in_array($post->getPostID(), $likedPosts);
       $heartClass = $isLiked ? 'text-danger' : 'text-secondary';
     ?>
-    <form action="index.php?action=likePost" method="POST" class="d-inline">
-      <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
-      <button type="submit" class="btn btn-sm btn-link text-decoration-none text-white p-0">
-        <i class="fas fa-heart <?= $heartClass ?> me-1"></i>
-        <?= htmlspecialchars($post->getLikes()) ?>
-      </button>
-    </form>
+  <form action="index.php?action=likePost" method="POST" class="d-inline like-form">
+    <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
+    <button type="submit" class="btn btn-sm btn-link text-decoration-none text-white p-0">
+      <i class="fas fa-heart <?= $heartClass ?> me-1"></i>
+      <span class="like-count"><?= htmlspecialchars($post->getLikes()) ?></span>
+    </button>
+  </form>
+
 
     <span class="text-white">
       <i class="fas fa-comment me-1"></i> 12
