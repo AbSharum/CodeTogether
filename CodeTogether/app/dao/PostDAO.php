@@ -178,6 +178,35 @@ class PostDAO
         $stmt->close();
 
     }
+    /*If we think that we are okay with deleting the posts straight up and deleting the files then we may do something like this instead.
+    public function deletePost(int $postID): void
+    {
+        $conn = Database::getConnection();
+
+        // Fetch the file name first
+        $stmt = $conn->prepare("SELECT file_path FROM post WHERE post_id = ?");
+        $stmt->bind_param("i", $postID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $file = $result->fetch_assoc()['file_path'] ?? null;
+        $stmt->close();
+
+        // Soft delete
+        $stmt = $conn->prepare("UPDATE post SET is_deleted = TRUE WHERE post_id = ?");
+        $stmt->bind_param("i", $postID);
+        $stmt->execute();
+        $stmt->close();
+
+        // Delete the actual file if it exists
+        if ($file && file_exists(__DIR__ . '/../public/uploads/' . $file)) {
+            unlink(__DIR__ . '/../public/uploads/' . $file);
+        }
+    }
+    */
+
+
+
+
 
     public function searchPostsByTerm(string $searchTerm): array
     {
