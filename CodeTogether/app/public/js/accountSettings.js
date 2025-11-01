@@ -73,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        if(wasRaining){
+        if(wasRaining && isRaining){
             startRain();
-        }else{
+        }else if (!isRaining){
             context.fillStyle = 'black';
             context.fillRect(0,0, canvas.width, canvas.height);
         }
@@ -144,7 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if(isRaining){
             startRain();
         }else{
-            stopRain();
+            context.fillStyle = 'black';
+            context.fillRect(0, 0, canvas.width, canvas.height);
         }
 
         rainToggle.addEventListener('change', () => {
