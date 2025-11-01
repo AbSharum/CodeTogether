@@ -18,9 +18,6 @@
 
 <body>
     <canvas id="matrix-canvas"></canvas>
-    <!--NavBar-->
-    <?php include __DIR__ . '/../includes/navbar.php'; ?>
-    <!--end of navigation-->
 
     <div class="container d-flex align-items-center justify-content-center vh-100 position-relative"
         style="z-index: 1;">
