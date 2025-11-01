@@ -97,13 +97,19 @@
                             <!--needs js for account deletion and db deletion-->
                         </div>
                     </div>
-
+                    <div class="text-center mt-3" style="color: #0f0; font-size: 0.8rem; clear: both;">
+                        Matrix Rain: Toggle On/Off
+                        <label class="rainToggle">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="/public/js/accountSettings.js"></script> <!--update for filepath for js-->
+    <script src="/public/js/accountSettings.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         xintegrity="sha384-I7E8VVD/ismYTF4yFOWMaa4G8Hh8MfWfQ9SFJdFjO3/B5Gowu/Q7X9+l+O/Y5z4z0J"
         crossorigin="anonymous"></script>
@@ -111,5 +117,4 @@
         xintegrity="sha384-0pUGZvbkm6XF6gxjEnlwpMCEoV3f73SjJ+J8C6W6D2Kx5lM7B8K2FfR7R7E7Q"
         crossorigin="anonymous"></script>
 </body>
-
 </html>
