@@ -97,10 +97,11 @@
                             <!--needs js for account deletion and db deletion-->
                         </div>
                     </div>
-                    <div class="text-center mt-3" style="color: #0f0; font-size: 0.8rem; clear: both;">
-                        Matrix Rain: Toggle On/Off
+                    <div class="text-center mt-3" style="color: #0f0; font-size: 0.8rem; clear: both; display: flex; align-items: center; justify-content: center;">
+                        <span class="me-2">Matrix Rain: Toggle On/Off</span>
                         <label class="rainToggle">
-                            <input type="checkbox">
+                            <!-- ADDED ID for JS to target -->
+                            <input type="checkbox" id="rainToggle">
                             <span class="slider round"></span>
                         </label>
                     </div>

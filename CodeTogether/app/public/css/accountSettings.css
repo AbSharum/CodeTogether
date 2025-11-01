@@ -137,10 +137,11 @@ a{
 .rainToggle {
     position: relative;
     display: inline-flex;
-    width: 35px;
+    width: 55px;
     height: 30px;
     justify-content: center;
-    margin-top: 1rem;
+    margin-left: 10px;
+    vertical-align: middle;
 }
 .rainToggle input{
     opacity: 0;
@@ -154,30 +155,31 @@ a{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #0f0;
+    background-color: #444;
     transition: 0.4s;
+    border: 1px solid #0f0;
 }
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
     transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked, .slider {
     background-color: #00ff41;
     box-shadow: 0 0 10px #00ff41;
 }
 
-input:focus + .slider {
+input:focus, .slider {
     box-shadow: 0 0 1px #00ff41;
 }
 
-input:checked + .slider:before {
+input:checked, .slider:before {
     transform: translateX(26px);
     background-color: #000;
 }
