@@ -19,6 +19,7 @@ p a {
     text-decoration-line: underline; /*underlines link */
     transform: translateY(-1px); /*lift effect on text */
     text-shadow: 0 4px 8px rgba(0, 255, 65, 0.4); /* green shadow to link text */
+    font-family: 'Consolas', 'Courier New', monospace;
 }
 
 .card{
@@ -104,4 +105,28 @@ p {
 .card-body p{
     margin-bottom: 1rem; /* reduces margin below paragraphs */
     text-align: center; /*ensures center alignment of links */
+}
+
+/* The flex items container below the password field (remains column-centered) */
+.password-options {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Centers the whole stack horizontally */
+    justify-content: center;
+    gap: 0.5rem; /* Small vertical space between options */
+    margin-bottom: 1rem; /* Space below the options group */
+}
+.form-check {
+    width: fit-content; /* Make the block only as wide as its content */
+    margin-left: auto; /* Use auto margins to center the entire block within its parent (password-options) */
+    margin-right: auto;
+    margin-bottom: 0;  /* Override any residual Bootstrap margin that might cause spacing issues */
+    padding-left: 0; /* Prevent Bootstrap from shifting content left */
+}
+/* Ensure form-check-input (the checkbox itself) is aligned properly */
+.form-check-input {
+    margin-top: 0; /* The default margin-left from Bootstrap is applied here, but the parent centering handles it */
+}
+#rememeberMe{
+    margin-left: auto;
 }

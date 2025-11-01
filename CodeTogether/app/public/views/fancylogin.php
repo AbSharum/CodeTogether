@@ -16,7 +16,7 @@
     <div class="container">
         <div class="card p-4 mx-4" style="max-width: 400px;">
             <div class="card-matrix w-full">
-                <h2 class="card-title text-center mb-4 text-2x1 font-bold" style="color:#0f0;">Code Together Login</h2>
+                <h2 class="card-title text-center mb-4 text-2xl font-bold" style="color:#0f0;">Code Together Login</h2>
                 <?php if (isset($error)): ?>
                     <div class="alert alert-danger" role="alert">
                         <?= htmlspecialchars($error) ?>
@@ -31,11 +31,17 @@
                     <div class="mb-2">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
-                        <div class="text-sm mt-2 text-left" style="color:#0f0;">
-                            <input type="checkbox" onclick="showPass()" style="margin-rigth: 4px;">Show Password<br>
-                            <input type="checkbox" id="rememberMe" name="rememberMe" value="1"
-                                style="margin-right: 4px;">
-                            <label class="form-check-label" for="rememberMe">Remember Me</label>
+                        <div class="text-sm mt-2 password-options" style="color:#0f0;">
+                            <div class="form-check">
+                                <input type="checkbox" onclick="showPass()" id="showPassCheckbox" class="form-check-input">
+                                <label class="form-check-label" for="showPassCheckbox">Show Password</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" id="rememberMe" name="rememberMe" value="1"
+                                    class="form-check-input">
+                                <label class="form-check-label" for="rememberMe">Remember Me</label>
+                            </div>
                         </div>
                     </div>
 
@@ -48,8 +54,8 @@
                     <button type="button" class="btn btn-success"
                         onclick="window.location.href='index.php?action=createAccount'">Create Account</button>
                 </div>
-                <p class="mt-4"><a href="index.php?action=privacyPolicy">Privacy Policy</a></p><br>
-                <p><a href="index.php?action=terms">Terms and Conditions</a></p>
+                <p class="mt-3 mb-1"><a href="index.php?action=privacyPolicy">Privacy Policy</a></p><br>
+                <p class="mb-0"><a href="index.php?action=terms">Terms and Conditions</a></p>
             </div>
         </div>
     </div>
