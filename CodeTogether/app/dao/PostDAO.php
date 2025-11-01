@@ -66,6 +66,7 @@ class PostDAO
             $ids[] = $friend->getFriendID();
         $inClause = "('" . implode("','", $ids) . "')";
 
+
         $conn = Database::getConnection();
         $stmt = $conn->prepare("SELECT * FROM post WHERE user_id in $inClause AND is_deleted = FALSE AND visibility in ('public','friends') ORDER BY created_on DESC LIMIT 100");
         $stmt->execute();
@@ -105,9 +106,6 @@ class PostDAO
 
     public function getPostsByFriendsAndUser(array $friends, int $userID): array
     {
-        if (empty($friends))
-            return [];
-
         $ids = [];
         foreach ($friends as $friend)
             $ids[] = $friend->getFriendID();
