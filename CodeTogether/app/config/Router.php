@@ -49,7 +49,7 @@ class Router
     {
         $protectedRoutes = [
             'home' => ['student', 'teacher', 'moderator'],
-            'accountSettings' => ['moderator'],
+            'accountSettings' => ['moderator','student','teacher'],
             'messages' => ['student', 'teacher', 'moderator'],
             'game' => ['student', 'teacher', 'moderator'],
             'profile' => ['student', 'teacher', 'moderator'],
