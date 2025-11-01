@@ -6,7 +6,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top"
         style="background-color: black; border-bottom: 2px solid green;">
         <div class="container-fluid container-lg">
-            <a class="navbar-brand fw-bold brand-green text-info" href="index.php?action=profile">Code Together</a>
+            <a class="navbar-brand flush-left fw-bold brand-green text-info" href="index.php?action=profile">Code Together</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
