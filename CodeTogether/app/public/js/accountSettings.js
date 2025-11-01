@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(animationFrameId === null){
             isRaining = true;
             localStorage.setItem('matrixRainEnabled', 'true');
-            lasTime = 0;
+            lastTime = 0;
             animationFrameId = requestAnimationFrame(animate);
         }
     };
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
             cancelAnimationFrame(animationFrameId);
         }
         animationFrameId = null;
-        isRaining = 'false';
+        isRaining = false;
         localStorage.setItem('matrixRainEnabled','false');
-        context.fillStyle = 'block';
+        context.fillStyle = 'black';
         context.fillRect(0,0,canvas.width, canvas.height);
     };
 
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    });
+});
 
     const deleteModal = document.getElementById("deleteModal");
     const usernameModal = document.getElementById("UsernameModal");
@@ -223,19 +223,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.navbar-nav .nav-item a');
 
     navLinks.forEach(link => {
-    // 3. Get the filename from the link's href
-    const linkHref = link.getAttribute('href') || '';
-    const linkPathParts = linkHref.split('/');
-    const linkFileName = linkPathParts[linkPathParts.length - 1].toLowerCase();
+        // 3. Get the filename from the link's href
+        const linkHref = link.getAttribute('href') || '';
+        const linkPathParts = linkHref.split('/');
+        const linkFileName = linkPathParts[linkPathParts.length - 1].toLowerCase();
 
-    // 4. Check if the link's filename matches the current page's filename
-    if (linkFileName && linkFileName === currentFileName) {
-    // 5. Hide the parent <li> element (the nav-item)
-        const parentItem = link.closest('.nav-item');
-        if (parentItem) {
-            parentItem.classList.add('d-none');
+        // 4. Check if the link's filename matches the current page's filename
+        if (linkFileName && linkFileName === currentFileName) {
+        // 5. Hide the parent <li> element (the nav-item)
+            const parentItem = link.closest('.nav-item');
+            if (parentItem) {
+                parentItem.classList.add('d-none');
+            }
         }
-    }
-});
+    });
 
 
