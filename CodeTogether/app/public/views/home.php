@@ -21,7 +21,6 @@
     <!--NavBar-->
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
     <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
-    <?php include __DIR__ . '/../includes/leaderboardWidget.php'; ?>
     <!--end of navigation-->
 
     <div class="container py-5">
@@ -35,9 +34,6 @@
                     $absolutePath = __DIR__ . '/../uploads/' . $profilePic;
                     $webPath = '/public/uploads/' . $profilePic;
                     $fileExists = !empty($profilePic) && file_exists($absolutePath);
-
-
-
 
                     // Check extension type
                     $extension = !empty($profilePic) ? strtolower(pathinfo($profilePic, PATHINFO_EXTENSION)) : ''; ?>
@@ -116,6 +112,7 @@
 
             <!--right side of page for friends list  will be 3/12 width on large screens-->
             <div class="col-lg-3 mb-4 order-lg-3 order-2">
+                <?php include __DIR__ . '/../includes/leaderboardWidget.php'; ?>
                 <div class="friends-card">
                     <h4 class="text-info mb-3 text-white">Online Friends (<?php echo count($data['friends']); ?>)</h4>
 
