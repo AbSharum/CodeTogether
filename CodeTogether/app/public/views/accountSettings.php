@@ -23,13 +23,21 @@
       <div class="card-body">
         <h2 class="card-title text-center mb-4">Code Together Account Settings</h2>
 
+        <?php if (!empty($data['error'])): ?>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($data['error']) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <?php endif; ?>
+
         <form action="index.php?action=accountSettings" method="POST" class="mb-3">
           <input type="hidden" name="update" value="username">
           <label for="username" class="form-label">Username</label>
           <input type="text" class="form-control" id="username" name="username"
             value="<?= htmlspecialchars($data['username'] ?? '') ?>" required>
-          <button type="submit" class="btn btn-success w-100 mt-2"><i class="fas fa-user-pen me-2"></i> Save
-            Username</button>
+          <button type="submit" class="btn btn-success w-100 mt-2">
+            <i class="fas fa-user-pen me-2"></i> Save Username
+          </button>
         </form>
 
         <form action="index.php?action=accountSettings" method="POST" class="mb-3">
@@ -37,8 +45,9 @@
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" name="email"
             value="<?= htmlspecialchars($data['email'] ?? '') ?>" required>
-          <button type="submit" class="btn btn-success w-100 mt-2"><i class="fas fa-envelope me-2"></i> Save
-            Email</button>
+          <button type="submit" class="btn btn-success w-100 mt-2">
+            <i class="fas fa-envelope me-2"></i> Save Email
+          </button>
         </form>
 
         <form action="index.php?action=accountSettings" method="POST" class="mb-3">
@@ -46,8 +55,9 @@
           <label for="password" class="form-label">Password</label>
           <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password"
             required>
-          <button type="submit" class="btn btn-success w-100 mt-2"><i class="fas fa-lock me-2"></i> Update
-            Password</button>
+          <button type="submit" class="btn btn-success w-100 mt-2">
+            <i class="fas fa-lock me-2"></i> Update Password
+          </button>
         </form>
 
         <form action="index.php?action=accountSettings" method="POST">
@@ -69,6 +79,7 @@
       </div>
     </div>
   </main>
+
   <script src="/public/js/core/theme.js"></script>
   <script src="/public/js/core/rain.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

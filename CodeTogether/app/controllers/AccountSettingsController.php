@@ -25,20 +25,44 @@ class AccountSettingsController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updateType = $_POST['update'] ?? '';
+            $error = '';
 
             switch ($updateType) {
                 case 'username':
-                    $this->userDao->updateUsername($_SESSION['usercreds']['userID'], $_POST['username']);
-                    $_SESSION['usercreds']['username'] = $_POST['username'];
+                    $newUsername = trim($_POST['username'] ?? '');
+                    if (empty($newUsername)) {
+                        $error = 'Username cannot be empty.';
+                        break;
+                    }
+                    if ($this->userDao->checkExistingUser($newUsername)) {
+                        $error = 'An account with this username already exists!';
+                        break;
+                    }
+                    $this->userDao->updateUsername($_SESSION['usercreds']['userID'], $newUsername);
+                    $_SESSION['usercreds']['username'] = $newUsername;
                     break;
 
                 case 'email':
-                    $this->userDao->updateEmail($_SESSION['usercreds']['userID'], $_POST['usercreds']['email']);
-                    $_SESSION['email'] = $_POST['email'];
+                    $newEmail = trim($_POST['email'] ?? '');
+                    if (empty($newEmail)) {
+                        $error = 'Email cannot be empty.';
+                        break;
+                    }
+                    if ($this->userDao->checkExistingEmail($newEmail)) {
+                        $error = 'An account with this email already exists!';
+                        break;
+                    }
+                    $this->userDao->updateEmail($_SESSION['usercreds']['userID'], $newEmail);
+                    $_SESSION['usercreds']['email'] = $newEmail;
                     break;
 
                 case 'password':
-                    $this->userDao->updatePassword($_SESSION['usercreds']['userID'], $_POST['password']);
+                    $newPassword = trim($_POST['password'] ?? '');
+                    if (empty($newPassword)) {
+                        $error = 'Password cannot be empty.';
+                        break;
+                    }
+                    $this->userDao->updatePassword($_SESSION['usercreds']['userID'], $newPassword);
                     break;
 
                 case 'preferences':
@@ -54,7 +78,8 @@ class AccountSettingsController extends Controller
                 'username' => $_SESSION['usercreds']['username'],
                 'email' => $_SESSION['usercreds']['email'],
                 'rain_enabled' => $_SESSION['rain_enabled'],
-                'theme' => $_SESSION['theme']
+                'theme' => $_SESSION['theme'],
+                'error' => $error
             ]);
         }
     }

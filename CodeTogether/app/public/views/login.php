@@ -24,8 +24,9 @@
                 <h2 class="card-title mb-4 text-center">Code Together Login</h2>
 
                 <?php if (isset($error)): ?>
-                    <div class="alert alert-danger text-center" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <?= htmlspecialchars($error) ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif; ?>
 
