@@ -1,0 +1,132 @@
+body{
+    overflow: hidden; /*hides scrollbar */
+    background:#000; /*backgroun is pure black*/
+    font-family: 'Consolas', 'Courier New', monospace; /*monospace font for command line look */
+}
+
+#matrix-canvas{
+    position: fixed;  /* Fixes the canvas position relative to the viewport */
+    top: 0; /* Aligns the canvas to the top edge */
+    left: 0; /* Aligns the canvas to the left edge */
+    width: 100%; /* Makes the canvas cover the full viewport width */
+     height: 100%; /* Makes the canvas cover the full viewport height */
+    z-index: -1; /* Puts the canvas behind all other content (the login card) */
+}
+
+p a {
+    color :#00ff41; /* set link color to green */
+    text-align: center; /*center text*/
+    text-decoration-line: underline; /*underlines link */
+    transform: translateY(-1px); /*lift effect on text */
+    text-shadow: 0 4px 8px rgba(0, 255, 65, 0.4); /* green shadow to link text */
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.card{
+    border: 1px solid rgba(0, 255, 0, 0.5);/* semi transparent green border */
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /*glow effect*/
+    background: rgba(0, 0, 0, 0.8); /*semi transparent background */
+    backdrop-filter: blur(5px); /* slight blur behind the card */
+    color: #0f0; /*text color */
+    max-width: 400px; /*limit card with*/
+    margin: 10vh auto; /*centers card horizontally and sets top/bottom margins*/
+    padding: 2rem; /*inner spacing */
+    border-radius: 0.6rem; /*rounded corners*/
+    text-align: center; /*center text */
+}
+
+.form-label{
+    color: #0f0; /*text color */
+    margin-bottom: 0.5rem; /*space below label*/
+    display: block; /*label has own line */
+    text-align: left; /* text aligned to the left */
+}
+
+.form-control {
+    width: 100%; /*full width of parent container*/
+    padding: 0.5rem; /*inner padding */
+    margin-bottom: 1rem; /*space below input */
+    border-radius: 0.25rem; /*round corners */
+    border: 1px solid rgba(0, 255, 0, 0.5); /* border */
+    background-color: rgba(0, 0, 0, 0.5); /* input background color */
+    color: #0f0; /* text color */
+}
+.form-control:focus, .form-select:focus{
+    background-color: rgba(30, 41, 59, 0.95); /*background color changes on focus */
+    border-color: #00ff41; /* changes border color */
+    box-shadow: 0 0 5px rgba(0, 255, 65, 0.7); /* strong glow on focus */
+    color: #fff; /* text color **/
+}
+
+.btn-success{
+    --tw-bg-opacity: 1; /* utility variable for background opacity */
+    background-color: #0c0; /*background color */
+    color: #000; /* black text */
+    padding: 0.75rem 1.5rem; /*padding inside button */
+    border-radius: 0.25rem; /* rounded corners */
+    border: none; /* no border */
+    cursor: pointer; /*changes the cursor on hover */
+    transition: all 0.3s; /* smooth transition on hover */
+}
+
+.btn-success:hover {
+    background-color: #0a0; /*  on hover slightly darjer background */
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.75); /* stronger shadow on hover */
+    transform: translateY(-1px); /* moves button up slightly for lifted effect on hover */
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.form-control, .form-select {
+    background-color: rgba(30, 41, 59, 0.95); /* background color for inpuits/selects */
+    border: 1px solid #06a342; /*green border color */
+    color: #fff; /*text color */
+}
+
+.form-select option {
+    background: #1e293b; /* background color for dropdown options */
+}
+.container {
+    display: flex; /*endables flexbox layout */
+    align-items: center; /*vertically centers content */
+    justify-content: center; /* horizontally centers the content */
+    height: 100vh; /*takes full viewport hieight */
+    position: relative; /* positioning context for z index */
+    z-index: 1; /* ensure content is above matrix-canvas  */
+}
+.card-body p{
+    margin-bottom: 1rem; /* reduces margin below paragraphs */
+    text-align: center; /*ensures center alignment of links */
+}
+
+/* The flex items container below the password field (remains column-centered) */
+.password-options {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Centers the whole stack horizontally */
+    justify-content: center;
+    gap: 0.5rem; /* Small vertical space between options */
+    margin-bottom: 1rem; /* Space below the options group */
+}
+.form-check {
+    width: fit-content; /* Make the block only as wide as its content */
+    margin-left: auto; /* Use auto margins to center the entire block within its parent (password-options) */
+    margin-right: auto;
+    margin-bottom: 0;  /* Override any residual Bootstrap margin that might cause spacing issues */
+    padding-left: 0; /* Prevent Bootstrap from shifting content left */
+}
+/* Ensure form-check-input (the checkbox itself) is aligned properly */
+.form-check-input {
+    margin-top: 0; /* The default margin-left from Bootstrap is applied here, but the parent centering handles it */
+}
+#rememeberMe{
+    margin-left: auto;
+}

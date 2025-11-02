@@ -21,7 +21,6 @@
     <!--NavBar-->
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
     <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
-    <?php include __DIR__ . '/../includes/leaderboardWidget.php'; ?>
     <!--end of navigation-->
     <main class="page-home">
         <div class="container py-5">

@@ -129,6 +129,7 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
             <!-- 4. Moderator Box and Winner Box (now in a row below the main content) -->
             <!-- will need db info and php here too for moderator -->
             <!-- moderator has control only for the timer to start. must click the timer to begin countdown-->
@@ -141,6 +142,19 @@
                         <div class="ms-3">
                             <span class="font-bold text-lg text-info d-block">Moderator</span>
                             <span class="text-sm text-light">Control Panel Active</span>
+=======
+            <!-- Team B Info (2 Columns) -->
+            <div class="col-12 col-md-2 d-flex flex-column align-items-md-end align-items-center">
+                <div class="team-info-box teamB-style w-100">
+                    <h2 class="text-xl font-bold mb-4 text-center text-md-end" style="color: #dc3545;">Team B</h2>
+                    <!-- User Profiles -->
+                    <div class="space-y-3 d-flex flex-column align-items-end align-items-md-end">
+                        <div class="d-flex align-items-center space-x-3 mb-2">
+                            <span class="text-sm text-md-end me-2">Sam L. (Captain)</span>
+                            <img src="https://placehold.co/40x40/000000/FFFFFF?text=S" class="profile-pic"
+                                onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=S'"
+                                alt="User Profile S">
+>>>>>>> 50677c24ddb671d107654168a488c55d1884c967
                         </div>
                     </div>
                 </div>
