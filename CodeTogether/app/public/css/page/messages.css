@@ -204,3 +204,48 @@
   color: #06a342 !important;
   text-shadow: 0 0 10px rgba(6, 163, 66, 0.4);
 }
+
+.page-messages .friend-item small.status,
+.page-messages .friend-item small.text-success,
+.page-messages .friend-item small.text-warning,
+.page-messages .friend-item small.text-danger {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+:root[data-theme="dark"] .page-messages .friend-item small.text-success {
+  background: #06a342;
+  color: #fff !important;
+}
+
+:root[data-theme="dark"] .page-messages .friend-item small.text-warning {
+  background: #facc15;
+  color: #000 !important;
+}
+
+:root[data-theme="dark"] .page-messages .friend-item small.text-danger {
+  background: #dc2626;
+  color: #fff !important;
+}
+
+:root[data-theme="light"] .page-messages .friend-item small.text-success {
+  background: rgba(6, 163, 66, 0.15);
+  color: #000 !important;
+}
+
+:root[data-theme="light"] .page-messages .friend-item small.text-warning {
+  background: rgba(250, 204, 21, 0.25);
+  color: #000 !important;
+}
+
+:root[data-theme="light"] .page-messages .friend-item small.text-danger {
+  background: rgba(220, 38, 38, 0.15);
+  color: #000 !important;
+}
