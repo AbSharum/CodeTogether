@@ -34,6 +34,62 @@ class UserDAO
         return $user;
     }
 
+    public function updateUsername(int $userID, string $newUsername): bool
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("UPDATE user SET username = ? WHERE user_id = ?");
+        $stmt->bind_param("si", $newUsername, $userID);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    public function updateEmail(int $userID, string $newEmail): bool
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("UPDATE user SET email = ? WHERE user_id = ?");
+        $stmt->bind_param("si", $newEmail, $userID);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    public function updatePassword(int $userID, string $newPassword): bool
+    {
+        $conn = Database::getConnection();
+        $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("UPDATE user SET password = ? WHERE user_id = ?");
+        $stmt->bind_param("si", $hashed, $userID);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    public function updatePreferences(int $userID, int $rainEnabled, string $theme): bool
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("UPDATE user SET rain_enabled = ?, theme = ? WHERE user_id = ?");
+        $stmt->bind_param("isi", $rainEnabled, $theme, $userID);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    public function getPreferences(int $userID): array
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT theme, rain_enabled FROM user WHERE user_id = ?");
+        $stmt->bind_param("i", $userID);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+        return [
+            'theme' => $result['theme'] ?? 'dark',
+            'rain_enabled' => (bool) ($result['rain_enabled'] ?? 0)
+        ];
+    }
+
+
 
     public function updateAboutMe(int $userID, string $aboutMe): void
     {

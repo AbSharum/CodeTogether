@@ -1,60 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include __DIR__ . '/../includes/sessionCheck.php'; ?>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <!--bootsrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Font - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <!--navigation icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5nI6Jj4QkI7U1vKjK+L0n4A0w4Z+T5E5R5B5B5Y5S5T5W5V5U5T5Q5V5W5X5Y5Z5"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/public/css/fancy.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome | Code Together</title>
+
+  <!-- Bootstrap + Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Global & Page-specific CSS -->
+  <link rel="stylesheet" href="/public/css/core/main.css"/>
+  <link rel="stylesheet" href="/public/css/page/landing.css"/>
 </head>
 
 <body>
-    <canvas id="matrix-canvas"></canvas>
+  <canvas id="matrix-canvas"></canvas>
+  <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-    <div class="container d-flex align-items-center justify-content-center vh-100 position-relative"
-        style="z-index: 1;">
-        <div class="card p-4 mx-4" style="max-width: 400px;">
-            <?php if (isset($error)): ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= htmlspecialchars($error) ?>
-                </div>
-            <?php endif; ?>
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">What Do You Choose</h2>
-                <div class="mb-3">
-                    "The Matrix is everywhere. It is all around us. Even now, in this very room.
-                    You can see it when you look out your window or when you turn on your television.
-                    It is the world that has been pulled over your eyes to blind you from the truth".
-                </div>
-                <div class="mb-3">
-                    "Here you will meet friends both new and old. Chat with each other, make some posts about how coding
-                    make
-                    you want to bang your head. Challenge your friends in a code battle on who can write workable code
-                    the cleanest
-                    and the fastest to gain amazing points. Here at Code Together we are bringing people together to get
-                    better at coding
-                    and to make friends to become more social... to help break free from the matrix. So come let us show
-                    you how far
-                    the rabit hole goes."
-                </div>
-                <div class="mb-3">
-                    <button class="LogInButton" onclick="window.location.href='index.php?action=login'">Rabbit
-                        Hole</button>
-                </div>
-            </div>
+  <main class="page-landing">
+    <div class="container position-relative">
+      <div class="card main-card p-4 text-center">
+        <h2 class="card-title mb-4">What Do You Choose?</h2>
+        <p class="quote mb-3">“The Matrix is everywhere. It is all around us. Even now, in this very room.”</p>
+        <p>Welcome to <strong>Code Together</strong>! Here you will collaborate, compete, and connect with other people
+          intrested in computer science.</p>
+        <button class="btn btn-success mt-2" onclick="window.location.href='index.php?action=login'">
+          Enter the Rabbit Hole
+        </button>
+      </div>
+
+      <div class="feature-row">
+        <div class="card info-card">
+          <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+          <h5>Community</h5>
+          <p>Meet developers and grow together.</p>
         </div>
+        <div class="card info-card">
+          <div class="feature-icon"><i class="fa-solid fa-code"></i></div>
+          <h5>Code Battles</h5>
+          <p>Challenge friends and climb the board.</p>
+        </div>
+        <div class="card info-card">
+          <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+          <h5>AI Companion</h5>
+          <p>Get real-time help from an AI chatbot.</p>
+        </div>
+      </div>
     </div>
+  </main>
 
-    <script src="/public/js/fancyLogin.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/public/js/core/rain.js"></script>
+  <script src="/public/js/core/theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,230 @@
+/* === Game Page === */
+.page-game {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding-top: 5vh;
+}
+
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.page-game .challenge-box {
+    background: var(--card);
+    border-left: 4px solid var(--accent);
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 15px rgba(0, 255, 65, 0.25);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.page-game .challenge-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.35);
+}
+
+.page-game .challenge-box h1 {
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+    margin-bottom: 0.5rem;
+}
+
+.page-game .challenge-box p {
+    font-family: monospace;
+    color: var(--text);
+    margin: 0.25rem 0;
+}
+
+.page-game .switchA,
+.page-game .switchB {
+    padding: 12px 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 0.6rem;
+    box-shadow: 0 3px 8px rgba(0, 255, 65, 0.3);
+    transition: all 0.3s ease;
+}
+
+.page-game .switchA:hover,
+.page-game .switchB:hover {
+    background: var(--accent-2);
+    box-shadow: 0 0 16px var(--accent-2);
+}
+
+.page-game .switchA:active,
+.page-game .switchB:active {
+    transform: translateY(3px);
+}
+
+.page-game .timer-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 240px;
+    font-family: monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #000;
+    background: var(--accent);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 255, 65, 0.35);
+    transition: all 0.3s ease;
+}
+
+.page-game .timer-box:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.45);
+    transform: translateY(-2px);
+}
+
+.page-game .timer-end {
+    background: #dc3545;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+.page-game .team-info-box {
+    background: var(--card);
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 10px rgba(0, 255, 65, 0.2);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    min-height: 200px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.page-game .team-info-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(0, 255, 65, 0.3);
+}
+
+.page-game .teamA-style {
+    border-left: 5px solid #0d6efd;
+}
+
+.page-game .teamB-style {
+    border-left: 5px solid #dc3545;
+}
+
+.page-game .code-box {
+    background: var(--card-2);
+    border-left: 5px solid var(--accent);
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 10px rgba(0, 255, 65, 0.2);
+    padding: 1rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.page-game .code-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+.page-game textarea {
+    width: 100%;
+    height: 350px;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    color: var(--text);
+    font-family: monospace;
+}
+
+.page-game .moderator-box {
+    background: var(--card);
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 255, 65, 0.2);
+    padding: 0.75rem 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.page-game .moderator-box:hover {
+    box-shadow: 0 0 18px rgba(0, 255, 65, 0.3);
+}
+
+.page-game .moderator-box .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+}
+
+.page-game .winner-popup-content {
+    background: var(--card);
+    border-radius: 1.25rem;
+    border-left: 5px solid var(--accent);
+    box-shadow: 0 8px 25px rgba(0, 255, 65, 0.4);
+    text-align: center;
+    padding: 1rem;
+}
+
+.page-game .winner-popup-content h1 {
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+}
+
+:root[data-theme="light"] .page-game .challenge-box,
+:root[data-theme="light"] .page-game .team-info-box,
+:root[data-theme="light"] .page-game .code-box,
+:root[data-theme="light"] .page-game .moderator-box,
+:root[data-theme="light"] .page-game .winner-popup-content {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="light"] .page-game .switchA,
+:root[data-theme="light"] .page-game .switchB {
+    color: #000;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+:root[data-theme="light"] .page-game .timer-box {
+    color: #000;
+    background: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .page-game .timer-box {
+        font-size: 2.2rem;
+        width: 200px;
+    }
+
+    .page-game .switchA,
+    .page-game .switchB {
+        width: 90%;
+        font-size: 1rem;
+    }
+
+    .page-game textarea {
+        height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-game .challenge-box h1 {
+        font-size: 1.3rem;
+    }
+
+    .page-game .timer-box {
+        width: 160px;
+        height: 60px;
+        font-size: 2rem;
+    }
+}

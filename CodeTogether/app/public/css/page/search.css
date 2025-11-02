@@ -1,0 +1,213 @@
+/* === Search Page === */
+.page-search {
+  position: relative;
+  min-height: 100vh;
+  color: var(--text);
+  padding-top: 5vh;
+  font-family: "Inter", sans-serif;
+}
+
+.page-search #matrix-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: transparent;
+  pointer-events: none;
+}
+
+.page-search h3 {
+  color: var(--accent);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(6, 163, 66, 0.3);
+}
+
+.page-search .nav-tabs {
+  border: none;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.page-search .nav-tabs .nav-link {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.page-search .nav-tabs .nav-link.active {
+  background: var(--accent);
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(6, 163, 66, 0.4);
+}
+
+.page-search .nav-tabs .nav-link:hover:not(.active) {
+  background: rgba(6, 163, 66, 0.1);
+  color: var(--accent);
+}
+
+.page-search .profile-card {
+  background: var(--card);
+  border-left: 4px solid var(--accent);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  color: var(--text);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.page-search .profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(6, 163, 66, 0.35);
+}
+
+.page-search .profile-card img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+}
+
+.page-search .profile-card h5 {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.page-search .profile-card small {
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.page-search .btn {
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.page-search .btn-success {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: #fff;
+}
+
+.page-search .btn-success:hover {
+  background: var(--accent-2);
+  box-shadow: 0 0 10px rgba(6, 163, 66, 0.35);
+}
+
+.page-search .btn-warning {
+  background: #facc15;
+  border: none;
+  color: #000;
+}
+
+.page-search .btn-danger {
+  background: #dc2626;
+  border: none;
+  color: #fff;
+}
+
+.page-search .btn-secondary {
+  background: #6b7280;
+  color: #fff;
+  border: none;
+}
+
+.page-search .btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.page-search .post-card {
+  background: var(--card);
+  border-left: 4px solid var(--accent);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+  color: var(--text);
+}
+
+.page-search .post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(6, 163, 66, 0.35);
+}
+
+.page-search .post-card img,
+.page-search .post-card video {
+  border-radius: 0.5rem;
+  border: 1px solid var(--accent);
+}
+
+.page-search .post-card .fw-bold {
+  color: var(--accent);
+}
+
+.page-search .post-card .fa-heart,
+.page-search .post-card .fa-comment {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.page-search .post-card .fa-heart:hover,
+.page-search .post-card .fa-comment:hover {
+  transform: scale(1.2);
+  color: var(--accent);
+}
+
+:root[data-theme="light"] .page-search {
+  color: #000;
+}
+
+:root[data-theme="light"] .page-search p,
+:root[data-theme="light"] .page-search h1,
+:root[data-theme="light"] .page-search h2,
+:root[data-theme="light"] .page-search h3,
+:root[data-theme="light"] .page-search h4,
+:root[data-theme="light"] .page-search h5,
+:root[data-theme="light"] .page-search h6,
+:root[data-theme="light"] .page-search small,
+:root[data-theme="light"] .page-search span,
+:root[data-theme="light"] .page-search strong {
+  color: #000;
+}
+
+:root[data-theme="dark"] .page-search {
+  color: #fff;
+}
+
+:root[data-theme="dark"] .page-search p,
+:root[data-theme="dark"] .page-search h1,
+:root[data-theme="dark"] .page-search h2,
+:root[data-theme="dark"] .page-search h3,
+:root[data-theme="dark"] .page-search h4,
+:root[data-theme="dark"] .page-search h5,
+:root[data-theme="dark"] .page-search h6,
+:root[data-theme="dark"] .page-search small,
+:root[data-theme="dark"] .page-search span,
+:root[data-theme="dark"] .page-search strong {
+  color: #fff;
+}
+
+
+.page-search .fw-bold,
+.page-search h3,
+.page-search .nav-link.active,
+.page-search .btn-success {
+  color: var(--accent) !important;
+}
+
+@media (max-width: 768px) {
+  .page-search .nav-tabs {
+    flex-wrap: wrap;
+  }
+
+  .page-search .profile-card,
+  .page-search .post-card {
+    padding: 1rem;
+  }
+}

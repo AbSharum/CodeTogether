@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include __DIR__ . '/../includes/sessionCheck.php'; ?>
 
 <head>
     <meta charset="utf-8">
@@ -17,19 +16,19 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/public/css/home.css">
-    <link rel="stylesheet" href="/public/css/fancy.css">
+    <link rel="stylesheet" href="/public/css/core/main.css">
+    <link rel="stylesheet" href="/public/css/paeg/createPost.css">
 </head>
 
-<body class="bg-dark text-light">
+<body>
     <canvas id="matrix-canvas"></canvas>
 
     <!-- Navbar -->
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-    <div class="container d-flex align-items-center justify-content-center vh-100 position-relative"
-        style="z-index: 1;">
-        <div class="card p-4 mx-4" style="max-width: 400px;">
+    <!-- Main Content -->
+    <main class="page-create-post">
+        <div class="card shadow position-relative">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Create a Post</h2>
 
@@ -79,9 +78,9 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <script src="/public/js/createAccount.js"></script>
+    </main>
+    <script src="/public/js/core/theme.js"></script>
+    <script src="/public/js/core/rain.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

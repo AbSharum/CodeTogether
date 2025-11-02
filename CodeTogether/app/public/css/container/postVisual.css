@@ -1,0 +1,201 @@
+/* === Posts Container === */
+.posts-section {
+  background: var(--card, rgba(45, 55, 72, 0.95));
+  border-radius: 1.5rem;
+  border-left: 5px solid #06a342;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  margin-bottom: 30px;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.post-card {
+  background: var(--card-2, rgba(60, 70, 85, 0.95));
+  border-left: 4px solid #06a342;
+  border-radius: 1rem;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.post-card p.fw-bold {
+  color: var(--text, #fff);
+  margin-bottom: 1rem;
+}
+
+.post-card .fw-bold span {
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.post-card span[style*="text-decoration: underline"] {
+  color: #06a342;
+}
+
+.post-card .dropdown-menu {
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.post-card img,
+.post-card video {
+  border-radius: 0.75rem;
+  max-height: 500px;
+  object-fit: contain;
+  width: 100%;
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
+.post-card .post-content {
+  color: var(--text, #fff);
+  white-space: pre-line;
+  margin-bottom: 1rem;
+}
+
+.post-card .d-flex i {
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.post-card .d-flex i:hover {
+  transform: scale(1.15);
+}
+
+.post-card .text-white {
+  color: var(--text, #fff) !important;
+}
+
+.post-card .btn-link {
+  color: var(--text, #fff);
+}
+
+.post-card .btn-link:hover i {
+  color: red !important;
+}
+
+.post-card .btn-outline-light {
+  border-color: #06a342;
+  color: #06a342;
+  transition: all 0.3s ease;
+}
+
+.post-card .btn-outline-light:hover {
+  background: #06a342;
+  color: #fff;
+}
+
+:root[data-theme="light"] .post-card {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="light"] .post-card p.fw-bold,
+:root[data-theme="light"] .post-card .post-content {
+  color: #111827;
+}
+
+:root[data-theme="light"] .post-card span[style*="text-decoration: underline"] {
+  color: black;
+}
+
+:root[data-theme="light"] .post-card .btn-outline-light {
+  border-color: #06a342;
+  color: #06a342;
+}
+
+:root[data-theme="light"] .post-card .btn-outline-light:hover {
+  background: #06a342;
+  color: #fff;
+}
+
+:root[data-theme="light"] .post-card .dropdown-menu {
+  background: #fff;
+  color: #111827;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="dark"] .post-card {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+:root[data-theme="dark"] .post-card span[style*="text-decoration: underline"] {
+  color: white;
+}
+
+
+:root[data-theme="dark"] .post-card .post-content {
+  color: #e5e7eb;
+}
+
+.post-card .dropdown {
+  position: relative;
+  z-index: 3000;
+}
+
+.post-card .post-options {
+  position: relative;
+  float: right;
+  margin-right: 12px;
+}
+
+.post-card .dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  margin-top: 6px !important;
+  transform: translateY(-10px) scale(0.98);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 3000 !important;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  background: rgba(25, 30, 35, 0.98);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+  will-change: opacity, transform;
+}
+
+.post-card .dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.post-card .dropdown-menu .dropdown-item {
+  color: #e5e7eb;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.4rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.post-card .dropdown-menu .dropdown-item:hover {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+:root[data-theme="light"] .post-card .dropdown-menu {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="light"] .post-card .dropdown-menu .dropdown-item {
+  color: #111827;
+}
+
+:root[data-theme="light"] .post-card .dropdown-menu .dropdown-item:hover {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}

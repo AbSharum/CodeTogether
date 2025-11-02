@@ -17,6 +17,8 @@ CREATE TABLE user (
     is_deleted BOOLEAN DEFAULT FALSE,
     status ENUM('online', 'banned', 'offline','away') DEFAULT 'offline',
     created_on DATETIME DEFAULT CURRENT_TIMESTAMP,
+    theme ENUM('dark','light') DEFAULT 'light',
+    rain_enabled BOOLEAN DEFAULT FALSE,
     latest_update DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (role_id) REFERENCES role(role_id)
         ON DELETE SET NULL

@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function performAction(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->renderView("fancylogin");
+            $this->renderView("login");
             return;
         }
 
@@ -21,7 +21,7 @@ class LoginController extends Controller
             $password = $_POST['password'] ?? '';
 
             if (empty(trim($identifier)) || empty(trim($password))) {
-                $this->renderView("fancylogin", ['error' => 'Please fill out all fields']);
+                $this->renderView("login", ['error' => 'Please fill out all fields']);
                 exit;
             }
 
@@ -33,7 +33,7 @@ class LoginController extends Controller
             $userDoesNotExist = $checkUserByEmail && $checkUserByUsername;
 
             if ($userDoesNotExist) {
-                $this->renderView("fancylogin", ['error' => 'No account associated with this user name or email!']);
+                $this->renderView("login", ['error' => 'No account associated with this user name or email!']);
                 exit;
             }
 
@@ -41,7 +41,7 @@ class LoginController extends Controller
 
 
             if ($result === null) {
-                $this->renderView("fancylogin", ['error' => 'The password you entered is incorrect!']);
+                $this->renderView("login", ['error' => 'The password you entered is incorrect!']);
                 exit;
             } else {
                 $role = $this->roleDao->getUserRole($result);
@@ -49,8 +49,14 @@ class LoginController extends Controller
                 $_SESSION['usercreds'] = [
                     'userID' => $result->getUserID(),
                     'username' => $result->getUsername(),
+                    'email' => $result->getEmail(),
                     'role' => $role->getRoleName()
                 ];
+
+                $preferences = $this->userDao->getPreferences($result->getUserID());
+                $_SESSION['theme'] = $preferences['theme'];
+                $_SESSION['rain_enabled'] = $preferences['rain_enabled'];
+
 
                 $this->userDao->updateUserStatus('online', $_SESSION['usercreds']['userID']);
                 header('Location: index.php?action=home');

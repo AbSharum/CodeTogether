@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/public/css/ai.css">
+<link rel="stylesheet" href="/public/css/core/main.css">
+<link rel="stylesheet" href="/public/css/container/ai.css">
 
 <div id="aiContainer">
   <!-- Character and speech area -->

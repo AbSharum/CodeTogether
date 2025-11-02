@@ -5,7 +5,8 @@ include_once __DIR__ . '/../../dao/UserDAO.php';
 $userDao = new UserDAO();
 $topUsers = $userDao->getTopUsersByPoints(3);
 ?>
-<link rel="stylesheet" href="/public/css/leaderboard.css">
+<link rel="stylesheet" href="/public/css/core/main.css">
+<link rel="stylesheet" href="/public/css/container/leaderboard.css">
 <div id="leaderboardContainer">
   <h3 class="leaderboard-title">🏆 Top Users</h3>
   <ul class="leaderboard-list">
@@ -34,7 +35,7 @@ $topUsers = $userDao->getTopUsersByPoints(3);
 
             <div class="leaderboard-info">
                 <a href="index.php?action=profile&user_id=<?= $topUser->getUserID(); ?>"
-                class="leaderboard-name text-decoration-none text-white">
+                class="leaderboard-name text-decoration-none">
                 <?= htmlspecialchars($topUser->getUsername()); ?>
                 </a>
                 <span class="leaderboard-points"><?= $topUser->getPoints(); ?> pts</span>
