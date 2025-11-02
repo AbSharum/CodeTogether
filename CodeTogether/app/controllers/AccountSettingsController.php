@@ -35,7 +35,7 @@ class AccountSettingsController extends Controller
                         break;
                     }
                     if ($this->userDao->checkExistingUser($newUsername)) {
-                        $error = 'A username with this account already exists!';
+                        $error = 'An account with this username already exists!';
                         break;
                     }
                     $this->userDao->updateUsername($_SESSION['usercreds']['userID'], $newUsername);
