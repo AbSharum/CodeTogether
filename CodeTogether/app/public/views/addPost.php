@@ -33,8 +33,9 @@
                 <h2 class="card-title text-center mb-4">Create a Post</h2>
 
                 <?php if (isset($error)): ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <?= htmlspecialchars($error) ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif; ?>
 

@@ -11,13 +11,13 @@ class DeletePostController extends Controller
 
     public function performAction(): void
     {
+        $redirect = $_SERVER['HTTP_REFERER'] ?? 'index.php?action=home';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->postDao = new PostDAO();
             $this->userDao = new UserDAO();
 
             $postID = isset($_POST['post_id']) ? (int)$_POST['post_id'] : 0;
             $userID = $_SESSION['usercreds']['userID'] ?? 0;
-            $redirect = $_SERVER['HTTP_REFERER'] ?? 'index.php?action=home';
 
             if ($postID <= 0 || $userID <= 0) {
                 $this->renderView('home', ['error' => 'Invalid delete request.']);
