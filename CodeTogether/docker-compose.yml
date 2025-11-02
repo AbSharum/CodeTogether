@@ -19,13 +19,8 @@ services:
   mariadb:
     image: mariadb:latest
     container_name: mariadb
-    environment:
-      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MARIADB_DATABASE: ${MYSQL_DATABASE}
-      MARIADB_USER: ${MYSQL_USER}
-      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
-      TZ: America/Chicago
-      MARIADB_INITDB_SKIP_TZINFO: 0 
+    env_file:
+      - .env
     ports:
       - "3305:3306"
     volumes:

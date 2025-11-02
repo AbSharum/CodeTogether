@@ -199,3 +199,29 @@
   background: rgba(16, 185, 129, 0.15);
   color: #10b981;
 }
+
+.post-card {
+  position: relative;
+}
+
+.post-card .edit-post-top {
+  border-color: #06a342;
+  color: #06a342;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.post-card .edit-post-top:hover {
+  background: #06a342;
+  color: #fff;
+}
+
+.post-card .post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.post-card {
+  padding-top: 12px;
+}

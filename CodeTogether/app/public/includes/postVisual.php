@@ -4,35 +4,45 @@
 
 <link rel="stylesheet" href="/public/css/container/postVisual.css">
 <div class="post-card">
-  <p class="fw-bold  mb-1">
-    <?= htmlspecialchars($post->getUsername()) ?>:
-    <span class=" fw-normal small">
-      <?= htmlspecialchars($post->getCreatedOn()->format('l, F j h:i A')) ?>
-    </span>
-    <br>
-    <span class="small " style="text-decoration: underline;">
-      <?= htmlspecialchars($post->getCaption()) ?>
-    </span>
+  <div class="post-header d-flex justify-content-between align-items-start mb-2">
+    <p class="fw-bold mb-0 flex-grow-1">
+      <?= htmlspecialchars($post->getUsername()) ?>:
+      <span class="fw-normal small">
+        <?= htmlspecialchars($post->getCreatedOn()->format('l, F j h:i A')) ?>
+      </span>
+      <br>
+      <span class="small" style="text-decoration: underline;">
+        <?= htmlspecialchars($post->getCaption()) ?>
+      </span>
+    </p>
 
-  <div class="dropdown post-options ms-auto" style="float:right;">
-    <button class="btn btn-sm btn-dark  dropdown-toggle" type="button" id="dropdownMenuButton<?= $post->getPostID(); ?>"
-      data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#141414;border:none;">
-      <i class="fas fa-ellipsis-h"></i>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton<?= $post->getPostID(); ?>">
-      <li><a class="dropdown-item text-warning" href="#">🕬 Report Post</a></li>
-      <li><a class="dropdown-item text-info" href="#">💾 Save Post</a></li>
-      <?php if ((int) $post->getUserID() === (int) $user->getUserID()): ?>
-        <li>
-          <form action="index.php?action=deletePost" method="POST" class="m-0">
-            <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
-            <button type="submit" class="dropdown-item text-danger">🗑 Delete Post</button>
-          </form>
-        </li>
+    <div class="d-flex align-items-start gap-2">
+      <?php if ((int) $post->getUserID() === (int) ($_SESSION['usercreds']['userID'] ?? 0)): ?>
+        <button class="btn btn-sm btn-outline-light edit-post-btn edit-post-top"
+          data-post-id="<?= $post->getPostID(); ?>">✎ Edit</button>
       <?php endif; ?>
-    </ul>
+
+      <div class="dropdown post-options">
+        <button class="btn btn-sm btn-dark dropdown-toggle" type="button"
+          id="dropdownMenuButton<?= $post->getPostID(); ?>" data-bs-toggle="dropdown" aria-expanded="false"
+          style="background-color:#141414;border:none;">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton<?= $post->getPostID(); ?>">
+          <li><a class="dropdown-item text-warning" href="#">🕬 Report Post</a></li>
+          <li><a class="dropdown-item text-info" href="#">💾 Save Post</a></li>
+          <?php if ((int) $post->getUserID() === (int) $user->getUserID()): ?>
+            <li>
+              <form action="index.php?action=deletePost" method="POST" class="m-0">
+                <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
+                <button type="submit" class="dropdown-item text-danger">🗑 Delete Post</button>
+              </form>
+            </li>
+          <?php endif; ?>
+        </ul>
+      </div>
+    </div>
   </div>
-  </p>
 
   <?php if (!empty($post->getContents())): ?>
     <?php
@@ -74,17 +84,8 @@
         <span class="like-count"><?= htmlspecialchars($post->getLikes()) ?></span>
       </button>
     </form>
-
-
     <span class="">
       <i class="fas fa-comment me-1"></i> 12
     </span>
-
-    <?php if ((int) $post->getUserID() === (int) $user->getUserID()): ?>
-      <button class="btn btn-sm btn-outline-light edit-post-btn" data-post-id="<?= $post->getPostID(); ?>">
-        ✎ Edit
-      </button>
-    <?php endif; ?>
-
   </div>
 </div>

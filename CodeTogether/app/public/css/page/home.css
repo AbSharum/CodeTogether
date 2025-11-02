@@ -121,7 +121,6 @@
   box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
 }
 
-/* === CHAT BOX === */
 .page-home .chat-box {
   position: fixed;
   bottom: 20px;
@@ -300,7 +299,6 @@
   color: #fff;
 }
 
-/* Light mode colors (soft backgrounds with black text) */
 :root[data-theme="light"] .page-home .friend-item small.text-success {
   background: rgba(6, 163, 66, 0.15);
   color: #065f46;

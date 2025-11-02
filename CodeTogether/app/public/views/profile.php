@@ -91,10 +91,10 @@
               <?php unset($_SESSION['upload_success']); ?>
             <?php endif; ?>
 
-            <h3 class="text-white"><?= htmlspecialchars($user->getUserName()) ?></h3>
+            <h3 class=""><?= htmlspecialchars($user->getUserName()) ?></h3>
             <p class="text-info mb-2"><?= htmlspecialchars($user->getEmail() ?? 'No email') ?></p>
 
-            <div class="row mt-3 text-white">
+            <div class="row mt-3 ">
               <div class="col-6">
                 <strong>Points</strong><br><?= htmlspecialchars($user->getPoints()) ?>
               </div>
@@ -130,8 +130,8 @@
               <?php endif; ?>
 
               <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
-                <h4 class="text-info text-white mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
-                <div class="text-white text-break"
+                <h4 class="text-info  mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
+                <div class=" text-break"
                   style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
                   <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
                 </div>
@@ -189,7 +189,7 @@
                   <?php endif; ?>
 
                   <div>
-                    <div class="fw-bold text-white">
+                    <div class="fw-bold ">
                       <?= htmlspecialchars($friendUser->getUserName()); ?>
                     </div>
                     <small class="<?= $statusClass; ?>"><?= $statusText; ?></small>
@@ -203,7 +203,7 @@
 
         <!-- Middle column: posts -->
         <section class="col-lg-6 mb-4">
-          <h2 class="text-white mb-3"><?= htmlspecialchars($user->getUserName()) ?>'s Posts</h2>
+          <h2 class=" mb-3"><?= htmlspecialchars($user->getUserName()) ?>'s Posts</h2>
           <?php if (empty($userPosts)): ?>
             <p class="text-secondary">No posts yet.</p>
           <?php else: ?>

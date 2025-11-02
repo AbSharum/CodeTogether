@@ -207,7 +207,6 @@
   box-shadow: 0 0 20px rgba(6, 163, 66, 0.35);
 }
 
-/* === FRIEND ITEM === */
 .page-profile .friend-item {
   display: flex;
   align-items: center;
@@ -260,29 +259,20 @@
 }
 
 
-:root[data-theme="light"] .page-profile {
+:root[data-theme="light"] .page-profile .profile-card,
+:root[data-theme="light"] .page-profile .friends-card,
+:root[data-theme="light"] .page-profile #aboutMeCard,
+:root[data-theme="light"] .page-profile .friends-card h5,
+:root[data-theme="light"] .page-profile .friend-item {
   color: #000 !important;
 }
 
-:root[data-theme="light"] .page-profile * {
-  color: #000 !important;
-}
-
-:root[data-theme="dark"] .page-profile {
-  color: #fff !important;
-}
-
-:root[data-theme="dark"] .page-profile * {
-  color: #fff !important;
-}
-
-:root[data-theme="light"] .page-profile .text-info,
-:root[data-theme="light"] .page-profile .fa-comment.text-info {
-  color: #000 !important;
-}
-
+:root[data-theme="dark"] .page-profile .profile-card,
+:root[data-theme="dark"] .page-profile .friends-card,
+:root[data-theme="dark"] .page-profile #aboutMeCard,
+:root[data-theme="dark"] .page-profile .friends-card h5,
 :root[data-theme="dark"] .page-profile .text-info,
-:root[data-theme="dark"] .page-profile .fa-comment.text-info {
+:root[data-theme="dark"] .page-profile .friend-item {
   color: #fff !important;
 }
 
