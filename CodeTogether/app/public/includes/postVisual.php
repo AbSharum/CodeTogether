@@ -82,11 +82,11 @@
       <i class="fas fa-comment me-1"></i> 12
     </span>
 
-    <?php if ((int)$post->getUserID() === (int)$user->getUserID()): ?>
-      <button class="btn btn-sm btn-outline-light edit-post-btn"
-              data-post-id="<?= $post->getPostID(); ?>">
-        ✎ Edit
+    <?php if ((int)$post->getUserID() === (int)($_SESSION['usercreds']['userID'] ?? 0)): ?>
+      <button class="btn btn-sm btn-outline-light edit-post-btn" data-post-id="<?= $post->getPostID(); ?>">
+        Edit
       </button>
     <?php endif; ?>
+
   </div>
 </div>
