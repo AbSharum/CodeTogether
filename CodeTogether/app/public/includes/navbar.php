@@ -28,9 +28,16 @@
                         <a class="nav-link text-white nav-fade" href="index.php?action=home"><i class="fas fa-home me-1"></i>
                             Home</a> <!--need to verify correct paths -->
                     </li>
-                    <li class="nav-item" id="game-nav-item">
-                        <a class="nav-link text-white nav-fade" href="index.php?action=game"><i
-                                class="fas fa-gamepad me-1"></i> Game Page</a> <!--need to verify correct paths -->
+                    <li class="nav-item dropdown" aria-current="page">
+                        <a class="nav-link text-white nav-fade dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-gamepad me-1"></i> Games
+                        </a>
+                        <ul class="dropdown-menu custom-dropdown">
+                            <li><a class="dropdown-item custom-dropdown-item active" aria-current="page" href="#">Game Page (Current)</a></li>
+                            <li><a class="dropdown-item custom-dropdown-item" href="#">FlashCards</a></li>
+                            <li><a class="dropdown-item custom-dropdown-item" href="#">Code Challenges</a></li>
+                            <li><a class="dropdown-item custom-dropdown-item" href="#">RunTime Analysis</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item" id="message-nav-item">
                         <a class="nav-link text-white nav-fade" href="index.php?action=messages"><i
