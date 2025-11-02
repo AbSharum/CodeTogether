@@ -13,6 +13,7 @@ class Post implements JsonSerializable
     private string $visibility;
     private string $filePath;
     private bool $isDeleted;
+    private int $comments=0;
     private ?DateTime $createdOn;
     private ?DateTime $latestUpdate;
 
@@ -30,6 +31,7 @@ class Post implements JsonSerializable
         $this->isDeleted = $is_deleted;
         $this->createdOn = $createdOn ?? new DateTime();
         $this->latestUpdate = $latestUpdate ?? new DateTime();
+        $this->comments=0;
     }
 
     public function load(array $row): void
@@ -134,6 +136,16 @@ class Post implements JsonSerializable
     }
 
     public function getLikes(): int
+    {
+        return $this->likes;
+    }
+
+    public function setComments(int $likes): void
+    {
+        $this->likes = $likes;
+    }
+
+    public function getComments(): int
     {
         return $this->likes;
     }

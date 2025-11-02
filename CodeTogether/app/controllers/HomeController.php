@@ -3,12 +3,14 @@ declare(strict_types=1);
 include_once __DIR__ . "/../dao/PostDAO.php";
 include_once __DIR__ . "/../dao/FriendListDAO.php";
 include_once __DIR__ . "/../dao/UserDAO.php";
+include_once __DIR__ . "/../dao/CommentDAO.php";
 
 class HomeController extends Controller
 {
     private PostDAO $postDao;
     private FriendListDAO $friendDao;
     private UserDAO $userDao;
+    private CommentDAO $commentDao;
 
     public function performAction(): void
     {
@@ -16,6 +18,7 @@ class HomeController extends Controller
         $this->postDao = new PostDAO();
         $this->friendDao = new FriendListDAO();
         $this->userDao = new UserDAO();
+        $this->commentDao = new CommentDAO();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $aboutMe = trim($_POST['aboutMe'] ?? '');
@@ -37,6 +40,11 @@ class HomeController extends Controller
             $userAndFriendPosts = $this->postDao->getPostsByFriendsAndUser($friends, $userID);
             $likedPosts = $this->postDao->getLikedPostIdsByUser($userID);
             $aboutMe = $this->userDao->getAboutMe($userID);
+
+            foreach ($posts as $post) {
+                $comments=$this->commentDao->getNumberOfComments($post->getPostID());
+                $post->setComments($comments);
+            }
 
 
             $this->renderView("home", [

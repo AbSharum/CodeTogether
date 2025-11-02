@@ -84,8 +84,15 @@
         <span class="like-count"><?= htmlspecialchars($post->getLikes()) ?></span>
       </button>
     </form>
-    <span class="">
-      <i class="fas fa-comment me-1"></i> 12
-    </span>
+
+    <form action="index.php" method="GET" class="d-inline">
+        <input type="hidden" name="action" value="viewPost">
+        <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
+        <button type="submit" class="btn btn-sm btn-link text-decoration-none p-0">
+            <i class="fas fa-comment me-1"></i>
+            <span class="comment-count"><?= htmlspecialchars($post->getComments()) ?></span>
+        </button>
+    </form>
+
   </div>
 </div>

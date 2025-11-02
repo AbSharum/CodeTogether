@@ -44,22 +44,16 @@ class CommentDAO
     {
         $conn = Database::getConnection();
         $stmt = $conn->prepare("
-            SELECT c.*, u.username
-            FROM comment c
-            JOIN user u ON c.user_id = u.user_id
-            WHERE c.post_id = ? AND c.is_deleted = FALSE
-            ORDER BY c.created_on ASC
+            SELECT *
+            FROM comment
+            WHERE post_id = ? AND is_deleted = FALSE
+            ORDER BY created_on ASC
         ");
         $stmt->bind_param("i", $postID);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        $comments = [];
-        while ($row = $result->fetch_assoc()) {
-            $comment = new Comment();
-            $comment->load($row);
-            $comments[] = $comment;
-        }
+        $comments = $result->fetch_all(MYSQLI_ASSOC);
 
         $stmt->close();
         return $comments;
@@ -92,6 +86,27 @@ class CommentDAO
         $stmt->execute();
         $stmt->close();
 
+    }
+
+    public function getNumberOfComments($postID): int
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("
+            SELECT COUNT(*) AS comment_count
+            FROM comment
+            WHERE post_id = ? AND is_deleted = FALSE
+        ");
+        $stmt->bind_param("i", $postID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $count = 0;
+        if ($row = $result->fetch_assoc()) {
+            $count = (int) $row['comment_count'];
+        }
+
+        $stmt->close();
+        return $count;
     }
 }
 ?>
