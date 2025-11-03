@@ -25,6 +25,8 @@ class ViewPostController extends Controller
                 $user = $this->userDao->getUserByID($userID);
                 $post = $this->postDao->getPostByID((int)$postID);
                 $comments = $this->commentDao->getAllPostComments((int)$postID);
+                $commentCount=$this->commentDao->getNumberOfComments($post->getPostID());
+                $post->setComments($commentCount);
 
                 $this->renderView("viewPost", [
                     'user' => $user,
@@ -40,30 +42,28 @@ class ViewPostController extends Controller
             $postID = $_POST['postID'] ?? null;
             $contents = $_POST['contents'] ?? null;
 
+            $user = $this->userDao->getUserByID($userID);
+            $post = $this->postDao->getPostByID((int)$postID);
+            $username = $user->getUsername();
+
             if ($postID && $task) {
                 switch ($task) {
                     case 'reply':
-                        $this->commentDao->addComment($userID, (int)$postID, $contents);
+                        $this->commentDao->addComment($userID, $username, (int)$postID, $contents);
                         break;
-                    case 'block':
-                        $friendID = $_POST['friendID'] ?? null;
-                        if ($friendID) {
-                            $this->friendDao->blockUser($userID, (int)$friendID);
-                        }
-                        break;
+                    # need to add edit, delete, report for comments
                 }
             }
 
-            $user = $this->userDao->getUserByID($userID);
-            $post = $this->postDao->getPostByID((int)$postID);
             $comments = $this->commentDao->getAllPostComments((int)$postID);
+            $commentCount = $this->commentDao->getNumberOfComments($post->getPostID());
+            $post->setComments($commentCount);
 
             $this->renderView("viewPost", [
                 'user' => $user,
                 'post' => $post,
                 'comments' => $comments
             ]);
-            return;
         }
     }
 

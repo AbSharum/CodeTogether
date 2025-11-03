@@ -10,12 +10,14 @@ class ProfileController extends Controller
     private UserDAO $userDao;
     private PostDAO $postDao;
     private FriendListDAO $friendDao;
+    private CommentDAO $commentDao;
 
     public function performAction(): void
     {
         $this->userDao = new UserDAO();
         $this->postDao = new PostDAO();
         $this->friendDao = new FriendListDAO();
+        $this->commentDao = new CommentDAO();
 
 
 
@@ -40,6 +42,11 @@ class ProfileController extends Controller
         $friends = $this->friendDao->getFriends($userID);
         $friendsUser = $this->userDao->getFriendUsers($friends);
         $likedPosts = $this->postDao->getLikedPostIdsByUser($userID);
+
+        foreach ($posts as $post) {
+                $comments=$this->commentDao->getNumberOfComments($post->getPostID());
+                $post->setComments($comments);
+            }
 
         $this->renderView('profile', [
             'user' => $user,

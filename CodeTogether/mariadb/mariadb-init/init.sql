@@ -94,6 +94,7 @@ CREATE TABLE post_likes (
 CREATE TABLE comment (
     comment_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
+    username VARCHAR(100) NOT NULL,
     post_id INT NOT NULL,
     contents VARCHAR(500),
     is_deleted BOOLEAN DEFAULT FALSE,

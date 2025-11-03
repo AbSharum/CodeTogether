@@ -40,12 +40,12 @@ class HomeController extends Controller
             $userAndFriendPosts = $this->postDao->getPostsByFriendsAndUser($friends, $userID);
             $likedPosts = $this->postDao->getLikedPostIdsByUser($userID);
             $aboutMe = $this->userDao->getAboutMe($userID);
-
-            foreach ($posts as $post) {
+            
+            foreach ($userAndFriendPosts as $post) {
                 $comments=$this->commentDao->getNumberOfComments($post->getPostID());
                 $post->setComments($comments);
             }
-
+            
 
             $this->renderView("home", [
                 'friendPosts' => $friendPosts,

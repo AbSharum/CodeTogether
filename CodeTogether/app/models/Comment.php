@@ -5,9 +5,9 @@ class Comment implements JsonSerializable
 {
     private int $commentID;
     private int $userID;
+    private string $username;
     private int $postID;
     private string $contents;
-    private string $username;
     private bool $isDeleted;
     private ?DateTime $createdOn;
 
@@ -15,18 +15,19 @@ class Comment implements JsonSerializable
     {
         $this->commentID = $commentID;
         $this->userID = $userID;
+        $this->username = $username;
         $this->postID = $postID;
         $this->isDeleted = $isDeleted;
         $this->createdOn = $createdOn;
         $this->contents = $contents;
         $this->createdOn = $createdOn ?? new DateTime();
-        $this->username = $username;
     }
 
     public function load(array $row): void
     {
         $this->commentID = (int) $row['comment_id'];
         $this->userID = (int) $row['user_id'];
+        $this->username = $row['username'];
         $this->postID = (int) $row['post_id'];
         $this->contents = $row['contents'];
         $this->isDeleted = (bool) $row['is_deleted'];

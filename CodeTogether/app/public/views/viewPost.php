@@ -25,7 +25,25 @@
         <!-- Middle column: posts -->
         <section class="col-lg-6 mb-4">
               <?php include __DIR__ . '/../includes/postVisual.php'; ?>
+            <form action="index.php?action=viewPost" method="POST" class="mt-3">
+                <input type="hidden" name="task" value="reply">
+                <input type="hidden" name="postID" value="<?= $post->getPostID(); ?>">
+
+                <div class="input-group">
+                <input type="text" name="contents" class="form-control" placeholder="Reply..." required>
+                <button class="btn btn-success" type="submit">
+                    <i class="fa-solid fa-comment"></i>
+                </button>
+                </div>
+            </form>
+              <div class="mt-3">
+                <?php foreach ($data['comments'] as $comment): ?>
+                    <?php include __DIR__ . '/../includes/commentVisual.php'; ?>        
+                <?php endforeach; ?>
+            </div>
         </section>
+
+        
       </div>
     </div>
   </main>

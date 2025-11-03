@@ -1,7 +1,6 @@
 <?php
 //Expects: $post (Post object), $user (User object), and optionally $likedPosts (array)
 ?>
-
 <link rel="stylesheet" href="/public/css/container/postVisual.css">
 <div class="post-card">
   <div class="post-header d-flex justify-content-between align-items-start mb-2">
@@ -71,7 +70,6 @@
         data-post-id="<?= $post->getPostID(); ?>">Cancel</button>
     </form>
   <?php endif; ?>
-
   <div class="d-flex gap-3 align-items-center">
     <?php
     $isLiked = isset($likedPosts) && in_array($post->getPostID(), $likedPosts);
@@ -85,14 +83,13 @@
       </button>
     </form>
 
-    <form action="index.php" method="GET" class="d-inline">
+    <form action="index.php?action=viewPost" method="GET" class="d-inline">
         <input type="hidden" name="action" value="viewPost">
         <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
-        <button type="submit" class="btn btn-sm btn-link text-decoration-none p-0">
-            <i class="fas fa-comment me-1"></i>
-            <span class="comment-count"><?= htmlspecialchars($post->getComments()) ?></span>
-        </button>
+       <button type="submit" class="btn btn-sm text-decoration-none p-0" style="color:#6c757d;">
+          <i class="fas fa-comment me-1"></i>
+          <span class="comment-count"><?= htmlspecialchars($post->getComments()) ?></span>
+      </button>
     </form>
-
   </div>
 </div>

@@ -6,11 +6,11 @@ require_once __DIR__ . '/../config/DbConn.php';
 class CommentDAO
 {
 
-    public function addComment(int $userID = -1, int $postID = -1, string $contents = ''): void
+    public function addComment(int $userID, string $username, int $postID, string $contents): void
     {
         $conn = Database::getConnection();
-        $stmt = $conn->prepare("INSERT INTO comment (user_id, post_id, contents) VALUES (?, ?, ?)");
-        $stmt->bind_param("iis", $userID, $postID, $contents);
+        $stmt = $conn->prepare("INSERT INTO comment (user_id, username, post_id, contents) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isis", $userID, $username, $postID, $contents);
         $stmt->execute();
         $stmt->close();
 
@@ -44,16 +44,22 @@ class CommentDAO
     {
         $conn = Database::getConnection();
         $stmt = $conn->prepare("
-            SELECT *
-            FROM comment
-            WHERE post_id = ? AND is_deleted = FALSE
-            ORDER BY created_on ASC
+            SELECT c.*, u.username
+            FROM comment c
+            JOIN user u ON c.user_id = u.user_id
+            WHERE c.post_id = ? AND c.is_deleted = FALSE
+            ORDER BY c.created_on ASC
         ");
         $stmt->bind_param("i", $postID);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        $comments = $result->fetch_all(MYSQLI_ASSOC);
+        $comments = [];
+        while ($row = $result->fetch_assoc()) {
+            $comment = new Comment();
+            $comment->load($row);
+            $comments[] = $comment;
+        }
 
         $stmt->close();
         return $comments;
@@ -94,7 +100,7 @@ class CommentDAO
         $stmt = $conn->prepare("
             SELECT COUNT(*) AS comment_count
             FROM comment
-            WHERE post_id = ? AND is_deleted = FALSE
+            WHERE post_id = ? AND is_deleted = 0
         ");
         $stmt->bind_param("i", $postID);
         $stmt->execute();

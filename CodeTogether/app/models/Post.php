@@ -100,14 +100,14 @@ class Post implements JsonSerializable
         return $this->userID;
     }
 
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
-    }
-
     public function getUsername(): string
     {
         return $this->username;
+    }
+
+    public function setUsername(string $username): void
+    {
+        $this->username = $username;
     }
 
     public function setThreadID(int $threadID): void
@@ -140,14 +140,14 @@ class Post implements JsonSerializable
         return $this->likes;
     }
 
-    public function setComments(int $likes): void
+    public function setComments(int $comments): void
     {
-        $this->likes = $likes;
+        $this->comments=$comments;
     }
 
     public function getComments(): int
     {
-        return $this->likes;
+        return $this->comments;
     }
 
     public function setCaption(string $caption): void
