@@ -5,28 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a Post</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Google Font - Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/public/css/core/main.css">
-    <link rel="stylesheet" href="/public/css/paeg/createPost.css">
+    <link rel="stylesheet" href="/public/css/page/createPost.css">
 </head>
 
 <body>
     <canvas id="matrix-canvas"></canvas>
 
-    <!-- Navbar -->
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-    <!-- Main Content -->
     <main class="page-create-post">
         <div class="card shadow position-relative">
             <div class="card-body">
@@ -39,7 +33,6 @@
                     </div>
                 <?php endif; ?>
 
-                <!-- IMPORTANT: enctype for file upload -->
                 <form action="index.php?action=addPost" method="POST" enctype="multipart/form-data" id="addPostForm">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
