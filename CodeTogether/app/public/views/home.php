@@ -20,6 +20,7 @@
     <canvas id="matrix-canvas"></canvas>
     <!--NavBar-->
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
+    <?php include __DIR__ . '/../includes/leaderboardWidget.php'; ?>
     <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
     <!--end of navigation-->
     <main class="page-home">

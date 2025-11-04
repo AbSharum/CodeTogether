@@ -12,8 +12,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Global & Page-specific CSS -->
-  <link rel="stylesheet" href="/public/css/core/main.css"/>
-  <link rel="stylesheet" href="/public/css/page/landing.css"/>
+  <link rel="stylesheet" href="/public/css/core/main.css" />
+  <link rel="stylesheet" href="/public/css/page/landing.css" />
 </head>
 
 <body>
@@ -38,8 +38,8 @@
         </div>
         <div class="card info-card">
           <div class="feature-icon"><i class="fa-solid fa-code"></i></div>
-          <h5>Code Battles</h5>
-          <p>Challenge friends and climb the board.</p>
+          <h5>Coding Activities</h5>
+          <p>Challenge your friends, sharpen your skills, and climb the leaderboard together.</p>
         </div>
         <div class="card info-card">
           <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
