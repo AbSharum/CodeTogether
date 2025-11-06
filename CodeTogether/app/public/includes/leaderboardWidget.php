@@ -13,7 +13,7 @@ $topUsers = $userDao->getTopUsersByPoints(3);
     <?php foreach ($topUsers as $index => $topUser): ?>
         <?php
         $profilePic = $topUser->getProfilePicture() ?? '';
-        $absolutePath = __DIR__ . '/../../uploads/' . $profilePic;
+        $absolutePath = __DIR__ . '/../uploads/' . $profilePic;
         $webPath = '/public/uploads/' . $profilePic;
         $fileExists = !empty($profilePic) && file_exists($absolutePath);
 
