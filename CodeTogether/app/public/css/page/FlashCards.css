@@ -21,7 +21,7 @@
     z-index: 0;
     width: 100%;
     max-width: 80rem;
-    background-color: rgba(17, 24, 39, 0.9);
+    background-color: var(--card);
     padding: 2.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 0 50px rgba(0, 255, 65, 0.5);
@@ -30,7 +30,7 @@
 
 /* --- TYPOGRAPHY & COLOR --- */
 .page-cards .matrix-text {
-    color: #00ff41;
+    color: #00ff41 var(--text);
     text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
 }
 
@@ -43,10 +43,9 @@
 }
 
 .page-cards .matrix-subtitle-text {
-    color: rgba(0, 255, 65, 0.7);
+    color: rgba(0, 255, 65, 0.7) var(--text);
     text-align: center;
     margin-bottom: 2rem;
-
     font-size: 1.125rem;
 }
 
@@ -124,14 +123,14 @@
     box-shadow: 0 0 8px #00ff41;
     transition: transform 0.15s, box-shadow 0.15s;
     cursor: grab;
-    background-color: rgba(13, 26, 13, 0.7);
+    background-color: rgba(13, 26, 13, 0.7) var(--card);
     padding: 1rem;
     border-radius: 0.5rem;
     font-size: 1.25rem;
     font-weight: bold;
     text-align: center;
     user-select: none;
-    background-color: rgb(31, 41, 55);
+    background-color: rgb(31, 41, 55) var(--card);
 }
 
 .page-cards .matrix-card:active {
