@@ -17,11 +17,12 @@
     <link rel="stylesheet" href="/public/css/page/FlashCards.css">
 </head>
 
-<?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-<body class="page-body">
+
+<body>
+    <?php include __DIR__ . '/../includes/navbar.php'; ?>
     <canvas id="matrix-canvas"></canvas>
-
+    <main class="page-cards"></main>
     <!-- Main Content Wrapper -->
     <div class="page-FlashCards container-lg mx-auto p-4 md:p-8">
         <h1 class="text-4xl md:text-5xl font-extrabold text-center matrix-text mb-6 mt-16 md:mt-20">
