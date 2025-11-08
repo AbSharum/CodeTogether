@@ -34,7 +34,7 @@ $theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : 'dark';
           <ul class="dropdown-menu custom-dropdown">
             <li><a class="dropdown-item custom-dropdown-item active" aria-current="page"
                 href="index.php?action=game">Code Battle</a></li>
-            <li><a class="dropdown-item custom-dropdown-item" href="#">FlashCards</a></li>
+            <li><a class="dropdown-item custom-dropdown-item" href="CodeTogether\app\public\views\FlashCards.php"></a></li>
             <li><a class="dropdown-item custom-dropdown-item" href="#">Code Challenges</a></li>
             <li><a class="dropdown-item custom-dropdown-item" href="#">RunTime Analysis</a></li>
           </ul>
