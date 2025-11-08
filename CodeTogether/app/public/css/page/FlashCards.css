@@ -1,9 +1,10 @@
 /*goog font for chivo+ mono*/
 @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;700&display=swap');
 
-.page-cards {
+body{
     font-family: 'Chivo Mono', monospace;
     background-color: #000000;
+    overflow: hidden;
 }
 
 .page-FlashCards {
@@ -22,6 +23,11 @@
     z-index: -1;
 }
 
+#app {
+    position: relative;
+    z-index: 1;
+}
+
 .matrix-text {
     color: #00ff41;
     text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41,
@@ -32,6 +38,7 @@
     box-shadow: 0 0 8px #00ff41;
     transition: transform 0.15s, box-shadow 0.15s;
     cursor: grab;
+    background-color: rgba(13, 26, 13, 0.7);
 }
 
 .matrix-card:active {
@@ -44,29 +51,21 @@
 }
 
 .definition-target {
-    /* Uses specific colors from user's CSS block */
     border: 2px dashed #33ff77;
     background-color: #0d1a0d;
     transition: background-color 0.2s, border-color 0.2s;
-    font-family: 'Inter', sans-serif;
-    min-height: 8rem;
-    /* Ensure drop target is large enough */
 }
 
 .drag-over {
-    background-color: #003300 !important;
-    border-color: #99ffaa !important;
+    background-color: #003300;
+    border-color: #99ffaa; 
     box-shadow: 0 0 15px #99ffaa;
 }
 
 .matched {
-    border-color: #00cc00 !important;
-    background-color: #001a00 !important;
+    border-color: #00cc00; 
+    background-color: #001a00;
     box-shadow: 0 0 10px #00cc00;
-    pointer-events: none;
-    /* Disable further interaction */
-    cursor: default !important;
-    color: var(--accent-2);
 }
 
 .incorrect {
