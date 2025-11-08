@@ -1,0 +1,81 @@
+/*goog font for chivo+ mono*/
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;700&display=swap');
+
+.page-FlashCards {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding-top: 5vh;
+}
+
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.matrix-text {
+    color: #00ff41;
+    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41,
+}
+
+.matrix-card {
+    border: 1px solid #00ff41;
+    box-shadow: 0 0 8px #00ff41;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: grab;
+}
+
+.matrix-card:active {
+    cursor: grabbing;
+}
+
+.matrix-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 12px #33ff77;
+}
+
+.definition-target {
+    border: 2px dashed #33ff77;
+    background-color: #0d1a0d;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.drag-over {
+    background-color: #003300 !important;
+    border-color: #99ffaa !important;
+    box-shadow: 0 0 15px #99ffaa;
+}
+
+.matched {
+    border-color: #00cc00 !important;
+    background-color: #001a00 !important;
+    box-shadow: 0 0 10px #00cc00;
+}
+
+.incorrect {
+    animation: shake 0.5s;
+    border-color: #ff0000 !important;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-5px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(5px);
+    }
+}
