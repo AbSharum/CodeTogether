@@ -128,7 +128,7 @@ function renderDefinitions(definitions) {
     definitionsContainer.innerHTML = '';
     definitions.forEach(card => {
         const definitionDiv = document.createElement('div');
-        definitionDiv.className = 'definition-target p-4 rounded-lg text-sm text-green-300 select-none h-32 flex items-center justify-center text-center';
+        definitionDiv.className = 'definition-target p-4 rounded-lg flex items-center justify-center font-mono';
         definitionDiv.textContent = card.definition;
         definitionDiv.dataset.definitionId = card.id;
         definitionDiv.dataset.definitionText = card.definition; // Store original text for display on match

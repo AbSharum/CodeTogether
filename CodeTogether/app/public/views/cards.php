@@ -19,45 +19,32 @@
 
 <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-<body class="p-4 sm:p-8 flex items-center justify-center">
+<body class="page-body">
     <canvas id="matrix-canvas"></canvas>
 
     <!-- Main Content Wrapper -->
-    <div id="app" class="w-full max-w-5xl bg-gray-900/90 p-6 sm:p-10 rounded-lg shadow-2xl shadow-green-500/50 z-10">
-        <!-- Header -->
-        <h1 class="text-4xl sm:text-5xl font-bold text-center mb-4 matrix-text tracking-wider">
-            SYSTEM TERMINOLOGY: MATCH
+    <div class="page-FlashCards container-lg mx-auto p-4 md:p-8">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-center matrix-text mb-6 mt-16 md:mt-20">
+            CYBER TERMINOLOGY MATCHING
         </h1>
-        <p class="text-center text-green-400/70 mb-8 text-lg">
-            Connect the Term to its correct Definition. Failure is not an option.
-        </p>
 
-        <!-- Score and Controls -->
-        <div
-            class="flex flex-col sm:flex-row justify-between items-center mb-10 p-4 border-b border-t border-green-700/50">
-            <div class="matrix-text text-xl font-bold mb-3 sm:mb-0">
-                Score: <span id="score">0</span> / <span id="total-matches">0</span>
-            </div>
-            <button id="restart-button"
-                class="px-6 py-2 matrix-text bg-gray-800 rounded-lg shadow-lg hover:shadow-green-500/70 transition duration-300 active:scale-95"
-                onclick="startGame()">
-                <span class="font-bold">RELOAD PROGRAM</span>
-            </button>
+        <div class="flex flex-col md:flex-row justify-between items-center matrix-text mb-8 p-4 bg-gray-900/50 rounded-lg border-2 border-green-700/50">
+            <div class="text-xl font-bold">Score: <span id="current-score">0</span> / <span id="total-matches">10</span></div>
+            <div class="text-lg font-mono mt-2 md:mt-0">Match the Term to its Definition</div>
         </div>
-        
-        <!-- Game Area: Terms (Left) vs Definitions (Right) -->
-        <div id="game-area" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Terms Column (Draggable Cards) -->
-            <div>
-                <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Terms</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Left Column: Terms -->
+            <div class="p-4 rounded-lg bg-gray-900/70 border border-green-500/50 shadow-lg shadow-green-500/30">
+                <h2 class="text-2xl font-bold matrix-text border-b pb-2 mb-4 border-green-500/50">Terms</h2>
                 <div id="terms-container" class="space-y-4">
                     <!-- Term cards will be inserted here -->
                 </div>
             </div>
 
-            <!-- Definitions Column (Drop Targets) -->
-            <div>
-                <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Definitions</h2>
+            <!-- Right Column: Definitions -->
+            <div class="p-4 rounded-lg bg-gray-900/70 border border-green-500/50 shadow-lg shadow-green-500/30">
+                <h2 class="text-2xl font-bold matrix-text border-b pb-2 mb-4 border-green-500/50">Definitions</h2>
                 <div id="definitions-container" class="space-y-4">
                     <!-- Definition targets will be inserted here -->
                 </div>
