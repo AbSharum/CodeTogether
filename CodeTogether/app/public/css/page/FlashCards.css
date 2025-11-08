@@ -1,6 +1,17 @@
 /*goog font for chivo+ mono*/
 @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;700&display=swap');
 
+.page-body {
+    background-color: var(--bg);
+    color: var(--text);
+    /* Center the content based on user's desired layout */
+    min-height: 100vh;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .page-FlashCards {
     position: relative;
     z-index: 1;
@@ -39,9 +50,13 @@
 }
 
 .definition-target {
+    /* Uses specific colors from user's CSS block */
     border: 2px dashed #33ff77;
     background-color: #0d1a0d;
     transition: background-color 0.2s, border-color 0.2s;
+    font-family: 'Inter', sans-serif;
+    min-height: 8rem;
+    /* Ensure drop target is large enough */
 }
 
 .drag-over {
@@ -54,6 +69,10 @@
     border-color: #00cc00 !important;
     background-color: #001a00 !important;
     box-shadow: 0 0 10px #00cc00;
+    pointer-events: none;
+    /* Disable further interaction */
+    cursor: default !important;
+    color: var(--accent-2);
 }
 
 .incorrect {
