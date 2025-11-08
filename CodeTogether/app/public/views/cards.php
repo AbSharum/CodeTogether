@@ -43,9 +43,9 @@
         </div>
 
         <!-- Game Area -->
-        <div id="game-area" class="flex flex-col md:flex-row gap-2">
+        <div id="game-area" class="flex flex-row gap-8">
             <!-- Terms Column (Draggable Cards) -->
-            <div class="md:w-1/2">
+            <div class="w-1/2">
                 <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Terms</h2>
                 <div id="terms-container" class="space-y-4">
                     <!-- Term cards will be inserted here -->
@@ -53,7 +53,7 @@
             </div>
 
             <!-- Definitions Column (Drop Targets) -->
-            <div class="md:w-1/2">
+            <div class="w-1/2">
                 <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Definitions</h2>
                 <div id="definitions-container" class="space-y-4">
                     <!-- Definition targets will be inserted here -->
