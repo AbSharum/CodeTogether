@@ -18,6 +18,7 @@
 
 <body>
   <canvas id="matrix-canvas"></canvas>
+  <?php include __DIR__ . '/../includes/navbar.php'; ?>
   <main class="page-landing">
     <div class="container position-relative">
       <div class="card main-card p-4 text-center">
