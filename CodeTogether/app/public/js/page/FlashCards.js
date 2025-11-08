@@ -10,11 +10,11 @@ const vocabulary = [
     { id: 8, term: "Object-Oriented Programming", definition: "A programming paradigm based on the concept of 'objects', which can contain data and code to manipulate that data." },
     { id: 9, term: "Database", definition: "An organized collection of data, generally stored and accessed electronically from a computer system." },
     { id: 10, term: "Version Control", definition: "A system that records changes to a file or set of files over time so that specific versions can be recalled later." },
-    {id: 11, term: "Encapsulation", definition: "The bundling of data with the methods that operate on that data, restricting direct access to some of the object's components." },
-    {id: 12, term: "Inheritance", definition: "A mechanism in object-oriented programming that allows a new class to inherit properties and behavior (methods) from an existing class." },
-    {id: 13, term: "Polymorphism", definition: "The ability of different classes to be treated as instances of the same class through a common interface, typically by overriding methods." },
-    {id: 14, term: "Asynchronous Programming", definition: "A programming paradigm that allows for non-blocking operations, enabling tasks to run concurrently without waiting for each other to complete." },
-    {id: 15, term: "Lambda Function", definition: "A small anonymous function defined with the lambda keyword, often used for short, throwaway functions." }
+    { id: 11, term: "Encapsulation", definition: "The bundling of data with the methods that operate on that data, restricting direct access to some of the object's components." },
+    { id: 12, term: "Inheritance", definition: "A mechanism in object-oriented programming that allows a new class to inherit properties and behavior (methods) from an existing class." },
+    { id: 13, term: "Polymorphism", definition: "The ability of different classes to be treated as instances of the same class through a common interface, typically by overriding methods." },
+    { id: 14, term: "Asynchronous Programming", definition: "A programming paradigm that allows for non-blocking operations, enabling tasks to run concurrently without waiting for each other to complete." },
+    { id: 15, term: "Lambda Function", definition: "A small anonymous function defined with the lambda keyword, often used for short, throwaway functions." }
 ];
 
 // --- Global State ---
@@ -166,6 +166,23 @@ function startGame() {
 function endGame() {
     document.getElementById('final-score').textContent = `${score}/${currentCards.length}`;
     gameOverModal.classList.remove('hidden');
+
+    fetch('index.php?action=addPoints', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ points: score })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Points added successfully');
+            } else {
+                console.error('Failed to add points:', data.error);
+            }
+        })
+        .catch(err => console.error('Error updating score:', err));
 }
 
 // Initialize the game on load

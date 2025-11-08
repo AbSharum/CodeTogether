@@ -218,6 +218,16 @@ class UserDAO
 
     }
 
+    public function addPoints(int $userID, int $points): bool
+    {
+        $conn = Database::getConnection();
+        $query = "UPDATE users SET points = points + ? WHERE userID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $points, $userID);
+        return $stmt->execute();
+    }
+
+
 
     public function authenticate(string $identefier, string $passwd): User|null
     {
