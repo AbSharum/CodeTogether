@@ -85,8 +85,8 @@ function handleDrop(e) {
 
         // 1. Style the definition target
         droppedElement.classList.add('matched');
-        droppedElement.innerHTML = `<span class="matrix-text font-bold text-lg">${termCard.textContent}</span><br>
-                                            <span class="text-green-400">${droppedElement.dataset.definitionText}</span>`;
+        droppedElement.innerHTML = `<span class="matrix-text" style="font-weight: bold; font-size: 1.125rem;">${termCard.textContent}</span><br>
+                                            <span style="color: #6ee7b7;">${droppedElement.dataset.definitionText}</span>`;
         droppedElement.style.cursor = 'default';
 
         // 2. Remove the term card
@@ -112,7 +112,7 @@ function renderTerms(terms) {
     termsContainer.innerHTML = '';
     terms.forEach(card => {
         const termDiv = document.createElement('div');
-        termDiv.className = 'matrix-card p-4 rounded-lg bg-gray-800 text-xl font-bold text-center select-none';
+        termDiv.className = 'matrix-card';
         termDiv.textContent = card.term;
         termDiv.setAttribute('draggable', 'true');
         termDiv.dataset.termId = card.id;
@@ -128,7 +128,7 @@ function renderDefinitions(definitions) {
     definitionsContainer.innerHTML = '';
     definitions.forEach(card => {
         const definitionDiv = document.createElement('div');
-        definitionDiv.className = 'definition-target p-4 rounded-lg flex items-center justify-center font-mono';
+        definitionDiv.className = 'definition-target';
         definitionDiv.textContent = card.definition;
         definitionDiv.dataset.definitionId = card.id;
         definitionDiv.dataset.definitionText = card.definition; // Store original text for display on match
@@ -169,4 +169,4 @@ function endGame() {
 }
 
 // Initialize the game on load
-window.onload = startGame;
+window.onload = () => startGame();

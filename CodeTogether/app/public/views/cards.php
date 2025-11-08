@@ -17,62 +17,65 @@
     <link rel="stylesheet" href="/public/css/page/FlashCards.css">
 </head>
 
-
-
-<body class="min-h-screen p-4 sm:p-8 flex items-center justify-center">
+<body class="app-body">
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
+    <!-- Digital Rain Canvas (Z-index 0) -->
     <canvas id="matrix-canvas"></canvas>
-    <main class="page-cards w-full flex items-center justify-center"></main>
-    <div id="app" class="w-full max-w-5xl bg-gray-900/90 p-6 sm:p-10 rounded-lg shadow-2xl shadow-green-500/50">
-        <!-- Header -->
-        <h1 class="text-4xl sm:text-5xl font-bold text-center mb-4 matrix-text tracking-wider">
-            SYSTEM TERMINOLOGY: MATCH
-        </h1>
-        <p class="text-center text-green-400/70 mb-8 text-lg">
-            Connect the Term to its correct Definition. Failure is not an option.
-        </p>
 
-        <!-- Score and Controls -->
-        <div class="flex flex-col sm:flex-row justify-between items-center mb-10 p-4 border-b border-t border-green-700/50">
-            <div class="matrix-text text-xl font-bold mb-3 sm:mb-0">
-                Score: <span id="score">0</span> / <span id="total-matches">0</span>
-            </div>
-            <button id="restart-button" class="px-6 py-2 matrix-text bg-gray-800 rounded-lg shadow-lg hover:shadow-green-500/70 transition duration-300 active:scale-95" onclick="startGame()">
-                <span class="font-bold">RELOAD PROGRAM</span>
-            </button>
-        </div>
+    <main class="page-cards">
+        <!-- Main Application Content (Z-index 10) -->
+        <div id="app" class="app-container">
+            <!-- Header -->
+            <h1 class="main-title matrix-text">
+                SYSTEM TERMINOLOGY: MATCH
+            </h1>
+            <p class="matrix-subtitle-text">
+                Connect the Term to its correct Definition. Failure is not an option.
+            </p>
 
-        <!-- Game Area -->
-        <div id="game-area" class="flex flex-row gap-8">
-            <!-- Terms Column (Draggable Cards) -->
-            <div class="w-1/2">
-                <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Terms</h2>
-                <div id="terms-container" class="space-y-4">
-                    <!-- Term cards will be inserted here -->
+            <!-- Score and Controls -->
+            <div class="control-bar">
+                <div class="score-display matrix-text">
+                    Score: <span id="score">0</span> / <span id="total-matches">0</span>
                 </div>
-            </div>
-
-            <!-- Definitions Column (Drop Targets) -->
-            <div class="w-1/2">
-                <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Definitions</h2>
-                <div id="definitions-container" class="space-y-4">
-                    <!-- Definition targets will be inserted here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Game Over Modal -->
-        <div id="game-over-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-            <div class="bg-gray-900 p-8 rounded-lg matrix-text text-center border-2 border-green-500 shadow-xl shadow-green-500/70 max-w-md w-full">
-                <h3 class="text-3xl font-bold mb-4">MATCHING COMPLETE</h3>
-                <p class="text-xl mb-6">You have successfully matched all terms.</p>
-                <p class="text-2xl mb-8 font-bold">Final Score: <span id="final-score">0</span></p>
-                <button class="px-8 py-3 matrix-text bg-gray-800 rounded-lg shadow-lg hover:shadow-green-500/70 transition duration-300 active:scale-95" onclick="document.getElementById('game-over-modal').classList.add('hidden'); startGame();">
-                    INITIATE NEW SEQUENCE
+                <button id="restart-button" class="restart-button matrix-text" onclick="startGame()">
+                    <span class="font-bold">RELOAD PROGRAM</span>
                 </button>
             </div>
+
+            <!-- Game Area: FORCING ROW LAYOUT -->
+            <div id="game-area" class="game-area">
+                <!-- Terms Column (Draggable Cards) -->
+                <div class="column">
+                    <h2 class="column-header matrix-text">Terms</h2>
+                    <div id="terms-container" class="card-list">
+                        <!-- Term cards will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Definitions Column (Drop Targets) -->
+                <div class="column">
+                    <h2 class="column-header matrix-text">Definitions</h2>
+                    <div id="definitions-container" class="card-list">
+                        <!-- Definition targets will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Over Modal -->
+            <div id="game-over-modal" class="modal-overlay hidden">
+                <div class="modal-content matrix-text">
+                    <h3 class="text-3xl font-bold mb-4">MATCHING COMPLETE</h3>
+                    <p class="text-xl mb-6">You have successfully matched all terms.</p>
+                    <p class="text-2xl mb-8 font-bold">Final Score: <span id="final-score">0</span></p>
+                    <button class="restart-button matrix-text"
+                        onclick="document.getElementById('game-over-modal').classList.add('hidden'); startGame();">
+                        INITIATE NEW SEQUENCE
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
 
 
     <script src="/public/js/core/theme.js"></script>

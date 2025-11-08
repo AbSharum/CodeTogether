@@ -1,44 +1,140 @@
 /*goog font for chivo+ mono*/
 @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;700&display=swap');
 
-body{
+body {
     font-family: 'Chivo Mono', monospace;
     background-color: #000000;
-
-}
-
-.page-FlashCards {
-    position: relative;
-    z-index: 1;
+    overflow: hidden;
     min-height: 100vh;
-    padding-top: 5vh;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#matrix-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
+.page-cards {
     width: 100%;
-    height: 100%;
-    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#app {
+.app-container {
     position: relative;
-    z-index: 1;
+    z-index: 10;
+    width: 100%;
+    max-width: 80rem;
+    background-color: rgba(17, 24, 39, 0.9);
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 0 50px rgba(0, 255, 65, 0.5);
+    backdrop-filter: blur(4px);
 }
 
+/* --- TYPOGRAPHY & COLOR --- */
 .matrix-text {
     color: #00ff41;
-    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41,
+    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
 }
 
+.main-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.matrix-subtitle-text {
+    color: rgba(0, 255, 65, 0.7);
+    text-align: center;
+    margin-bottom: 2rem;
+
+    font-size: 1.125rem;
+}
+
+.score-display {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+/* --- CONTROLS & BARS --- */
+.control-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding: 1rem;
+    border-top: 1px solid rgba(0, 255, 65, 0.5);
+    border-bottom: 1px solid rgba(0, 255, 65, 0.5);
+}
+
+/* Responsive control bar for wider screens */
+@media (min-width: 640px) {
+    .control-bar {
+        flex-direction: row;
+    }
+
+    .score-display {
+        margin-bottom: 0;
+    }
+}
+
+.restart-button {
+    padding: 0.5rem 1.5rem;
+    background-color: rgb(31, 41, 55);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.restart-button:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.7);
+}
+
+.restart-button:active {
+    transform: scale(0.95);
+}
+
+/* --- GAME COLUMNS --- */
+.game-area {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.column {
+    width: 50%;
+}
+
+.column-header {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #14532d;
+    padding-bottom: 0.5rem;
+}
+
+.card-list>div:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+/* --- CARDS & TARGETS --- */
 .matrix-card {
     border: 1px solid #00ff41;
     box-shadow: 0 0 8px #00ff41;
     transition: transform 0.15s, box-shadow 0.15s;
     cursor: grab;
     background-color: rgba(13, 26, 13, 0.7);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+    background-color: rgb(31, 41, 55);
 }
 
 .matrix-card:active {
@@ -54,17 +150,27 @@ body{
     border: 2px dashed #33ff77;
     background-color: #0d1a0d;
     transition: background-color 0.2s, border-color 0.2s;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: #6ee7b7;
+    user-select: none;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .drag-over {
-    background-color: #003300;
-    border-color: #99ffaa; 
+    background-color: #003300 !important;
+    border-color: #99ffaa !important;
     box-shadow: 0 0 15px #99ffaa;
 }
 
 .matched {
-    border-color: #00cc00; 
-    background-color: #001a00;
+    border-color: #00cc00 !important;
+    background-color: #001a00 !important;
     box-shadow: 0 0 10px #00cc00;
 }
 
@@ -90,4 +196,42 @@ body{
     80% {
         transform: translateX(5px);
     }
+}
+
+/* --- MODAL STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.modal-content {
+    background-color: rgb(17, 24, 39);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    border: 2px solid #00ff41;
+    box-shadow: 0 0 50px rgba(0, 255, 65, 0.7);
+    max-width: 28rem;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
