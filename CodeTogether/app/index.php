@@ -28,6 +28,7 @@ include_once __DIR__ . "/controllers/AddProfilePictureController.php";
 include_once __DIR__ . "/controllers/NoPermissionController.php";
 include_once __DIR__ . "/controllers/MessagesController.php";
 include_once __DIR__ . "/controllers/ViewPostController.php";
+include_once __DIR__ . "/controllers/FlashCardsController.php";
 
 
 
@@ -61,6 +62,7 @@ $router->addController('messages', $messagesController);
 $router->addController('getMessages', $messagesController);
 $router->addController('sendMessage', $messagesController);
 $router->addController('viewPost', new ViewPostController());
+$router->addController('cards', new FlashCardsController());
 
 
 # Register default controller (used when no action is specified)
