@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include __DIR__ . '/../includes/sessionCheck.php'; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -15,10 +14,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--core css-->
     <link rel="stylesheet" href="/public/css/core/main.css">
-    <link rel="stylesheet" href="/public/views/FlashCards.css">
+    <link rel="stylesheet" href="/public/css/page/FlashCards.css">
 </head>
 
 <body class="min-h-screen p-4 sm:p-8 flex items-center justify-centerr">
+    <canvas id="matrix-canvas"></canvas>
+
+    <?php include __DIR__ . '/../includes/navbar.php'; ?>
     <div id="app" class="w-full max-w-5xl bg-gray-900/90 p-6 sm:p-10 rounded-lg shadow-2xl shadow-green-500/50">
         <!-- Header -->
         <h1 class="text-4xl sm:text-5xl font-bold text-center mb-4 matrix-text tracking-wider">
@@ -77,7 +79,7 @@
 
     <script src="/public/js/core/theme.js"></script>
     <script src="/public/js/core/rain.js"></script>
-    <script src="/public/js/views/FlashCards.js"></script>
+    <script src="/public/js/page/FlashCards.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
