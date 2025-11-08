@@ -42,6 +42,9 @@ function handleDragStart(e) {
     // Set the ID of the term being dragged
     e.dataTransfer.setData('text/plain', e.target.dataset.termId);
     e.target.classList.add('opacity-50');
+    const img = new Image();
+            img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            e.dataTransfer.setDragImage(img, 0, 0);
 }
 
 function handleDragEnd(e) {
