@@ -63,7 +63,7 @@
                 <!--Team A info-->
                 <div class="col-12 col-md-2 d-flex flex-column align-items-md-start align-items-center">
                     <div class="team-info-box teamA-style w-100">
-                        <h2 class="text-xl font-bold text-danger mb-4 text-center text-md-start">Team A</h2>
+                        <h2 class="text-xl font-bold text-primary mb-4 text-center text-md-start">Team A</h2>
                         <!-- User Profiles -->
                         <div class="space-y-3 d-flex flex-column align-items-start align-items-md-start">
                             <div class="d-flex align-items-center space-x-3 mb-2">
@@ -103,7 +103,7 @@
                 <!-- Team B Info (2 Columns) -->
                 <div class="col-12 col-md-2 d-flex flex-column align-items-md-end align-items-center">
                     <div class="team-info-box teamB-style w-100">
-                        <h2 class="text-xl font-bold text-primary mb-4 text-center text-md-end">Team B</h2>
+                        <h2 class="text-xl font-bold text-danger mb-4 text-center text-md-end">Team B</h2>
                         <!-- User Profiles -->
                         <div class="space-y-3 d-flex flex-column align-items-end align-items-md-end">
                             <div class="d-flex align-items-center space-x-3 mb-2">
