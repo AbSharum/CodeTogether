@@ -28,6 +28,71 @@ const scoreElement = document.getElementById('score');
 const totalMatchesElement = document.getElementById('total-matches');
 const gameOverModal = document.getElementById('game-over-modal');
 
+// --- AutoScroll during the drag operation ---
+let autoScrollInterval = null;
+const SCROLL_SPEED = 10;
+const SCROLL_ZONE_HEIGHT = 50;
+
+ // Function to start the scrolling loop
+        function startAutoScrolling(scrollAmount) {
+            // Only start if not already scrolling in the requested direction
+            if (autoScrollInterval) {
+                // Determine direction based on sign
+                const currentDirection = autoScrollInterval.scrollAmount > 0 ? 'down' : 'up';
+                const newDirection = scrollAmount > 0 ? 'down' : 'up';
+
+                // If the direction hasn't changed, do nothing
+                if (currentDirection === newDirection) return;
+                
+                // If the direction changed, clear the old one
+                clearInterval(autoScrollInterval.id);
+            }
+            
+            autoScrollInterval = {
+                id: setInterval(() => {
+                    window.scrollBy(0, scrollAmount);
+                }, 50),
+                scrollAmount: scrollAmount // Store for direction check
+            };
+        }
+
+        // Function to stop the scrolling loop
+        function stopAutoScrolling() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval.id);
+                autoScrollInterval = null;
+            }
+        }
+        
+        // Listen to the drag event globally when a drag operation is active
+        window.addEventListener('dragover', (e) => {
+            // Prevent default to allow drop *and* ensure the drag event keeps firing regularly
+            e.preventDefault(); 
+            
+            const viewportHeight = window.innerHeight;
+            const mouseY = e.clientY; // Mouse position relative to the viewport
+
+            // Check if dragging near the top edge
+            if (mouseY < SCROLL_ZONE_HEIGHT) {
+                // Scroll Up
+                startAutoScrolling(-SCROLL_SPEED);
+            } 
+            // Check if dragging near the bottom edge
+            else if (mouseY > viewportHeight - SCROLL_ZONE_HEIGHT) {
+                // Scroll Down
+                startAutoScrolling(SCROLL_SPEED);
+            } 
+            // Mouse is in the middle, stop scrolling
+            else {
+                stopAutoScrolling();
+            }
+        });
+        
+        // Ensure scrolling stops when drag operation ends or is cancelled
+        window.addEventListener('dragend', stopAutoScrolling);
+
+
+
 // Utility to shuffle an array (Fisher-Yates)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {

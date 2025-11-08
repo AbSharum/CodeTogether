@@ -18,7 +18,7 @@
 </head>
 
 <body class="app-body">
-    
+
     <canvas id="matrix-canvas"></canvas>
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
