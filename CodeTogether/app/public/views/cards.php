@@ -43,7 +43,7 @@
         </div>
 
         <!-- Game Area -->
-        <div id="game-area" class="flex flex-col md:flex-row gap-8">
+        <div id="game-area" class="flex flex-col md:flex-row gap-2">
             <!-- Terms Column (Draggable Cards) -->
             <div class="w-full md:w-1/2">
                 <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Terms</h2>
