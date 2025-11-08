@@ -28,6 +28,53 @@ const scoreElement = document.getElementById('score');
 const totalMatchesElement = document.getElementById('total-matches');
 const gameOverModal = document.getElementById('game-over-modal');
 
+const scrollDownTrigger = document.getElementById('scroll-down-trigger');
+        const scrollUpTrigger = document.getElementById('scroll-up-trigger');
+
+        let isMouseDown = false;
+        let scrollInterval = null;
+
+        function startScrolling(direction) {
+            // Stop any existing scroll interval first
+            if (scrollInterval) clearInterval(scrollInterval);
+
+            // Direction determines scroll amount: 10 pixels for down, -10 for up
+            const scrollAmount = direction === 'down' ? 10 : -10;
+
+            scrollInterval = setInterval(() => {
+                // Use window.scrollBy for native scrolling
+                window.scrollBy(0, scrollAmount); 
+            }, 50);
+        }
+
+        function stopScrolling() {
+            isMouseDown = false;
+            clearInterval(scrollInterval);
+            scrollInterval = null; // Clear interval ID
+        }
+
+        // Down Scroll Trigger
+        scrollDownTrigger.addEventListener('mousedown', () => {
+            isMouseDown = true;
+            startScrolling('down');
+        });
+
+        // Up Scroll Trigger
+        scrollUpTrigger.addEventListener('mousedown', () => {
+            isMouseDown = true;
+            startScrolling('up');
+        });
+
+        // Universal stop scrolling events (release mouse anywhere)
+        document.addEventListener('mouseup', stopScrolling);
+
+        // Optional: Stop scrolling if the mouse leaves the trigger element while holding
+        scrollDownTrigger.addEventListener('mouseleave', () => {
+            if (isMouseDown && scrollInterval) stopScrolling();
+        });
+        scrollUpTrigger.addEventListener('mouseleave', () => {
+            if (isMouseDown && scrollInterval) stopScrolling();
+        });
 // Utility to shuffle an array (Fisher-Yates)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -37,33 +84,6 @@ function shuffleArray(array) {
 }
 
 // --- Drag and Drop Handlers ---
-const scrollTrigger = document.getElementById('scroll-trigger'); 
-
-let isMouseDown = false;
-let scrollInterval;
-
-scrollTrigger.addEventListener('mousedown', () => {
-    isMouseDown = true;
-    // Start scrolling when the mouse button is pressed down
-    scrollInterval = setInterval(() => {
-        // Adjust the scroll amount (e.g., 10 pixels per interval)
-        window.scrollBy(0, 10); 
-    }, 50); // Adjust the interval time (milliseconds) for smoother/faster scrolling
-});
-
-document.addEventListener('mouseup', () => {
-    isMouseDown = false;
-    // Stop scrolling when the mouse button is released
-    clearInterval(scrollInterval);
-});
-
-// Optional: Stop scrolling if the mouse leaves the trigger element while holding
-scrollTrigger.addEventListener('mouseleave', () => {
-    if (isMouseDown) {
-        isMouseDown = false;
-        clearInterval(scrollInterval);
-    }
-});
 
 function handleDragStart(e) {
     // Set the ID of the term being dragged

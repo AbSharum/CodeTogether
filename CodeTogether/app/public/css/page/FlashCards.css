@@ -224,6 +224,26 @@
     display: none;
 }
 
+/* --- SCROLL TRIGGERS --- */
+.page-cards .scroll-trigger-bar {
+    text-align: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: rgba(0, 255, 65, 0.1) var(--card);
+    /* Light green background */
+    border: 1px solid #00ff41;
+    border-radius: 0.25rem;
+    margin: 1rem 0;
+    transition: background-color 0.2s;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.page-cards .scroll-trigger-bar:hover {
+    background-color: rgba(0, 255, 65, 0.3) var(--card);
+    box-shadow: 0 0 10px #00ff41;
+}
+
 #matrix-canvas {
     position: fixed;
     top: 0;
