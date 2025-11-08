@@ -1,7 +1,7 @@
 /*goog font for chivo+ mono*/
 @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;700&display=swap');
 
-.page-body {
+body {
     background-color: var(--bg);
     color: var(--text);
     /* Center the content based on user's desired layout */
