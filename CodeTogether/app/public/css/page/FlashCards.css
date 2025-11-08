@@ -1,7 +1,7 @@
 /*goog font for chivo+ mono*/
 @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;700&display=swap');
 
-.page-body {
+.page-cards {
     font-family: 'Chivo Mono', monospace;
     background-color: #000000;
 }
