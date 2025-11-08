@@ -18,9 +18,9 @@
 </head>
 
 <body class="app-body">
-    <?php include __DIR__ . '/../includes/navbar.php'; ?>
-    <!-- Digital Rain Canvas (Z-index 0) -->
+    
     <canvas id="matrix-canvas"></canvas>
+    <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
     <main class="page-cards">
         <!-- Main Application Content (Z-index 10) -->
