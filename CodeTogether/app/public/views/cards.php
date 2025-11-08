@@ -33,11 +33,6 @@
                 Connect the Term to its correct Definition. Failure is not an option.
             </p>
 
-            <!-- Scroll Up Trigger -->
-            <div id="scroll-up-trigger" class="scroll-trigger-bar matrix-text">
-                SCROLL UP [▲]
-            </div>
-            
             <!-- Score and Controls -->
             <div class="control-bar">
                 <div class="score-display matrix-text">
@@ -65,11 +60,6 @@
                         <!-- Definition targets will be inserted here -->
                     </div>
                 </div>
-            </div>
-
-             <!-- Scroll Down Trigger -->
-            <div id="scroll-down-trigger" class="scroll-trigger-bar matrix-text">
-                SCROLL DOWN [▼]
             </div>
 
             <!-- Game Over Modal -->

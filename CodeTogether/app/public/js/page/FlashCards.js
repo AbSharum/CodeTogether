@@ -28,53 +28,71 @@ const scoreElement = document.getElementById('score');
 const totalMatchesElement = document.getElementById('total-matches');
 const gameOverModal = document.getElementById('game-over-modal');
 
-const scrollDownTrigger = document.getElementById('scroll-down-trigger');
-        const scrollUpTrigger = document.getElementById('scroll-up-trigger');
+// --- AutoScroll during the drag operation ---
+let autoScrollInterval = null;
+const SCROLL_SPEED = 10;
+const SCROLL_ZONE_HEIGHT = 50;
 
-        let isMouseDown = false;
-        let scrollInterval = null;
+ // Function to start the scrolling loop
+        function startAutoScrolling(scrollAmount) {
+            // Only start if not already scrolling in the requested direction
+            if (autoScrollInterval) {
+                // Determine direction based on sign
+                const currentDirection = autoScrollInterval.scrollAmount > 0 ? 'down' : 'up';
+                const newDirection = scrollAmount > 0 ? 'down' : 'up';
 
-        function startScrolling(direction) {
-            // Stop any existing scroll interval first
-            if (scrollInterval) clearInterval(scrollInterval);
-
-            // Direction determines scroll amount: 10 pixels for down, -10 for up
-            const scrollAmount = direction === 'down' ? 10 : -10;
-
-            scrollInterval = setInterval(() => {
-                // Use window.scrollBy for native scrolling
-                window.scrollBy(0, scrollAmount); 
-            }, 50);
+                // If the direction hasn't changed, do nothing
+                if (currentDirection === newDirection) return;
+                
+                // If the direction changed, clear the old one
+                clearInterval(autoScrollInterval.id);
+            }
+            
+            autoScrollInterval = {
+                id: setInterval(() => {
+                    window.scrollBy(0, scrollAmount);
+                }, 50),
+                scrollAmount: scrollAmount // Store for direction check
+            };
         }
 
-        function stopScrolling() {
-            isMouseDown = false;
-            clearInterval(scrollInterval);
-            scrollInterval = null; // Clear interval ID
+        // Function to stop the scrolling loop
+        function stopAutoScrolling() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval.id);
+                autoScrollInterval = null;
+            }
         }
+        
+        // Listen to the drag event globally when a drag operation is active
+        window.addEventListener('dragover', (e) => {
+            // Prevent default to allow drop *and* ensure the drag event keeps firing regularly
+            e.preventDefault(); 
+            
+            const viewportHeight = window.innerHeight;
+            const mouseY = e.clientY; // Mouse position relative to the viewport
 
-        // Down Scroll Trigger
-        scrollDownTrigger.addEventListener('mousedown', () => {
-            isMouseDown = true;
-            startScrolling('down');
+            // Check if dragging near the top edge
+            if (mouseY < SCROLL_ZONE_HEIGHT) {
+                // Scroll Up
+                startAutoScrolling(-SCROLL_SPEED);
+            } 
+            // Check if dragging near the bottom edge
+            else if (mouseY > viewportHeight - SCROLL_ZONE_HEIGHT) {
+                // Scroll Down
+                startAutoScrolling(SCROLL_SPEED);
+            } 
+            // Mouse is in the middle, stop scrolling
+            else {
+                stopAutoScrolling();
+            }
         });
+        
+        // Ensure scrolling stops when drag operation ends or is cancelled
+        window.addEventListener('dragend', stopAutoScrolling);
 
-        // Up Scroll Trigger
-        scrollUpTrigger.addEventListener('mousedown', () => {
-            isMouseDown = true;
-            startScrolling('up');
-        });
 
-        // Universal stop scrolling events (release mouse anywhere)
-        document.addEventListener('mouseup', stopScrolling);
 
-        // Optional: Stop scrolling if the mouse leaves the trigger element while holding
-        scrollDownTrigger.addEventListener('mouseleave', () => {
-            if (isMouseDown && scrollInterval) stopScrolling();
-        });
-        scrollUpTrigger.addEventListener('mouseleave', () => {
-            if (isMouseDown && scrollInterval) stopScrolling();
-        });
 // Utility to shuffle an array (Fisher-Yates)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
