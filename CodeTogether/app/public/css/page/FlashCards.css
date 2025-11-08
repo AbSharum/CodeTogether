@@ -4,7 +4,7 @@
 .page-cards body {
     font-family: 'Chivo Mono', monospace;
     background-color: #000000;
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
 }
@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .page-cards .app-container {
