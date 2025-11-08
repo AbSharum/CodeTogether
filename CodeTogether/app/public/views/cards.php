@@ -19,10 +19,10 @@
 
 
 
-<body>
+<body class="min-h-screen p-4 sm:p-8 flex items-center justify-center">
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
     <canvas id="matrix-canvas"></canvas>
-    <main class="page-cards"></main>
+    <main class="page-cards w-full flex items-center justify-center"></main>
     <div id="app" class="w-full max-w-5xl bg-gray-900/90 p-6 sm:p-10 rounded-lg shadow-2xl shadow-green-500/50">
         <!-- Header -->
         <h1 class="text-4xl sm:text-5xl font-bold text-center mb-4 matrix-text tracking-wider">
