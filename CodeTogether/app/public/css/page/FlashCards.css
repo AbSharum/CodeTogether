@@ -144,7 +144,7 @@
 
 .page-cards .definition-target {
     border: 2px dashed #33ff77;
-    background-color: #0d1a0d;
+    background-color: #0d1a0d var(--card);
     transition: background-color 0.2s, border-color 0.2s;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -159,20 +159,20 @@
 }
 
 .page-cards .drag-over {
-    background-color: #003300 !important;
-    border-color: #99ffaa !important;
+    background-color: #003300 var(--card);
+    border-color: #99ffaa;
     box-shadow: 0 0 15px #99ffaa;
 }
 
 .page-cards .matched {
-    border-color: #00cc00 !important;
-    background-color: #001a00 !important;
+    border-color: #00cc00;
+    background-color: #001a00 var(--card);
     box-shadow: 0 0 10px #00cc00;
 }
 
 .page-cards .incorrect {
     animation: shake 0.5s;
-    border-color: #ff0000 !important;
+    border-color: #ff0000;
     box-shadow: 0 0 10px #ff0000;
 }
 
