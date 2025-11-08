@@ -19,10 +19,11 @@
 
 <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-<body class="min-h-screen p-4 sm:p-8 flex items-center justify-centerr">
+<body class="p-4 sm:p-8 flex items-center justify-center">
     <canvas id="matrix-canvas"></canvas>
 
-    <div id="app" class="w-full max-w-5xl bg-gray-900/90 p-6 sm:p-10 rounded-lg shadow-2xl shadow-green-500/50">
+    <!-- Main Content Wrapper -->
+    <div id="app" class="w-full max-w-5xl bg-gray-900/90 p-6 sm:p-10 rounded-lg shadow-2xl shadow-green-500/50 z-10">
         <!-- Header -->
         <h1 class="text-4xl sm:text-5xl font-bold text-center mb-4 matrix-text tracking-wider">
             SYSTEM TERMINOLOGY: MATCH
@@ -43,10 +44,11 @@
                 <span class="font-bold">RELOAD PROGRAM</span>
             </button>
         </div>
-        <!-- Game Area -->
-        <div id="game-area" class="flex flex-col md:flex-row gap-8">
+        
+        <!-- Game Area: Terms (Left) vs Definitions (Right) -->
+        <div id="game-area" class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Terms Column (Draggable Cards) -->
-            <div class="w-full md:w-1/2">
+            <div>
                 <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Terms</h2>
                 <div id="terms-container" class="space-y-4">
                     <!-- Term cards will be inserted here -->
@@ -54,7 +56,7 @@
             </div>
 
             <!-- Definitions Column (Drop Targets) -->
-            <div class="w-full md:w-1/2">
+            <div>
                 <h2 class="text-2xl matrix-text mb-4 border-b border-green-800 pb-2">Definitions</h2>
                 <div id="definitions-container" class="space-y-4">
                     <!-- Definition targets will be inserted here -->
