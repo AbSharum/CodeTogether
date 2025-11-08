@@ -37,14 +37,38 @@ function shuffleArray(array) {
 }
 
 // --- Drag and Drop Handlers ---
+const scrollTrigger = document.getElementById('scroll-trigger'); 
+
+let isMouseDown = false;
+let scrollInterval;
+
+scrollTrigger.addEventListener('mousedown', () => {
+    isMouseDown = true;
+    // Start scrolling when the mouse button is pressed down
+    scrollInterval = setInterval(() => {
+        // Adjust the scroll amount (e.g., 10 pixels per interval)
+        window.scrollBy(0, 10); 
+    }, 50); // Adjust the interval time (milliseconds) for smoother/faster scrolling
+});
+
+document.addEventListener('mouseup', () => {
+    isMouseDown = false;
+    // Stop scrolling when the mouse button is released
+    clearInterval(scrollInterval);
+});
+
+// Optional: Stop scrolling if the mouse leaves the trigger element while holding
+scrollTrigger.addEventListener('mouseleave', () => {
+    if (isMouseDown) {
+        isMouseDown = false;
+        clearInterval(scrollInterval);
+    }
+});
 
 function handleDragStart(e) {
     // Set the ID of the term being dragged
     e.dataTransfer.setData('text/plain', e.target.dataset.termId);
     e.target.classList.add('opacity-50');
-    const img = new Image();
-            img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-            e.dataTransfer.setDragImage(img, 0, 0);
 }
 
 function handleDragEnd(e) {
