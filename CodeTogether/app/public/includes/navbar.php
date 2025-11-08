@@ -7,7 +7,7 @@ $theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : 'dark';
 <link rel="stylesheet" href="/public/css/core/main.css">
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top navbar-matrix">
   <div class="container-fluid container-lg">
-    <a class="navbar-brand fw-bold nav-fade" href="index.php?action=landing"><i class="fa-solid fa-code"></i> Code
+    <a class="navbar-brand fw-bold nav-fade justify-content-start" href="index.php?action=landing"><i class="fa-solid fa-code"></i> Code
       Together</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
