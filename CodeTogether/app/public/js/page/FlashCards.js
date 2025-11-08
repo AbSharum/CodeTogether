@@ -231,23 +231,6 @@ function startGame() {
 function endGame() {
     document.getElementById('final-score').textContent = `${score}/${currentCards.length}`;
     gameOverModal.classList.remove('hidden');
-
-    fetch('index.php?action=addPoints', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ points: score })
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                console.log('Points added successfully');
-            } else {
-                console.error('Failed to add points:', data.error);
-            }
-        })
-        .catch(err => console.error('Error updating score:', err));
 }
 
 // Initialize the game on load
