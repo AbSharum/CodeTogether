@@ -53,8 +53,10 @@
         <form action="index.php?action=accountSettings" method="POST" class="mb-3">
           <input type="hidden" name="update" value="password">
           <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label muted">(Must include upper, lower, number, and
+            symbol)</label>
           <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password"
-            required>
+            required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" required>
           <button type="submit" class="btn btn-success w-100 mt-2">
             <i class="fas fa-lock me-2"></i> Update Password
           </button>
