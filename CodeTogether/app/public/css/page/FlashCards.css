@@ -149,7 +149,7 @@
     padding: 1rem;
     border-radius: 0.5rem;
     font-size: 0.875rem;
-    color: #6ee7b7;
+    color: #6ee7b7 var(--text);
     user-select: none;
     height: 8rem;
     display: flex;
@@ -201,7 +201,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8) var(--card);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,7 +209,7 @@
 }
 
 .page-cards .modal-content {
-    background-color: rgb(17, 24, 39);
+    background-color: rgb(17, 24, 39) var(--card);
     padding: 2rem;
     border-radius: 0.5rem;
     text-align: center;
