@@ -42,6 +42,7 @@
                     <span class="font-bold">RELOAD PROGRAM</span>
                 </button>
             </div>
+            <?php include __DIR__ . '/../includes/progressBar.php'; ?>
 
             <!-- Game Area: FORCING ROW LAYOUT -->
             <div id="game-area" class="game-area">

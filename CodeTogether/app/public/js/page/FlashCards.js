@@ -27,69 +27,71 @@ const definitionsContainer = document.getElementById('definitions-container');
 const scoreElement = document.getElementById('score');
 const totalMatchesElement = document.getElementById('total-matches');
 const gameOverModal = document.getElementById('game-over-modal');
+const progressBar = document.getElementById('progress-bar'); // NEW
+const progressText = document.getElementById('progress-text'); // NEW
 
 // --- AutoScroll during the drag operation ---
 let autoScrollInterval = null;
 const SCROLL_SPEED = 10;
 const SCROLL_ZONE_HEIGHT = 50;
 
- // Function to start the scrolling loop
-        function startAutoScrolling(scrollAmount) {
-            // Only start if not already scrolling in the requested direction
-            if (autoScrollInterval) {
-                // Determine direction based on sign
-                const currentDirection = autoScrollInterval.scrollAmount > 0 ? 'down' : 'up';
-                const newDirection = scrollAmount > 0 ? 'down' : 'up';
+// Function to start the scrolling loop
+function startAutoScrolling(scrollAmount) {
+    // Only start if not already scrolling in the requested direction
+    if (autoScrollInterval) {
+        // Determine direction based on sign
+        const currentDirection = autoScrollInterval.scrollAmount > 0 ? 'down' : 'up';
+        const newDirection = scrollAmount > 0 ? 'down' : 'up';
 
-                // If the direction hasn't changed, do nothing
-                if (currentDirection === newDirection) return;
-                
-                // If the direction changed, clear the old one
-                clearInterval(autoScrollInterval.id);
-            }
-            
-            autoScrollInterval = {
-                id: setInterval(() => {
-                    window.scrollBy(0, scrollAmount);
-                }, 50),
-                scrollAmount: scrollAmount // Store for direction check
-            };
-        }
+        // If the direction hasn't changed, do nothing
+        if (currentDirection === newDirection) return;
 
-        // Function to stop the scrolling loop
-        function stopAutoScrolling() {
-            if (autoScrollInterval) {
-                clearInterval(autoScrollInterval.id);
-                autoScrollInterval = null;
-            }
-        }
-        
-        // Listen to the drag event globally when a drag operation is active
-        window.addEventListener('dragover', (e) => {
-            // Prevent default to allow drop *and* ensure the drag event keeps firing regularly
-            e.preventDefault(); 
-            
-            const viewportHeight = window.innerHeight;
-            const mouseY = e.clientY; // Mouse position relative to the viewport
+        // If the direction changed, clear the old one
+        clearInterval(autoScrollInterval.id);
+    }
 
-            // Check if dragging near the top edge
-            if (mouseY < SCROLL_ZONE_HEIGHT) {
-                // Scroll Up
-                startAutoScrolling(-SCROLL_SPEED);
-            } 
-            // Check if dragging near the bottom edge
-            else if (mouseY > viewportHeight - SCROLL_ZONE_HEIGHT) {
-                // Scroll Down
-                startAutoScrolling(SCROLL_SPEED);
-            } 
-            // Mouse is in the middle, stop scrolling
-            else {
-                stopAutoScrolling();
-            }
-        });
-        
-        // Ensure scrolling stops when drag operation ends or is cancelled
-        window.addEventListener('dragend', stopAutoScrolling);
+    autoScrollInterval = {
+        id: setInterval(() => {
+            window.scrollBy(0, scrollAmount);
+        }, 50),
+        scrollAmount: scrollAmount // Store for direction check
+    };
+}
+
+// Function to stop the scrolling loop
+function stopAutoScrolling() {
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval.id);
+        autoScrollInterval = null;
+    }
+}
+
+// Listen to the drag event globally when a drag operation is active
+window.addEventListener('dragover', (e) => {
+    // Prevent default to allow drop *and* ensure the drag event keeps firing regularly
+    e.preventDefault();
+
+    const viewportHeight = window.innerHeight;
+    const mouseY = e.clientY; // Mouse position relative to the viewport
+
+    // Check if dragging near the top edge
+    if (mouseY < SCROLL_ZONE_HEIGHT) {
+        // Scroll Up
+        startAutoScrolling(-SCROLL_SPEED);
+    }
+    // Check if dragging near the bottom edge
+    else if (mouseY > viewportHeight - SCROLL_ZONE_HEIGHT) {
+        // Scroll Down
+        startAutoScrolling(SCROLL_SPEED);
+    }
+    // Mouse is in the middle, stop scrolling
+    else {
+        stopAutoScrolling();
+    }
+});
+
+// Ensure scrolling stops when drag operation ends or is cancelled
+window.addEventListener('dragend', stopAutoScrolling);
 
 
 
@@ -147,6 +149,14 @@ function handleDrop(e) {
         // Correct Match
         score++;
         scoreElement.textContent = score;
+
+        // --- PROGRESS UPDATE ---
+        const percentage = Math.round((score / currentCards.length) * 100);
+        progressBar.style.width = `${percentage}%`;
+        progressText.textContent = `${percentage}%`;
+        // If progress is low, switch text color to neon green to ensure visibility
+        progressText.style.color = percentage < 10 ? '#00ff41' : '#000000';
+        // -------------------------
 
         // 1. Style the definition target
         droppedElement.classList.add('matched');
@@ -215,6 +225,13 @@ function startGame() {
     score = 0;
     scoreElement.textContent = 0;
     totalMatchesElement.textContent = currentCards.length;
+
+
+    // Reset Progress Bar
+    progressBar.style.width = '0%';
+    progressText.textContent = '0%';
+    progressText.style.color = '#00ff41'; // Ensure text is visible when bar is empty
+
 
     // Prepare cards
     const shuffledTerms = JSON.parse(JSON.stringify(currentCards)); // Shuffled Terms (left column)
