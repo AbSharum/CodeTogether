@@ -104,20 +104,25 @@
 }
 
 /* Responsive layout for smaller screens */
-@media (max-width: 639px) {
+@media (max-width: 640px) {
     .game-area {
         flex-direction: column;
         /* Stack columns on small screens */
     }
+
     .column {
         width: 100%;
         /* Full width on small screens */
     }
 }
 
-.page-cards .column {
-    width: 50%;
+/* Wider screens: Side-by-side columns */
+@media (min-width: 768px) {
+    .column {
+        width: 50%;
+    }
 }
+
 
 .page-cards .column-header {
     font-size: 1.5rem;
@@ -128,6 +133,21 @@
 
 .page-cards .card-list>div:not(:last-child) {
     margin-bottom: 1rem;
+}
+
+/* Definitions List: 2 definitions per row on wider screens */
+#definitions-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Default: Single column on small screens */
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    #definitions-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* Two columns on desktop */
+    }
 }
 
 /* --- CARDS & TARGETS --- */
