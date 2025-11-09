@@ -32,7 +32,6 @@
             <p class="matrix-subtitle-text">
                 Connect the Term to its correct Definition. Failure is not an option.
             </p>
-
             <!-- Score and Controls -->
             <div class="control-bar">
                 <div class="score-display matrix-text">
