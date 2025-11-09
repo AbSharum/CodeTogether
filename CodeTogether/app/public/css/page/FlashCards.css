@@ -60,6 +60,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-top: 2rem;
     margin-bottom: 2rem;
     padding: 1rem;
     border-top: 1px solid rgba(0, 255, 65, 0.5);
@@ -96,6 +97,7 @@
 
 /* --- GAME COLUMNS --- */
 .page-cards .game-area {
+    margin-top: 2rem;
     display: flex;
     flex-direction: row;
     gap: 2rem;

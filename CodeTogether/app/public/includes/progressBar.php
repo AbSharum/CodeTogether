@@ -14,9 +14,9 @@
         border: 1px solid #00ff41;
         border-radius: 0.25rem;
         overflow: hidden;
-        margin-bottom: 2.5rem;
+        
         box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-        color: #000000;
+        
     }
 
     .matrix-progress-bar {
