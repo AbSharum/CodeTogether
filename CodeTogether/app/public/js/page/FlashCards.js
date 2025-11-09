@@ -155,7 +155,7 @@ function handleDrop(e) {
         progressBar.style.width = `${percentage}%`;
         progressText.textContent = `${percentage}%`;
         // If progress is low, switch text color to neon green to ensure visibility
-        progressText.style.color = percentage < 10 ? '#00ff41' : '#000000';
+        progressText.style.color = percentage < 10 ? '#000000' : '#000000';
         // -------------------------
 
         // 1. Style the definition target
@@ -230,7 +230,7 @@ function startGame() {
     // Reset Progress Bar
     progressBar.style.width = '0%';
     progressText.textContent = '0%';
-    progressText.style.color = '#00ff41'; // Ensure text is visible when bar is empty
+    progressText.style.color = '#030303ff'; // Ensure text is visible when bar is empty
 
 
     // Prepare cards
