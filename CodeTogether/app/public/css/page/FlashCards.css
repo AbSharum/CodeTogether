@@ -3,7 +3,7 @@
 
 .page-cards body {
     font-family: 'Chivo Mono', monospace;
-    background-color: #000000;
+    background-color: var(--bg);
     display: block;
     align-items: center;
     justify-content: center;
@@ -22,15 +22,17 @@
     background-color: var(--card);
     padding: 2.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 0 50px rgba(0, 255, 65, 0.5);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 8px 10px -6px rgba(0, 0, 0, 0.1),
+                0 0 50px var(--accent);
     backdrop-filter: blur(4px);
     margin-top: 2rem;
 }
 
 /* --- TYPOGRAPHY & COLOR --- */
 .page-cards .matrix-text {
-    color: #00ff41 var(--text);
-    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
+    color: var(--accent-2);
+    text-shadow: 0 0 2px var(--accent), 0 0 4px var(--accent);
 }
 
 .page-cards .main-title {
@@ -42,7 +44,8 @@
 }
 
 .page-cards .matrix-subtitle-text {
-    color: rgba(0, 255, 65, 0.7) var(--text);
+    color: var(--accent);
+    opacity: 0.8;
     text-align: center;
     margin-bottom: 2rem;
     font-size: 1.125rem;
@@ -63,11 +66,59 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
     padding: 1rem;
-    border-top: 1px solid rgba(0, 255, 65, 0.5);
-    border-bottom: 1px solid rgba(0, 255, 65, 0.5);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
 }
 
-/* Responsive control bar for wider screens */
+#terms-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+    align-items: start;
+}
+
+#terms-container .matrix-card {
+    width: 160px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.75rem;
+    border: 1px solid var(--accent);
+    border-radius: 0.5rem;
+    background-color: var(--card);
+    box-shadow: 0 0 6px var(--accent);
+    color: var(--text);
+    cursor: grab;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+}
+
+#terms-container .matrix-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--accent-2);
+    background-color: var(--card-2);
+}
+
+#terms-container .matrix-card:active {
+    cursor: grabbing;
+}
+
+@media (max-width: 640px) {
+    #terms-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    #terms-container .matrix-card {
+        width: 120px;
+        height: 70px;
+        font-size: 0.9rem;
+    }
+}
+
 @media (min-width: 640px) {
     .control-bar {
         flex-direction: row;
@@ -80,15 +131,20 @@
 
 .page-cards .restart-button {
     padding: 0.5rem 1.5rem;
-    background-color: rgb(31, 41, 55) var(--card);
+    background-color: var(--card);
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -2px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
+    border: 1px solid var(--accent);
+    color: var(--accent);
 }
 
 .page-cards .restart-button:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.7);
+    box-shadow: 0 0 20px var(--accent-2);
+    background-color: var(--accent);
+    color: var(--bg);
 }
 
 .page-cards .restart-button:active {
@@ -107,12 +163,10 @@
 @media (max-width: 640px) {
     .game-area {
         flex-direction: column;
-        /* Stack columns on small screens */
     }
 
     .column {
         width: 100%;
-        /* Full width on small screens */
     }
 }
 
@@ -123,11 +177,10 @@
     }
 }
 
-
 .page-cards .column-header {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #14532d;
+    border-bottom: 1px solid var(--accent);
     padding-bottom: 0.5rem;
 }
 
@@ -135,54 +188,71 @@
     margin-bottom: 1rem;
 }
 
-/* Definitions List: 2 definitions per row on wider screens */
+/* Definitions List: 3 definitions per row on wider screens */
 #definitions-container {
     display: grid;
     grid-template-columns: 1fr;
-    /* Default: Single column on small screens */
     gap: 1rem;
 }
 
 @media (min-width: 768px) {
     #definitions-container {
-        grid-template-columns: repeat(2, 1fr);
-        /* Two columns on desktop */
+        grid-template-columns: repeat(3, 1fr);
     }
+}
+
+.match-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.match-term {
+    font-size: 0.8rem;            
+    font-weight: bold;
+    color: var(--accent-2);
+    text-shadow: 0 0 2px var(--accent), 0 0 5px var(--accent); 
+    margin-bottom: 0.3rem;
+}
+
+.match-definition {
+    font-size: 0.7rem;
+    color: var(--text);
+    opacity: 0.9;
+    line-height: 1.3;
 }
 
 /* --- CARDS & TARGETS --- */
 .page-cards .matrix-card {
-    border: 1px solid #00ff41;
-    box-shadow: 0 0 8px #00ff41;
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 8px var(--accent);
     transition: transform 0.15s, box-shadow 0.15s;
     cursor: grab;
-    background-color: rgba(13, 26, 13, 0.7) var(--card);
+    background-color: var(--card);
     padding: 1rem;
     border-radius: 0.5rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: bold;
     text-align: center;
     user-select: none;
-    background-color: rgb(31, 41, 55) var(--card);
-}
-
-.page-cards .matrix-card:active {
-    cursor: grabbing;
+    color: var(--text);
 }
 
 .page-cards .matrix-card:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 12px #33ff77;
+    box-shadow: 0 0 12px var(--accent-2);
 }
 
 .page-cards .definition-target {
-    border: 2px dashed #33ff77;
-    background-color: #0d1a0d var(--card);
+    border: 2px dashed var(--accent-2);
+    background-color: var(--card);
     transition: background-color 0.2s, border-color 0.2s;
     padding: 1rem;
     border-radius: 0.5rem;
-    font-size: 0.875rem;
-    color: #6ee7b7 var(--text);
+    font-size: 0.7rem;
+    color: var(--text);
     user-select: none;
     height: 8rem;
     display: flex;
@@ -192,37 +262,31 @@
 }
 
 .page-cards .drag-over {
-    background-color: #003300 var(--card);
-    border-color: #99ffaa;
-    box-shadow: 0 0 15px #99ffaa;
+    background-color: var(--card-2);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
 }
 
 .page-cards .matched {
-    border-color: #00cc00;
-    background-color: #001a00 var(--card);
-    box-shadow: 0 0 10px #00cc00;
+    border-color: var(--accent);
+    background-color: var(--card-2);
+    box-shadow: 0 0 10px var(--accent);
 }
 
 .page-cards .incorrect {
     animation: shake 0.5s;
-    border-color: #ff0000;
-    box-shadow: 0 0 10px #ff0000;
+    border-color: red;
+    box-shadow: 0 0 10px red;
 }
 
 @keyframes shake {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateX(0);
     }
-
-    20%,
-    60% {
+    20%, 60% {
         transform: translateX(-5px);
     }
-
-    40%,
-    80% {
+    40%, 80% {
         transform: translateX(5px);
     }
 }
@@ -242,14 +306,15 @@
 }
 
 .page-cards .modal-content {
-    background-color: rgb(17, 24, 39);
+    background-color: var(--card);
     padding: 2rem;
     border-radius: 0.5rem;
     text-align: center;
-    border: 2px solid #00ff41;
-    box-shadow: 0 0 50px rgba(0, 255, 65, 0.7);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 40px var(--accent);
     max-width: 28rem;
     width: 100%;
+    color: var(--text);
 }
 
 .page-cards .hidden {
@@ -261,26 +326,17 @@
     text-align: center;
     padding: 0.5rem 1rem;
     cursor: pointer;
-    background-color: rgba(0, 255, 65, 0.1) var(--card);
-    /* Light green background */
-    border: 1px solid #00ff41;
+    background-color: var(--card);
+    border: 1px solid var(--accent);
     border-radius: 0.25rem;
     margin: 1rem 0;
     transition: background-color 0.2s;
     font-weight: bold;
     font-size: 1rem;
+    color: var(--text);
 }
 
 .page-cards .scroll-trigger-bar:hover {
-    background-color: rgba(0, 255, 65, 0.3) var(--card);
-    box-shadow: 0 0 10px #00ff41;
-}
-
-#matrix-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+    background-color: var(--card-2);
+    box-shadow: 0 0 10px var(--accent);
 }

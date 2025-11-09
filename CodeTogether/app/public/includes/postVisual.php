@@ -1,6 +1,3 @@
-<?php
-//Expects: $post (Post object), $user (User object), and optionally $likedPosts (array)
-?>
 <link rel="stylesheet" href="/public/css/container/postVisual.css">
 <div class="post-card">
   <div class="post-header d-flex justify-content-between align-items-start mb-2">

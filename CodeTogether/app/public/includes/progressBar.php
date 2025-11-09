@@ -1,58 +1,7 @@
 <!-- progress Bar -->
+<link rel="stylesheet" href="/public/css/container/progress.css">
 <div class="progress-container">
     <div id="progress-bar" class="matrix-progress-bar">
         <span id="progress-text">0%</span>
     </div>
 </div>
-</div>
-
-<style>
-    .progress-container {
-        width: 100%;
-        height: 0.75rem;
-        background-color: #111827;
-        border: 1px solid #00ff41;
-        border-radius: 0.25rem;
-        overflow: hidden;
-        
-        box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-        
-    }
-
-    .matrix-progress-bar {
-        height: 100%;
-        width: 0%;
-        background-color: #00ff41;
-        transition: width 0.4s ease-in-out;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        font-size: 0.75rem;
-        color: #000000;
-        font-weight: bold;
-        padding-right: 0.25rem;
-        background-image: linear-gradient(-45deg,
-                rgba(0, 0, 0, 0.2) 25%,
-                transparent 25%,
-                transparent 50%,
-                rgba(0, 0, 0, 0.2) 50%,
-                rgba(0, 0, 0, 0.2) 75%,
-                transparent 75%,
-                transparent);
-        background-size: 1rem 1rem;
-        animation: progress-stripes 1s linear infinite;
-    }
-
-    @keyframes progress-stripes {
-        0% {
-            background-position: 1rem 0;
-        }
-
-        100% {
-            background-position: 0 0;
-        }
-    }
-    #progress-text {
-        color: #000000;
-    }
-</style>

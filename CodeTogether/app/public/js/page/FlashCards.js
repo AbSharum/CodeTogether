@@ -160,8 +160,14 @@ function handleDrop(e) {
 
         // 1. Style the definition target
         droppedElement.classList.add('matched');
-        droppedElement.innerHTML = `<span class="matrix-text" style="font-weight: bold; font-size: 1.125rem;">${termCard.textContent}</span><br>
-                                            <span style="color: #6ee7b7;">${droppedElement.dataset.definitionText}</span>`;
+        droppedElement.innerHTML = `
+                        <div class="match-container">
+                            <div class="match-term">${termCard.textContent}</div>
+                            <div class="match-definition">${droppedElement.dataset.definitionText}</div>
+                        </div>
+                        `;
+
+
         droppedElement.style.cursor = 'default';
 
         // 2. Remove the term card
@@ -238,6 +244,7 @@ function startGame() {
     shuffleArray(shuffledTerms);
 
     const definitions = currentCards; // Definitions (right column) - we want these fixed
+    shuffleArray(definitions);
     // Note: We don't shuffle definitions so the matching is clear, only the terms are shuffled.
 
     // Render
@@ -248,7 +255,25 @@ function startGame() {
 function endGame() {
     document.getElementById('final-score').textContent = `${score}/${currentCards.length}`;
     gameOverModal.classList.remove('hidden');
+
+    fetch('index.php?action=addPoints', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ points: score })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log(`${score} points added successfully!`);
+        } else {
+            console.warn('Failed to update score:', data.error || data);
+        }
+    })
+    .catch(error => console.error('Error updating score:', error));
 }
+
 
 // Initialize the game on load
 window.onload = () => startGame();

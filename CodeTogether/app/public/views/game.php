@@ -177,6 +177,7 @@
     <script src="/public/js/core/rain.js"></script>
     <script src="/public/js/core/theme.js"></script>
     <script src="/public/js/page/games.js"></script>
+    <script src="/public/js/core/status.js"></script>
 
 </body>
 

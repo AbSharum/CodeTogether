@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 include_once __DIR__ . "/Controller.php";
+include_once __DIR__ . "/../dao/UserDAO.php";
 
 class Router
 {
+    private UserDAO $userDao;
     public $controllers;
 
     public function __construct()
@@ -13,6 +15,7 @@ class Router
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+        $this->userDao = new UserDAO();
     }
 
     public function run(): void
@@ -22,7 +25,7 @@ class Router
         $this->authCheck($action);
 
         $action = $_REQUEST['action'] ?? 'default';
-        
+
         if (in_array($action, ['getMessages', 'sendMessage'])) {
             $messagesController = $this->controllers['messages'];
             if (method_exists($messagesController, $action)) {
@@ -49,7 +52,7 @@ class Router
     {
         $protectedRoutes = [
             'home' => ['student', 'teacher', 'moderator'],
-            'accountSettings' => ['student','teacher','moderator'],
+            'accountSettings' => ['student', 'teacher', 'moderator'],
             'messages' => ['student', 'teacher', 'moderator'],
             'game' => ['student', 'teacher', 'moderator'],
             'profile' => ['student', 'teacher', 'moderator'],
@@ -62,6 +65,8 @@ class Router
                 header('Location: index.php?action=login');
                 exit;
             }
+
+            $this->userDao->updateUserStatus('online', (int) $_SESSION['usercreds']['userID']);
 
             $userRole = $_SESSION['usercreds']['role'] ?? null;
             if (!in_array($userRole, $protectedRoutes[$action])) {

@@ -153,15 +153,29 @@ class UserDAO
         return $user;
     }
 
-    public function updateUserStatus(string $status, int $userID)
+    public function updateUserStatus(string $status, int $userID): bool
     {
         $conn = Database::getConnection();
-
-        $stmt = $conn->prepare("UPDATE user SET status = ? WHERE user_id = ?;");
+        $stmt = $conn->prepare("UPDATE user SET status = ?, latest_update = NOW() WHERE user_id = ?");
         $stmt->bind_param("si", $status, $userID);
-        $stmt->execute();
+        $success = $stmt->execute();
         $stmt->close();
+        return $success;
     }
+
+
+    public function getUserStatus(int $userID): ?array
+    {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT status, latest_update FROM user WHERE user_id = ?");
+        $stmt->bind_param("i", $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        return $row ?: null;
+    }
+
 
     public function updateUser(User $user): void
     {
@@ -221,7 +235,7 @@ class UserDAO
     public function addPoints(int $userID, int $points): bool
     {
         $conn = Database::getConnection();
-        $query = "UPDATE users SET points = points + ? WHERE userID = ?";
+        $query = "UPDATE user SET points = points + ? WHERE user_id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("ii", $points, $userID);
         return $stmt->execute();

@@ -1,6 +1,7 @@
 <?php
 $rain = isset($_SESSION['rain_enabled']) ? (bool) $_SESSION['rain_enabled'] : false;
 $theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : 'dark';
+
 ?>
 
 <link rel="stylesheet" href="/public/css/container/navbar.css">
