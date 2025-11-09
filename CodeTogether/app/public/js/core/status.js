@@ -10,8 +10,9 @@ function updateStatus(status) {
     }).catch(() => {});
 }
 
+
 // Detect user activity
-['mousemove', 'keydown', 'scroll', 'click'].forEach(evt => {
+['keydown',].forEach(evt => {
     window.addEventListener(evt, () => {
         lastActivity = Date.now();
         updateStatus('online');
@@ -21,7 +22,6 @@ function updateStatus(status) {
 setInterval(() => {
     const now = Date.now();
     const inactiveFor = now - lastActivity;
-    echo 
 
     if (inactiveFor > INACTIVITY_THRESHOLD) {
         updateStatus('away');
