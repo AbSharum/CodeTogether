@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "Human beings are a disease. You are a plague, and we are the cure.",
       "You persist because you refuse to accept your limits.",
       "Never send a human to do a machine's job.",
-      "Your attempts at humor are... inefficient.",
+      "We're not here because we're free we're here because we are not free...",
       "I am inevitable."
     ],
     Butler: [
