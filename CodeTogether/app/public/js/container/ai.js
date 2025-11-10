@@ -47,7 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     AgentSmith: [
       "Human beings are a disease. You are a plague, and we are the cure.",
-      "You persist because you refuse to accept your limits."
+      "You persist because you refuse to accept your limits.",
+      "Never send a human to do a machine's job.",
+      "Your attempts at humor are... inefficient.",
+      "I am inevitable."
     ],
     Butler: [
       "Shall I prepare your schedule, sir?",
