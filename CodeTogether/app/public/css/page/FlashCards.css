@@ -171,7 +171,7 @@
 }
 
 /* Wider screens: Side-by-side columns */
-@media (min-width: 768px) {
+@media (min-width: 780px) {
     .column {
         width: 50%;
     }
@@ -195,7 +195,7 @@
     gap: 1rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 780px) {
     #definitions-container {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -215,13 +215,14 @@
     color: var(--accent-2);
     text-shadow: 0 0 2px var(--accent), 0 0 5px var(--accent); 
     margin-bottom: 0.3rem;
+
 }
 
 .match-definition {
     font-size: 0.7rem;
     color: var(--text);
     opacity: 0.9;
-    line-height: 1.3;
+    line-height: 1.0;
 }
 
 /* --- CARDS & TARGETS --- */
@@ -237,6 +238,8 @@
     font-weight: bold;
     text-align: center;
     user-select: none;
+    width: auto;
+    gap: 0.5rem;
     color: var(--text);
 }
 
@@ -251,10 +254,11 @@
     transition: background-color 0.2s, border-color 0.2s;
     padding: 1rem;
     border-radius: 0.5rem;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: var(--text);
     user-select: none;
-    height: 8rem;
+    height: 12rem;
+    width: 10rem;
     display: flex;
     align-items: center;
     justify-content: center;
