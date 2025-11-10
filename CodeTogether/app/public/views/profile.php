@@ -16,7 +16,7 @@
 
   <?php include __DIR__ . '/../includes/navbar.php'; ?>
   <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
-  <script src="/public/js/ai.js"></script>
+  <script src="/public/js/container/ai.js"></script>
   <script src="/public/js/profile.js"></script>
 
   <main class="page-profile">
