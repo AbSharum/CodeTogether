@@ -57,6 +57,18 @@
                     <!--needs to be connected to the players in team B to be able to swap-->
                 </div>
             </div>
+            <div class="row justify-content-center align-items-center mb-5 gx-3">
+                <div class="col-4 col-md-3 d-flex justify-content-center">
+                    <button onclick="joinTeam('A')" class="btn btn-lg w-75 teamA">
+                        <i class="fas fa-users me-2"></i>Join Team A(Red)
+                    </button>
+                </div>
+                <div class="col-4 col-md-4 d-flex justify-content-center">
+                    <button onclick="joinTeam('B')" class="btn btn-lg w-75 teamB">
+                        <i class="fas fa-users me-2"></i>Join Team B(Blue)
+                    </button>
+                </div>
+            </div>
 
             <!-- 3. Main Coding Row (12-Column Grid for Desktop) -->
             <div class="row justify-content-center align-items-stretch g-3">
