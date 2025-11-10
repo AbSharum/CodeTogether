@@ -36,8 +36,7 @@ $theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : 'dark';
             <li><a class="dropdown-item custom-dropdown-item active" aria-current="page"
                 href="index.php?action=game">Code Battle</a></li>
             <li><a class="dropdown-item custom-dropdown-item" href="index.php?action=cards">FlashCards</a></li>
-            <li><a class="dropdown-item custom-dropdown-item" href="#">Code Challenges</a></li>
-            <li><a class="dropdown-item custom-dropdown-item" href="#">RunTime Analysis</a></li>
+
           </ul>
         </li>
         <li class="nav-item"><a class="nav-link  nav-fade" href="index.php?action=messages"><i
