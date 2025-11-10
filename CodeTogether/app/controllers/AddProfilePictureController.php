@@ -17,6 +17,18 @@ class AddProfilePictureController extends Controller
         }
 
         $uploadDir = __DIR__ . '/../public/uploads/';
+
+        // testing this out
+        if (!is_dir($uploadDir)) {
+            // Create the directory recursively (the 'true' argument) with 0775 permissions
+            if (!mkdir($uploadDir, 0775, true)) {
+                $_SESSION['upload_error'] = 'Upload directory does not exist and could not be created.';
+                header('Location: index.php?action=profile');
+                exit;
+            }
+        }
+
+
         $originalName = basename($_FILES['profilePic']['name']);
         $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
 
