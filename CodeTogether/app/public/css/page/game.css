@@ -105,6 +105,17 @@
     text-transform: uppercase;
 }
 
+.page-game .teamA:hover,
+.page-game .teamB:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+:root[data-theme="light"] .teamA,
+:root[data-theme="light"] .teamB {
+    color: #fff;
+}
+
 .page-game .teamB {
     background-color: #0d6efd;
     border: none;
