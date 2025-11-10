@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="row justify-content-center align-items-center mb-5 gx-3">
-                <div class="col-4 col-md-3 d-flex justify-content-center">
+                <div class="col-4 col-md-4 d-flex justify-content-center">
                     <button onclick="joinTeam('A')" class="btn btn-lg w-75 teamA">
                         <i class="fas fa-users me-2"></i>Join Team A(Red)
                     </button>

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formattedSeconds = String(seconds).padStart(2, '0');
 
         timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
-
+        
         if (totalSeconds <= 0) {
             clearInterval(countdownInterval);
             timerElement.textContent = "Time's Up!";
@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             totalSeconds--;
         }
+    }
+
+    // backend needed to handle team joining
+    function joinTeam(team) {
+        alert(`You have attempted to join Team ${team}. This action would typically be handled by a server-side script.`);
+        console.log(`Attempting to join Team ${team}`);
     }
 
     function startTimer() {
