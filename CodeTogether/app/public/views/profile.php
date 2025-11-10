@@ -56,7 +56,7 @@
             <?php if (!empty($profilePic) && file_exists($absolutePath)): ?>
               <?php if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
                 <img src="<?= htmlspecialchars($webPath) ?>" class="profile-avatar mx-auto d-block rounded-circle mb-3"
-                  alt="" style="width:120px;height:120px;object-fit:contain;">
+                  alt="" style="width:120px;height:120px;object-fit:cover;">
               <?php elseif (in_array($extension, ['mp4', 'webm', 'ogg'])): ?>
                 <video controls class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
                   <source src="<?= htmlspecialchars($webPath) ?>" type="video/<?= $extension ?>">
