@@ -32,7 +32,7 @@
 /* --- TYPOGRAPHY & COLOR --- */
 .page-cards .matrix-text {
     color: var(--accent-2);
-    text-shadow: 0 0 2px var(--accent), 0 0 4px var(--accent);
+    text-shadow: 0 0 2px var(--accent), 0 0 2px var(--accent);
 }
 
 .page-cards .main-title {
@@ -79,15 +79,15 @@
 }
 
 #terms-container .matrix-card {
-    width: 160px;
-    height: 80px;
+    width: 11rem;
+    height: 8rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
-    padding: 0.75rem;
+    padding: 1rem;
     border: 1px solid var(--accent);
     border-radius: 0.5rem;
     background-color: var(--card);
@@ -210,10 +210,10 @@
 }
 
 .match-term {
-    font-size: 0.8rem;            
+    font-size: 1rem;            
     font-weight: bold;
     color: var(--accent-2);
-    text-shadow: 0 0 2px var(--accent), 0 0 5px var(--accent); 
+    text-shadow: 0 0 1px var(--accent), 0 0 1px var(--accent); 
     margin-bottom: 0.3rem;
 
 }
@@ -254,11 +254,12 @@
     transition: background-color 0.2s, border-color 0.2s;
     padding: 1rem;
     border-radius: 0.5rem;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text);
     user-select: none;
-    height: 12rem;
-    width: 10rem;
+    height: 8rem;
+    width: 12rem;
+    word-wrap: normal;
     display: flex;
     align-items: center;
     justify-content: center;
