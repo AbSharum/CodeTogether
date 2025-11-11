@@ -27,7 +27,7 @@
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton<?= $post->getPostID(); ?>">
           <li><a class="dropdown-item text-warning" href="#">🕬 Report Post</a></li>
           <li><a class="dropdown-item text-info" href="#">💾 Save Post</a></li>
-          <?php if ((int) $post->getUserID() === (int) $user->getUserID()): ?>
+          <?php if ((int) $post->getUserID() === (int) ($_SESSION['usercreds']['userID'] ?? 0)): ?>
             <li>
               <form action="index.php?action=deletePost" method="POST" class="m-0">
                 <input type="hidden" name="post_id" value="<?= $post->getPostID(); ?>">
