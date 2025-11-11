@@ -18,6 +18,7 @@ class DeletePostController extends Controller
 
             $postID = isset($_POST['post_id']) ? (int)$_POST['post_id'] : 0;
             $userID = $_SESSION['usercreds']['userID'] ?? 0;
+            $role = $_SESSION['usercreds']['role'] ?? '';
 
             if ($postID <= 0 || $userID <= 0) {
                 $this->renderView('home', ['error' => 'Invalid delete request.']);
@@ -26,7 +27,7 @@ class DeletePostController extends Controller
 
             $post = $this->postDao->getPostByID($postID);
 
-            if ($post && (int)$post->getUserID() === (int)$userID) {
+            if (($post && (int)$post->getUserID() === (int)$userID) || $role === 'moderator') {
                 $this->postDao->deletePost($postID);
                 $data['message'] = 'Post successfully deleted.';
             } else {
