@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
           div.innerHTML = `
           <strong>${msg.username}</strong><br>
           <span>${msg.content}</span><br>
-          <small class="text-muted">${displayTime}</small>`;
+          <small class="text-white">${displayTime}</small>`;
           chatMessages.appendChild(div);
         });
 
