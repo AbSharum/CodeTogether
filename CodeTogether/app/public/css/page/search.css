@@ -71,7 +71,7 @@
   height: 55px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid var(--accent);
+  transform: translateY(12px);
 }
 
 .page-search .profile-card h5 {

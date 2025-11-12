@@ -181,11 +181,9 @@
                   ?>
 
                   <?php if ($fileExists): ?>
-                    <img src="<?= htmlspecialchars($webPath) ?>" alt="" class="friend-avatar me-2 rounded-circle"
-                      style="width:40px; height:40px; object-fit:cover;">
+                    <img src="<?= htmlspecialchars($webPath) ?>" alt="" class="friend-avatar me-2 rounded-circle">
                   <?php else: ?>
-                    <img src="<?= $placeholderUrl ?>" alt="Friend Avatar" class="friend-avatar me-2 rounded-circle"
-                      style="width:40px; height:40px; object-fit:cover;">
+                    <img src="<?= $placeholderUrl ?>" alt="Friend Avatar" class="friend-avatar me-2 rounded-circle">
                   <?php endif; ?>
 
                   <div>

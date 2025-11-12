@@ -44,6 +44,15 @@ class LoginController extends Controller
                 $this->renderView("login", ['error' => 'The password you entered is incorrect!']);
                 exit;
             } else {
+                if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                    $currentUser = $_SESSION['usercreds']['username'] ?? null;
+                    if ($currentUser !== $result->getUsername()) {
+                        $this->userDao->updateUserStatus('offline', $_SESSION['usercreds']['userID']);
+                        session_unset();        
+                        session_destroy();      
+                        session_start();      
+                    }
+                }
                 $role = $this->roleDao->getUserRole($result);
                 $_SESSION['loggedin'] = true;
                 $_SESSION['usercreds'] = [

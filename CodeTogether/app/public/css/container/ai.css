@@ -25,7 +25,6 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  border: 1px solid var(--accent);
   background-color: var(--card-2);
   object-fit: cover;
 }
