@@ -1,20 +1,14 @@
-/* === Leaderboard Widget === */
 #leaderboardContainer {
-  position: absolute;
-  top: 65px;
-  right: 45%;
-  transform: translateX(520px);
-  width: 250px;
+  width: 100%;
   background: var(--card);
   border: 1px solid var(--accent);
   border-radius: 12px;
   box-shadow: var(--shadow);
   padding: 12px;
   color: var(--text);
-  text-align: left;
-  z-index: 10;
-  transition: background 0.3s ease, color 0.3s ease;
+  margin-bottom: 1.5rem; 
 }
+
 
 .leaderboard-title {
   text-align: center;

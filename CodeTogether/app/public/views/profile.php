@@ -15,7 +15,6 @@
   <canvas id="matrix-canvas"></canvas>
 
   <?php include __DIR__ . '/../includes/navbar.php'; ?>
-  <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
   <script src="/public/js/container/ai.js"></script>
   <script src="/public/js/profile.js"></script>
 
@@ -201,6 +200,7 @@
 
         <!-- Middle column: posts -->
         <section class="col-lg-6 mb-4">
+          <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
           <h2 class=" mb-3"><?= htmlspecialchars($user->getUserName()) ?>'s Posts</h2>
           <?php if (empty($userPosts)): ?>
             <p class="text-secondary">No posts yet.</p>

@@ -20,8 +20,7 @@
     <canvas id="matrix-canvas"></canvas>
     <!--NavBar-->
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
-    <?php include __DIR__ . '/../includes/leaderboardWidget.php'; ?>
-    <?php include __DIR__ . '/../includes/aiWidget.php'; ?>
+    
     <!--end of navigation-->
     <main class="page-home">
         <div class="container py-5">
@@ -108,6 +107,7 @@
 
                 <!-- middle column: posts will be 6/12 on large screens-->
                 <div class="col-lg-6 mb-4 order-lg-2 order-3">
+                    <?php include __DIR__ . '/../includes/aiWidget.php'; ?><!--This is the include for the ai stuff!-->
                     <h3 class="mb-4 ">Latest Posts</h3>
                     <!--php integration for posts somewhat complete. I added some fake posts and got them to display, but it could use some work this need comments to show up properly, and the ability to display image/video-->
                     <?php foreach ($data['userAndFriendPosts'] as $post): ?>
@@ -118,6 +118,7 @@
 
                 <!--right side of page for friends list  will be 3/12 width on large screens-->
                 <div class="col-lg-3 mb-4 order-lg-3 order-2">
+                    <?php include __DIR__ . '/../includes/leaderboardWidget.php'; ?><!--Leaderboard!-->
                     <div class="friends-card">
                         <h4 class="text-info mb-3 ">Online Friends (<?php echo count($data['friends']); ?>)
                         </h4>
