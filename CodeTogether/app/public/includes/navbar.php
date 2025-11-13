@@ -1,7 +1,9 @@
 <?php
-$rain = isset($_SESSION['rain_enabled']) ? (bool) $_SESSION['rain_enabled'] : false;
-$theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : 'dark';
+  $rain = isset($_SESSION['rain_enabled']) ? (bool) $_SESSION['rain_enabled'] : false;
+  $theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : 'dark';
 
+  //Brings in the loading screen
+  include __DIR__ . '/loadingScreen.php';
 ?>
 
 <link rel="stylesheet" href="/public/css/container/navbar.css">
