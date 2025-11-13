@@ -38,7 +38,7 @@
       <option value="Butler">Butler</option>
       <option value="Scientist">Scientist</option>
       <option value="Gamer">Gamer</option>
-      <option value="DrMackey">Dr. Mackey</option>
+      <option value="RoboMackey">Robo Mackey</option>
     </select><br><br>
     <button id="savePersonality">Confirm</button>
     <button id="closeMenu">Close</button>
