@@ -19,6 +19,18 @@ class ProfileController extends Controller
         $this->friendDao = new FriendListDAO();
         $this->commentDao = new CommentDAO();
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aboutMe'])) {
+            $loggedInID = $_SESSION['usercreds']['userID'] ?? 0;
+
+            if ($loggedInID > 0) {
+                $newText = trim($_POST['aboutMe']);
+                $this->userDao->updateAboutMe($loggedInID, $newText);
+            }
+
+            header("Location: index.php?action=profile");
+            exit;
+        }
+
 
 
         $userID = $_GET['user_id'] ?? ($_SESSION['usercreds']['userID'] ?? 0);
@@ -58,6 +70,8 @@ class ProfileController extends Controller
 
         
     }
+
+
 
 
 }

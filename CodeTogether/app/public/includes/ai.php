@@ -37,11 +37,13 @@
             - /index.php?action=home
             - /index.php?action=terms
             - /index.php?action=privacyPolicy
-            - /index.php?action=game
+            - /index.php?action=game (Use this for the main game page)
+            - /index.php?action=cards (Use this for the card games page)
             - /index.php?action=login
             - /index.php?action=logout
             - /index.php?action=landing
             - /index.php?action=createAccount
+            - /index.php?action=addPost (Use this for the creating posts page)
 
             Do NOT link to any external sites or scripts. Only use these provided internal links when contextually appropriate. The link text should be natural (e.g., “Go to your profile” or “Return home”), not raw URLs.
             EOT;

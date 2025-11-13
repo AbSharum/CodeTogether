@@ -14,6 +14,11 @@ class AddPostController extends Controller
 
     public function performAction(): void
     {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ajax']) && $_GET['ajax'] === 'friends') {
+            $this->loadFriendsForMentions();
+            return;
+        }
+        
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->renderView('addPost');
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -74,5 +79,21 @@ class AddPostController extends Controller
     {
         parent::renderView($view, $data);
     }
+
+    private function loadFriendsForMentions(): void
+    {
+        header('Content-Type: application/json');
+
+        $userId = $_SESSION['usercreds']['userID'];
+
+        $friendDao = new FriendListDAO();
+        $friends = $friendDao->getFriends($userId);
+
+        $usernames = array_map(fn($f) => $f->getFriendName(), $friends);
+
+        echo json_encode($usernames);
+        exit;
+    }
+
 }
 ?>

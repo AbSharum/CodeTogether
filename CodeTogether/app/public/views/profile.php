@@ -106,6 +106,9 @@
               Joined: <?= htmlspecialchars($user->getCreatedOn()->format('Y-m-d')) ?>
             </p>
 
+            
+
+
             <?php if (!$isOwnProfile): ?>
               <!-- Show only when viewing another user's profile -->
               <?php if ($isFriend): ?>
@@ -127,20 +130,41 @@
                   </button>
                 </form>
               <?php endif; ?>
-
-              <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
-                <h4 class="text-info  mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
-                <div class=" text-break"
-                  style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
-                  <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
-                </div>
-              </div>
             <?php endif; ?>
+              
 
             <button class="btn btn-outline-info btn-sm mt-2 w-100" onclick="window.location='index.php?action=home'">
               <i class="fas fa-home me-1"></i> Back to Home
             </button>
           </div>
+
+          <?php if (!$isOwnProfile): ?>
+            <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
+              <h4 class="text-info  mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
+              <div class=" text-break"
+                style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
+                <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
+              </div>
+            </div>
+          <?php endif; ?>
+
+          <?php if ($isOwnProfile): ?>
+            <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
+                <h4 class="text-info mb-3">About Me</h4>
+
+                <form method="POST" action="index.php?action=profile&user_id=<?= $user->getUserID() ?>">
+                  <textarea name="aboutMe" rows="4" class="form-control mb-2"
+                      style="background-color:#4a4468;color:#fff;border:1px solid #06a342;resize:none;"><?=
+                      trim(htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!'))
+                  ?></textarea>
+
+
+                  <button type="submit" class="btn btn-sm btn-outline-info rounded-pill w-100">
+                      Save
+                  </button>
+                </form>
+            </div>
+          <?php endif; ?>
 
 
 

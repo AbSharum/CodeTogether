@@ -87,18 +87,12 @@
                     <!--end of profile card-->
 
                     <!-- the about me info card-->
-                    <div id="aboutMeCard" class="profile-card mb-4">
-                        <h4 class="text-info  d-flex justify-content-between align-items-center">
-                            About Me
-                        </h4>
-
-                        <form method="POST" action="index.php?action=home">
-                            <div class="mb-3">
-                                <textarea name="aboutMe" id="aboutMeEditor" rows="4" class="form-control mb-2"
-                                    style="background-color: #4a4468; color: #fff; border: 1px solid #06a342; resize: none;"><?= htmlspecialchars($data['aboutMe'] ?? 'Nothing here yet!') ?></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-sm btn-outline-info rounded-pill w-100">Save</button>
-                        </form>
+                    <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
+                        <h4 class="text-info  mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
+                        <div class=" text-break"
+                            style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
+                            <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
+                        </div>
                     </div>
 
                     <!--end of the about me box-->

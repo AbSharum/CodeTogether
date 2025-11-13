@@ -33,11 +33,12 @@
     <h3 class="menu-heading">Select AI Personality</h3>
     <select id="personalitySelect">
       <option value="Oracle">The Oracle</option>
-      <option value="Maid">Maid</option>
       <option value="AgentSmith">Agent Smith</option>
+      <option value="Maid">Maid</option>
       <option value="Butler">Butler</option>
       <option value="Scientist">Scientist</option>
       <option value="Gamer">Gamer</option>
+      <option value="DrMackey">Dr. Mackey</option>
     </select><br><br>
     <button id="savePersonality">Confirm</button>
     <button id="closeMenu">Close</button>
