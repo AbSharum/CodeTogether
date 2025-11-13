@@ -167,7 +167,7 @@
 
 :root[data-theme="dark"] .page-messages .friends-card,
 :root[data-theme="dark"] .page-messages .message-card {
-  background: rgba(45, 55, 72, 0.95);
+  background: var(--card);
   border-left-color: #06a342;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
 }
