@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // === DOM elements ===
+  //=== DOM elements ===
   const aiImg = document.getElementById('aiCharacter');
   const aiForm = document.getElementById('aiForm');
   const aiInput = document.getElementById('aiInput');
@@ -12,7 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('closeMenu');
   const select = document.getElementById('personalitySelect');
 
-  // === Guard clause ===
+
+
+  //=== Collapsable tab ===
+  const toggleBtn = document.getElementById('aiToggleBtn');
+  const aiContainer = document.getElementById('aiContainer');
+
+  toggleBtn.addEventListener('click', () => {
+    aiContainer.classList.toggle('collapsed');
+    toggleBtn.classList.toggle('rotated');
+  });
+
+
+
+  //=== Guard clause ===
   if (!aiImg || !aiForm || !bubble) return;
 
   // === State ===
@@ -20,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPersonality = localStorage.getItem('aiPersonality') || 'default';
   let lastAiResponse = null;
 
-  // === Personality Prompts ===
+  //=== Personality Prompts ===
   const personalityPrompts = {
     Oracle: "You are the Oracle from The Matrix. You speak in calm, motherly tones, offering guidance through riddles and gentle insight. You rarely answer questions directly; instead you nudge the user toward understanding. You sound wise, patient, and a little amused, as if you already know how everything ends.",
     Maid: "You are a maid assistant. Speak politely and cheerfully, calling the user 'master'.",
@@ -31,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     default: "You are a helpful, neutral assistant who speaks clearly and informatively."
   };
 
-  // === Idle chatter lines ===
+  //=== Idle chatter lines ===
   const fallbackLines = {
     Oracle: [
       "Everything that has a beginning has an end.",
@@ -82,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
   };
 
-  // === Personality images ===
+  //=== Personality images ===
   const personalityImages = {
     Oracle: "/public/images/TheOracle.webp",
     Maid: "/public/images/maid.webp",
@@ -93,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     default: "/public/images/ProfilePicture_default.webp"
   };
 
-  // === Helpers ===
+  //=== Helpers ===
   function updateAiImage() {
     aiImg.src = personalityImages[currentPersonality] || personalityImages.default;
   }
@@ -167,19 +180,20 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const question = aiInput.value.trim();
     if (!question) return;
+    aiInput.value = "";
     autoActive = false;
 
     appendResponse(question, true);
     showSpeech("Thinking...", true);
 
-  const reply = await askAI(question);
+    const reply = await askAI(question);
 
-  lastAiResponse = reply;
+    lastAiResponse = reply;
 
-  localStorage.setItem('aiLastResponse', reply);
+    localStorage.setItem('aiLastResponse', reply);
 
-  appendResponse(reply);
-  showSpeech(getRandomLine());
+    appendResponse(reply);
+    showSpeech(getRandomLine());
 
 
     aiInput.value = "";
@@ -201,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menu.style.display = "none";
   });
 
-  // === Init ===
+  //=== Init ===
   select.value = currentPersonality;
   lastAiResponse = localStorage.getItem('aiLastResponse') || null;
   updateAiImage();

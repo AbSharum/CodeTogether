@@ -8,6 +8,9 @@
     <div id="speech"></div>
   </div>
 
+
+
+
   <!-- Scrollable response area for AI replies -->
   <div id="aiResponseContainer">
     <!-- AI responses will be appended here -->
@@ -39,5 +42,10 @@
     <button id="savePersonality">Confirm</button>
     <button id="closeMenu">Close</button>
   </div>
+
+
 </div>
 
+<button id="aiToggleBtn" aria-label="Toggle AI">
+  <i class="fas fa-chevron-down"></i>
+</button>
