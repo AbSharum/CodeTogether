@@ -90,7 +90,7 @@
                     <div id="aboutMeCard" class="profile-card mb-4 mt-3 p-3">
                         <h4 class="text-info  mb-3">About <?= htmlspecialchars($user->getUserName()) ?></h4>
                         <div class=" text-break"
-                            style="background-color: #4a4468; border: 1px solid #06a342; padding: 10px; border-radius: 8px;">
+                            style="background-color:#4a4468;color:#fff;border:1px solid #06a342;resize:none; padding: 10px; border-radius: 8px;">
                             <?= htmlspecialchars($user->getAboutMe() ?? 'Nothing here yet!') ?></textarea>
                         </div>
                     </div>
