@@ -13,5 +13,7 @@ If on linux you can simply run ./docker-compose-start.sh -d --build you will nee
 
 If not on linux, all docker commands will have to be executed manually, to start up the containers run docker compose up -d --build
 
+Additonally if not on linux make sure that the CodeTogether/CodeTogether/app/public/uploads directory exsits
+
 
 The webapp follows an MVC architecture, Request -> Router -> Controller -> View 
