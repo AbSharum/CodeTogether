@@ -63,12 +63,17 @@ mkdir -p app/public/uploads   # required if not already present
 docker compose up -d --build
 ```
 
+**Windows:**
+```powershell
+.\dev.ps1 start -Detach   # equivalent to docker-compose-start.sh, no sudo/chown step needed on Docker Desktop's WSL2 backend
+```
+
 The app will be reachable at **http://localhost:8080**. MariaDB is exposed on host port **3305** (mapped to the container's 3306) if you want to connect with an external SQL client.
 
 On first run, MariaDB executes `mariadb-init/init.sql` automatically to create the schema.
 
-**Other scripts** (run from `CodeTogether/CodeTogether/`, Linux/WSL — they use `sudo`):
-- `./freshDb.sh` — stops the containers, wipes `mariadb/mariadb-data/` and `app/public/uploads/`, and restarts with a completely fresh database.
-- `./dbMod.sh` — execs into the running `mariadb` container and opens a `mariadb` client shell against `CodeTogetherDB` using the credentials from `.env`.
+**Other scripts** (run from `CodeTogether/CodeTogether/`):
+- Linux/WSL (use `sudo`): `./freshDb.sh` wipes `mariadb/mariadb-data/` and `app/public/uploads/` and restarts with a fresh database; `./dbMod.sh` execs into the running `mariadb` container and opens a `mariadb` client shell against `CodeTogetherDB` using the credentials from `.env`.
+- Windows: `.\dev.ps1 fresh` (same as `freshDb.sh`) and `.\dev.ps1 db` (same as `dbMod.sh`) — `dev.ps1` consolidates all three shell scripts into one entry point.
 
 To stop everything: `docker compose down` (from the same directory).
